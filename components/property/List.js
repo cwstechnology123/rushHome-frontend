@@ -10,7 +10,7 @@ export default function List() {
                 <div className="col-xl-4 col-lg-6 col-md-6">
                   <div className="property-card style3">
                     <div className="property-img">
-                      <Image width={100} height={100} layout={'responsive'} src="/assets/img/property/property-26.jpg" alt="Image" />
+                      <Image width={100} height={100} layout="responsive" src="/assets/img/property/property-26.jpg" alt="Image" />
                       <span className="property-status">Exclusive</span>
                       {/* <span class="property-condo">New</span> */}
                     </div>
@@ -31,7 +31,7 @@ export default function List() {
                 <div className="col-xl-4 col-lg-6 col-md-6">
                   <div className="property-card style3">
                     <div className="property-img">
-                      <Image width={100} height={100} layout={'responsive'} src="/assets/img/property/property-26.jpg" alt="Image" />
+                      <Image width={100} height={100} layout="responsive" src="/assets/img/property/property-26.jpg" alt="Image" />
                       <span className="property-status">Exclusive</span>
                       {/* <span class="property-condo">New</span> */}
                     </div>
@@ -52,7 +52,7 @@ export default function List() {
                 <div className="col-xl-4 col-lg-6 col-md-6">
                   <div className="property-card style3">
                     <div className="property-img">
-                      <Image width={100} height={100} layout={'responsive'} src="/assets/img/property/property-26.jpg" alt="Image" />
+                      <Image width={100} height={100} layout="responsive" src="/assets/img/property/property-26.jpg" alt="Image" />
                       {/* <span class="property-status">Exclusive</span>
     <span class="property-condo">New</span> */}
                     </div>
@@ -73,7 +73,7 @@ export default function List() {
                 <div className="col-xl-4 col-lg-6 col-md-6">
                   <div className="property-card style3">
                     <div className="property-img">
-                      <Image width={100} height={100} layout={'responsive'} src="/assets/img/property/property-26.jpg" alt="Image" />
+                      <Image width={100} height={100} layout="responsive" src="/assets/img/property/property-26.jpg" alt="Image" />
                       {/* <span class="property-status">For Rent</span>
     <span class="property-condo">New</span> */}
                     </div>
@@ -94,7 +94,7 @@ export default function List() {
                 <div className="col-xl-4 col-lg-6 col-md-6">
                   <div className="property-card style3">
                     <div className="property-img">
-                      <Image width={100} height={100} layout={'responsive'} src="/assets/img/property/property-26.jpg" alt="Image" />
+                      <Image width={100} height={100} layout="responsive" src="/assets/img/property/property-26.jpg" alt="Image" />
                       {/* <span class="property-status">For Rent</span>
     <span class="property-condo">New</span> */}
                     </div>
@@ -115,7 +115,7 @@ export default function List() {
                 <div className="col-xl-4 col-lg-6 col-md-6">
                   <div className="property-card style3">
                     <div className="property-img">
-                      <Image width={100} height={100} layout={'responsive'} src="/assets/img/property/property-26.jpg" alt="Image" />
+                      <Image width={100} height={100} layout="responsive" src="/assets/img/property/property-26.jpg" alt="Image" />
                       {/* <span class="property-status">For Rent</span>
     <span class="property-condo">New</span> */}
                     </div>
@@ -140,7 +140,7 @@ export default function List() {
                 <div className="col-xl-4 col-lg-6 col-md-6">
                   <div className="property-card style3">
                     <div className="property-img">
-                      <Image width={100} height={100} layout={'responsive'} src="/assets/img/property/property-26.jpg" alt="Image" />
+                      <Image width={100} height={100} layout="responsive" src="/assets/img/property/property-26.jpg" alt="Image" />
                       <span className="property-status">Exclusive</span>
                       {/* <span class="property-condo">New</span> */}
                     </div>
@@ -161,7 +161,7 @@ export default function List() {
                 <div className="col-xl-4 col-lg-6 col-md-6">
                   <div className="property-card style3">
                     <div className="property-img">
-                      <Image width={100} height={100} layout={'responsive'} src="/assets/img/property/property-26.jpg" alt="Image" />
+                      <Image width={100} height={100} layout="responsive" src="/assets/img/property/property-26.jpg" alt="Image" />
                       <span className="property-status">Exclusive</span>
                       {/* <span class="property-condo">New</span> */}
                     </div>
@@ -182,7 +182,7 @@ export default function List() {
                 <div className="col-xl-4 col-lg-6 col-md-6">
                   <div className="property-card style3">
                     <div className="property-img">
-                      <Image width={100} height={100} layout={'responsive'} src="/assets/img/property/property-26.jpg" alt="Image" />
+                      <Image width={100} height={100} layout="responsive" src="/assets/img/property/property-26.jpg" alt="Image" />
                       {/* <span class="property-status">Exclusive</span>
     <span class="property-condo">New</span> */}
                     </div>
@@ -207,7 +207,7 @@ export default function List() {
                 <div className="col-xl-4 col-lg-6 col-md-6">
                   <div className="property-card style3">
                     <div className="property-img">
-                      <Image width={100} height={100} layout={'responsive'} src="/assets/img/property/property-26.jpg" alt="Image" />
+                      <Image width={100} height={100} layout="responsive" src="/assets/img/property/property-26.jpg" alt="Image" />
                       <span className="property-status">Exclusive</span>
                       {/* <span class="property-condo">New</span> */}
                     </div>
@@ -228,7 +228,7 @@ export default function List() {
                 <div className="col-xl-4 col-lg-6 col-md-6">
                   <div className="property-card style3">
                     <div className="property-img">
-                      <Image width={100} height={100} layout={'responsive'} src="/assets/img/property/property-26.jpg" alt="Image" />
+                      <Image width={100} height={100} layout="responsive" src="/assets/img/property/property-26.jpg" alt="Image" />
                       <span className="property-status">Exclusive</span>
                       {/* <span class="property-condo">New</span> */}
                     </div>
@@ -249,7 +249,7 @@ export default function List() {
                 <div className="col-xl-4 col-lg-6 col-md-6">
                   <div className="property-card style3">
                     <div className="property-img">
-                      <Image width={100} height={100} layout={'responsive'} src="/assets/img/property/property-26.jpg" alt="Image" />
+                      <Image width={100} height={100} layout="responsive" src="/assets/img/property/property-26.jpg" alt="Image" />
                       {/* <span class="property-status">Exclusive</span>
     <span class="property-condo">New</span> */}
                     </div>
@@ -270,7 +270,7 @@ export default function List() {
                 <div className="col-xl-4 col-lg-6 col-md-6">
                   <div className="property-card style3">
                     <div className="property-img">
-                      <Image width={100} height={100} layout={'responsive'} src="/assets/img/property/property-26.jpg" alt="Image" />
+                      <Image width={100} height={100} layout="responsive" src="/assets/img/property/property-26.jpg" alt="Image" />
                       {/* <span class="property-status">For Rent</span>
     <span class="property-condo">New</span> */}
                     </div>
@@ -291,7 +291,7 @@ export default function List() {
                 <div className="col-xl-4 col-lg-6 col-md-6">
                   <div className="property-card style3">
                     <div className="property-img">
-                      <Image width={100} height={100} layout={'responsive'} src="/assets/img/property/property-26.jpg" alt="Image" />
+                      <Image width={100} height={100} layout="responsive" src="/assets/img/property/property-26.jpg" alt="Image" />
                       {/* <span class="property-status">For Rent</span>
     <span class="property-condo">New</span> */}
                     </div>
@@ -312,7 +312,7 @@ export default function List() {
                 <div className="col-xl-4 col-lg-6 col-md-6">
                   <div className="property-card style3">
                     <div className="property-img">
-                      <Image width={100} height={100} layout={'responsive'} src="/assets/img/property/property-26.jpg" alt="Image" />
+                      <Image width={100} height={100} layout="responsive" src="/assets/img/property/property-26.jpg" alt="Image" />
                       {/* <span class="property-status">For Rent</span>
     <span class="property-condo">New</span> */}
                     </div>
