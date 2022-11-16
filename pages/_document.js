@@ -23,9 +23,6 @@ class MyDocument extends Document {
     return (
         <Html>
         <Head>
-          <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <title>RushHome</title>
           <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
           <link rel="stylesheet" href="assets/css/flaticon.css" />
           <link rel="stylesheet" href="assets/css/remixicon.css" />
@@ -41,7 +38,6 @@ class MyDocument extends Document {
         <body>
             <Main />
             <NextScript />
-            <a href="javascript:void(0)" class="back-to-top bounce"><i class="ri-arrow-up-s-line"></i></a>
             <script src="./assets/js/jquery.min.js"></script>
             <script src="./assets/js/bootstrap.bundle.min.js"></script>
         </body>

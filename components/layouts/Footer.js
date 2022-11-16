@@ -178,6 +178,7 @@ export default function Footer() {
             </div>
             </div>
         </footer>
+        <link href="/" className="back-to-top bounce" /><i className="ri-arrow-up-s-line" />
       </>
     )
 }
