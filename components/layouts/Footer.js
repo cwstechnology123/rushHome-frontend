@@ -9,7 +9,7 @@ export default function Footer() {
                 <div className="row pb-75">
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6 pe-xl-5">
                     <div className="footer-widget">
-                    <Link href="index.html" className="footer-logo">
+                    <Link href="/" className="footer-logo">
                         <span className="logo_wraper"><img src="assets/img/Black Rush home.png" alt="Black Rush home" /></span>
                     </Link>
                     <p className="comp-desc">
@@ -56,37 +56,37 @@ export default function Footer() {
                     <h3 className="footer-widget-title">Search by City</h3>
                     <ul className="footer-menu list-style">
                         <li>
-                        <Link href="listings-one.html" target="_blank">
+                        <Link href="/" target="_blank">
                             <i className="ri-arrow-right-s-line" />
                             Delaware Real Estate
                         </Link>
                         </li>
                         <li>
-                        <Link href="listings-one.html" target="_blank">
+                        <Link href="/" target="_blank">
                             <i className="ri-arrow-right-s-line" />
                             Florida Real Estate
                         </Link>
                         </li>
                         <li>
-                        <Link href="listings-one.html" target="_blank">
+                        <Link href="/" target="_blank">
                             <i className="ri-arrow-right-s-line" />
                             Istambul Real Estate
                         </Link>
                         </li>
                         <li>
-                        <Link href="listings-one.html" target="_blank">
+                        <Link href="/" target="_blank">
                             <i className="ri-arrow-right-s-line" />
                             Sanfransisco Real Estate
                         </Link>
                         </li>
                         <li>
-                        <Link href="listings-one.html" target="_blank">
+                        <Link href="/" target="_blank">
                             <i className="ri-arrow-right-s-line" />
                             London Real Estate
                         </Link>
                         </li>
                         <li>
-                        <Link href="listings-one.html" target="_blank">
+                        <Link href="/" target="_blank">
                             <i className="ri-arrow-right-s-line" />
                             New York City Real Estate
                         </Link>
@@ -94,13 +94,13 @@ export default function Footer() {
                     </ul>
                     <ul className="footer-menu list-style">
                         <li>
-                        <Link href="listings-one.html" target="_blank">
+                        <Link href="/" target="_blank">
                             <i className="ri-arrow-right-s-line" />
                             Delaware Real Estate
                         </Link>
                         </li>
                         <li>
-                        <Link href="listings-one.html" target="_blank">
+                        <Link href="/" target="_blank">
                             <i className="ri-arrow-right-s-line" />
                             Delaware Real Estate
                         </Link>
@@ -119,37 +119,37 @@ export default function Footer() {
                     <h3 className="footer-widget-title">Quick Links</h3>
                     <ul className="footer-menu list-style">
                         <li>
-                        <Link href="index.html" target="_blank">
+                        <Link href="/" target="_blank">
                             <i className="ri-arrow-right-s-line" />
                             Home
                         </Link>
                         </li>
                         <li>
-                        <Link href="#" target="_blank">
+                        <Link href="/buy" target="_blank">
                             <i className="ri-arrow-right-s-line" />
                             Buy Property
                         </Link>
                         </li>
                         <li>
-                        <Link href="#" target="_blank">
+                        <Link href="/sell" target="_blank">
                             <i className="ri-arrow-right-s-line" />
                             Sell Property
                         </Link>
                         </li>
                         <li>
-                        <Link href="#" target="_blank">
+                        <Link href="/about-us" target="_blank">
                             <i className="ri-arrow-right-s-line" />
                             About Us
                         </Link>
                         </li>
                         <li>
-                        <Link href="#" target="_blank">
+                        <Link href="/contact-us" target="_blank">
                             <i className="ri-arrow-right-s-line" />
                             Contact Us
                         </Link>
                         </li>
                         <li>
-                        <Link href="#" target="_blank">
+                        <Link href="/" target="_blank">
                             <i className="ri-arrow-right-s-line" />
                             Others
                         </Link>
