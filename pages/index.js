@@ -4,7 +4,7 @@ import ContactUs from '../components/ContactUs'
 import List from '../components/property/List'
 
 export default function Home({data}) {
-  console.log(data)
+  //console.log(data)
   return (
     <>
       <MainBanner />
@@ -171,9 +171,9 @@ export default function Home({data}) {
 // This gets called on every request
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch(`https://rushhome.com/wp-json/wp/v2/posts`)
-  const data = await res.json()
+  //const res = await fetch(`https://rushhome.com/wp-json/wp/v2/posts`)
+  //const data = await res.json()
 
   // Pass data to the page via props
-  return { props: { data } }
+  return { props: { data : 'True' } }
 }
