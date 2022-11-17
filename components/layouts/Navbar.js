@@ -28,7 +28,7 @@ export default function Navbar() {
                 </div>
                 <ul className="navbar-nav ms-auto">
                   <li className="nav-item">
-                    <Link href="/buy" className="nav-link active">
+                    <Link href="/buy" className="nav-link">
                       Buy
                     </Link>
                   </li>
