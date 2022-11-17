@@ -80,52 +80,6 @@ export default function AboutUs() {
           </div>
         </div>
       </section>
-      <section className="advantage-wrap ptb-50 bg-seashell property_wraper">
-        <div className="container">
-          <div className="col-xl-8 col-lg-8 offset-xl-2 offset-lg-2">
-            <div className="section-title style2 text-center mb-40">
-              <h2>Leadership</h2>
-              <hr className="center" />
-              <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p>
-            </div>
-          </div>
-          <div className="row justify-content-center">
-            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-              <div className="adv-card">
-                <div className="adv-img">
-                  <img src="assets/img/agent-4.jpg" alt="Image" />
-                </div>
-                <div className="adv-info">
-                  <h3>Name</h3>
-                  <p>President &amp; CEO</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-              <div className="adv-card">
-                <div className="adv-img">
-                  <img src="assets/img/agent-5.jpg" alt="Image" />
-                </div>
-                <div className="adv-info">
-                  <h3>Name</h3>
-                  <p>Co-Founder</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-              <div className="adv-card">
-                <div className="adv-img">
-                  <img src="assets/img/agent-6.jpg" alt="Image" />
-                </div>
-                <div className="adv-info">
-                  <h3>Name</h3>
-                  <p>Marketing Director</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
       <section className="hw-wrap pt-100 pb-75 contact_box">
         <div className="container">
           <div className="row">

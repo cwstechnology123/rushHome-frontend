@@ -13,7 +13,7 @@ export default function MainBanner() {
                 <form action="#" className="property-search-form">
                   <div className="form-group-wrap">
                     <div className="form-group">
-                      <input type="text" placeholder="Enter an Address, Neighbarhood" />
+                      <input type="text" placeholder="Enter an Address, Neighbourhood" />
                     </div>
                   </div>
                   <button type="submit" className="btn style2 search_button">Search</button>
