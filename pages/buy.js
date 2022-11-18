@@ -1,7 +1,9 @@
+import Map from "../components/Map";
+
 export default function Buy() {
   return (
     <>
-        <section className="pt-50 bye_topnav">
+        <section className="bye_topnav">
             <div className="container">
             <form className="row row-cols-lg-auto g-3 align-items-center">
                 <div className="col-12">
@@ -66,173 +68,170 @@ export default function Buy() {
             </div>
         </section>
         <section className="listing_wraper">
-            <div className="container">
+            <div className="container-fluid">
             <div className="row">
-                <div className="col-md-5 col-xl-5 col-lg-5">
-                <div className="footer-widget">
+                <div className="col-md-5 col-xl-6 col-lg-6 p-0">
                     <div className="comp-map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8385385572983!2d144.95358331584498!3d-37.81725074201705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4dd5a05d97%3A0x3e64f855a564844d!2s121%20King%20St%2C%20Melbourne%20VIC%203000%2C%20Australia!5e0!3m2!1sen!2sbd!4v1612419490850!5m2!1sen!2sbd">
-                    </iframe>
+                            <Map />
+                        {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8385385572983!2d144.95358331584498!3d-37.81725074201705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4dd5a05d97%3A0x3e64f855a564844d!2s121%20King%20St%2C%20Melbourne%20VIC%203000%2C%20Australia!5e0!3m2!1sen!2sbd!4v1612419490850!5m2!1sen!2sbd">
+                        </iframe> */}
                     </div>
                 </div>
-                </div>
-                <div className="col-md-7 col-xl-7 col-lg-7">
-                <section className="listing-wrap">
-                    <div className="container">
-                    <div className="row align-items-center mb-25">
-                        <div className="col-xl-6 col-lg-8 col-md-8">
-                        <div className="profuct-result">
-                            <p>We found <span>45</span> properties available for you</p>
-                        </div>
-                        </div>
-                        <div className="col-xl-2 col-lg-4 col-md-4">
-                        <p className="sort_by">
-                            <span className="sorted_list"><i className="fa fa-list-ul" aria-hidden="true" /></span>
-                            &nbsp;Sorted By
-                        </p>
-                        </div>
-                        <div className="col-xl-3 col-lg-4 col-md-4">
-                        <div className="filter-item-cat">
-                            <select>
-                            <option value={1}>Top Selling</option>
-                            <option value={2}>Sort By High To Low</option>
-                            <option value={3}>Sort By Low To High</option>
-                            </select>
-                        </div>
-                        </div>
-                        <div className="lising_icons">
-                        <span className="list_icon"><i className="fa fa-th-list" aria-hidden="true" /></span>
-                        <span className="list_th_icon"><i className="fa fa-th" aria-hidden="true" /></span>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-xl-6 col-lg-6 col-md-6">
-                        <div className="property-card style4">
-                            <div className="property-img">
-                            <img src="assets/img/property/property-20.jpg" alt="Image" />
-                            <span className="property-status">Exclusive</span>
+                <div className="col-md-7 col-xl-6 col-lg-6">
+                    <section className="listing-wrap px-3 pt-3">
+                        <div className="row align-items-center mb-25">
+                            <div className="col-xl-6 col-lg-8 col-md-8">
+                                <div className="profuct-result">
+                                    <p>We found <span>45</span> properties available for you</p>
+                                </div>
                             </div>
-                            <div className="property-info">
-                            <h3><a href="listing-details.html">Home in Delaware</a></h3>
-                            <p>1421 San Pedro St. Los Angeles</p>
-                            <p className="property-price">$500.00/<span>month</span></p>
-                            <ul className="property-metainfo list-style">
-                                <li><i className="flaticon-double-bed" />3 Br</li>
-                                <li><i className="flaticon-bath-tub" />3 Ba</li>
-                                <li><i className="flaticon-square" />2300 Sq Ft</li>
-                                <li><i className="flaticon-home" />3 Gr</li>
-                            </ul>
+                            <div className="col-xl-2 col-lg-4 col-md-4">
+                                <p className="sort_by">
+                                    <span className="sorted_list"><i className="fa fa-list-ul" aria-hidden="true" /></span>
+                                    &nbsp;Sorted By
+                                </p>
+                            </div>
+                            <div className="col-xl-3 col-lg-4 col-md-4">
+                                <div className="filter-item-cat">
+                                    <select>
+                                    <option value={1}>Top Selling</option>
+                                    <option value={2}>Sort By High To Low</option>
+                                    <option value={3}>Sort By Low To High</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="lising_icons">
+                                <span className="list_icon"><i className="fa fa-th-list" aria-hidden="true" /></span>
+                                <span className="list_th_icon"><i className="fa fa-th" aria-hidden="true" /></span>
                             </div>
                         </div>
-                        </div>
-                        <div className="col-xl-6 col-lg-6 col-md-6">
-                        <div className="property-card style4">
-                            <div className="property-img">
-                            <img src="assets/img/property/property-20.jpg" alt="Image" />
-                            <span className="property-status">Exclusive</span>
+                        <div className="row">
+                            <div className="col-xl-6 col-lg-6 col-md-6">
+                                <div className="property-card style4">
+                                    <div className="property-img">
+                                        <img src="assets/img/property/property-20.jpg" alt="Image" />
+                                        <span className="property-status">Exclusive</span>
+                                    </div>
+                                    <div className="property-info">
+                                        <h3><a href="listing-details.html">Home in Delaware</a></h3>
+                                        <p>1421 San Pedro St. Los Angeles</p>
+                                        <p className="property-price">$500.00/<span>month</span></p>
+                                        <ul className="property-metainfo list-style">
+                                            <li><i className="flaticon-double-bed" />3 Br</li>
+                                            <li><i className="flaticon-bath-tub" />3 Ba</li>
+                                            <li><i className="flaticon-square" />2300 Sq Ft</li>
+                                            <li><i className="flaticon-home" />3 Gr</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="property-info">
-                            <h3><a href="listing-details.html">Home in Delaware</a></h3>
-                            <p>1421 San Pedro St. Los Angeles</p>
-                            <p className="property-price">$500.00/<span>month</span></p>
-                            <ul className="property-metainfo list-style">
-                                <li><i className="flaticon-double-bed" />3 Br</li>
-                                <li><i className="flaticon-bath-tub" />3 Ba</li>
-                                <li><i className="flaticon-square" />2300 Sq Ft</li>
-                                <li><i className="flaticon-home" />3 Gr</li>
-                            </ul>
+                            <div className="col-xl-6 col-lg-6 col-md-6">
+                                <div className="property-card style4">
+                                    <div className="property-img">
+                                        <img src="assets/img/property/property-20.jpg" alt="Image" />
+                                        <span className="property-status">Exclusive</span>
+                                    </div>
+                                    <div className="property-info">
+                                        <h3><a href="listing-details.html">Home in Delaware</a></h3>
+                                        <p>1421 San Pedro St. Los Angeles</p>
+                                        <p className="property-price">$500.00/<span>month</span></p>
+                                        <ul className="property-metainfo list-style">
+                                            <li><i className="flaticon-double-bed" />3 Br</li>
+                                            <li><i className="flaticon-bath-tub" />3 Ba</li>
+                                            <li><i className="flaticon-square" />2300 Sq Ft</li>
+                                            <li><i className="flaticon-home" />3 Gr</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-xl-6 col-lg-6 col-md-6">
+                            <div className="property-card style4">
+                                <div className="property-img">
+                                <img src="assets/img/property/property-20.jpg" alt="Image" />
+                                <span className="property-status">Exclusive</span>
+                                </div>
+                                <div className="property-info">
+                                <h3><a href="listing-details.html">Home in Delaware</a></h3>
+                                <p>1421 San Pedro St. Los Angeles</p>
+                                <p className="property-price">$500.00/<span>month</span></p>
+                                <ul className="property-metainfo list-style">
+                                    <li><i className="flaticon-double-bed" />3 Br</li>
+                                    <li><i className="flaticon-bath-tub" />3 Ba</li>
+                                    <li><i className="flaticon-square" />2300 Sq Ft</li>
+                                    <li><i className="flaticon-home" />3 Gr</li>
+                                </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div className="col-xl-6 col-lg-6 col-md-6">
+                            <div className="property-card style4">
+                                <div className="property-img">
+                                <img src="assets/img/property/property-20.jpg" alt="Image" />
+                                <span className="property-status">Exclusive</span>
+                                </div>
+                                <div className="property-info">
+                                <h3><a href="listing-details.html">Home in Delaware</a></h3>
+                                <p>1421 San Pedro St. Los Angeles</p>
+                                <p className="property-price">$500.00/<span>month</span></p>
+                                <ul className="property-metainfo list-style">
+                                    <li><i className="flaticon-double-bed" />3 Br</li>
+                                    <li><i className="flaticon-bath-tub" />3 Ba</li>
+                                    <li><i className="flaticon-square" />2300 Sq Ft</li>
+                                    <li><i className="flaticon-home" />3 Gr</li>
+                                </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div className="col-xl-6 col-lg-6 col-md-6">
+                            <div className="property-card style4">
+                                <div className="property-img">
+                                <img src="assets/img/property/property-20.jpg" alt="Image" />
+                                <span className="property-status">Exclusive</span>
+                                </div>
+                                <div className="property-info">
+                                <h3><a href="listing-details.html">Home in Delaware</a></h3>
+                                <p>1421 San Pedro St. Los Angeles</p>
+                                <p className="property-price">$500.00/<span>month</span></p>
+                                <ul className="property-metainfo list-style">
+                                    <li><i className="flaticon-double-bed" />3 Br</li>
+                                    <li><i className="flaticon-bath-tub" />3 Ba</li>
+                                    <li><i className="flaticon-square" />2300 Sq Ft</li>
+                                    <li><i className="flaticon-home" />3 Gr</li>
+                                </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <div className="col-xl-6 col-lg-6 col-md-6">
+                            <div className="property-card style4">
+                                <div className="property-img">
+                                <img src="assets/img/property/property-20.jpg" alt="Image" />
+                                <span className="property-status">Exclusive</span>
+                                </div>
+                                <div className="property-info">
+                                <h3><a href="listing-details.html">Home in Delaware</a></h3>
+                                <p>1421 San Pedro St. Los Angeles</p>
+                                <p className="property-price">$500.00/<span>month</span></p>
+                                <ul className="property-metainfo list-style">
+                                    <li><i className="flaticon-double-bed" />3 Br</li>
+                                    <li><i className="flaticon-bath-tub" />3 Ba</li>
+                                    <li><i className="flaticon-square" />2300 Sq Ft</li>
+                                    <li><i className="flaticon-home" />3 Gr</li>
+                                </ul>
+                                </div>
+                            </div>
                             </div>
                         </div>
-                        </div>
-                        <div className="col-xl-6 col-lg-6 col-md-6">
-                        <div className="property-card style4">
-                            <div className="property-img">
-                            <img src="assets/img/property/property-20.jpg" alt="Image" />
-                            <span className="property-status">Exclusive</span>
-                            </div>
-                            <div className="property-info">
-                            <h3><a href="listing-details.html">Home in Delaware</a></h3>
-                            <p>1421 San Pedro St. Los Angeles</p>
-                            <p className="property-price">$500.00/<span>month</span></p>
-                            <ul className="property-metainfo list-style">
-                                <li><i className="flaticon-double-bed" />3 Br</li>
-                                <li><i className="flaticon-bath-tub" />3 Ba</li>
-                                <li><i className="flaticon-square" />2300 Sq Ft</li>
-                                <li><i className="flaticon-home" />3 Gr</li>
-                            </ul>
-                            </div>
-                        </div>
-                        </div>
-                        <div className="col-xl-6 col-lg-6 col-md-6">
-                        <div className="property-card style4">
-                            <div className="property-img">
-                            <img src="assets/img/property/property-20.jpg" alt="Image" />
-                            <span className="property-status">Exclusive</span>
-                            </div>
-                            <div className="property-info">
-                            <h3><a href="listing-details.html">Home in Delaware</a></h3>
-                            <p>1421 San Pedro St. Los Angeles</p>
-                            <p className="property-price">$500.00/<span>month</span></p>
-                            <ul className="property-metainfo list-style">
-                                <li><i className="flaticon-double-bed" />3 Br</li>
-                                <li><i className="flaticon-bath-tub" />3 Ba</li>
-                                <li><i className="flaticon-square" />2300 Sq Ft</li>
-                                <li><i className="flaticon-home" />3 Gr</li>
-                            </ul>
-                            </div>
-                        </div>
-                        </div>
-                        <div className="col-xl-6 col-lg-6 col-md-6">
-                        <div className="property-card style4">
-                            <div className="property-img">
-                            <img src="assets/img/property/property-20.jpg" alt="Image" />
-                            <span className="property-status">Exclusive</span>
-                            </div>
-                            <div className="property-info">
-                            <h3><a href="listing-details.html">Home in Delaware</a></h3>
-                            <p>1421 San Pedro St. Los Angeles</p>
-                            <p className="property-price">$500.00/<span>month</span></p>
-                            <ul className="property-metainfo list-style">
-                                <li><i className="flaticon-double-bed" />3 Br</li>
-                                <li><i className="flaticon-bath-tub" />3 Ba</li>
-                                <li><i className="flaticon-square" />2300 Sq Ft</li>
-                                <li><i className="flaticon-home" />3 Gr</li>
-                            </ul>
-                            </div>
-                        </div>
-                        </div>
-                        <div className="col-xl-6 col-lg-6 col-md-6">
-                        <div className="property-card style4">
-                            <div className="property-img">
-                            <img src="assets/img/property/property-20.jpg" alt="Image" />
-                            <span className="property-status">Exclusive</span>
-                            </div>
-                            <div className="property-info">
-                            <h3><a href="listing-details.html">Home in Delaware</a></h3>
-                            <p>1421 San Pedro St. Los Angeles</p>
-                            <p className="property-price">$500.00/<span>month</span></p>
-                            <ul className="property-metainfo list-style">
-                                <li><i className="flaticon-double-bed" />3 Br</li>
-                                <li><i className="flaticon-bath-tub" />3 Ba</li>
-                                <li><i className="flaticon-square" />2300 Sq Ft</li>
-                                <li><i className="flaticon-home" />3 Gr</li>
-                            </ul>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    <ul className="page-nav list-style mt-10">
-                        <li><a href="listings-one.html"><i className="flaticon-back" /> Prev</a></li>
-                        <li><a className="active" href="listings-one.html">1</a></li>
-                        <li><a href="listings-one.html">2</a></li>
-                        <li><a href="listings-one.html">3</a></li>
-                        <li><a href="listings-one.html">4</a></li>
-                        <li><a href="listings-one.html">5</a></li>
-                        <li><a href="listings-one.html">6</a></li>
-                        <li><a href="listings-one.html"><i className="flaticon-next-1" /> Next</a></li>
-                    </ul>
-                    </div>
-                </section>
+                        <ul className="page-nav list-style mt-10">
+                            <li><a href="listings-one.html"><i className="fa fa-angle-left" style={{fontSize: 1.2+'rem'}}></i>&nbsp;&nbsp;&nbsp;&nbsp;Prev</a></li>
+                            <li><a className="active" href="listings-one.html">1</a></li>
+                            <li><a href="listings-one.html">2</a></li>
+                            <li><a href="listings-one.html">3</a></li>
+                            <li><a href="listings-one.html">4</a></li>
+                            <li><a href="listings-one.html">5</a></li>
+                            <li><a href="listings-one.html">6</a></li>
+                            <li><a href="listings-one.html">Next&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-angle-right" style={{fontSize: 1.2+'rem'}}></i></a></li>
+                        </ul>
+                    </section>
                 </div>
             </div>
             </div>
