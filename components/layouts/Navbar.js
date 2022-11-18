@@ -5,13 +5,17 @@ import { useSession, signOut } from "next-auth/react"
 export default function Navbar() {
   const { data: session } = useSession()
   const router = useRouter();
-  const handleClick = (e, path) => {
+  const handleClick = async (e, path) => {
     e.preventDefault()
     if (path === "/signup") {
       router.push(path)
     }
-    if (path === "/signin") {
+    else if (path === "/auth") {
       router.push(path)
+    }
+    else if (path === "/signout") {
+      const data = await signOut({redirect: false, callbackUrl: "/"})
+      router.push(data.url)
     }
   };
   return (
@@ -63,18 +67,17 @@ export default function Navbar() {
                   </li>
                   {(session) ?
                     <>
-                      Signed in as {session.user.email} <br />
                       <li className="nav-item d-lg-none">
-                        <button type="button" className="btn style1" onClick={() => signOut()} >Sign out</button>
+                        <button type="button" className="btn style1" onClick={(e) => handleClick(e, "/signout")} >Sign out</button>
                       </li>
                     </>
                     :
                     <>
                       <li className="nav-item d-lg-none">
-                        <button type="button" className={"btn" + (router.pathname == '/signin' ? " style1" : " style3")} onClick={(e) => handleClick(e, "/signin")}>Sign In</button>
+                        <button type="button" className={"btn" + (router.pathname == '/auth' ? " style1" : " style3")} onClick={(e) => handleClick(e, "/auth")}>Sign In</button>
                       </li>
                       <li className="nav-item d-lg-none">
-                        <button type="button" className={"btn" + (router.pathname != '/signup' && router.pathname == '/signin' ? " style3" : " style1")} onClick={(e) => handleClick(e, "/signup")}>Sign Up</button>
+                        <button type="button" className={"btn" + (router.pathname != '/signup' && router.pathname == '/auth' ? " style3" : " style1")} onClick={(e) => handleClick(e, "/signup")}>Sign Up</button>
                       </li>
                     </>
                   }
@@ -83,14 +86,14 @@ export default function Navbar() {
                   {(session) ?
                     <>
                       <div className="header-btn">
-                        <button type="button" className="btn style1" onClick={() => signOut()}>Sign out</button>
+                        <button type="button" className="btn style1" onClick={(e) => handleClick(e, "/signout")}>Sign out</button>
                       </div>
                     </>
                     :
                     <>
                       <div className="header-btn">
-                        <button type="button" className={"btn" + (router.pathname == '/signin' ? " style1" : " style3")} onClick={(e) => handleClick(e, "/signin")}>Sign In</button>
-                        <button type="button" className={"btn" + (router.pathname != '/signup' && router.pathname == '/signin' ? " style3" : " style1")} onClick={(e) => handleClick(e, "/signup")}>Sign Up</button>
+                        <button type="button" className={"btn" + (router.pathname == '/auth' ? " style1" : " style3")} onClick={(e) => handleClick(e, "/auth")}>Sign In</button>
+                        <button type="button" className={"btn" + (router.pathname != '/signup' && router.pathname == '/auth' ? " style3" : " style1")} onClick={(e) => handleClick(e, "/signup")}>Sign Up</button>
                       </div>
                     </>
                   }

@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import ContactUs from '../components/ContactUs'
+import Link from 'next/link'
 
 export default function Sell() {
   return (
@@ -14,7 +15,7 @@ export default function Sell() {
                     <h2>Sell Home With Rush Home Expert.</h2>
                     <p> Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet. </p>
                     </div>
-                    <a href="about.html" className="btn style1">Get Started</a>
+                    <Link href="/about-us" className="btn style1">Get Started</Link>
                 </div>
                 </div>
                 <div className="col-lg-5">
@@ -97,7 +98,7 @@ export default function Sell() {
                     <p> Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet.  Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur ad</p>
                     <p> Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet. </p>
                     <p> Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet.  Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur ad</p>
-                    <a href>Learn More</a>
+                    <Link href="#">Learn More</Link>
                     </div>
                 </div>
                 </div>
@@ -114,8 +115,8 @@ export default function Sell() {
                     <hr />
                     <p> Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet.  Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur ad</p>
                     </div>
-                    <a href="about.html" className="btn style1">Download Now</a>
-                    <a href="about.html" className="how_button"><span className="arow_how"><i className="fa fa-caret-right" aria-hidden="true" /></span>How it Works?</a>
+                    <Link href="/about-us" className="btn style1">Download Now</Link>
+                    <Link href="/about-us" className="how_button"><span className="arow_how"><i className="fa fa-caret-right" aria-hidden="true" /></span>How it Works?</Link>
                 </div>
                 </div>
                 <div className="col-lg-5">

@@ -6,10 +6,10 @@ export default function SignInOpt() {
     const router = useRouter();
     const handleClick = (e, path) => {
         e.preventDefault()
-        if (path === "/signin/client") {
+        if (path === "/auth/client-signin") {
             router.push(path)
         }
-        else if (path === "/signin/agent") {
+        else if (path === "/auth/agent-signin") {
             router.push(path)
         }
         else{
@@ -28,10 +28,10 @@ export default function SignInOpt() {
                 <Image width={100} height={100} layout="responsive" src="/assets/img/login_signupbg.png" alt="Login"/>
                 </div>
                 <div className="col-md-12 text-center">
-                    <button type="button" className="btn style1 button_agent" onClick={(e) => handleClick(e, "/signin/agent")}>Rush Home Agent</button>
+                    <button type="button" className="btn style1 button_agent" onClick={(e) => handleClick(e, "/auth/agent-signin")}>Rush Home Agent</button>
                 </div>
                 <div className="col-md-12 text-center">
-                    <button type="button" className="btn style1 button_agent" onClick={(e) => handleClick(e, "/signin/client")}>Buyer or Seller</button>
+                    <button type="button" className="btn style1 button_agent" onClick={(e) => handleClick(e, "/auth/client-signin")}>Buyer or Seller</button>
                 </div>
                 <p className="policy_content">I accept Rush Home Terms of Service &amp; Privacy Policy</p>
             </div>

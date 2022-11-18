@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 export default function Footer() {
     const router = useRouter();
-    if(router.pathname != '/signin' && router.pathname != '/signin/client' && router.pathname != '/signin/agent' && router.pathname != '/signup'){
+    if(router.pathname != '/auth' && router.pathname != '/auth/client-signin' && router.pathname != '/auth/agent-signin' && router.pathname != '/signup'){
         return (
             <>
               <footer className="footer-wrap style1 pt-100">

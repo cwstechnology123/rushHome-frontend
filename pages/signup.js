@@ -28,7 +28,7 @@ export default function SignUp() {
                 <div className="col-md-12 text-center">
                     <button type="button" className="btn style1 button_agent" onClick={() => signIn()}><span className="googleicon"><img src="assets/img/googleicon.png" /></span>Continue with Google</button>
                 </div>
-                <p className="policy_content">Already have an account? <Link href="/signin"> Login</Link></p>
+                <p className="policy_content">Already have an account? <Link href="/auth"> Login</Link></p>
                 </form>
             </div>
         </section>
