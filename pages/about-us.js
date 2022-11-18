@@ -4,7 +4,7 @@ export default function AboutUs() {
   return (
     <>
       <section className="pt-50 pb-75 text-center citybanner_box">
-        <img src="assets/img/city_banner.jpg" />
+        <Image width={100} height={100} layout="responsive" src="/assets/img/city_banner.jpg" />
         <div className="container">
           <div className="welcome_box">
             <div className="col-xl-10 col-lg-10 offset-xl-1 offset-lg-1">
