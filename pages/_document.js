@@ -23,23 +23,23 @@ class MyDocument extends Document {
     return (
         <Html>
         <Head>
-          <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-          <link rel="stylesheet" href="assets/css/flaticon.css" />
-          <link rel="stylesheet" href="assets/css/remixicon.css" />
-          <link rel="stylesheet" href="assets/css/fancybox.css" />
-          <link rel="stylesheet" href="assets/css/jquery-ui-min.css" />
-          <link rel="stylesheet" href="assets/css/odometer.min.css" />
-          <link rel="stylesheet" href="assets/css/aos.css" />
-          <link rel="stylesheet" href="assets/css/style.css" />
-          <link rel="stylesheet" href="assets/css/responsive.css" />
-          <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
-          <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+          <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+          <link rel="stylesheet" href="../assets/css/flaticon.css" />
+          <link rel="stylesheet" href="../assets/css/remixicon.css" />
+          <link rel="stylesheet" href="../assets/css/fancybox.css" />
+          <link rel="stylesheet" href="../assets/css/jquery-ui-min.css" />
+          <link rel="stylesheet" href="../assets/css/odometer.min.css" />
+          <link rel="stylesheet" href="../assets/css/aos.css" />
+          <link rel="stylesheet" href="../assets/css/style.css" />
+          <link rel="stylesheet" href="../assets/css/responsive.css" />
+          <link rel="stylesheet" href="../assets/css/font-awesome.min.css" />
+          <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
         </Head>
         <body>
             <Main />
             <NextScript />
-            <script src="./assets/js/jquery.min.js"></script>
-            <script src="./assets/js/bootstrap.bundle.min.js"></script>
+            <script src="../assets/js/jquery.min.js"></script>
+            <script src="../assets/js/bootstrap.bundle.min.js"></script>
         </body>
         </Html>
     )

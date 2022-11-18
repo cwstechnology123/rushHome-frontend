@@ -13,7 +13,7 @@ export default function Footer() {
                       <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6 pe-xl-5">
                           <div className="footer-widget">
                           <Link href="/" className="footer-logo">
-                              <span className="logo_wraper"><img src="assets/img/Black Rush home.png" alt="Black Rush home" /></span>
+                              <span className="logo_wraper"><img src="../assets/img/Black Rush home.png" alt="Black Rush home" /></span>
                           </Link>
                           <p className="comp-desc">
                               Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet.
@@ -174,7 +174,7 @@ export default function Footer() {
                       </div>
                       <div className="col-md-6">
                           <p className="copyright-text text-right logo_copyright">
-                          <span><img src="assets/img/Black Rush home.png" alt="Black Rush home" /></span>
+                          <span><img src="../assets/img/Black Rush home.png" alt="Black Rush home" /></span>
                           </p>
                       </div>
                       </div>
@@ -199,7 +199,7 @@ export default function Footer() {
                         </div>
                         <div className="col-md-6">
                         <p className="copyright-text text-right logo_copyright">
-                            <span><img src="assets/img/Black Rush home.png" alt="Black Rush home" /></span>
+                            <span><img src="../assets/img/Black Rush home.png" alt="Black Rush home" /></span>
                         </p>
                         </div>
                     </div>

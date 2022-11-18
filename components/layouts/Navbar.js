@@ -24,7 +24,7 @@ export default function Navbar() {
           <div className="container">
             <nav className="navbar navbar-expand-md navbar-light">
               <Link className="navbar-brand" href="/">
-                <span className="logo_wraper"><img src="assets/img/Black Rush home.png" alt="Black Rush home" /></span>
+                <span className="logo_wraper"><img src="../assets/img/Black Rush home.png" alt="Black Rush home" /></span>
               </Link>
               <div className="collapse navbar-collapse main-menu-wrap" id="navbarSupportedContent">
                 <div className="menu-close d-lg-none">
