@@ -5,7 +5,6 @@ import { useSession, signOut } from "next-auth/react"
 export default function Navbar() {
   const { data: session } = useSession()
   const router = useRouter();
-  console.log(router.pathname)
   const handleClick = (e, path) => {
     e.preventDefault()
     if (path === "/signup") {
