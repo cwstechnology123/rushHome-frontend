@@ -5,6 +5,7 @@ import { useSession, signOut } from "next-auth/react"
 export default function Navbar() {
   const { data: session } = useSession()
   const router = useRouter();
+  console.log(router.pathname)
   const handleClick = (e, path) => {
     e.preventDefault()
     if (path === "/signup") {
@@ -28,36 +29,36 @@ export default function Navbar() {
                 </div>
                 <ul className="navbar-nav ms-auto">
                   <li className="nav-item">
-                    <Link href="/buy" className="nav-link">
+                    <Link href="/buy" className={"nav-link" + (router.pathname == '/buy' ? " active" : "")}>
                       Buy
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link href="/sell" className="nav-link">
+                    <Link href="/sell" className={"nav-link" + (router.pathname == '/sell' ? " active" : "")}>
                       Sell
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link href="#" className="nav-link">
+                    <Link href="#" className={"nav-link" + (router.pathname == '/find-an-agent' ? " active" : "")}>
                       Agents
                       <i className="ri-add-line" />
                     </Link>
                     <ul className="dropdown-menu">
                       <li className="nav-item">
-                        <Link href="/find-an-agent" className="nav-link">Find an Agent</Link>
+                        <Link href="/find-an-agent" className={"nav-link" + (router.pathname == '/find-an-agent' ? " active" : "")}>Find an Agent</Link>
                       </li>
                       <li className="nav-item">
-                        <Link href="#" className="nav-link">Become and Agent</Link>
+                        <Link href="#" className={"nav-link" + (router.pathname == '/become-an-agent' ? " active" : "")}>Become and Agent</Link>
                       </li>
                     </ul>
                   </li>
                   <li className="nav-item">
-                    <Link href="/about-us" className="nav-link">
+                    <Link href="/about-us" className={"nav-link" + (router.pathname == '/about-us' ? " active" : "")}>
                       About Us
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link href="/contact-us" className="nav-link">
+                    <Link href="/contact-us" className={"nav-link" + (router.pathname == '/contact-us' ? " active" : "")}>
                       Contact
                     </Link>
                   </li>
@@ -71,10 +72,10 @@ export default function Navbar() {
                     :
                     <>
                       <li className="nav-item d-lg-none">
-                        <button type="button" className="btn style3" onClick={(e) => handleClick(e, "/signin")}>Sign In</button>
+                        <button type="button" className={"btn" + (router.pathname == '/signin' ? " style1" : " style3")} onClick={(e) => handleClick(e, "/signin")}>Sign In</button>
                       </li>
                       <li className="nav-item d-lg-none">
-                        <button type="button" className="btn style1" onClick={(e) => handleClick(e, "/signup")}>Sign Up</button>
+                        <button type="button" className={"btn" + (router.pathname != '/signup' && router.pathname == '/signin' ? " style3" : " style1")} onClick={(e) => handleClick(e, "/signup")}>Sign Up</button>
                       </li>
                     </>
                   }
@@ -89,8 +90,8 @@ export default function Navbar() {
                     :
                     <>
                       <div className="header-btn">
-                        <button type="button" className="btn style3" onClick={(e) => handleClick(e, "/signin")}>Sign In</button>
-                        <button type="button" className="btn style1" onClick={(e) => handleClick(e, "/signup")}>Sign Up</button>
+                        <button type="button" className={"btn" + (router.pathname == '/signin' ? " style1" : " style3")} onClick={(e) => handleClick(e, "/signin")}>Sign In</button>
+                        <button type="button" className={"btn" + (router.pathname != '/signup' && router.pathname == '/signin' ? " style3" : " style1")} onClick={(e) => handleClick(e, "/signup")}>Sign Up</button>
                       </div>
                     </>
                   }
