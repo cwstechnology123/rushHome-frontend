@@ -54,26 +54,30 @@ export default function Home({data}) {
           </div>
           <div className="row justify-content-left">
             <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-              <div className="hw-card">
-                <div className="hw-img">
-                  <img src="assets/img/Buy a New Home.jpg" alt="Image" />
+              <Link href={`/buy`}>
+                <div className="hw-card">
+                  <div className="hw-img">
+                    <img src="assets/img/Buy a New Home.jpg" alt="Image" />
+                  </div>
+                  <div className="hw-info">
+                    <h3>Buy a New Home</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. </p>
+                  </div>
                 </div>
-                <div className="hw-info">
-                  <h3>Buy a New Home</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. </p>
-                </div>
-              </div>
+              </Link>
             </div>
             <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-              <div className="hw-card">
-                <div className="hw-img">
-                  <img src="assets/img/Sell a Home.jpg" alt="Image" />
+              <Link href={`/sell`}>
+                <div className="hw-card">
+                  <div className="hw-img">
+                    <img src="assets/img/Sell a Home.jpg" alt="Image" />
+                  </div>
+                  <div className="hw-info">
+                    <h3>Sell a Home</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. </p>
+                  </div>
                 </div>
-                <div className="hw-info">
-                  <h3>Sell a Home</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. </p>
-                </div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -94,7 +98,7 @@ export default function Home({data}) {
                 <div className="city-card style1 city_height">
                   <img src="assets/img/city/city-1.jpg" alt="Image" />
                   <div className="city-info">
-                    <h3><Link href="city.html">New York City</Link></h3>
+                    <h3><Link href="/city">New York City</Link></h3>
                     <p>+5231 properties</p>
                   </div>
                 </div>
@@ -103,7 +107,7 @@ export default function Home({data}) {
                 <div className="city-card style1">
                   <img src="assets/img/city/city-1.jpg" alt="Image" />
                   <div className="city-info">
-                    <h3><Link href="city.html">New York City</Link></h3>
+                    <h3><Link href="/city">New York City</Link></h3>
                     <p>+5231 properties</p>
                   </div>
                 </div>
@@ -114,7 +118,7 @@ export default function Home({data}) {
                 <div className="city-card style1">
                   <img src="assets/img/city/city-1.jpg" alt="Image" />
                   <div className="city-info">
-                    <h3><Link href="city.html">New York City</Link></h3>
+                    <h3><Link href="/city">New York City</Link></h3>
                     <p>+5231 properties</p>
                   </div>
                 </div>
@@ -124,7 +128,7 @@ export default function Home({data}) {
                   <div className="city-card style1">
                     <img src="assets/img/city/city-1.jpg" alt="Image" />
                     <div className="city-info">
-                      <h3><Link href="city.html">New York City</Link></h3>
+                      <h3><Link href="/city">New York City</Link></h3>
                       <p>+5231 properties</p>
                     </div>
                   </div>
@@ -133,7 +137,7 @@ export default function Home({data}) {
                   <div className="city-card style1">
                     <img src="assets/img/city/city-1.jpg" alt="Image" />
                     <div className="city-info">
-                      <h3><Link href="city.html">New York City</Link></h3>
+                      <h3><Link href="/city">New York City</Link></h3>
                       <p>+5231 properties</p>
                     </div>
                   </div>
@@ -145,7 +149,7 @@ export default function Home({data}) {
                 <div className="city-card style1">
                   <img src="assets/img/city/city-1.jpg" alt="Image" />
                   <div className="city-info">
-                    <h3><Link href="city.html">New York City</Link></h3>
+                    <h3><Link href="/city">New York City</Link></h3>
                     <p>+5231 properties</p>
                   </div>
                 </div>
@@ -154,7 +158,7 @@ export default function Home({data}) {
                 <div className="city-card style1 city_height">
                   <img src="assets/img/city/city-1.jpg" alt="Image" />
                   <div className="city-info">
-                    <h3><Link href="city.html">New York City</Link></h3>
+                    <h3><Link href="/city">New York City</Link></h3>
                     <p>+5231 properties</p>
                   </div>
                 </div>

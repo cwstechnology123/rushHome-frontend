@@ -829,6 +829,7 @@ select {
 }
 .btn.style2 {
     background-color: #333333;
+    border-color: #333333;;
     color: #fff;
 }
 .btn.style2:after,
@@ -837,6 +838,7 @@ select {
 }
 .btn.style2:hover {
     color: #fff;
+    border-color: #fdce64;;
 }
 .btn.style3 {
     background-color: transparent;
@@ -3711,6 +3713,7 @@ select {
 }
 .property-card {
     margin-bottom: 25px;
+    border-radius: 20px;
 }
 .property-card .property-img {
     overflow: hidden;

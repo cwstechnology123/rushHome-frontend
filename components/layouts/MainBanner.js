@@ -3,7 +3,7 @@ export default function MainBanner() {
     <>
         <section className="hero-wrap style3">
           <div className="hero-slider-two owl-carousel">
-            <div className="hero-slide-item hero-slide-4 bg-f" />
+            <div className="hero-slide-item hero-slide-4 bg-f"></div>
           </div>
           <div className="hero-content">
             <div className="row">
@@ -11,12 +11,15 @@ export default function MainBanner() {
                 <h1>Get Home Faster</h1>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
                 <form action="#" className="property-search-form">
-                  <div className="form-group-wrap">
-                    <div className="form-group">
-                      <input type="text" placeholder="Enter an Address, Neighborhood" />
+                    {/* <div class="form-group col-md-12">
+                        <button type="submit" class="btn style1 find_hm">Find Home</button>
+                    </div>	 */}
+                    <div className="form-group-wrap">
+                        <div className="form-group">
+                            <input type="text" placeholder="Enter an Address, Neighbourhood" />
+                        </div>
                     </div>
-                  </div>
-                  <button type="submit" className="btn style2 search_button">Search</button>
+                    <button type="submit" className="btn style2 search_button">Search</button>
                 </form>
               </div>
             </div>

@@ -16,7 +16,7 @@ export default function Footer() {
                               <span className="logo_wraper"><img src="../assets/img/Black Rush home.png" alt="Black Rush home" /></span>
                           </Link>
                           <p className="comp-desc">
-                              Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet.
+                              {/* Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet. */}
                           </p>
                           <div className="bx_wraper">
                               <div className="left_box">
@@ -79,7 +79,7 @@ export default function Footer() {
                               <li>
                               <Link href="/" target="_blank">
                                   <i className="ri-arrow-right-s-line" />
-                                  Sanfransisco Real Estate
+                                  San Francisco Real Estate
                               </Link>
                               </li>
                               <li>
