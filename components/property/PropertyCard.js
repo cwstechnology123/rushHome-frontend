@@ -3,7 +3,7 @@ import Link from "next/link";
 // import { FaBed, FaBath } from 'react-icons/fa';
 // import { BsGridFill } from 'react-icons/bs';
 
-export default function PropertyCard() {
+export default function PropertyCard({index}) {
 
     return (
         <div className="property-card style3">
@@ -18,10 +18,10 @@ export default function PropertyCard() {
                 </div>
                 <h3><Link href="listing-details.html">Home in Delaware</Link></h3>
                 <ul className="property-metainfo list-style">
-                    <li><i className="flaticon-double-bed" />3 Br</li>
-                    <li><i className="flaticon-bath-tub" />3 Ba</li>
-                    <li><i className="flaticon-square" />2300 Sq.Ft</li>
-                    <li><i className="flaticon-home" />3 Gr</li>
+                    <li key={"bed"+index}><i className="flaticon-double-bed" />3 Br</li>
+                    <li key={"bath"+index}><i className="flaticon-bath-tub" />3 Ba</li>
+                    <li key={"square"+index}><i className="flaticon-square" />2300 Sq.Ft</li>
+                    <li key={"home"+index}><i className="flaticon-home" />3 Gr</li>
                 {/* <li><FaBed/> 3 Br</li>
                 <li><FaBath /> 3 Ba</li>
                 <li><BsGridFill /> 2300 Sq.Ft</li>

@@ -10,7 +10,7 @@ export default function List() {
               <div className="row justify-content-center">
                 {[...Array(6)].map((e, i) => (
                   <div className="col-xl-4 col-lg-6 col-md-6">
-                      <PropertyCard />
+                      <PropertyCard index={(i+1)}/>
                   </div>
                 ))}
               </div>
@@ -19,7 +19,7 @@ export default function List() {
               <div className="row justify-content-center">
                 {[...Array(6)].map((e, i) => (
                   <div className="col-xl-4 col-lg-6 col-md-6">
-                      <PropertyCard />
+                      <PropertyCard index={(i+1)}/>
                   </div>
                 ))}
               </div>
@@ -28,7 +28,7 @@ export default function List() {
               <div className="row justify-content-center">
                 {[...Array(6)].map((e, i) => (
                   <div className="col-xl-4 col-lg-6 col-md-6">
-                      <PropertyCard />
+                      <PropertyCard index={(i+1)}/>
                   </div>
                 ))}
               </div>
