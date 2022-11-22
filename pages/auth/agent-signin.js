@@ -3,13 +3,7 @@ import { useRouter } from "next/router";
 import { getCsrfToken } from "next-auth/react"
 
 export default function Agent({ csrfToken }) {
-  const router = useRouter();
-  const handleClick = (e, path) => {
-    e.preventDefault()
-    if (path === "/auth/email-signin") {
-      router.push(path)
-    }
-  };
+  
   return (
     <>
       <section className="pt-100 pb-75 agent_wraper">
@@ -17,7 +11,7 @@ export default function Agent({ csrfToken }) {
           <h2><span onClick={() => Router.back()}><i className="flaticon-left-arrow" /></span> Agent Sign In</h2>
           <div className="col-md-12 text-center">
             <form className="g-3" method="post" action="/api/auth/signin/email">
-              <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+              <input name="csrfToken" type="hidden" value={csrfToken} />
               <button type="submit" className="btn style1 button_agent">Login with Email</button>
             </form>
           </div> 
@@ -30,6 +24,6 @@ export default function Agent({ csrfToken }) {
 export async function getServerSideProps(context) {
   const csrfToken = await getCsrfToken(context)
   return {
-    props: { csrfToken },
+    props: { csrfToken }
   }
 }
