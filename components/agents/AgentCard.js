@@ -14,22 +14,22 @@ export default function AgentCard({ index }) {
                     <span>Real Estate Agent</span>
                     <ul className="social-profile list-style style1">
                     <li key={"twitter-"+index}>
-                        <a target="_blank" href="https://twitter.com/">
+                        <a target="_blank" rel="noreferrer" href="https://twitter.com/">
                         <i className="flaticon-twitter" />
                         </a>
                     </li>
                     <li key={"facebook-"+index}>
-                        <a target="_blank" href="https://facebook.com/">
+                        <a target="_blank" rel="noreferrer" href="https://facebook.com/">
                         <i className="flaticon-facebook" />
                         </a>
                     </li>
                     <li key={"-skype"+index}>
-                        <a target="_blank" href="#">
+                        <a target="_blank" rel="noreferrer" href="#">
                         <i className="fa fa-skype" aria-hidden="true" />
                         </a>
                     </li>
                     <li key={"linkedin"+index}>
-                        <a target="_blank" href="https://linkedin.com/">
+                        <a target="_blank" rel="noreferrer" href="https://linkedin.com/">
                         <i className="flaticon-linkedin-1" />
                         </a>
                     </li>

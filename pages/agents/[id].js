@@ -4,9 +4,6 @@ export default function AgentDetail() {
 
     return (
         <>
-            <Head>
-                <title>Agent - | RUSHHOME</title>
-            </Head>
             <section className="style3 singalagent_box pt-50">
                 <div className="container">
                     <div className="row">
@@ -20,22 +17,22 @@ export default function AgentDetail() {
                         <div className="content-title style1 whatwe_Box">
                             <h2>Mike Wells <ul className="social-profile list-style style1">
                                 <li>
-                                <a target="_blank" href="https://facebook.com/">
+                                <a target="_blank"  rel="noreferrer" href="https://facebook.com/">
                                     <i className="ri-facebook-fill"></i>
                                 </a>
                                 </li>
                                 <li>
-                                <a target="_blank" href="https://twitter.com/">
+                                <a target="_blank"  rel="noreferrer" href="https://twitter.com/">
                                     <i className="ri-twitter-fill"></i>
                                 </a>
                                 </li>
                                 <li>
-                                <a target="_blank" href="https://instagram.com/">
+                                <a target="_blank"  rel="noreferrer" href="https://instagram.com/">
                                     <i className="ri-instagram-line"></i>
                                 </a>
                                 </li>
                                 <li>
-                                <a target="_blank" href="https://linkedin.com/">
+                                <a target="_blank"  rel="noreferrer" href="https://linkedin.com/">
                                     <i className="ri-linkedin-fill"></i>
                                 </a>
                                 </li>

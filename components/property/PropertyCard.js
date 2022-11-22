@@ -1,7 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-// import { FaBed, FaBath } from 'react-icons/fa';
-// import { BsGridFill } from 'react-icons/bs';
 
 export default function PropertyCard({index}) {
 
@@ -22,10 +20,6 @@ export default function PropertyCard({index}) {
                     <li key={"bath"+index}><i className="flaticon-bath-tub" />3 Ba</li>
                     <li key={"square"+index}><i className="flaticon-square" />2300 Sq.Ft</li>
                     <li key={"home"+index}><i className="flaticon-home" />3 Gr</li>
-                {/* <li><FaBed/> 3 Br</li>
-                <li><FaBath /> 3 Ba</li>
-                <li><BsGridFill /> 2300 Sq.Ft</li>
-                <li><GiHomeGarage /> 3 Gr</li> */}
                 </ul>
             </div>
         </div>

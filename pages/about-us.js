@@ -131,7 +131,7 @@ export default function AboutUs() {
           <div className="row">
             <div className="col-xl-10 col-lg-10 offset-xl-1 offset-lg-1">
               <div className="section-title style2 text-center mb-40">
-                <h2>We're always eager to hear from you!</h2>
+                <h2>We are always eager to hear from you!</h2>
                 <hr className="center" />
                 <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p>
               </div>

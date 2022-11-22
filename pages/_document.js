@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Script from 'next/script'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -38,8 +39,8 @@ class MyDocument extends Document {
         <body>
             <Main />
             <NextScript />
-            <script src="../assets/js/jquery.min.js"></script>
-            <script src="../assets/js/bootstrap.bundle.min.js"></script>
+            <Script src="../assets/js/jquery.min.js"></Script>
+            <Script src="../assets/js/bootstrap.bundle.min.js"></Script>
         </body>
         </Html>
     )
