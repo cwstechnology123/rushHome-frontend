@@ -7,7 +7,7 @@ export default function City() {
             <section className="pt-50 pb-75 text-center citybanner_box">
                 <div className="container">
                 <h1 className="aos-init aos-animate">Dover, Delaware</h1>  
-                <p className="aos-init">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>                     
+                <p className="aos-init">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s</p>                     
                 </div>
                 <img src="assets/img/city_banner.jpg" />
             </section>
