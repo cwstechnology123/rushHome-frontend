@@ -74,10 +74,10 @@ export default function Navbar() {
                     :
                     <>
                       <li className="nav-item d-lg-none">
-                        <button type="button" className={"btn" + (router.pathname == '/auth' ? " style1" : " style3")} onClick={(e) => handleClick(e, "/auth")}>Sign In</button>
+                        <button type="button" className={"btn" + (router.pathname == '/auth' || router.pathname == '/auth/client-signin' || router.pathname == '/auth/agent-signin' ? " style1" : " style3")} onClick={(e) => handleClick(e, "/auth")}>Sign In</button>
                       </li>
                       <li className="nav-item d-lg-none">
-                        <button type="button" className={"btn" + (router.pathname != '/signup' && router.pathname == '/auth' ? " style3" : " style1")} onClick={(e) => handleClick(e, "/signup")}>Sign Up</button>
+                        <button type="button" className={"btn" + (router.pathname != '/signup' && (router.pathname == '/auth' || router.pathname == '/auth/client-signin' || router.pathname == '/auth/agent-signin') ? " style3" : " style1")} onClick={(e) => handleClick(e, "/signup")}>Sign Up</button>
                       </li>
                     </>
                   }
@@ -92,8 +92,8 @@ export default function Navbar() {
                     :
                     <>
                       <div className="header-btn">
-                        <button type="button" className={"btn" + (router.pathname == '/auth' ? " style1" : " style3")} onClick={(e) => handleClick(e, "/auth")}>Sign In</button>
-                        <button type="button" className={"btn" + (router.pathname != '/signup' && router.pathname == '/auth' ? " style3" : " style1")} onClick={(e) => handleClick(e, "/signup")}>Sign Up</button>
+                        <button type="button" className={"btn" + (router.pathname == '/auth' || router.pathname == '/auth/client-signin' || router.pathname == '/auth/agent-signin' ? " style1" : " style3")} onClick={(e) => handleClick(e, "/auth")}>Sign In</button>
+                        <button type="button" className={"btn" + (router.pathname != '/signup' && (router.pathname == '/auth' || router.pathname == '/auth/client-signin' || router.pathname == '/auth/agent-signin') ? " style3" : " style1")}  onClick={(e) => handleClick(e, "/signup")}>Sign Up</button>
                       </div>
                     </>
                   }

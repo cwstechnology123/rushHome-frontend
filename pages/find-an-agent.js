@@ -59,8 +59,8 @@ export default function FindAnAgent() {
                 </div>
                 <div className="row justify-content-center">
                     {[...Array(total_agents)].map((e, i) => (
-                        <div className="col-xl-3 col-lg-6 col-md-6">
-                            <AgentCard index={(i+1)}/>
+                        <div key={"list-card-"+i} className="col-xl-3 col-lg-6 col-md-6">
+                            <AgentCard key={"agent-card-"+i} index={(i+1)}/>
                         </div>
                     ))}
                 </div>
