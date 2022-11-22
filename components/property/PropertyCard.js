@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function PropertyCard({index}) {
 
     return (
-        <div className="property-card style3">
+        <div key={"card-"+index} className="property-card style3">
             <div className="property-img">
                 <Image width={100} height={100} layout="responsive" src="/assets/img/property/property-26.jpg" alt="Image" />
                 <span className="property-status">Exclusive</span>
