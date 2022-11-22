@@ -3,7 +3,7 @@ import Link from "next/link"
 import Image from "next/image";
 
 export default function SignInOpt() {
-    const router = useRouter();
+    const router = useRouter()
     const handleClick = (e, path) => {
         e.preventDefault()
         if (path === "/auth/client-signin") {
@@ -15,7 +15,7 @@ export default function SignInOpt() {
         else{
             router.push('/')
         }
-    };
+    }
     
     return (
       <>

@@ -18,7 +18,7 @@ export default function Client() {
                     <label htmlFor="inputPassword4" className="form-label">Password</label>
                     <input type="password" className="form-control" id="inputPassword4" placeholder="Enter Password" />
                 </div>
-                <div className="forgot_box"><a href>Forgot Password?</a></div>
+                <div className="forgot_box"><Link href="#">Forgot Password?</Link></div>
                 <div className="col-md-12 text-center">
                     <button type="button" className="btn style1 button_agent">Login</button>
                 </div>
@@ -28,8 +28,7 @@ export default function Client() {
                 <p className="policy_content">Don’t have an account? <Link href="/signup">Sign up for free</Link></p>
                 </form>
             </div>
-            </section>
-
+        </section>
       </>
     )
 }

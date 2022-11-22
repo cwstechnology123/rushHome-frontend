@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaBed, FaBath } from 'react-icons/fa';
-import { BsGridFill } from 'react-icons/bs';
+// import { FaBed, FaBath } from 'react-icons/fa';
+// import { BsGridFill } from 'react-icons/bs';
 
 export default function PropertyCard() {
 
