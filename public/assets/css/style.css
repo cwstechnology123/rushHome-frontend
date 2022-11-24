@@ -1991,7 +1991,7 @@ select {
     }
     .header-wrap .navbar .navbar-nav .nav-item a {
         color: #666;
-        font-weight: 400;
+        font-weight: 500;
         padding: 30px 0;
         -webkit-transition: 0.4s;
         transition: 0.4s;
@@ -7095,3 +7095,398 @@ color: #000000;}
     font-size: 23px;
     width: 100%;
 }
+
+.search_dahboard {position: relative;}
+.search_dahboard input {  border: 1px solid #E8E9EB;
+  height: 40px;
+  background-color: transparent;
+  width: 100%;
+  padding: 15px 37px 14px;
+  border-radius: 15px;
+  position: relative;
+}
+.search_dahboard i {
+    position: absolute;
+    top: 13px;
+    left: 15px;
+    color: #ccc;
+}
+.dashboard_nav_box h2 {
+    font-size: 16px;
+    color: #333;
+}
+.dashboard_box {
+    margin-top: 40px;
+    border: 1px solid #e7e7e7;
+    border-radius: 15px;
+}
+.dashboard_nav_box {
+    padding: 20px;
+    border-bottom: 1px solid #e7e7e7;
+}
+.dashboard_nav_box p {
+    text-align: left;
+}
+/*.dashboard_nav_box div.col-md-3, .col-md-4, col-md-5 {
+    border-right: 1px solid #e7e7e7;
+}*/
+.dashbaord_table {
+    padding: 10px;
+}
+.dashbaord_table img {
+    width: 80px;
+}
+.dashbaord_table thead {
+    background: #F2F2F2;
+    height: 50px;
+    line-height: 35px;
+}
+.dashbaord_table thead tr {
+    line-height: 35px;
+}
+.dashbaord_table button {
+    padding: 5px 13px;
+    border-radius: 25px;
+}
+
+.dashbaord_table tr {line-height: 70px;}
+.view_details i {top: 0px;
+font-size: 16px;
+margin-left: 0px;}
+.view_details {
+    border-radius: 5px !important;
+    color: #000 !important;
+    border: 1px solid #E5E6EB !important;
+}
+.view_details:hover {color:#fff !important;}
+.paginaion_wraper {
+    width: 100%;
+    display: inline-block;
+    margin: -5px 0 10px 0;
+}
+.text_pagi {
+    text-align: left;
+    width: 49%;
+    display: inline-block;
+    padding: 0 15px;
+}
+.text_pagi p {
+    display: inline;
+}
+.right_box_pagi.text_pagi {
+    text-align: right;
+}
+.prev_pagi {
+    border: 1px solid #ccc;
+    padding: 4px 10px;
+    border-radius: 100%;
+    margin: 0 4px 0 4px;
+}
+.next_pegi {
+    border: 1px solid #ccc;
+    padding: 4px 10px;
+    border-radius: 100%;
+}
+.rushhome_agent h3 {
+    font-size: 15px;
+    text-align: center;
+    margin: 0 0 20px 0;
+}
+.rushhome_agent p {
+    text-align: left;
+    margin: 4px;
+}
+.rushhome_agent div.col-md-6 h3 {
+    margin: 21px 0 0 0;
+}
+.criteria_box h2 {
+    font-size: 20px;
+}
+.criteria_box button {
+    background: #304FFD;
+    color: #fff;
+    padding: 5px 10px;
+
+    }
+
+.criteria_box button {
+    background-color: #304FFD !important;
+    color: #fff;
+    padding: 2px 10px;
+    font-size: 12px;
+    float: right;
+}
+.criteria_box {
+    border-top: 1px solid #000;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+.criteria_box ul {margin:0; padding:0; list-style: none;}
+.criteria_box ul li {
+    display: inline-block;
+    font-size: 13px;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+.monthwise h2 {
+    font-size: 20px;
+}
+.monthwise span {
+    float: right;
+    margin-left: 18px;
+    cursor: pointer;
+}
+.monthwise {
+    margin-top: 30px;
+}
+.monthwise p {text-align: left;}
+.datewise ul {margin:0; padding: 0; list-style: none;}
+.datewise ul li {
+    text-align: left;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+.datewise ul li span {
+    float: left;
+    margin: 0;
+    width: 30%;
+    font-size: 12px;
+    border-right: 4px solid blue;
+    height: 40px;
+    line-height: 40px;
+}
+.datewise ul li span.addressdate {
+    width: 70%;
+    border-right: none;
+    padding: 0 0 0 10px;
+    line-height: inherit;
+}
+.recent_wraper h2 {color: #3F434A; font-size: 20px;}
+.recent_wraper h2 span {font-size: 13px; color: #000;}
+.recent_wraper p {text-align: left;}
+.btn.style2.saved_button {
+    padding: 0 5px;
+    font-size: 11px;
+    float: left;
+    width: 20%;
+}
+.active_content p {
+    font-size: 13px;
+    /* float: right; */
+    width: 80%;
+    float: right;
+    padding-left: 15px;
+    margin: 0;
+}
+.active_content {
+    width: 100%;
+    display: inline-block;
+}
+.client_favbox {
+    border: 1px solid #e7e7e7;
+    border-radius: 10px;
+    display: flex;
+    margin-top: 30px;
+}
+.showingall {
+    width: 24%;
+}
+.btn.style3.removeall {
+    padding: 0 10px;
+    height: 35px;
+    margin: 5px 0 0 5px;
+    color: #F06565;
+    border:1px solid #F06565;
+    background:#fff;
+}
+.left_client {width: 60%; }
+.right_client {width: 40%; display: flex; }
+.left_client select {
+    width: 140px;
+    height: 45px;
+    border: 0;
+    border-right: 1px solid #e7e7e7;
+    border-radius: 0px;
+    margin-left: 5px;
+}
+.right_client select {
+    width: 140px;
+    height: 35px;
+    margin:5px;
+}
+.right_client span {
+    width: 40px;
+    border:1px solid #e7e7e7;
+    margin: 5px 5px 0 5px;
+    height: 35px;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 35px;
+}
+.btn.style3.removeall i {
+    top: 0;
+    margin: 0 3px 0px 0;
+}
+.property_name {
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+}
+.list_clientbox {
+    margin-top: 50px;
+}
+.listing_agentbox {
+    margin-top: 50px;
+}
+.askqu {
+    display: flex;
+}
+.left_ask {
+    width: 40%;
+    background: #D9D9D9;
+    height: 100px;
+    line-height: 119px;
+    text-align: center;
+}
+.left_ask i {
+    font-size: 45px;
+    color: #fff;
+}
+.agent_box h2 {
+    font-size: 28px;
+    margin: 0;
+}
+.agent_box h3 {
+    font-size: 22px;
+ margin: 0;
+}
+.agent_box p {
+    text-align: left;
+    margin: 0;
+}
+.agent_box h3 span {color: #FFC107; margin-left: 5px;}
+.agent_box {
+    width: 60%;
+    margin-left: 20px;
+    text-align: left;
+}
+.askquestion h2 {
+    font-size: 19px;
+    font-weight: normal;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.askquestion button {
+    margin-top: 20px;
+}
+
+.askquestion textarea {background:#F2F2F2 }
+
+.carousel_icons {
+    position: absolute;
+    right: 10px;
+    top: 29px;
+    z-index: 101;
+    width: 150px;
+}
+.carousel_icons ul {margin:0; padding: 0; list-style: none;}
+.carousel_icons ul li {display: inline-block;}
+.carousel_icons ul li a {
+    background-color: rgba(181, 176, 176, 0.5);
+    padding: 12px;
+    border-radius: 15px;
+    margin-left: 9px;
+    color: #fff;
+}
+.carousel_icons ul li a:hover {}
+.vill_callled h2 {
+    font-size: 25px;
+    margin-top: 20px;
+}
+.vill_callled p {
+    text-align: left;
+}
+.villaprice p {
+    text-align: right;
+    float: right;
+    margin-top: 5px;
+}
+.villaprice ul {margin:0;padding: 0; list-style: none;}
+.villaprice ul li {
+    display: inline-block;
+    width: 48%;
+}
+.villaprice ul li i {
+    padding: 10px;
+    background: #f1f1f1;
+    color: #000;
+    border-radius: 10px;
+    float: left;
+    width: 20%;
+}
+.villaprice ul li p {
+    float: right;
+    width: 76%;
+    text-align: left;
+    margin: 0;
+}
+.villaprice ul li h3 {float: right;width: 76%; text-align: left; font-size: 16px;}
+.villaprice h2 {margin-bottom: 20px;}
+.villaprice p {text-align: left;}
+.villaprice button.btn {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.vill_callled {
+    padding: 30px;
+    width: 100%;
+    display: inline-block;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px #ccc;
+}
+.requestmore_Box h2 {
+    border: 0;
+}
+.requestmore_Box h4 {
+    font-weight: normal;
+    text-align: center;
+    margin-top: -20px;
+    margin-bottom: 20px;
+}
+.profile_wraper {
+    width: 81%;
+    float: right;
+    position: relative;
+}
+.profile_sub {
+    position: absolute;
+    top: 51px;
+    left: -8px;
+    width: 100%;
+    box-shadow: 0 0 5px #ccc;
+    border-radius: 15px;
+    
+    z-index: 9999999999999999999999999;
+    background: #fff;
+}
+.profile_sub ul {margin:0; padding: 0; list-style: none;}
+.profile_sub ul li {}
+.profile_sub ul li a {
+    padding: 12px;
+    display: block;
+    border-bottom: 1px solid #ccc;
+}
+.profile_sub ul li a:hover {
+    background: #ccc;
+    
+}    
+.profile_sub ul li:last-child a {border:none;}
+.profile_sub ul li:first-child a:hover {
+    background: #ccc;
+    border-radius: 15px 15px 0 0;
+}
+.profile_sub ul li:last-child a:hover {
+    background: #ccc;
+    border-radius: 0px 0px 15px 15px;
+}
+    

@@ -23,7 +23,8 @@ export default function Agent({ csrfToken }) {
 
 export async function getServerSideProps(context) {
   const csrfToken = await getCsrfToken(context)
+  const data = csrfToken ? csrfToken : {}
   return {
-    props: { csrfToken }
+    props: { data }
   }
 }

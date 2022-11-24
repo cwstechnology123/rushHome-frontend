@@ -1,9 +1,15 @@
 import Link from 'next/link'
 import { useRouter } from "next/router";
 import { useSession, signOut } from "next-auth/react"
+import { useState } from "react";
 
 export default function Navbar() {
   const { data: session } = useSession()
+  const [showMe, setShowMe] = useState(false);
+  function toggle(){
+    setShowMe(!showMe);
+  }
+
   const router = useRouter();
   const handleClick = async (e, path) => {
     e.preventDefault()
@@ -41,52 +47,81 @@ export default function Navbar() {
                       Sell
                     </Link>
                   </li>
+                {(session) ?
+                  <>
                   <li className="nav-item">
-                    <Link href="#" className={"nav-link" + (router.pathname == '/find-an-agent' ? " active" : "")}>
-                      Agents
-                      <i className="ri-add-line" />
-                    </Link>
-                    <ul className="dropdown-menu">
-                      <li className="nav-item">
-                        <Link href="/find-an-agent" className={"nav-link" + (router.pathname == '/find-an-agent' ? " active" : "")}>Find an Agent</Link>
-                      </li>
-                      <li className="nav-item">
-                        <Link href="#" className={"nav-link" + (router.pathname == '/become-an-agent' ? " active" : "")}>Become and Agent</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="nav-item">
-                    <Link href="/about-us" className={"nav-link" + (router.pathname == '/about-us' ? " active" : "")}>
-                      About Us
+                    <Link href="/client/dashboard" className={"nav-link" + (router.pathname == '/client/dashboard' ? " active" : "")}>
+                      Dashboard
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link href="/contact-us" className={"nav-link" + (router.pathname == '/contact-us' ? " active" : "")}>
-                      Contact
+                    <Link href="/client/favorites" className={"nav-link" + (router.pathname == '/client/favorites' ? " active" : "")}>
+                      Favorites
                     </Link>
                   </li>
-                  {(session) ?
-                    <>
-                      <li className="nav-item d-lg-none">
-                        <button type="button" className="btn style1" onClick={(e) => handleClick(e, "/signout")} >Sign out</button>
-                      </li>
-                    </>
-                    :
-                    <>
-                      <li className="nav-item d-lg-none">
-                        <button type="button" className={"btn" + (router.pathname == '/auth' || router.pathname == '/auth/client-signin' || router.pathname == '/auth/agent-signin' ? " style1" : " style3")} onClick={(e) => handleClick(e, "/auth")}>Sign In</button>
-                      </li>
-                      <li className="nav-item d-lg-none">
-                        <button type="button" className={"btn" + (router.pathname != '/signup' && (router.pathname == '/auth' || router.pathname == '/auth/client-signin' || router.pathname == '/auth/agent-signin') ? " style3" : " style1")} onClick={(e) => handleClick(e, "/signup")}>Sign Up</button>
-                      </li>
-                    </>
-                  }
+                  <li class="nav-item d-lg-none">
+                    <i class="fa fa-bell-o" aria-hidden="true"></i>
+                    <span></span>
+                  </li>
+                  <li className="nav-item d-lg-none">
+                      <button type="button" className="btn style1" onClick={(e) => handleClick(e, "/signout")} >Sign out</button>
+                  </li>
+                  </>
+                :
+                  <>
+                    <li className="nav-item">
+                      <Link href="#" className={"nav-link" + (router.pathname == '/find-an-agent' ? " active" : "")}>
+                        Agents
+                        <i className="ri-add-line" />
+                      </Link>
+                      <ul className="dropdown-menu">
+                        <li className="nav-item">
+                          <Link href="/find-an-agent" className={"nav-link" + (router.pathname == '/find-an-agent' ? " active" : "")}>Find an Agent</Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link href="#" className={"nav-link" + (router.pathname == '/become-an-agent' ? " active" : "")}>Become and Agent</Link>
+                        </li>
+                      </ul>
+                    </li>
+                    <li className="nav-item">
+                      <Link href="/about-us" className={"nav-link" + (router.pathname == '/about-us' ? " active" : "")}>
+                        About Us
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link href="/contact-us" className={"nav-link" + (router.pathname == '/contact-us' ? " active" : "")}>
+                        Contact
+                      </Link>
+                    </li>
+                    <li className="nav-item d-lg-none">
+                      <button type="button" className={"btn" + (router.pathname == '/auth' || router.pathname == '/auth/client-signin' || router.pathname == '/auth/agent-signin' ? " style1" : " style3")} onClick={(e) => handleClick(e, "/auth")}>Sign In</button>
+                    </li>
+                    <li className="nav-item d-lg-none">
+                      <button type="button" className={"btn" + (router.pathname != '/signup' && (router.pathname == '/auth' || router.pathname == '/auth/client-signin' || router.pathname == '/auth/agent-signin') ? " style3" : " style1")} onClick={(e) => handleClick(e, "/signup")}>Sign Up</button>
+                    </li>
+                  </>
+                }
                 </ul>
                 <div className="others-options  md-none">
                   {(session) ?
                     <>
                       <div className="header-btn">
-                        <button type="button" className="btn style1" onClick={(e) => handleClick(e, "/signout")}>Sign out</button>
+                        <div class="bell_box">
+                          <i class="fa fa-bell-o" aria-hidden="true"></i>
+                          <span></span>
+                        </div>
+                        <div className="profile_wraper">
+                          <button onClick={toggle} type="button" className="btn profile_button style3"><span>GI</span>Giovanni <i className="fa fa-angle-down" aria-hidden="true" /></button>
+                            <div className="profile_sub" style={{
+                              display: showMe?"block":"none"
+                            }}>
+                            <ul>
+                              <li><a href="/client/my-profile">My Profile</a></li>
+                              <li><a href="/client/my-account">My Account</a></li>
+                              <li onClick={(e) => handleClick(e, "/signout")}><a href="#">Logout</a></li>
+                            </ul>
+                          </div>
+                        </div>
                       </div>
                     </>
                     :
