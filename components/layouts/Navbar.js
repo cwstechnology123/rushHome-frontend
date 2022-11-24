@@ -116,8 +116,8 @@ export default function Navbar() {
                               display: showMe?"block":"none"
                             }}>
                             <ul>
-                              <li><a href="/client/my-profile">My Profile</a></li>
-                              <li><a href="/client/my-account">My Account</a></li>
+                              <li><Link href="/client/my-profile">My Profile</Link></li>
+                              <li><Link href="/client/my-account">My Account</Link></li>
                               <li onClick={(e) => handleClick(e, "/signout")}><a href="#">Logout</a></li>
                             </ul>
                           </div>
