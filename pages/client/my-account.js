@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Sidebar from '../../components/client/Sidebar'
 
 export default function MyAccount() {
   return (
@@ -7,12 +8,7 @@ export default function MyAccount() {
             <div className="container">
                 <div className="row">
                 <div className="col-md-3 col-lg-3 col-xl-3">
-                    <div className="nav_left_bar">
-                    <ul>
-                        <li><a href>Profile</a></li>
-                        <li className="active"><a href>My Account</a></li>
-                    </ul>
-                    </div>
+                    <Sidebar />
                 </div>
                 <div className="col-md-9 col-lg-9 col-xl-9">
                     <div className="personal_box">
