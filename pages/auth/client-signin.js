@@ -1,17 +1,7 @@
 import { signIn } from "next-auth/react"
 import Link from "next/link"
-import { useRouter } from "next/router";
 
 export default function Client() {
-    const router = useRouter()
-    const handleClick = async (e, path) => {
-        e.preventDefault()
-        if (path === "/signIn") {
-            const data = await signIn({redirect: false, callbackUrl: "/client/dashboard"})
-            router.push(data.url)
-        }
-    };
-
     return (
       <>
         <section className="pt-50 pb-75 client_sign">
@@ -33,7 +23,7 @@ export default function Client() {
                     <button type="button" className="btn style1 button_agent">Login</button>
                 </div>
                 <div className="col-md-12 text-center">
-                    <button type="button" className="btn style1 button_agent" onClick={(e) => handleClick(e, "/signIn")}><span className="googleicon"><img src="../../assets/img/googleicon.png" /></span>Continue with Google</button>
+                    <button type="button" className="btn style1 button_agent" onClick={() => signIn("google", { callbackUrl: '/client/dashboard' })}><span className="googleicon"><img src="../../assets/img/googleicon.png" /></span>Continue with Google</button>
                 </div>
                 <p className="policy_content">Don’t have an account? <Link href="/signup">Sign up for free</Link></p>
                 </form>

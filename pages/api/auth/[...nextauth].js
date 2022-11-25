@@ -7,11 +7,14 @@ export const authOptions = {
     GoogleProvider({
         clientId: process.env.GOOGLE_ID,
         clientSecret: process.env.GOOGLE_SECRET,
-        // clientId: '895180081492-3go2n3jup7uhq3efoo5f9iia1k8t08q7.apps.googleusercontent.com',
-        // clientSecret: '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',
     }),
     // ...add more providers here
   ],
+  callbacks: {
+    async jwt({ token }) {
+      return token
+    },
+  },
 }
 
 export default NextAuth(authOptions)
