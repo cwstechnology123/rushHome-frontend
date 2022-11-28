@@ -1,4 +1,4 @@
-import Head from "next/head";
+import Link from "next/link"
 
 export default function AgentDetail() {
 
@@ -17,24 +17,24 @@ export default function AgentDetail() {
                         <div className="content-title style1 whatwe_Box">
                             <h2>Mike Wells <ul className="social-profile list-style style1">
                                 <li>
-                                <a target="_blank"  rel="noreferrer" href="https://facebook.com/">
+                                <Link target="_blank" href="https://facebook.com/">
                                     <i className="ri-facebook-fill"></i>
-                                </a>
+                                </Link>
                                 </li>
                                 <li>
-                                <a target="_blank"  rel="noreferrer" href="https://twitter.com/">
+                                <Link target="_blank" href="https://twitter.com/">
                                     <i className="ri-twitter-fill"></i>
-                                </a>
+                                </Link>
                                 </li>
                                 <li>
-                                <a target="_blank"  rel="noreferrer" href="https://instagram.com/">
+                                <Link target="_blank" href="https://instagram.com/">
                                     <i className="ri-instagram-line"></i>
-                                </a>
+                                </Link>
                                 </li>
                                 <li>
-                                <a target="_blank"  rel="noreferrer" href="https://linkedin.com/">
+                                <Link target="_blank" href="https://linkedin.com/">
                                     <i className="ri-linkedin-fill"></i>
-                                </a>
+                                </Link>
                                 </li>
                             </ul>
                             </h2>
@@ -112,7 +112,7 @@ export default function AgentDetail() {
                                 </p>
                                 </div>
                                 <h3>
-                                <a href="listing-details.html">Home in Delaware</a>
+                                <Link href={"/property/1"}>Home in Delaware</Link>
                                 </h3>
                                 <ul className="property-metainfo list-style">
                                 <li>
@@ -146,7 +146,7 @@ export default function AgentDetail() {
                                 </p>
                                 </div>
                                 <h3>
-                                <a href="listing-details.html">Home in Delaware</a>
+                                <Link href={"/property/1"}>Home in Delaware</Link>
                                 </h3>
                                 <ul className="property-metainfo list-style">
                                 <li>
@@ -180,7 +180,7 @@ export default function AgentDetail() {
                                 </p>
                                 </div>
                                 <h3>
-                                <a href="listing-details.html">Home in Delaware</a>
+                                <Link href={"/property/1"}>Home in Delaware</Link>
                                 </h3>
                                 <ul className="property-metainfo list-style">
                                 <li>
@@ -214,7 +214,7 @@ export default function AgentDetail() {
                                 </p>
                                 </div>
                                 <h3>
-                                <a href="listing-details.html">Home in Delaware</a>
+                                <Link href={"/property/1"}>Home in Delaware</Link>
                                 </h3>
                                 <ul className="property-metainfo list-style">
                                 <li>
@@ -248,7 +248,7 @@ export default function AgentDetail() {
                                 </p>
                                 </div>
                                 <h3>
-                                <a href="listing-details.html">Home in Delaware</a>
+                                <Link href={"/property/1"}>Home in Delaware</Link>
                                 </h3>
                                 <ul className="property-metainfo list-style">
                                 <li>
@@ -282,7 +282,7 @@ export default function AgentDetail() {
                                 </p>
                                 </div>
                                 <h3>
-                                <a href="listing-details.html">Home in Delaware</a>
+                                <Link href={"/property/1"}>Home in Delaware</Link>
                                 </h3>
                                 <ul className="property-metainfo list-style">
                                 <li>
@@ -320,7 +320,7 @@ export default function AgentDetail() {
                                 </p>
                                 </div>
                                 <h3>
-                                <a href="listing-details.html">Home in Delaware</a>
+                                <Link href={"/property/1"}>Home in Delaware</Link>
                                 </h3>
                                 <ul className="property-metainfo list-style">
                                 <li>
@@ -354,7 +354,7 @@ export default function AgentDetail() {
                                 </p>
                                 </div>
                                 <h3>
-                                <a href="listing-details.html">Home in Delaware</a>
+                                <Link href={"/property/1"}>Home in Delaware</Link>
                                 </h3>
                                 <ul className="property-metainfo list-style">
                                 <li>
@@ -388,7 +388,7 @@ export default function AgentDetail() {
                                 </p>
                                 </div>
                                 <h3>
-                                <a href="listing-details.html">Home in Delaware</a>
+                                <Link href={"/property/1"}>Home in Delaware</Link>
                                 </h3>
                                 <ul className="property-metainfo list-style">
                                 <li>
@@ -422,7 +422,7 @@ export default function AgentDetail() {
                                 </p>
                                 </div>
                                 <h3>
-                                <a href="listing-details.html">Home in Delaware</a>
+                                <Link href={"/property/1"}>Home in Delaware</Link>
                                 </h3>
                                 <ul className="property-metainfo list-style">
                                 <li>
@@ -456,7 +456,7 @@ export default function AgentDetail() {
                                 </p>
                                 </div>
                                 <h3>
-                                <a href="listing-details.html">Home in Delaware</a>
+                                <Link href={"/property/1"}>Home in Delaware</Link>
                                 </h3>
                                 <ul className="property-metainfo list-style">
                                 <li>
@@ -490,7 +490,7 @@ export default function AgentDetail() {
                                 </p>
                                 </div>
                                 <h3>
-                                <a href="listing-details.html">Home in Delaware</a>
+                                <Link href={"/property/1"}>Home in Delaware</Link>
                                 </h3>
                                 <ul className="property-metainfo list-style">
                                 <li>
@@ -547,7 +547,7 @@ export default function AgentDetail() {
                                 </p>
                                 </div>
                                 <h3>
-                                <a href="listing-details.html">Home in Delaware</a>
+                                <Link href={"/property/1"}>Home in Delaware</Link>
                                 </h3>
                                 <ul className="property-metainfo list-style">
                                 <li>
@@ -581,7 +581,7 @@ export default function AgentDetail() {
                                 </p>
                                 </div>
                                 <h3>
-                                <a href="listing-details.html">Home in Delaware</a>
+                                <Link href={"/property/1"}>Home in Delaware</Link>
                                 </h3>
                                 <ul className="property-metainfo list-style">
                                 <li>
@@ -615,7 +615,7 @@ export default function AgentDetail() {
                                 </p>
                                 </div>
                                 <h3>
-                                <a href="listing-details.html">Home in Delaware</a>
+                                <Link href={"/property/1"}>Home in Delaware</Link>
                                 </h3>
                                 <ul className="property-metainfo list-style">
                                 <li>
@@ -649,7 +649,7 @@ export default function AgentDetail() {
                                 </p>
                                 </div>
                                 <h3>
-                                <a href="listing-details.html">Home in Delaware</a>
+                                <Link href={"/property/1"}>Home in Delaware</Link>
                                 </h3>
                                 <ul className="property-metainfo list-style">
                                 <li>
@@ -683,7 +683,7 @@ export default function AgentDetail() {
                                 </p>
                                 </div>
                                 <h3>
-                                <a href="listing-details.html">Home in Delaware</a>
+                                <Link href={"/property/1"}>Home in Delaware</Link>
                                 </h3>
                                 <ul className="property-metainfo list-style">
                                 <li>
@@ -717,7 +717,7 @@ export default function AgentDetail() {
                                 </p>
                                 </div>
                                 <h3>
-                                <a href="listing-details.html">Home in Delaware</a>
+                                <Link href={"/property/1"}>Home in Delaware</Link>
                                 </h3>
                                 <ul className="property-metainfo list-style">
                                 <li>
