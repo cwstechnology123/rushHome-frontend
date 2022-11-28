@@ -1,5 +1,5 @@
 import Link from "next/link";
-import AgentCard from "../components/agents/AgentCard";
+import AgentCard from "../components/agent/AgentCard";
 
 export default function FindAnAgent() {
     const total_agents = 45;

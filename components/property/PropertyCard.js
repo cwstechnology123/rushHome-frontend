@@ -14,7 +14,7 @@ export default function PropertyCard({index}) {
                 <div className="property-status-wrap">
                 <p className="property-price">$8,587.00</p>
                 </div>
-                <h3><Link href="listing-details.html">Home in Delaware</Link></h3>
+                <h3><Link href={"/property/"+index}>Home in Delaware</Link></h3>
                 <ul className="property-metainfo list-style">
                     <li key={"bed"+index}><i className="flaticon-double-bed" />3 Br</li>
                     <li key={"bath"+index}><i className="flaticon-bath-tub" />3 Ba</li>

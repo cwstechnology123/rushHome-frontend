@@ -10,7 +10,7 @@ export default function AgentCard({ index }) {
             </div>
             <div key={'card-info-'+index}  className="agent-info-wrap">
                 <div key={'agent-'+index} className="agent-info">
-                    <h3><Link href={`/agents/${index}`} passHref>Erik Ondricka</Link></h3>
+                    <h3><Link href={`/agent/${index}`} passHref>Erik Ondricka</Link></h3>
                     <span>Real Estate Agent</span>
                     <ul className="social-profile list-style style1">
                     <li key={"twitter-"+index}>
