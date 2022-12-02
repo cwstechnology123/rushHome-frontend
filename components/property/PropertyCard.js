@@ -16,7 +16,7 @@ const PropertyCard = ({
     (
         <div className="property-card style3">
             <div className="property-img">
-                <Image width={100} height={100} layout="responsive" src="/assets/img/property/property-26.jpg" alt="Image" />
+                <img src={listPictureURL} alt="Image" />
                 <span className="property-status">Exclusive</span>
                 {/* <span class="property-condo">New</span> */}
             </div>
