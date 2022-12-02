@@ -2,9 +2,10 @@ import Link from 'next/link'
 import MainBanner from '../components/layouts/MainBanner'
 import ContactUs from '../components/ContactUs'
 import List from '../components/property/List'
+import { apiBaseUrl, fetchApi } from '../utils/fetchApi'
 
-export default function Home({data}) {
-  //console.log(data)
+export default function Home({properties}) {
+
   return (
     <>
       <MainBanner />
@@ -35,10 +36,20 @@ export default function Home({data}) {
               </div>
             </div>
           </div>
-          <List />
-          <div className="col-md-12 text-center">
-            <button type="button" className="btn style1 button_custom">See All Properties <i className="flaticon-right-arrow" /></button>
-          </div>
+          { (properties) ?
+            <>
+              <List properties={properties? properties : null} />
+              <div className="col-md-12 text-center">
+                <button type="button" className="btn style1 button_custom">See All Properties <i className="flaticon-right-arrow" /></button>
+              </div>
+            </>
+            :
+            <>
+              <div className="col-md-12 text-center">
+                No Records...
+              </div>
+            </>
+          }
         </div>
       </section>
       <section className="hw-wrap pt-100 pb-75">
@@ -173,11 +184,21 @@ export default function Home({data}) {
 }
 
 // This gets called on every request
-export async function getServerSideProps() {
-  // Fetch data from external API
-  //const res = await fetch(`https://rushhome.com/wp-json/wp/v2/posts`)
-  //const data = await res.json()
-
+export async function getStaticProps() {
+  const type = 'all';
+  const payload = {url : `${apiBaseUrl}/properties/${type}/1/6`, method : 'GET'}
+  const res = await fetchApi(payload)
   // Pass data to the page via props
-  return { props: { data : 'True' } }
+  if(res.data){
+    return {
+      props: {
+        properties : res && res.data?.properties,
+      },
+    };
+  }
+  return {
+    props: {
+      properties : null,
+    },
+  };
 }

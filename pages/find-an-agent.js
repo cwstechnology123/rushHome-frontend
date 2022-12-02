@@ -40,7 +40,7 @@ export default function FindAnAgent() {
                     <div className="col-xl-2 col-lg-4 col-md-4">
                         <p className="sort_by">
                             <span className="sorted_list"><i className="fa fa-list-ul" aria-hidden="true" /></span>
-                            Sorted By
+                            &nbsp;Sorted By
                         </p>
                     </div>
                     <div className="col-xl-3 col-lg-4 col-md-4">

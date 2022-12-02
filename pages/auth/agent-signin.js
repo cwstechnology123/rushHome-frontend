@@ -1,7 +1,7 @@
 import Router from "next/router"
 import { signIn } from "next-auth/react"
 
-export default function Agent({ csrfToken }) {
+export default function Agent() {
   
   return (
     <>

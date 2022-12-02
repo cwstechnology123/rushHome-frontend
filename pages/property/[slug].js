@@ -1,5 +1,21 @@
-export default function PropertyDeatil() {
-  return (
+import { apiBaseUrl, fetchApi } from '../../utils/fetchApi'
+
+const PropertyDetails = ({
+    propertyDetails: {
+        id,
+        listPrice,
+        fullStreetAddress,
+        description,
+        bedroomsTotal,
+        bathroomsTotal,
+        areaTotal,
+        slug,
+        county,
+        city,
+        listPictureURL,
+        listPicture2URL,
+      },
+  }) => (
     <>
         <section className="style3 ptb-50 product_box">
             <div className="container">
@@ -26,21 +42,21 @@ export default function PropertyDeatil() {
                     </div>
                     <div className="slide_content">
                     <div className="slide_content_left">
-                        <h2>123 Main Street</h2>
-                        <p>Dover, DE 19904</p>
+                        <h2>{fullStreetAddress}</h2>
+                        <p>{county}, {city}</p>
                     </div>
                     <div className="slide_content_right">
-                        <h2>$15,000.00</h2>
+                        <h2>{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</h2>
                         <p>2300/SqFt</p>
                     </div>
                     </div>
                     <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="false">
                     <div className="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={0} className="active" aria-current="true" aria-label="Slide 1"><img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." /></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={0} className="active" aria-current="true" aria-label="Slide 1"><img src={listPicture2URL} className="d-block w-100" alt="..." /></button>
                         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={1} aria-label="Slide 2"><img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." /></button>
                         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={2} aria-label="Slide 3"><img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." /></button>
                         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={3} aria-label="Slide 4"><img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." /></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={4} aria-label="Slide 5"><img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." /></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={4} aria-label="Slide 5"><img src={listPictureURL} className="d-block w-100" alt="..." /></button>
                     </div>
                     <div className="carousel-inner">
                         <div className="carousel_icons">
@@ -87,8 +103,7 @@ export default function PropertyDeatil() {
                     <div className="section-title style1 text-left mb-40">
                         <h2>Descriptions</h2>
                         <hr />
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p>
+                        <p>{description}</p>
                     </div>
                     </div>
                 </div>
@@ -549,4 +564,24 @@ export default function PropertyDeatil() {
         </section>
     </>
   )
+
+export default PropertyDetails
+
+export async function getServerSideProps({ params: { slug } }) {
+    const propertyId = slug.substring(slug.lastIndexOf('-') + 1)
+    const payload = {url : `${apiBaseUrl}/properties/details/${propertyId}`, method : 'GET'}
+    const res = await fetchApi(payload)
+    // Pass data to the page via props
+    if(res.data){
+        return {
+        props: {
+            propertyDetails : res && res.data?.propertyDetails,
+        },
+        };
+    }
+    return {
+        props: {
+            propertyDetails : null,
+        },
+    };
 }
