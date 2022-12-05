@@ -5213,15 +5213,18 @@ article .content-feature-list li i {
 .agent-card .agent-img {
 	overflow: hidden;
 	position: relative;
-	border-radius: 5px 5px 0 0;
+	border-radius: 50%;
 	text-align: center;
-	padding-top: 10px;
+	margin-top: 10px;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
 }
 .agent-card .agent-img img {
 	-webkit-transition: 0.7s;
 	transition: 0.7s;
-	border-radius: 100%;
-	width: 50%;
+	width: 100%;
+    object-fit: cover;
 }
 .agent-card .agent-info {
     padding: 22px 25px;

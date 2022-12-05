@@ -1,9 +1,12 @@
 import Link from "next/link";
 import AgentCard from "../components/agent/AgentCard";
+import { fetchFubApi, fubApiBaseUrl } from "../utils/fubFetchApi";
 
-export default function FindAnAgent() {
-    const total_agents = 45;
-
+export default function FindAnAgent({agentList}) {
+    //console.log("agentList: ",props)
+    const total_agents = agentList._metadata.total;
+    const agents = agentList.users;
+    //console.log("Agents: ",agents)
     return (
       <>
         <section className="hero-wrap style3 findagent_banner">
@@ -34,7 +37,7 @@ export default function FindAnAgent() {
                 <div className="row align-items-center mb-25">
                     <div className="col-xl-6 col-lg-8 col-md-8">
                         <div className="profuct-result">
-                            <p>We found <span>45</span> properties available for you</p>
+                            <p>We found <span>{total_agents}</span> agents available for you</p>
                         </div>
                     </div>
                     <div className="col-xl-2 col-lg-4 col-md-4">
@@ -58,9 +61,9 @@ export default function FindAnAgent() {
                     </div>
                 </div>
                 <div className="row justify-content-center">
-                    {[...Array(total_agents)].map((e, i) => (
+                    {agents.map((agent, i) => (
                         <div key={"list-card-"+i} className="col-xl-3 col-lg-6 col-md-6">
-                            <AgentCard key={"agent-card-"+i} index={(i+1)}/>
+                            <AgentCard key={"agent-card-"+i} agent={agent} index={(i+1)}/>
                         </div>
                     ))}
                 </div>
@@ -68,4 +71,20 @@ export default function FindAnAgent() {
         </section>
       </>
     )
-  }
+}
+
+export async function getServerSideProps() {
+    //users?limit=10&offset=0&role=Agent&includeDeleted=false',
+    let limit = 25;
+    let offset = 0;
+    const type = 'Agent';
+    const payload = {url : `${fubApiBaseUrl}/users/?limit=${limit}&offset=${offset}&role=${type}&includeDeleted=false`, method : 'GET', data: []}
+    const res = await fetchFubApi(payload);
+    // Pass data to the page via props
+    // console.log("res:", res)
+    return {
+        props: {
+            agentList : res,
+        },
+    };
+}

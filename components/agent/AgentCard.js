@@ -1,16 +1,27 @@
 import Image from "next/image"
 import Link from "next/link";
+import { useState } from "react";
+import defaultAgentImage from "../../public/assets/img/default-profile-pic.png";
+import blurImage from "../../public/assets/img/placeholder.png";
 
-export default function AgentCard({ index }) {
-
+export default function AgentCard({ agent, index }) {
+    const [src, setSrc] = useState(agent.picture.original);
+    // console.log(agent.picture)
     return (
         <div key={'card-'+index} className="agent-card style1">
-            <div key={'image-'+index} className="agent-img">
-                <img src="assets/img/agents/agent-1.jpg" alt="Image" />
+            <div key={'image-'+index} className="agent-img mx-auto">
+                <Image 
+                    placeholder="blur"
+                    blurDataURL={blurImage.src}
+                    src={src} 
+                    width={150} height={150} 
+                    onError={() => setSrc(defaultAgentImage.src)}
+                    alt="Agent Image"/>
             </div>
             <div key={'card-info-'+index}  className="agent-info-wrap">
                 <div key={'agent-'+index} className="agent-info">
-                    <h3><Link href={`/agent/${index}`} passHref>Erik Ondricka</Link></h3>
+                {/* `/agent/${agent.id}` */}
+                    <h3><Link href={'#'} passHref>{agent.name}</Link></h3>
                     <span>Real Estate Agent</span>
                     <ul className="social-profile list-style style1">
                     <li key={"twitter-"+index}>
@@ -36,8 +47,8 @@ export default function AgentCard({ index }) {
                     </ul>
                 </div>
                 <div className="mail_Box">
-                    <p>oliverbeddows@homeid.com</p>
-                    <span>123 900 686668</span>
+                    <p>{agent.email}</p>
+                    <span>{agent.phone}</span>
                 </div>
             </div>
         </div>
