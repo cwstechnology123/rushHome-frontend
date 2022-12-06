@@ -1,7 +1,12 @@
 import Link from "next/link"
+import { fetchFubApi, fubApiBaseUrl } from "../../utils/fubFetchApi";
+import defaultAgentImage from "../../public/assets/img/default-profile-pic.png";
+import blurImage from "../../public/assets/img/placeholder.png";
+import { useState } from "react";
+import Image from "next/image";
 
-export default function AgentDetail() {
-
+export default function AgentDetail({ agent: { name, firstName, lastName, email, phone, picture } }) {
+    const [src, setSrc] = useState(picture.original);
     return (
         <>
             <section className="style3 singalagent_box pt-50">
@@ -9,13 +14,21 @@ export default function AgentDetail() {
                     <div className="row">
                     <div className="col-lg-4 aos-init aos-animate">
                         <div className="about-img-wrap img_box">
-                            <img src="../assets/img/agents/agent-1.jpg" alt="Iamge" className="about-img-one" />
+                            {/* <img src="../assets/img/agents/agent-1.jpg" alt="Iamge" className="about-img-one" /> */}
+                            <Image 
+                                placeholder="blur"
+                                blurDataURL={blurImage.src}
+                                src={src} 
+                                width={150} height={150} 
+                                onError={() => setSrc(defaultAgentImage.src)}
+                                alt="Agent Image"
+                            />
                         </div>
                     </div>
                     <div className="col-lg-8 aos-init aos-animate">
                         <div className="about-content">
                         <div className="content-title style1 whatwe_Box">
-                            <h2>Mike Wells <ul className="social-profile list-style style1">
+                            <h2>{name} <ul className="social-profile list-style style1">
                                 <li>
                                 <Link target="_blank" href="https://facebook.com/">
                                     <i className="ri-facebook-fill"></i>
@@ -40,10 +53,10 @@ export default function AgentDetail() {
                             </h2>
                             <div className="callemail_box">
                             <p>
-                                <img src="../assets/img/callus.jpg" /> + 5854 8845 8555
+                                <img src="../assets/img/callus.jpg" /> + {phone}
                             </p>
                             <p>
-                                <img src="../assets/img/agentemail.jpg" /> mikewells@gmail.com
+                                <img src="../assets/img/agentemail.jpg" /> {email}
                             </p>
                             </div>
                             <p> Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet. Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur ad Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur ad</p>
@@ -88,14 +101,14 @@ export default function AgentDetail() {
                             </li>
                             </ul>
                         </div>
-                        <h2>Mike Listings</h2>
+                        <h2>{firstName} Listings</h2>
                         <hr />
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p>
                         </div>
                     </div>
                     </div>
                     <div className="tab-content" id="pills-tabContent">
-                    <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                    <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabIndex="0">
                         <div className="row justify-content-center">
                         <div className="col-xl-4 col-lg-6 col-md-6">
                             <div className="property-card style3">
@@ -303,7 +316,7 @@ export default function AgentDetail() {
                         </div>
                         </div>
                     </div>
-                    <div className="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                    <div className="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabIndex="0">
                         <div className="row justify-content-center">
                         <div className="col-xl-4 col-lg-6 col-md-6">
                             <div className="property-card style3">
@@ -513,24 +526,24 @@ export default function AgentDetail() {
                     </div>
                     </div>
                     <div className="col-md-12 text-center">
-                    <button type="button" className="btn style1 button_custom">See All Properties <i className="flaticon-right-arrow"></i>
-                    </button>
+                        <button type="button" className="btn style1 button_custom">See All Properties <i className="flaticon-right-arrow"></i>
+                        </button>
                     </div>
                 </div>
                 </section>
                 <section className="property-slider-wrap pt-100 pb-75 property_wraper">
                 <div className="container">
                     <div className="row">
-                    <div className="col-xl-12 col-lg-12">
-                        <div className="section-title style1 text-left mb-40">
-                        <h2>Past Transections</h2>
-                        <hr />
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p>
+                        <div className="col-xl-12 col-lg-12">
+                            <div className="section-title style1 text-left mb-40">
+                                <h2>Past Transections</h2>
+                                <hr />
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p>
+                            </div>
                         </div>
                     </div>
-                    </div>
                     <div className="tab-content" id="pills-tabContent">
-                    <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                    <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabIndex="0">
                         <div className="row justify-content-center">
                         <div className="col-xl-4 col-lg-6 col-md-6">
                             <div className="property-card style3">
@@ -740,7 +753,18 @@ export default function AgentDetail() {
                     </div>
                     </div>
                 </div>
-                </section>
+            </section>
         </>
     )
+}
+//{ params: { id }}
+export async function getServerSideProps({ params: { id }}) {
+    const payload = {url : `${fubApiBaseUrl}/users/${id}`, method : 'GET', data: []}
+    const res = await fetchFubApi(payload);
+    console.log("Query:", res)
+    return {
+        props: {
+            agent : res,
+        },
+    };
 }

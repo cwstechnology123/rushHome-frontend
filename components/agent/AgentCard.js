@@ -20,8 +20,7 @@ export default function AgentCard({ agent, index }) {
             </div>
             <div key={'card-info-'+index}  className="agent-info-wrap">
                 <div key={'agent-'+index} className="agent-info">
-                {/* `/agent/${agent.id}` */}
-                    <h3><Link href={'#'} passHref>{agent.name}</Link></h3>
+                    <h3><Link href={`/agent/${agent.id}`} passHref>{agent.name}</Link></h3>
                     <span>Real Estate Agent</span>
                     <ul className="social-profile list-style style1">
                     <li key={"twitter-"+index}>

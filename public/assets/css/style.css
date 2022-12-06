@@ -6539,6 +6539,7 @@ color: #000000;}
 }
 .img_box img {
 	border-radius: 20px !important;
+    width: 100%;
 }
 .property_wraper .adv-img img {
 	border-radius: 20px;
