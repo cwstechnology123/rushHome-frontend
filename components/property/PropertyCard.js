@@ -11,6 +11,7 @@ const PropertyCard = ({
       slug,
       county,
       listPictureURL,
+      garageSpaces,
     },
   }) => 
     (
@@ -29,7 +30,7 @@ const PropertyCard = ({
                     <li key={`bed${id}`}><i className="flaticon-double-bed" />{bedroomsTotal} Br</li>
                     <li key={`bath${id}`}><i className="flaticon-bath-tub" />{bathroomsTotal} Ba</li>
                     <li key={`square${id}`}><i className="flaticon-square" />{areaTotal} Sq.Ft</li>
-                    <li key={`home${id}`}><i className="flaticon-home" />3 Gr</li>
+                    <li key={`home${id}`}><i className="flaticon-home" />{garageSpaces} Gr</li>
                 </ul>
             </div>
         </div>
