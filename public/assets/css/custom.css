@@ -1,0 +1,22 @@
+/* change border radius for the tab , apply corners on top*/
+
+#exTab3 .nav-tabs > li > button {
+    border-color: transparent !important;
+    border-radius: 10px 10px 0 0 !important;
+}
+#exTab3 .nav-tabs > li > button.active {
+    border-bottom: 1px solid #eee !important;
+    /* box-shadow: 0px 0px 29px 0px grey; */
+}
+
+#exTab3 .tab-content {
+    border-radius: 0 0 10px 10px !important;
+    padding : 5px 15px;
+    /* box-shadow: 0px 0px 29px 0px grey; */
+}
+
+#exTab3 .form-control {
+    border-radius: 15px !important;
+    border-color: #eee !important;
+    background-color: #eee;
+}
