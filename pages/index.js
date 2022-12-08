@@ -200,5 +200,6 @@ export async function getStaticProps() {
     props: {
       properties : null,
     },
+    revalidate: 1000
   };
 }
