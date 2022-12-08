@@ -15,6 +15,7 @@ export const fetchApi = async (payload) => {
       return jsonRes
     })
     .catch((err) => {
-      throw err;
+      console.log(err)
+      return null;
     });
 };
