@@ -1,10 +1,16 @@
 import { useState } from 'react'
+import { HiOutlineHomeModern, HiOutlineStar } from "react-icons/hi2";
+import { GiCrane, GiBathtub, GiHomeGarage } from "react-icons/gi";
+import { MdSquareFoot } from "react-icons/md";
+import { IoBedOutline } from "react-icons/io5";
 import Mortgage from '../../components/property/Mortgage';
 import PropertyLocation from '../../components/property/PropertyLocation';
-import RequestInfo from '../../components/property/RequestInfo';
-import ScheduleTour from '../../components/property/ScheduleTour';
 import SimilarHomes from '../../components/property/SimilarHomes';
-import { apiBaseUrl, fetchApi } from '../../utils/fetchApi'
+import { apiBaseUrl, fetchApi } from '../../utils/fetchApi';
+import { FaBath, FaHotTub } from 'react-icons/fa';
+import NonAccount from './NonAccount';
+import { useSession } from 'next-auth/react';
+
 
 const PropertyDetails = ({
     propertyDetails: {
@@ -20,10 +26,19 @@ const PropertyDetails = ({
         city,
         listPictureURL,
         listPicture2URL,
+        unparsedAddress,
+        geography,
+        saleType,
+        onMarketDate,
+        heatingYN,
+        cooling,
+        garageYN,
+        totalGarageAndParkingSpaces,
+        mlsStatus
       },
   }) => {
-    const [activeTab, setActiveTab] = useState('schedule-tour');
-
+    
+    const { data: session } = useSession()
     return (
         <>
         <section className="style3 ptb-50 product_box">
@@ -32,32 +47,32 @@ const PropertyDetails = ({
                     <div className="col-md-8 col-xl-8 col-lg-8">
                         <div className="slider_wraper">
                             <div className="top_slide_nav">
-                            <div className="left_nav_slide">
-                                <button type="submit" className="btn style2 excl_button">Exclusive</button>
-                                <span>
-                                <i className="fa fa-clock-o" aria-hidden="true" />
-                                Month Ago
-                                </span>
-                                <span>
-                                <i className="fa fa-eye" aria-hidden="true" />
-                                15892 Views
-                                </span>
-                            </div>
-                            <div className="right_slide_nav">
-                                <button type="button" className="btn style3 button_top"><i className="fa fa-heart-o" aria-hidden="true" /> Saved</button>
-                                <button type="button" className="btn style3 button_top"><i className="fa fa-share" aria-hidden="true" /> Share</button>
-                                <button type="button" className="btn style3 button_top"><i className="fa fa-print" aria-hidden="true" /> Print</button>
-                            </div>
+                                <div className="left_nav_slide">
+                                    <button type="submit" className="btn style2 excl_button">Exclusive</button>
+                                    <span>
+                                    <i className="fa fa-clock-o" />
+                                    Month Ago
+                                    </span>
+                                    <span>
+                                    <i className="fa fa-eye"  />
+                                    15892 Views
+                                    </span>
+                                </div>
+                                <div className="right_slide_nav">
+                                    <button type="button" className="btn style3 button_top"><i className="fa fa-heart-o"  /> Saved</button>
+                                    <button type="button" className="btn style3 button_top"><i className="fa fa-share"  /> Share</button>
+                                    <button type="button" className="btn style3 button_top"><i className="fa fa-print"  /> Print</button>
+                                </div>
                             </div>
                             <div className="slide_content">
-                            <div className="slide_content_left">
-                                <h2>{fullStreetAddress}</h2>
-                                <p>{county}, {city}</p>
-                            </div>
-                            <div className="slide_content_right">
-                                <h2>{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</h2>
-                                <p>2300/SqFt</p>
-                            </div>
+                                <div className="slide_content_left">
+                                    <h2>{fullStreetAddress}</h2>
+                                    <p>{county}, {city}</p>
+                                </div>
+                                <div className="slide_content_right">
+                                    <h2>{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</h2>
+                                    <p>{areaTotal}/SqFt</p>
+                                </div>
                             </div>
                             <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="false">
                             <div className="carousel-indicators">
@@ -71,13 +86,13 @@ const PropertyDetails = ({
                                 <div className="carousel_icons">
                                 <ul>
                                     <li>
-                                    <a href="#"><i className="fa fa-heart-o" aria-hidden="true" /></a>
+                                    <a href="#"><i className="fa fa-heart-o"  /></a>
                                     </li>
                                     <li>
-                                    <a href="#"><i className="fa fa-share" aria-hidden="true" /></a>
+                                    <a href="#"><i className="fa fa-share"  /></a>
                                     </li>
                                     <li>
-                                    <a href="#"><i className="fa fa-print" aria-hidden="true" /></a>
+                                    <a href="#"><i className="fa fa-print"  /></a>
                                     </li>
                                 </ul>
                                 </div>
@@ -98,11 +113,11 @@ const PropertyDetails = ({
                                 </div>
                             </div>
                             <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                                <span className="carousel-control-prev-icon" aria-hidden="true"><i className="fa fa-angle-left" aria-hidden="true" /></span>
+                                <span className="carousel-control-prev-icon" ><i className="fa fa-angle-left"  /></span>
                                 <span className="visually-hidden">Previous</span>
                             </button>
                             <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                                <span className="carousel-control-next-icon" aria-hidden="true"><i className="fa fa-angle-right" aria-hidden="true" /></span>
+                                <span className="carousel-control-next-icon" ><i className="fa fa-angle-right"  /></span>
                                 <span className="visually-hidden">Next</span>
                             </button>
                             </div>
@@ -118,64 +133,77 @@ const PropertyDetails = ({
                         </div>
                         <div className="factfeature_box heading_line">
                             <div className="col-xl-12 col-lg-12">
-                            <div className="section-title style1 text-left mb-40">
-                                <h2>Facts &amp; Features</h2>
-                                <hr />
-                                <div className="fact_iconbox">
-                                <ul>
-                                    <li>
-                                    <span><i className="fa fa-home" aria-hidden="true" /></span>
-                                    <p>Type</p>
-                                    <h3>Single</h3>
-                                    </li>
-                                    <li>
-                                    <span><i className="fa fa-home" aria-hidden="true" /></span>
-                                    <p>Type</p>
-                                    <h3>Single</h3>
-                                    </li>
-                                    <li>
-                                    <span><i className="fa fa-home" aria-hidden="true" /></span>
-                                    <p>Type</p>
-                                    <h3>Single</h3>
-                                    </li>
-                                    <li>
-                                    <span><i className="fa fa-home" aria-hidden="true" /></span>
-                                    <p>Type</p>
-                                    <h3>Single</h3>
-                                    </li>
-                                    <li>
-                                    <span><i className="fa fa-home" aria-hidden="true" /></span>
-                                    <p>Type</p>
-                                    <h3>Single</h3>
-                                    </li>
-                                    <li>
-                                    <span><i className="fa fa-home" aria-hidden="true" /></span>
-                                    <p>Type</p>
-                                    <h3>Single</h3>
-                                    </li>
-                                    <li>
-                                    <span><i className="fa fa-home" aria-hidden="true" /></span>
-                                    <p>Type</p>
-                                    <h3>Single</h3>
-                                    </li>
-                                    <li>
-                                    <span><i className="fa fa-home" aria-hidden="true" /></span>
-                                    <p>Type</p>
-                                    <h3>Single</h3>
-                                    </li>
-                                    <li>
-                                    <span><i className="fa fa-home" aria-hidden="true" /></span>
-                                    <p>Type</p>
-                                    <h3>Single</h3>
-                                    </li>
-                                    <li>
-                                    <span><i className="fa fa-home" aria-hidden="true" /></span>
-                                    <p>Type</p>
-                                    <h3>Single</h3>
-                                    </li>
-                                </ul>
+                                <div className="section-title style1 text-left mb-40">
+                                    <h2>Facts &amp; Features</h2>
+                                    <hr />
+                                    <div className="fact_iconbox">
+                                        <ul>
+                                            {saleType!="" && (
+                                                <li>
+                                                <span><HiOutlineHomeModern/></span>
+                                                <p>Type</p>
+                                                <h3>{saleType}</h3>
+                                                </li>
+                                            )}
+                                            {onMarketDate!="" && (
+                                                <li>
+                                                <span><GiCrane/></span>
+                                                <p>Build Year</p>
+                                                <h3>{new Date(onMarketDate).getFullYear()}</h3>
+                                                </li>
+                                            )}
+                                            {heatingYN==="Y" && (
+                                                <li>
+                                                <span><FaHotTub/></span>
+                                                <p>Heating</p>
+                                                <h3>Radiant</h3>
+                                                </li>
+                                            )}
+                                            {areaTotal!="" && (
+                                                <li>
+                                                <span><MdSquareFoot/></span>
+                                                <p>SQFT</p>
+                                                <h3>{parseFloat(areaTotal).toFixed(1)}</h3>
+                                                </li>
+                                            )}
+                                            {bedroomsTotal!="" && (
+                                                <li>
+                                                <span><IoBedOutline/></span>
+                                                <p>Bedroom</p>
+                                                <h3>{bedroomsTotal}</h3>
+                                                </li>
+                                            )}
+                                            {bathroomsTotal!="" && (
+                                                <li>
+                                                <span><FaBath/></span>
+                                                <p>Bathroom</p>
+                                                <h3>{bathroomsTotal}</h3>
+                                                </li>
+                                            )}
+                                            {totalGarageAndParkingSpaces!="" && (
+                                                <li>
+                                                <span><GiHomeGarage/></span>
+                                                <p>Garage</p>
+                                                <h3>{totalGarageAndParkingSpaces}</h3>
+                                                </li>
+                                            )}
+                                            {/* {cooling!="" && (
+                                                <li>
+                                                <span><GiHomeGarage/></span>
+                                                <p>Air Cooler</p>
+                                                <h3>{cooling}</h3>
+                                                </li>
+                                            )} */}
+                                            {mlsStatus!="" && (
+                                                <li>
+                                                <span><HiOutlineStar/></span>
+                                                <p>Status</p>
+                                                <h3>{mlsStatus}</h3>
+                                                </li>
+                                            )}
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
                             </div>
                         </div>
                         <div className="factfeature_box heading_line">
@@ -237,51 +265,51 @@ const PropertyDetails = ({
                                 <div className="offices_wraper">
                                 <ul>
                                     <li>
-                                    <i className="fa fa-check" aria-hidden="true" />
+                                    <i className="fa fa-check"  />
                                     Balcony
                                     </li>
                                     <li>
-                                    <i className="fa fa-check" aria-hidden="true" />
+                                    <i className="fa fa-check"  />
                                     Fireplace
                                     </li>
                                     <li>
-                                    <i className="fa fa-check" aria-hidden="true" />
+                                    <i className="fa fa-check"  />
                                     Basement
                                     </li>
                                     <li>
-                                    <i className="fa fa-check" aria-hidden="true" />
+                                    <i className="fa fa-check"  />
                                     Dishwasher
                                     </li>
                                     <li>
-                                    <i className="fa fa-check" aria-hidden="true" />
+                                    <i className="fa fa-check"  />
                                     Fireplace 
                                     </li>
                                     <li>
-                                    <i className="fa fa-check" aria-hidden="true" />
+                                    <i className="fa fa-check"  />
                                     Basement Cooling
                                     </li>
                                     <li>
-                                    <i className="fa fa-check" aria-hidden="true" />
+                                    <i className="fa fa-check"  />
                                     Dining room
                                     </li>
                                     <li>
-                                    <i className="fa fa-check" aria-hidden="true" />
+                                    <i className="fa fa-check"  />
                                     Balcony
                                     </li>
                                     <li>
-                                    <i className="fa fa-check" aria-hidden="true" />
+                                    <i className="fa fa-check"  />
                                     Cooling
                                     </li>
                                     <li>
-                                    <i className="fa fa-check" aria-hidden="true" />
+                                    <i className="fa fa-check"  />
                                     Balcony
                                     </li>
                                     <li>
-                                    <i className="fa fa-check" aria-hidden="true" />
+                                    <i className="fa fa-check"  />
                                     Dining room
                                     </li>
                                     <li>
-                                    <i className="fa fa-check" aria-hidden="true" />
+                                    <i className="fa fa-check"  />
                                     Dishwasher
                                     </li>
                                 </ul>
@@ -289,36 +317,25 @@ const PropertyDetails = ({
                             </div>
                             </div>
                         </div>
-                        <PropertyLocation />
+                        <PropertyLocation address={unparsedAddress} position={geography}/>
                         
-                        <Mortgage />
+                        <Mortgage price={listPrice}/>
                     </div>
                     <div className="col-md-4 col-xl-4 col-lg-4">
                         <div className="right_box_listing" id="exTab3">
-                            <ul className="nav nav-tabs" id="myTab" role="tablist">
-                                <li className="nav-item" role="presentation">
-                                    <button type="button" className={`nav-link ${activeTab==='schedule-tour'? 'active' : ''}`} id="schedule-tour" onClick={()=>setActiveTab('schedule-tour')} data-bs-toggle="tab" data-bs-target="#schedule-tour-pane" role="tab" aria-controls="schedule-tour-pane" aria-selected="true">Schedule a Tour</button>
-                                </li>
-                                <li className="nav-item" role="presentation">
-                                    <button type="button" className={`nav-link ${activeTab==='request-info'? 'active' : ''}`} id="request-info" onClick={()=>setActiveTab('request-info')} data-bs-toggle="tab" data-bs-target="#request-info-pane" role="tab" aria-controls="request-info-pane" aria-selected="false">Request Info</button>
-                                </li>
-                            </ul>
-                            <div className="tab-content" id="myTabContent">
-                                <div className={`tab-pane fade ${activeTab==='schedule-tour'? 'show active' : ''}`} id="schedule-tour-pane" role="tabpanel" aria-labelledby="schedule-tour" tabIndex={0}>
-                                    <ScheduleTour />
-                                </div>
-                                <div className={`tab-pane fade ${activeTab==='request-info'? 'show active' : ''}`} id="request-info-pane" role="tabpanel" aria-labelledby="request-info" tabIndex={1}>
-                                    <RequestInfo />
-                                </div>
-                            
-                            </div>
+                            {(session)? (
+                                <></>
+                            ) : (
+                                <NonAccount address={fullStreetAddress}/>
+                                )
+                            }
 
                             <div className="col-lg-12 col-xl-12 col-md-12">
                                 <div className="listing_agentbox">
                                     <h2>Listing Agent</h2>
                                     <div className="askqu">
                                         <div className="left_ask">
-                                            <i className="fa fa-user-o" aria-hidden="true" />
+                                            <i className="fa fa-user-o"  />
                                         </div>
                                         <div className="agent_box">
                                             <h2>John Doe</h2>
@@ -359,6 +376,7 @@ export async function getServerSideProps({ params: { slug } }) {
     const payload = {url : `${apiBaseUrl}/properties/details/${propertyId}`, method : 'GET'}
     const res = await fetchApi(payload)
     // Pass data to the page via props
+
     if(res.data){
         return {
             props: {
