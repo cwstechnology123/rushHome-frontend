@@ -62,6 +62,7 @@ export default function ScheduleTour() {
 
     const handleScheduleTour = (data) => {
         console.log(data)
+        reset()
         // setSchedule(data);
         // setShowmodal(true);
         // console.log("reqmodal: ",reqmodal)
