@@ -102,7 +102,7 @@ export default function Mortgage({ price }) {
                                 <span className="text-danger">{errors.duration?.message}</span>
                             </div>
                             <div className="col-md-12">
-                                <label htmlFor="inputState" className="form-label">Payment Period</label>
+                                <label for="period" className="form-label">Payment Period</label>
                                 <select id="period" className="form-select" name="period" {...register('period')}>
                                     <option value={'monthly'}>Monthly</option>
                                     {/* <option value={'yearly'}>Yearly</option> */}

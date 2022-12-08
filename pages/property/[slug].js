@@ -15,6 +15,8 @@ import { useSession } from 'next-auth/react';
 const PropertyDetails = ({
     propertyDetails: {
         id,
+        listingId,
+        propertyType,
         listPrice,
         fullStreetAddress,
         description,
@@ -25,6 +27,7 @@ const PropertyDetails = ({
         county,
         city,
         listPictureURL,
+        roomsTotal,
         listPicture2URL,
         unparsedAddress,
         geography,
@@ -33,6 +36,7 @@ const PropertyDetails = ({
         heatingYN,
         cooling,
         garageYN,
+        garageSpaces,
         totalGarageAndParkingSpaces,
         mlsStatus
       },
@@ -209,49 +213,79 @@ const PropertyDetails = ({
                         <div className="factfeature_box heading_line">
                             <div className="col-xl-12 col-lg-12">
                             <div className="section-title style1 text-left mb-40">
-                                <h2>Facts &amp; Features</h2>
+                                <h2>Additional Details</h2>
                                 <hr />
                                 <div className="additional_box">
-                                <div className="additional_left">
-                                    <ul>
-                                    <li>Property ID:</li>
-                                    <li>Property Type:</li>
-                                    <li>Rooms:</li>
-                                    <li>Size:</li>
-                                    <li>Garage:</li>
-                                    <li>Garage Size:</li>
-                                    <li>Year Build:</li>
-                                    </ul>
-                                    <ul className="details_box">
-                                    <li>AD-2912</li>
-                                    <li>Apartment, bar, cafe, villa</li>
-                                    <li>04</li>
-                                    <li>9000 SqFt</li>
-                                    <li>01</li>
-                                    <li>50 SqFt</li>
-                                    <li>2018</li>
-                                    </ul>
-                                </div>
-                                <div className="additional_right">
-                                    <ul>
-                                    <li>Property ID:</li>
-                                    <li>Property Type:</li>
-                                    <li>Rooms:</li>
-                                    <li>Size:</li>
-                                    <li>Garage:</li>
-                                    <li>Garage Size:</li>
-                                    <li>Year Build:</li>
-                                    </ul>
-                                    <ul className="details_box">
-                                    <li>AD-2912</li>
-                                    <li>Apartment, bar, cafe, villa</li>
-                                    <li>04</li>
-                                    <li>9000 SqFt</li>
-                                    <li>01</li>
-                                    <li>50 SqFt</li>
-                                    <li>2018</li>
-                                    </ul>
-                                </div>
+                                    <div className="additional_left">
+                                        <table className='table table-borderless'>
+                                            <tbody>
+                                                <tr>
+                                                    <th>Property ID:</th>
+                                                    <td>{listingId}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Property Type:</th>
+                                                    <td>{propertyType}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Rooms:</th>
+                                                    <td>{roomsTotal}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Size:</th>
+                                                    <td>{areaTotal} SqFt</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Garage:</th>
+                                                    <td>{totalGarageAndParkingSpaces}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Garage Size:</th>
+                                                    <td>{garageSpaces} SqFt</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Year Build:</th>
+                                                    <td>{new Date(onMarketDate).getFullYear()}</td>
+                                                </tr>
+                                            </tbody>
+                                            
+                                        </table>
+                                    </div>
+                                    <div className="additional_right">
+                                        <table className='table table-borderless'>
+                                            <tbody>
+                                                <tr>
+                                                    <th>Price:</th>
+                                                    <td>{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Property Status:</th>
+                                                    <td>For Sale</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Bedrooms:</th>
+                                                    <td>{bedroomsTotal}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Bathrooms:</th>
+                                                    <td>{bathroomsTotal} SqFt</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Garage:</th>
+                                                    <td>{totalGarageAndParkingSpaces}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Bath Size:</th>
+                                                    <td>50 SqFt</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Label:</th>
+                                                    <td>Bestseller</td>
+                                                </tr>
+                                            </tbody>
+                                            
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                             </div>
@@ -349,7 +383,7 @@ const PropertyDetails = ({
                                         <div className="col-12">
                                             <div className="form-floating">
                                             <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{height: 150}} />
-                                            <label htmlFor="floatingTextarea2">I would like more information on 123 Main Street.</label>
+                                            <label for="floatingTextarea2">I would like more information on 123 Main Street.</label>
                                             </div>
                                         </div>
                                         <div className="col-12 text-center">

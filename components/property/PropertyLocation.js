@@ -1,4 +1,5 @@
 import { Status, Wrapper } from "@googlemaps/react-wrapper";
+import { memo } from "react";
 import LocationMap from "../gmap/LocationMap";
 import Marker from "../gmap/Marker";
 
@@ -9,7 +10,7 @@ const render = (status) => {
     return <p>Loading...</p>;
 };
 
-export default function PropertyLocation({ address, position }) {
+const PropertyLocation = ({ address, position }) => {
     return (
         <div className="location_box heading_line">
             <div className="col-xl-12 col-lg-12">
@@ -48,4 +49,6 @@ export default function PropertyLocation({ address, position }) {
             </div>
         </div>
     )
-}
+};
+
+export default memo(PropertyLocation);
