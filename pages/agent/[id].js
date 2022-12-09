@@ -64,7 +64,7 @@ export default function AgentDetail({ agent: { name, firstName, lastName, email,
                             <ul>
                                 <li>
                                 <h2>182</h2>
-                                <p>Transections</p>
+                                <p>Transactions</p>
                                 </li>
                                 <li>
                                 <h2>85</h2>
@@ -72,7 +72,7 @@ export default function AgentDetail({ agent: { name, firstName, lastName, email,
                                 </li>
                                 <li>
                                 <h2>54</h2>
-                                <p>Acting Listing</p>
+                                <p>Active Listing</p>
                                 </li>
                                 <li>
                                 <h2>4.9</h2>
