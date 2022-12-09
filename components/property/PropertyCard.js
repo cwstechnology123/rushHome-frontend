@@ -5,6 +5,7 @@ import ucfirst from "../../utils/ucfirst";
 const PropertyCard = ({
     property: {
       id,
+      listingAgreementType,
       listPrice,
       bedroomsTotal,
       bathroomsTotal,
@@ -18,7 +19,8 @@ const PropertyCard = ({
     (
         <div className="property-card style3">
             <div className="property-img">
-                <img src={listPictureURL} alt="Image" />
+                <img key={`image_${id}`} src={listPictureURL} alt="Image" />
+                <span className="property-status">{listingAgreementType.split(' ')[0]}</span>
             </div>
             <div className="property-info">
                 <div className="property-status-wrap">

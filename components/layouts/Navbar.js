@@ -111,7 +111,7 @@ export default function Navbar() {
                           <span></span>
                         </div>
                         <div className="profile_wraper">
-                          <button onClick={toggle} type="button" className="btn profile_button style3"><span>GI</span>Giovanni <i className="fa fa-angle-down" aria-hidden="true" /></button>
+                          <button onClick={toggle} type="button" className="btn profile_button style3"><span>{session.user.name.charAt(0)}</span>{session.user.name} <i className="fa fa-angle-down" aria-hidden="true" /></button>
                             <div className="profile_sub" style={{
                               display: showMe?"block":"none"
                             }}>
