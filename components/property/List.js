@@ -1,5 +1,5 @@
 import PropertyCard from './PropertyCard'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from "next/router";
 
 export default function List({properties}) {

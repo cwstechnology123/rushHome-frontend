@@ -3,8 +3,38 @@ import MainBanner from '../components/layouts/MainBanner'
 import ContactUs from '../components/ContactUs'
 import List from '../components/property/List'
 import { apiBaseUrl, fetchApi } from '../utils/fetchApi'
+import { useState } from 'react'
 
 export default function Home({properties}) {
+  const [loader, setLoader] = useState(false);
+
+  const [activeTab, setActiveTab] = useState('all');
+  const [propertiesData, setPropertiesData] = useState(properties);
+  const handleTabClick = (e, type) => {
+    setLoader('true')
+    setActiveTab(type)
+    e.preventDefault();
+    fetch(`https://rushhome-api.cwsbuild.com/api/v1/properties/${type}/1/12`, { 
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": "rh_DjeB8HK7UXCnjFMmLAutFWfVAdcV",
+      },
+      mode: 'cors' 
+    })
+    .then((response) => {
+      //console.log('response', response);
+      let res = response.json();
+      let resData = res && res.data ? res.data.properties : ""
+      setPropertiesData(res.data.properties)
+      setLoader('false')
+    })
+    .catch((err) => {
+      setLoader('false')
+      console.log(err)
+      return null;
+    });
+  };
 
   return (
     <>
@@ -17,16 +47,16 @@ export default function Home({properties}) {
                 <div className="state_tabs">
                   <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li className="nav-item" role="presentation">
-                      <button className="btn style1 active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">All</button>
+                      <button className={`btn style1 ${activeTab==='all'? 'active' : ''}`} id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onClick={(e)=> handleTabClick(e,'all')} >All</button>
                     </li>
                     <li className="nav-item" role="presentation">
-                      <button className="btn style1" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Delaware</button>
+                      <button className={`btn style1 ${activeTab==='delaware'? 'active' : ''}`} id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onClick={(e)=> handleTabClick(e,'delaware')}>Delaware</button>
                     </li>
                     <li className="nav-item" role="presentation">
-                      <button className="btn style1" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Maryland</button>
+                      <button className={`btn style1 ${activeTab==='maryland'? 'active' : ''}`} id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onClick={(e)=>handleTabClick(e,'maryland')}>Maryland</button>
                     </li>
                     <li className="nav-item" role="presentation">
-                      <button className="btn style1" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Pennsylvania</button>
+                      <button className={`btn style1 ${activeTab==='pennsylvania'? 'active' : ''}`} id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onClick={(e)=>handleTabClick(e,'pennsylvania')}>Pennsylvania</button>
                     </li>
                   </ul>
                 </div>	
@@ -36,9 +66,9 @@ export default function Home({properties}) {
               </div>
             </div>
           </div>
-          { (properties) ?
+          {(propertiesData) ?
             <>
-              <List properties={properties? properties : null} />
+              <List properties={propertiesData? propertiesData : null} />
             </>
             :
             <>
@@ -46,7 +76,7 @@ export default function Home({properties}) {
                 No Records...
               </div>
             </>
-          }
+  	      }
         </div>
       </section>
       <section className="hw-wrap pt-100 pb-75">

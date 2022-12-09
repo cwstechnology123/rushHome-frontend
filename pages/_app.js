@@ -6,7 +6,7 @@ import NextNProgress from 'nextjs-progressbar';
 function MyApp({  Component,  pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session}>
-      <NextNProgress color="#29D" startPosition={0.3} stopDelayMs={100} height={3} showOnShallow={true} />
+      <NextNProgress color="#29D" startPosition={0.3} stopDelayMs={50} height={3} showOnShallow={true} />
       <Layout>
         <Component {...pageProps} />
       </Layout>

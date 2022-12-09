@@ -10,12 +10,15 @@ import { apiBaseUrl, fetchApi } from '../../utils/fetchApi';
 import { FaBath, FaHotTub } from 'react-icons/fa';
 import NonAccount from './NonAccount';
 import { useSession } from 'next-auth/react';
+import VirtualTour from '../../components/property/VirtualTour';
+import PropertyImages from '../../components/property/PropertyImages';
 
 
-const PropertyDetails = ({
+const PropertyDetails = async ({
     propertyDetails: {
         id,
         listingId,
+        // listingKey,
         propertyType,
         listPrice,
         fullStreetAddress,
@@ -26,9 +29,11 @@ const PropertyDetails = ({
         slug,
         county,
         city,
+        virtualTourURLUnbranded,
         listPictureURL,
-        roomsTotal,
-        listPicture2URL,
+        // listPicture2URL,
+        // listPicture3URL,
+        roomsTotal,       
         unparsedAddress,
         geography,
         saleType,
@@ -42,7 +47,21 @@ const PropertyDetails = ({
       },
   }) => {
     
-    const { data: session } = useSession()
+    const { data: session } = useSession();
+    // useEffect(() =>{
+    //     // const payload = {url : `${apiBaseUrl}/properties/images/${listingKey}`, method : 'GET'};
+    //     // const fetcher = async fetchApi(payload)
+    //     const payload = {url : `${apiBaseUrl}/properties/images/${listingKey}`, method : 'GET'}
+    //     const fetcher = async (url) => await axios.get(url, {
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "x-api-key": process.env.NEXT_RUSHHOME_API_KEY,
+    //         }
+    //     }).then((res) => res.data);
+    //     const {data, error} = useSWR(payload.url, fetcher);
+    //     console.log(data)
+    // }, [listingKey]);
+
     return (
         <>
         <section className="style3 ptb-50 product_box">
@@ -78,53 +97,57 @@ const PropertyDetails = ({
                                     <p>{areaTotal}/SqFt</p>
                                 </div>
                             </div>
-                            <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="false">
-                            <div className="carousel-indicators">
-                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={0} className="active" aria-current="true" aria-label="Slide 1"><img src={listPicture2URL} className="d-block w-100" alt="..." /></button>
-                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={1} aria-label="Slide 2"><img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." /></button>
-                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={2} aria-label="Slide 3"><img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." /></button>
-                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={3} aria-label="Slide 4"><img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." /></button>
-                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={4} aria-label="Slide 5"><img src={listPictureURL} className="d-block w-100" alt="..." /></button>
-                            </div>
-                            <div className="carousel-inner">
-                                <div className="carousel_icons">
-                                <ul>
-                                    <li>
-                                    <a href="#"><i className="fa fa-heart-o"  /></a>
-                                    </li>
-                                    <li>
-                                    <a href="#"><i className="fa fa-share"  /></a>
-                                    </li>
-                                    <li>
-                                    <a href="#"><i className="fa fa-print"  /></a>
-                                    </li>
-                                </ul>
+                            {/* <PropertyImages 
+                                listPictureURL={listPictureURL}
+                                images={[]}
+                            /> */}
+                            {/* <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="false">
+                                <div className="carousel-indicators">
+                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={0} className="active" aria-current="true" aria-label="Slide 1"><img src={listPicture2URL} className="d-block w-100" alt="..." /></button>
+                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={1} aria-label="Slide 2"><img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." /></button>
+                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={2} aria-label="Slide 3"><img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." /></button>
+                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={3} aria-label="Slide 4"><img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." /></button>
+                                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={4} aria-label="Slide 5"><img src={listPictureURL} className="d-block w-100" alt="..." /></button>
                                 </div>
-                                <div className="carousel-item active">
-                                <img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." />
+                                <div className="carousel-inner">
+                                    <div className="carousel_icons">
+                                    <ul>
+                                        <li>
+                                        <a href="#"><i className="fa fa-heart-o"  /></a>
+                                        </li>
+                                        <li>
+                                        <a href="#"><i className="fa fa-share"  /></a>
+                                        </li>
+                                        <li>
+                                        <a href="#"><i className="fa fa-print"  /></a>
+                                        </li>
+                                    </ul>
+                                    </div>
+                                    <div className="carousel-item active">
+                                    <img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." />
+                                    </div>
+                                    <div className="carousel-item">
+                                    <img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." />
+                                    </div>
+                                    <div className="carousel-item">
+                                    <img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." />
+                                    </div>
+                                    <div className="carousel-item">
+                                    <img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." />
+                                    </div>
+                                    <div className="carousel-item">
+                                    <img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." />
+                                    </div>
                                 </div>
-                                <div className="carousel-item">
-                                <img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." />
-                                </div>
-                                <div className="carousel-item">
-                                <img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." />
-                                </div>
-                                <div className="carousel-item">
-                                <img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." />
-                                </div>
-                                <div className="carousel-item">
-                                <img src="../../assets/img/city_banner.jpg" className="d-block w-100" alt="..." />
-                                </div>
-                            </div>
-                            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                                <span className="carousel-control-prev-icon" ><i className="fa fa-angle-left"  /></span>
-                                <span className="visually-hidden">Previous</span>
-                            </button>
-                            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                                <span className="carousel-control-next-icon" ><i className="fa fa-angle-right"  /></span>
-                                <span className="visually-hidden">Next</span>
-                            </button>
-                            </div>
+                                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                                    <span className="carousel-control-prev-icon" ><i className="fa fa-angle-left"  /></span>
+                                    <span className="visually-hidden">Previous</span>
+                                </button>
+                                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                                    <span className="carousel-control-next-icon" ><i className="fa fa-angle-right"  /></span>
+                                    <span className="visually-hidden">Next</span>
+                                </button>
+                            </div> */}
                         </div>
                         <div className="Descriptions_box heading_line">
                             <div className="col-xl-12 col-lg-12">
@@ -351,6 +374,8 @@ const PropertyDetails = ({
                             </div>
                             </div>
                         </div>
+                        {virtualTourURLUnbranded!="" && <VirtualTour tourLink={virtualTourURLUnbranded} />}
+
                         <PropertyLocation address={unparsedAddress} position={geography}/>
                         
                         <Mortgage price={listPrice}/>
@@ -410,7 +435,7 @@ export async function getServerSideProps({ params: { slug } }) {
     const payload = {url : `${apiBaseUrl}/properties/details/${propertyId}`, method : 'GET'}
     const res = await fetchApi(payload)
     // Pass data to the page via props
-
+    console.log(res.data)
     if(res.data){
         return {
             props: {
