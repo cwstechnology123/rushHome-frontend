@@ -77,6 +77,9 @@ export default function ScheduleTour() {
         //console.log(reqmodal)
         reset();
     }
+    const handleRequestModalClose = () => {
+        setReqmodal(false)
+    }
 
     const ScheduleModal = () => (
         <div className={`modal fade ${showmodal? 'show' : ''}`} id="myModal" style={{display: (showmodal? 'block' : 'none')}}>
@@ -91,7 +94,7 @@ export default function ScheduleTour() {
                         <form className="row g-3">
                             <div className="col-md-12">
                                 <label for="" className="form-label">First Name</label>
-                                <input type="text" className="form-control" id="inputEmail4" value={''} readOnly/>
+                                <input type="text" className="form-control" id="inputEmail4" value={schedule.full_name} readOnly/>
                             </div>
 
                             <div className="col-12">
@@ -106,13 +109,13 @@ export default function ScheduleTour() {
                                                 <option className="3">Three</option>
                                             </select>
                                         </div>
-                                        <input type="text" className="form-control" id="autoSizingInputGroup" placeholder="414-266-9847" />
+                                        <input type="text" className="form-control" id="autoSizingInputGroup" placeholder="414-266-9847" value={schedule.schedule_phone} />
                                     </div>
                                 </div>
                             </div>
                             <div className="col-12">
                                 <label for="inputAddress" className="form-label">Email Address</label>
-                                <input type="text" className="form-control" id="inputAddress" placeholder="john.doe@gmail.com" />
+                                <input type="text" className="form-control" id="inputAddress" placeholder="john.doe@gmail.com" value={schedule.schedule_email} />
                             </div>
 
                             <label className="review">Reviews</label>
@@ -132,10 +135,10 @@ export default function ScheduleTour() {
 
     const ScheduleRequestModal = () => (
         <div className={`modal fade ${reqmodal? 'show' : ''}`} id="requestModal" style={{display: (reqmodal? 'block' : 'none')}}>
-            <div className="modal-dialog">
+            <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-body">
-                        <h6 className="text-center">Request Send</h6>
+                        <h6 className="text-center my-5">Request Send</h6>
                         <div className="col-12 text-center">
                             <button type="button" className="btn style2 contact_button" onClick={()=>(handleRequestModalClose())}>Close</button>
                         </div>
