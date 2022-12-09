@@ -14,10 +14,11 @@ import VirtualTour from '../../components/property/VirtualTour';
 import PropertyImages from '../../components/property/PropertyImages';
 
 
-const PropertyDetails = ({
+const PropertyDetails = async ({
     propertyDetails: {
         id,
         listingId,
+        // listingKey,
         propertyType,
         listPrice,
         fullStreetAddress,
@@ -29,10 +30,9 @@ const PropertyDetails = ({
         county,
         city,
         virtualTourURLUnbranded,
-        images,
         listPictureURL,
-        listPicture2URL,
-        listPicture3URL,
+        // listPicture2URL,
+        // listPicture3URL,
         roomsTotal,       
         unparsedAddress,
         geography,
@@ -47,7 +47,21 @@ const PropertyDetails = ({
       },
   }) => {
     
-    const { data: session } = useSession()
+    const { data: session } = useSession();
+    // useEffect(() =>{
+    //     // const payload = {url : `${apiBaseUrl}/properties/images/${listingKey}`, method : 'GET'};
+    //     // const fetcher = async fetchApi(payload)
+    //     const payload = {url : `${apiBaseUrl}/properties/images/${listingKey}`, method : 'GET'}
+    //     const fetcher = async (url) => await axios.get(url, {
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "x-api-key": process.env.NEXT_RUSHHOME_API_KEY,
+    //         }
+    //     }).then((res) => res.data);
+    //     const {data, error} = useSWR(payload.url, fetcher);
+    //     console.log(data)
+    // }, [listingKey]);
+
     return (
         <>
         <section className="style3 ptb-50 product_box">
@@ -83,9 +97,10 @@ const PropertyDetails = ({
                                     <p>{areaTotal}/SqFt</p>
                                 </div>
                             </div>
-                            <PropertyImages 
-                                images={images}
-                            />
+                            {/* <PropertyImages 
+                                listPictureURL={listPictureURL}
+                                images={[]}
+                            /> */}
                             {/* <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="false">
                                 <div className="carousel-indicators">
                                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={0} className="active" aria-current="true" aria-label="Slide 1"><img src={listPicture2URL} className="d-block w-100" alt="..." /></button>

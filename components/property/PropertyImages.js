@@ -3,6 +3,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 export default function PropertyImages({
+    listPictureURL,
     images
 }) {
 
@@ -29,9 +30,10 @@ export default function PropertyImages({
                 :
                 (
                     <div>
-                        <img src={defaultProperty.src} />
+                        <img src={listPictureURL} />
                     </div>
                 )
+                
             }
         </Carousel>
         </>
