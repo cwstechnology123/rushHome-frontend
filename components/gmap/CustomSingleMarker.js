@@ -47,7 +47,10 @@ export default function CustomSingleMarker({ hotel, map, highlight }) {
             <div key={`marker-button-${hotel.id}`} className={`price-tag ${highlight===hotel.id && "font-weight-bold p-2"}`} onClick={()=>setShow(!show)} >{price}</div>
         </OverlayView>
         {show && <PopupView
-            position={hotel.geography}
+            position={{
+                lat: parseFloat(hotel.geography.lat),
+                lng: parseFloat(hotel.geography.lng)
+            }}
             map={map}
             zIndex={109}
         >{contentPopup(hotel)}</PopupView>}
