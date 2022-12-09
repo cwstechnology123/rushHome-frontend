@@ -39,9 +39,6 @@ export default function Home({properties}) {
           { (properties) ?
             <>
               <List properties={properties? properties : null} />
-              <div className="col-md-12 text-center">
-                <button type="button" className="btn style1 button_custom">See All Properties <i className="flaticon-right-arrow" /></button>
-              </div>
             </>
             :
             <>
@@ -186,10 +183,10 @@ export default function Home({properties}) {
 // This gets called on every request
 export async function getStaticProps() {
   const type = 'all';
-  const payload = {url : `${apiBaseUrl}/properties/${type}/1/6`, method : 'GET'}
+  const payload = {url : `${apiBaseUrl}/properties/${type}/1/12`, method : 'GET'}
   const res = await fetchApi(payload)
   // Pass data to the page via props
-  if(res.data){
+  if(res && res.data){
     return {
       props: {
         properties : res && res.data?.properties,
