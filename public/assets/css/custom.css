@@ -24,3 +24,23 @@
 /* .additional_box .table tr {
     line-height: 35px;
 } */
+
+.carousel .slider-wrapper {
+    max-height: 60vh;
+}
+.carousel .thumb.selected, .carousel .thumb:hover {
+    border: 2px solid #ffc107 !important;
+    border-radius: 10px !important;
+}
+.carousel .thumb {
+    transition: border .15s ease-in;
+    display: inline-block;
+    margin-right: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 0px solid #ffc107 !important;
+    padding: 2px;
+}
+.carousel img {
+    border-radius: 5px !important;
+}

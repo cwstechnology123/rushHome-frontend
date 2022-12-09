@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import defaultProperty from "../../public/default_home.jpg";
 import ucfirst from "../../utils/ucfirst";
 
 const PropertyCard = ({
@@ -13,13 +15,28 @@ const PropertyCard = ({
       slug,
       county,
       listPictureURL,
+      listPicture2URL,
+      listPicture3URL,
       garageSpaces,
     },
-  }) => 
-    (
+  }) => {
+    const [srcimg, setSrcimg] = useState(listPictureURL);
+    return (
         <div className="property-card style3">
             <div className="property-img">
-                <img key={`image_${id}`} src={listPictureURL} alt="Image" />
+                {/* <img key={`image_${id}`} src={listPictureURL} alt="Image" /> */}
+                <picture key={`picture_${id}`}>
+                    <source
+                    media = "(min-width:860px)"
+                    data-srcset={listPictureURL} />
+                    <source 
+                    media = "(min-width:640px)"
+                    data-srcset = {listPictureURL} />
+                    <source
+                    media = "(max-width:420px)"
+                    data-srcset = {listPictureURL} />
+                    <img class="lazyload myImg blur-up content-image" src={srcimg} onError={()=>setSrcimg(defaultProperty.src)} data-src={listPictureURL} alt="Image" />
+                </picture>
                 <span className="property-status">{listingAgreementType.split(' ')[0]}</span>
             </div>
             <div className="property-info">
@@ -36,5 +53,5 @@ const PropertyCard = ({
             </div>
         </div>
     )
-
+}
 export default PropertyCard

@@ -61,93 +61,90 @@ export default function ScheduleTour() {
     });
 
     const handleScheduleTour = (data) => {
-        console.log(data)
-        reset()
-        // setSchedule(data);
-        // setShowmodal(true);
+        // console.log(data)
+        // reset()
+        setSchedule(data);
+        setShowmodal(true);
         // console.log("reqmodal: ",reqmodal)
         // console.log("showmodal: ",showmodal)
     }
-    // const handleModalClose = () => {
-    //     // if(respond){
-    //     //     setReqmodal(true);
-    //     // }
-    //     setShowmodal(false);
-    //     setSchedule({});
-    //     //console.log(reqmodal)
-    //     reset();
-    // }
-    // const handleRequestModalClose = () => {
-    //     setReqmodal(false);
-    // }
+    const handleModalClose = (respond) => {
+        if(respond){
+            setReqmodal(true);
+        }
+        setShowmodal(false);
+        setSchedule({});
+        //console.log(reqmodal)
+        reset();
+    }
 
-    // const ScheduleModal = () => (
-    //     <div className={`modal fade ${showmodal? 'show' : ''}`} id="myModal" style={{display: (showmodal? 'block' : 'none')}}>
-    //         <div className="modal-dialog">
-    //             <div className="modal-content">
-    //                 <div className="modal-header">
-    //                     <h2>Request more information</h2>
-    //                     <button type="button" className="btn-close" onClick={handleModalClose} aria-label="Close"></button>
-    //                 </div>
-    //                 <div className="first_box second_box">
-    //                     <h2>Tuesday, March 9th <br/>at 12:30 PM</h2>
-    //                     <form className="row g-3">
-    //                         <div className="col-md-12">
-    //                             <label for="" className="form-label">First Name</label>
-    //                             <input type="text" className="form-control" id="inputEmail4" value={schedule.full_name} readOnly/>
-    //                         </div>
+    const ScheduleModal = () => (
+        <div className={`modal fade ${showmodal? 'show' : ''}`} id="myModal" style={{display: (showmodal? 'block' : 'none')}}>
+            <div className="modal-dialog">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h2>Request more information</h2>
+                        <button type="button" className="btn-close" onClick={()=>(handleModalClose(0))} aria-label="Close"></button>
+                    </div>
+                    <div className="first_box second_box">
+                        <h2>Tuesday, March 9th <br/>at 12:30 PM</h2>
+                        <form className="row g-3">
+                            <div className="col-md-12">
+                                <label for="" className="form-label">First Name</label>
+                                <input type="text" className="form-control" id="inputEmail4" value={''} readOnly/>
+                            </div>
 
-    //                         <div className="col-12">
-    //                             <div className="col-auto">
-    //                                 <label className="form-label" for="autoSizingInputGroup">Phone Number</label>
-    //                                 <div className="input-group">
-    //                                     <div className="col-auto">
-    //                                         <select className="form-select" id="autoSizingSelect">
-    //                                             <option className="">Cell</option>
-    //                                             <option className="1">One</option>
-    //                                             <option className="2">Two</option>
-    //                                             <option className="3">Three</option>
-    //                                         </select>
-    //                                     </div>
-    //                                     <input type="text" className="form-control" id="autoSizingInputGroup" placeholder="414-266-9847" />
-    //                                 </div>
-    //                             </div>
-    //                         </div>
-    //                         <div className="col-12">
-    //                             <label for="inputAddress" className="form-label">Email Address</label>
-    //                             <input type="text" className="form-control" id="inputAddress" placeholder="john.doe@gmail.com" />
-    //                         </div>
+                            <div className="col-12">
+                                <div className="col-auto">
+                                    <label className="form-label" for="autoSizingInputGroup">Phone Number</label>
+                                    <div className="input-group">
+                                        <div className="col-auto">
+                                            <select className="form-select" id="autoSizingSelect">
+                                                <option className="">Cell</option>
+                                                <option className="1">One</option>
+                                                <option className="2">Two</option>
+                                                <option className="3">Three</option>
+                                            </select>
+                                        </div>
+                                        <input type="text" className="form-control" id="autoSizingInputGroup" placeholder="414-266-9847" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-12">
+                                <label for="inputAddress" className="form-label">Email Address</label>
+                                <input type="text" className="form-control" id="inputAddress" placeholder="john.doe@gmail.com" />
+                            </div>
 
-    //                         <label className="review">Reviews</label>
+                            <label className="review">Reviews</label>
                             
-    //                         <p className="agent_content">By pressing Request Showing, you agree that Rush Home and it’s real estate professionals may call/text you about your inquiry, which may involve use of automated means and prerecorded/artificial voices. </p>
+                            <p className="agent_content">By pressing Request Showing, you agree that Rush Home and it’s real estate professionals may call/text you about your inquiry, which may involve use of automated means and prerecorded/artificial voices. </p>
                             
-    //                         <div className="col-12 text-center">
-    //                             <button type="submit" className="btn style2 contact_button" onClick={handleModalClose}>Request Showing</button>
-    //                         </div>
+                            <div className="col-12 text-center">
+                                <button type="submit" className="btn style2 contact_button" onClick={()=>(handleModalClose(1))}>Request Showing</button>
+                            </div>
 
-    //                     </form>
-    //                 </div> 
-    //             </div>
-    //         </div>
-    //     </div>
-    // )
+                        </form>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    )
 
-    // const ScheduleRequestModal = () => (
-    //     <div className={`modal fade ${reqmodal? 'show' : ''}`} id="requestModal" style={{display: (reqmodal? 'block' : 'none')}}>
-    //         <div className="modal-dialog">
-    //             <div className="modal-content">
-    //                 <div className="modal-body">
-    //                     <h6 className="text-center">Request Send</h6>
-    //                     <div className="col-12 text-center">
-    //                         <button type="button" className="btn style2 contact_button" onClick={handleRequestModalClose}>Close</button>
-    //                     </div>
-    //                 </div>
+    const ScheduleRequestModal = () => (
+        <div className={`modal fade ${reqmodal? 'show' : ''}`} id="requestModal" style={{display: (reqmodal? 'block' : 'none')}}>
+            <div className="modal-dialog">
+                <div className="modal-content">
+                    <div className="modal-body">
+                        <h6 className="text-center">Request Send</h6>
+                        <div className="col-12 text-center">
+                            <button type="button" className="btn style2 contact_button" onClick={()=>(handleRequestModalClose())}>Close</button>
+                        </div>
+                    </div>
             
-    //             </div>
-    //         </div>
-    //     </div>
-    // )
+                </div>
+            </div>
+        </div>
+    )
 
     return (
         <>
@@ -198,7 +195,8 @@ export default function ScheduleTour() {
                     
                 </form>
             </div>
-            {/* <ScheduleModal /> */}
+            <ScheduleModal />
+            <ScheduleRequestModal />
             {/* {reqmodal && <ScheduleRequestModal />} */}
         </>
     )
