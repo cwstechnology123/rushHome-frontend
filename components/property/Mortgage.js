@@ -12,7 +12,7 @@ export default function Mortgage({ price }) {
     const [showmodal, setShowmodal] = useState(false);
     const schema = yup.object().shape({
         total_amount: yup.number().default(Number(price)).label('Total Amount').transform((v, o) => o === '' || Number.isNaN(0) ? 0 : v),
-        down_payment: yup.number().default(0).min(0).max(Number(price)).required().integer().label('Down Payment').transform((v, o) => o === '' || Number.isNaN(o) ? 0 : v),
+        down_payment: yup.number().default(0).min(0).max(Number(price)).integer().label('Down Payment').transform((v, o) => o === '' || Number.isNaN(o) ? 0 : v),
         rate: yup.number().required().default(1).min(1).lessThan(100).positive().label('Interest Rate').transform((v, o) => o === '' || Number.isNaN(o) ? 0 : v),
         duration: yup.number().default(1).min(1).required().positive().integer().label('Number of Years').transform((v, o) => o === '' || Number.isNaN(o) ? 0 : v)
     });
@@ -88,7 +88,7 @@ export default function Mortgage({ price }) {
                             </div>
                             <div className="col-md-6">
                                 <label className="form-label">Down Payment</label>
-                                <input type="number" className="form-control" name="down_payment" id="down_payment" {...register('down_payment')} value={0}/>
+                                <input type="number" className="form-control" name="down_payment" id="down_payment" {...register('down_payment')} step={1}/>
                                 <span className="text-danger">{errors.down_payment?.message}</span>
                             </div>
                             <div className="col-md-6">
