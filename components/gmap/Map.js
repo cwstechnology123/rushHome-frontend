@@ -52,17 +52,16 @@ export default function Map({
     return (
         <>
             <div style={{width: 100+'%', height: 100+'%', overflow: 'hidden'}}>
-              {draw ?? (
-                  draw?
+              {draw?
                   (
-                      <div className='justify-content-center align-items-center p-4 bg-dark w-100' style={{position: 'absolute', zIndex: 9}}>
+                      <div className='justify-content-center align-items-center text-center p-4 bg-dark w-100' style={{position: 'absolute', zIndex: 9}}>
                           <span className='text-white mr-4'>Click and Draw on the map</span> <button type="button" className='btn btn-danger btn-sm' onClick={()=>setMapDraw(false, map)}>Cancel</button>
                       </div> 
                   ) 
                   : 
                   (
-                      <button type="button" className="btn btn-primary btn-sm" style={{position: 'absolute', top: '5%', right: '5%', zIndex: 9}} onClick={()=>setMapDraw(true, map)}>Draw on Map</button>
-                  ))
+                      <button type="button" className="btn btn-primary btn-sm" style={{position: 'absolute', top: '2%', right: '2%', zIndex: 9}} onClick={()=>setMapDraw(true, map)}>Draw on Map</button>
+                  )
               }
               <div style={{width: 100+'%', height: 100+'%'}} id="map" ref={mapRef}/>
               {React.Children.map(children, (child) => {

@@ -7,12 +7,12 @@ import PopupView from "./popups/PopupView";
 export default function CustomSingleMarker({ hotel, map, highlight }) {
     const [show, setShow] = useState(false);
     const price = useMemo(() => {
-        return `$ ${millify(hotel.price)}`;
+        return `$ ${millify(hotel.listPrice)}`;
     }, [hotel]);
     const contentPopup = (hotel) =>{
         return (
             <div className="popup-bubble d-flex shadow bg-light text-white">
-                <Image src={hotel.coverPhoto.url} alt={`property for ${hotel.title}`} width={100} height={100}/>
+                <Image src={hotel.listPictureURL} alt={`property for ${hotel.slug}`} width={100} height={100}/>
                 <div className="grow p-2">
                     <span className="font-weight-bold">
                         {hotel.id && (
@@ -22,7 +22,8 @@ export default function CustomSingleMarker({ hotel, map, highlight }) {
                             target="_blank"
                             rel="noreferrer"
                         >
-                            {hotel.title}
+                            {hotel.fullStreetAddress}<br/>
+                            <strong>$ {hotel.listPrice}</strong>
                         </a>
                         )}
                     </span>
@@ -36,7 +37,10 @@ export default function CustomSingleMarker({ hotel, map, highlight }) {
     return (
         <>
         <OverlayView
-            position={hotel.geography}
+            position={{
+                lat: parseFloat(hotel.geography.lat),
+                lng: parseFloat(hotel.geography.lng)
+            }}
             map={map}
             zIndex={highlight? 99 : 0}
         >

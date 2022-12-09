@@ -12,7 +12,10 @@ export default function ClusterMarker({
 
     return (
         <OverlayView
-            position={position}
+            position={{
+                lat: parseFloat(position.lat),
+                lng: parseFloat(position.lng)
+            }}
             map={map}
             zIndex={0}
         >

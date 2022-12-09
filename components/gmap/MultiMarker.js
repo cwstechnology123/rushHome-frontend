@@ -26,7 +26,7 @@ export default function MultiMarker({
                             let hotel = properties.hotel;
                             return (
                             <div className='d-flex mb-2 border'>
-                                <Image src={hotel.coverPhoto.url} alt={`property for ${hotel.title}`} width={100} height={100}/>
+                                <Image src={hotel.listPictureURL} alt={`property for ${hotel.slug}`} width={100} height={100}/>
                             <div className="grow p-2">
                                 <span className="font-weight-bold">
                                     {hotel.id && (
@@ -36,7 +36,8 @@ export default function MultiMarker({
                                         target="_blank"
                                         rel="noreferrer"
                                     >
-                                        {hotel.title}
+                                        {hotel.fullStreetAddress}<br/>
+                                        <strong>$ {hotel.listPrice}</strong>
                                     </a>
                                     )}
                                 </span>
@@ -54,7 +55,10 @@ export default function MultiMarker({
         <>
             <OverlayView
                 key={`multicluster-overview-${clusterId}`}
-                position={position}
+                position={{
+                    lat: parseFloat(position.lat),
+                    lng: parseFloat(position.lng)
+                }}
                 map={map}
                 zIndex={show? 99 : 0}
             >
@@ -62,7 +66,10 @@ export default function MultiMarker({
             </OverlayView>
             {show && <PopupView
                 key={`multicluster-popup-${clusterId}`}
-                position={position}
+                position={{
+                    lat: parseFloat(position.lat),
+                    lng: parseFloat(position.lng)
+                }}
                 map={map}
                 zIndex={109}
             >{contentPopup(hotels)}</PopupView>}
