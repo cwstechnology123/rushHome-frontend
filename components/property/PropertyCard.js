@@ -24,8 +24,8 @@ const PropertyCard = ({
     return (
         <div className="property-card style3">
             <div className="property-img">
-                {/* <img key={`image_${id}`} src={listPictureURL} alt="Image" /> */}
-                <picture key={`picture_${id}`}>
+                <img key={`image_${id}`} src={srcimg} onError={()=>setSrcimg(defaultProperty.src)} alt="Image" />
+                {/* <picture key={`picture_${id}`}>
                     <source
                     media = "(min-width:860px)"
                     data-srcset={listPictureURL} />
@@ -36,7 +36,7 @@ const PropertyCard = ({
                     media = "(max-width:420px)"
                     data-srcset = {listPictureURL} />
                     <img className="lazyload myImg blur-up content-image" src={srcimg} onError={()=>setSrcimg(defaultProperty.src)} data-src={listPictureURL} alt="Image" />
-                </picture>
+                </picture> */}
                 <span className="property-status">{listingAgreementType.split(' ')[0]}</span>
             </div>
             <div className="property-info">
