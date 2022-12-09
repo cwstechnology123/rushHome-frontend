@@ -35,7 +35,7 @@ const PropertyCard = ({
                     <source
                     media = "(max-width:420px)"
                     data-srcset = {listPictureURL} />
-                    <img class="lazyload myImg blur-up content-image" src={srcimg} onError={()=>setSrcimg(defaultProperty.src)} data-src={listPictureURL} alt="Image" />
+                    <img className="lazyload myImg blur-up content-image" src={srcimg} onError={()=>setSrcimg(defaultProperty.src)} data-src={listPictureURL} alt="Image" />
                 </picture>
                 <span className="property-status">{listingAgreementType.split(' ')[0]}</span>
             </div>
