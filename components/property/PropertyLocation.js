@@ -11,6 +11,7 @@ const render = (status) => {
 };
 
 const PropertyLocation = ({ address, position }) => {
+    
     return (
         <div className="location_box heading_line">
             <div className="col-xl-12 col-lg-12">
@@ -42,6 +43,10 @@ const PropertyLocation = ({ address, position }) => {
                                 lat: parseFloat(position.lat),
                                 lng: parseFloat(position.lng),
                             }} />
+                            {/* <Marker position={{
+                                lat: parseFloat(position.lat),
+                                lng: parseFloat(position.lng),
+                            }} myIcon={true} /> */}
                         </LocationMap>
                     </Wrapper>
                 </div>
