@@ -21,11 +21,11 @@ export default function Home({properties}) {
       const res = await fetchApi(payload)
       let resData = res && res.data ? res.data.properties : ""
       setPropertiesData(resData)
-      console.log('resData',propertiesData)
+      // console.log('resData',propertiesData)
       setLoader(false)
     } catch (error) {
       setLoader(false)
-      console.log(error)
+      // console.log(error)
       return null;
     };
   };

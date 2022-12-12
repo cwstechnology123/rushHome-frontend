@@ -24,6 +24,9 @@
 /* .additional_box .table tr {
     line-height: 35px;
 } */
+.table-line tr {
+    line-height: 35px;
+}
 
 .carousel .slider-wrapper {
     max-height: 60vh;

@@ -1,12 +1,27 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 import AgentCard from "../components/agent/AgentCard";
 import { fetchFubApi, fubApiBaseUrl } from "../utils/fubFetchApi";
 
 export default function FindAnAgent({agentList}) {
-    //console.log("agentList: ",props)
+    const router = useRouter();
     const total_agents = agentList._metadata.total;
     const agents = agentList.users;
-    //console.log("Agents: ",agents)
+    const options = [
+        { value: 'name-asc', label: 'Ascending' },
+        { value: 'name-desc', label: 'Descending' }
+    ];
+    const sortAgent = (filterValues) => {
+        // console.log(filterValues)
+        
+        const path = router.pathname;
+        const { query } = router;
+        query['sort'] = filterValues;
+        router.push({ pathname: path, query: query });
+    };
     return (
       <>
         <section className="hero-wrap style3 findagent_banner">
@@ -34,31 +49,37 @@ export default function FindAnAgent({agentList}) {
         </section>
         <section className="agent-wrap ptb-50">
             <div className="container">
-                <div className="row align-items-center mb-25">
+                <div className="row justify-content-between align-items-center mb-25">
                     <div className="col-xl-6 col-lg-8 col-md-8">
                         <div className="profuct-result">
                             <p>We found <span>{total_agents}</span> agents available for you</p>
                         </div>
                     </div>
-                    <div className="col-xl-2 col-lg-4 col-md-4">
+                    {/* <div className="col-xl-2 col-lg-4 col-md-4">
                         <p className="sort_by">
-                            <span className="sorted_list"><i className="fa fa-list-ul" aria-hidden="true" /></span>
-                            &nbsp;Sorted By
+                            
                         </p>
-                    </div>
+                    </div> */}
                     <div className="col-xl-3 col-lg-4 col-md-4">
                         <div className="filter-item-cat">
-                            <select>
-                                <option value={1}>Alphabet</option>
-                                <option value={2}>Sort By High To Low</option>
-                                <option value={3}>Sort By Low To High</option>
-                            </select>
+                            <Dropdown
+                                options={options} placeholder={<span className="sorted_list"><i className="fa fa-list-ul"/> Sort By Alphabet</span>}
+                                onChange={ev => sortAgent(ev.value)}
+                                // arrowClosed={<span className="arrow-closed" />}
+                                // arrowOpen={<span className="arrow-open" />}
+                            />
+                            {/* <select>
+                                <option value={''}><span className="sorted_list"><i className="fa fa-list-ul" aria-hidden="true" /></span>
+                            &nbsp;Sort By Alphabet</option>
+                                <option value={'name'}>Ascending</option>
+                                <option value={'-name'}>Descending</option>
+                            </select> */}
                         </div>
                     </div>
-                    <div className="lising_icons">
+                    {/* <div className="lising_icons">
                         <span className="list_icon"><i className="fa fa-th-list" aria-hidden="true" /></span>
                         <span className="list_th_icon"><i className="fa fa-th" aria-hidden="true" /></span>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="row justify-content-center">
                     {agents.map((agent, i) => (
@@ -73,12 +94,13 @@ export default function FindAnAgent({agentList}) {
     )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ query }) {
     //users?limit=10&offset=0&role=Agent&includeDeleted=false',
     let limit = 25;
     let offset = 0;
     const type = 'Agent';
-    const payload = {url : `${fubApiBaseUrl}/users/?limit=${limit}&offset=${offset}&role=${type}&includeDeleted=false`, method : 'GET', data: []}
+    const sort = query.sort? (query.sort=='name-asc'? 'name' : '-name') : 'name';
+    const payload = {url : `${fubApiBaseUrl}/users/?limit=${limit}&offset=${offset}&sort=${sort}&role=${type}&includeDeleted=false`, method : 'GET', data: []}
     const res = await fetchFubApi(payload);
     // Pass data to the page via props
     // console.log("res:", res)

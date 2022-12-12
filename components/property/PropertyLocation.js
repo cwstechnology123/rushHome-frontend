@@ -1,59 +1,57 @@
-import { Status, Wrapper } from "@googlemaps/react-wrapper";
-import { memo } from "react";
-import LocationMap from "../gmap/LocationMap";
-import Marker from "../gmap/Marker";
-
-const render = (status) => {
-    if (status === Status.FAILURE) {
-      return <p>Map failed to load</p>;
-    }
-    return <p>Loading...</p>;
-};
-
-const PropertyLocation = ({ address, position }) => {
+const PropertyLocation = () => {
     
     return (
         <div className="location_box heading_line">
             <div className="col-xl-12 col-lg-12">
-            <div className="section-title style1 text-left mb-40">
-                <h2>Location</h2>
-                <hr />
-                <div className="contact_map" style={{ height: "70vh", width: "100%" }}>
-                    <Wrapper
-                        apiKey={process.env.GOOGLE_API_TOKEN}
-                        render={render}
-                    >
-                        <LocationMap
-                            center={{
-                                lat: parseFloat(position.lat),
-                                lng: parseFloat(position.lng),
-                            }}
-                            address={address}
-                            zoom={15}
-                            minZoom={3}
-                            maxZoom={20}
-                            draggable={false}
-                            fullscreenControl={false}
-                            streetViewControl={true}
-                            mapTypeControl={true}
-                            zoomControl={true}
-                            clickableIcons={false}
-                        >
-                            <Marker position={{
-                                lat: parseFloat(position.lat),
-                                lng: parseFloat(position.lng),
-                            }} />
-                            {/* <Marker position={{
-                                lat: parseFloat(position.lat),
-                                lng: parseFloat(position.lng),
-                            }} myIcon={true} /> */}
-                        </LocationMap>
-                    </Wrapper>
+                <div className="section-title style1 text-left mb-40">
+                    <h2>Locations</h2>
+                    <hr />
+                    <div className="row">
+                        <div className="col-md-6">
+                            <table className="tabel table-borderless table-line" width={`100%`}>
+                                <tbody>
+                                    <tr>
+                                        <td>Country:</td>
+                                        <th className="text-right">Kent, DE</th>
+                                    </tr>
+                                    <tr>
+                                        <td>In City Limit:</td>
+                                        <th className="text-right">No</th>
+                                    </tr>
+                                    <tr>
+                                        <td>MLS Area:</td>
+                                        <th className="text-right">Capital - Kent, Country (3423423)</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Legal Supervision:</td>
+                                        <th className="text-right">Winding Ridge</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Subdiv/Neigh:</td>
+                                        <th className="text-right">Winding Ridge</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className="col-md-6">
+                            <table className="tabel table-borderless table-line" width={`100%`}>
+                                <tbody>
+                                    <tr>
+                                        <td>School District:</td>
+                                        <th className="text-right">Capital</th>
+                                    </tr>
+                                    <tr>
+                                        <td>High School:</td>
+                                        <th className="text-right">Dover</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
     )
 };
 
-export default memo(PropertyLocation);
+export default PropertyLocation;

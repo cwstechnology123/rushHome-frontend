@@ -9,8 +9,8 @@ export default function AgentCard({ agent, index }) {
     // console.log(agent.picture)
     return (
         <div key={'card-'+index} className="agent-card style1">
-            <div key={'image-'+index} className="agent-img mx-auto">
-                <Image 
+            <div key={'image-box-'+index} className="agent-img mx-auto">
+                <Image  key={'image-'+index}
                     placeholder="blur"
                     blurDataURL={blurImage.src}
                     src={src} 
@@ -20,7 +20,7 @@ export default function AgentCard({ agent, index }) {
             </div>
             <div key={'card-info-'+index}  className="agent-info-wrap">
                 <div key={'agent-'+index} className="agent-info">
-                    <h3><Link href={`/agent/${agent.id}`} passHref>{agent.name}</Link></h3>
+                    <h5><Link href={`/agent/${agent.id}`} passHref>{agent.name}</Link></h5>
                     <span>Real Estate Agent</span>
                     <ul className="social-profile list-style style1">
                     <li key={"twitter-"+index}>

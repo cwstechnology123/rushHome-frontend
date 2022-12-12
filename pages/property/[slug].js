@@ -5,6 +5,7 @@ import { MdSquareFoot } from "react-icons/md";
 import { IoBedOutline } from "react-icons/io5";
 import Mortgage from '../../components/property/Mortgage';
 import PropertyLocation from '../../components/property/PropertyLocation';
+import PropertyMap from '../../components/property/PropertyMap';
 import SimilarHomes from '../../components/property/SimilarHomes';
 import { apiBaseUrl, fetchApi } from '../../utils/fetchApi';
 import { FaBath, FaHotTub } from 'react-icons/fa';
@@ -74,7 +75,7 @@ const PropertyDetails = ({
                                     <p>{county}, {city}</p>
                                 </div>
                                 <div className="slide_content_right">
-                                    <h2>{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</h2>
+                                    <h2>{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0 })}</h2>
                                     <p>{areaTotal}/SqFt</p>
                                 </div>
                             </div>
@@ -351,8 +352,8 @@ const PropertyDetails = ({
                             </div>
                             </div>
                         </div>
-                        <PropertyLocation address={unparsedAddress} position={geography}/>
-                        
+                        <PropertyMap address={unparsedAddress} position={geography}/>
+                        <PropertyLocation />
                         <Mortgage price={listPrice}/>
                     </div>
                     <div className="col-md-4 col-xl-4 col-lg-4">
