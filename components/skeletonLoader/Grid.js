@@ -16,10 +16,10 @@ export default function Grid({item}) {
                                 </div>
                                 <h3><Skeleton variant="text" /></h3>
                                 <ul className="property-metainfo list-style">
-                                    <li key={`bed_x`}><i className="flaticon-double-bed" /><Skeleton variant="text"/> Br</li>
-                                    <li key={`bath_x`}><i className="flaticon-bath-tub" /><Skeleton variant="text"/> Ba</li>
-                                    <li key={`square_x`}><i className="flaticon-square" /><Skeleton variant="text"/> Sq.Ft</li>
-                                    <li key={`home_x`}><i className="flaticon-home" /><Skeleton variant="text"/> Gr</li>
+                                    <li><i className="flaticon-double-bed" /><Skeleton variant="text"/> Br</li>
+                                    <li><i className="flaticon-bath-tub" /><Skeleton variant="text"/> Ba</li>
+                                    <li><i className="flaticon-square" /><Skeleton variant="text"/> Sq.Ft</li>
+                                    <li><i className="flaticon-home" /><Skeleton variant="text"/> Gr</li>
                                 </ul>
                             </div>
                         </div>
