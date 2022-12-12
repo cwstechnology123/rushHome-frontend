@@ -4,7 +4,7 @@ import ContactUs from '../components/ContactUs'
 import List from '../components/property/List'
 import { apiBaseUrl, fetchApi } from '../utils/fetchApi'
 import { useState } from 'react'
-import Skeleton from 'react-loading-skeleton'
+import Grid from '../components/skeletonLoader/grid'
 
 export default function Home({properties}) {
   const [loader, setLoader] = useState(false);
@@ -19,7 +19,7 @@ export default function Home({properties}) {
     try{
       const payload = {url : `${apiBaseUrl}/properties/${type}/1/12`, method : 'GET'}
       const res = await fetchApi(payload)
-      let resData = res && res.data ? res.data.properties : ""
+      let resData = res && res.data ? res.data.properties : null
       setPropertiesData(resData)
       console.log('resData',propertiesData)
       setLoader(false)
@@ -56,11 +56,10 @@ export default function Home({properties}) {
                 </div>	
                 <h2>Popular Properties</h2>
                 <hr />
-                {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p> */}
               </div>
             </div>
           </div>
-          {(loader) ? <Skeleton count={2} /> : (propertiesData) ?
+          {(loader) ?<Grid item={3} /> : (propertiesData) ?
             <>
               <List properties={propertiesData? propertiesData : null} />
             </>
