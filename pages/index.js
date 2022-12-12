@@ -4,7 +4,7 @@ import ContactUs from '../components/ContactUs'
 import List from '../components/property/List'
 import { apiBaseUrl, fetchApi } from '../utils/fetchApi'
 import { useState } from 'react'
-import Grid from '../components/skeletonLoader/grid'
+import Grid from '../components/skeletonLoader/Grid'
 
 export default function Home({properties}) {
   const [loader, setLoader] = useState(false);
