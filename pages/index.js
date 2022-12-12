@@ -4,36 +4,30 @@ import ContactUs from '../components/ContactUs'
 import List from '../components/property/List'
 import { apiBaseUrl, fetchApi } from '../utils/fetchApi'
 import { useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
 
 export default function Home({properties}) {
   const [loader, setLoader] = useState(false);
 
   const [activeTab, setActiveTab] = useState('all');
   const [propertiesData, setPropertiesData] = useState(properties);
-  const handleTabClick = (e, type) => {
-    setLoader('true')
+
+  const handleTabClick = async (e, type) => {
+    setLoader(true)
     setActiveTab(type)
     e.preventDefault();
-    fetch(`https://rushhome-api.cwsbuild.com/api/v1/properties/${type}/1/12`, { 
-      method: 'GET',
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": "rh_DjeB8HK7UXCnjFMmLAutFWfVAdcV",
-      },
-      mode: 'cors' 
-    })
-    .then((response) => {
-      //console.log('response', response);
-      let res = response.json();
+    try{
+      const payload = {url : `${apiBaseUrl}/properties/${type}/1/12`, method : 'GET'}
+      const res = await fetchApi(payload)
       let resData = res && res.data ? res.data.properties : ""
-      setPropertiesData(res.data.properties)
-      setLoader('false')
-    })
-    .catch((err) => {
-      setLoader('false')
-      console.log(err)
+      setPropertiesData(resData)
+      console.log('resData',propertiesData)
+      setLoader(false)
+    } catch (error) {
+      setLoader(false)
+      console.log(error)
       return null;
-    });
+    };
   };
 
   return (
@@ -66,7 +60,7 @@ export default function Home({properties}) {
               </div>
             </div>
           </div>
-          {(propertiesData) ?
+          {(loader) ? <Skeleton count={2} /> : (propertiesData) ?
             <>
               <List properties={propertiesData? propertiesData : null} />
             </>
@@ -227,6 +221,6 @@ export async function getStaticProps() {
     props: {
       properties : null,
     },
-    revalidate: 1000
+    revalidate: 100
   };
 }

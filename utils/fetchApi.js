@@ -1,11 +1,11 @@
-export const apiBaseUrl = process.env.NEXT_APIBASEURL;
+export const apiBaseUrl = process.env.NEXT_PUBLIC_APIBASEURL;
 
 export const fetchApi = async (payload) => {
   return await fetch(payload.url, { 
       method: payload.method,
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": process.env.NEXT_RUSHHOME_API_KEY,
+        "x-api-key": process.env.NEXT_PUBLIC_RUSHHOME_API_KEY,
       },
       mode: 'cors' 
     })

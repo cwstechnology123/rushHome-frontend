@@ -1,7 +1,9 @@
 import '../styles/globals.css'
 import Layout from '../components/layouts/Layout'
 import { SessionProvider } from "next-auth/react"
-import NextNProgress from 'nextjs-progressbar';
+import NextNProgress from 'nextjs-progressbar'
+//import { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function MyApp({  Component,  pageProps: { session, ...pageProps } }) {
   return (
