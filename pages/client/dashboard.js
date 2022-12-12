@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Dashboard() {
   return (
@@ -133,9 +134,9 @@ export default function Dashboard() {
                         </div>
                         <div className="col-md-6 col-xl-6 col-lg-6">
                             <div className="rightrushome">
-                            <p><a href><i className="fa fa-user-o" aria-hidden="true" /> Profile</a></p>
-                            <p><a href><i className="fa fa-envelope-o" aria-hidden="true" /> Messages</a></p>
-                            <p><a href><i className="fa fa-phone" aria-hidden="true" /> Call</a></p>
+                            <p><Link href="/"><i className="fa fa-user-o" aria-hidden="true" /> Profile</Link></p>
+                            <p><Link href="/"><i className="fa fa-envelope-o" aria-hidden="true" /> Messages</Link></p>
+                            <p><Link href="/"><i className="fa fa-phone" aria-hidden="true" /> Call</Link></p>
                             </div>
                         </div>
                         </div>

@@ -12,7 +12,7 @@ export default function Grid({item}) {
                             <Skeleton variant="rect" width={350} height={250} />
                             <div className="property-info">
                                 <div className="property-status-wrap">
-                                <p className="property-price">$<Skeleton variant="text" width={150} /></p>
+                                <p className="property-price"><Skeleton variant="text" /></p>
                                 </div>
                                 <h3><Skeleton variant="text" /></h3>
                                 <ul className="property-metainfo list-style">

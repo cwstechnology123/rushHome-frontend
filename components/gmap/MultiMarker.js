@@ -25,7 +25,7 @@ export default function MultiMarker({
                         {hotels.map(({properties}) => {
                             let hotel = properties.hotel;
                             return (
-                            <div className='d-flex mb-2 border'>
+                            <div key={`marker_${hotel.id}`} className='d-flex mb-2 border'>
                                 <Image src={hotel.listPictureURL} alt={`property for ${hotel.slug}`} width={100} height={100}/>
                             <div className="grow p-2">
                                 <span className="font-weight-bold">

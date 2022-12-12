@@ -64,7 +64,7 @@ export default function RequestInfo({ address }) {
                     </div>
                 </div>
                 
-                <p className="agent_content">By clicking "contact agent" you agree that Rush Home, it’s affiliates or associated third parties may contact you, including with calls or texts by automated means. You also agree to our Terms of Service and Privacy Policy. Message/data rates may apply. Consent is not a condition to access real estate services.</p>
+                <p className="agent_content">By clicking &apos;contact agent&apos; you agree that Rush Home, it&apos;s affiliates or associated third parties may contact you, including with calls or texts by automated means. You also agree to our Terms of Service and Privacy Policy. Message/data rates may apply. Consent is not a condition to access real estate services.</p>
                 
                 <div className="col-12 text-center">
                     <button type="submit" className="btn style2 contact_button">Contact Agent</button>
