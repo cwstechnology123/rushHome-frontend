@@ -47,7 +47,7 @@ export default function AgentCard({ agent, index }) {
                 </div>
                 <div className="mail_Box">
                     <p>{agent.email}</p>
-                    <span>{agent.phone}</span>
+                    {/* <span>{agent.phone}</span> */}
                 </div>
             </div>
         </div>

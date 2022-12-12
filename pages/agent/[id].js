@@ -52,9 +52,9 @@ export default function AgentDetail({ agent: { name, firstName, lastName, email,
                             </ul>
                             </h2>
                             <div className="callemail_box">
-                            <p>
+                            {/* <p>
                                 <img src="../assets/img/callus.jpg" /> + {phone}
-                            </p>
+                            </p> */}
                             <p>
                                 <img src="../assets/img/agentemail.jpg" /> {email}
                             </p>

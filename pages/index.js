@@ -62,7 +62,7 @@ export default function Home({properties}) {
                 </div>	
                 <h2>Popular Properties</h2>
                 <hr />
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p>
+                {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p> */}
               </div>
             </div>
           </div>

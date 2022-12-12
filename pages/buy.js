@@ -444,7 +444,7 @@ export default function Buy({ properties }) {
   )
 }
 export async function getServerSideProps() {
-    const payload = {url : `${apiBaseUrl}/properties/all/1/100`, method : 'GET'}
+    const payload = {url : `${apiBaseUrl}/properties/all/1/1000`, method : 'GET'}
     const res = await fetchApi(payload)
     // Pass data to the page via props
 

@@ -165,7 +165,7 @@ export default function Footer() {
                   </div>
                   <div className="container">
                   <div className="footer-bottom">
-                      <p className="text_content"> Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet. </p>
+                      {/* <p className="text_content"> Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet. </p> */}
                       <div className="row align-items-center">
                       <div className="col-md-6">
                           <p className="copyright-text">

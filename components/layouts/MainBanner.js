@@ -9,7 +9,7 @@ export default function MainBanner() {
           <div className="row">
             <div className="col-xxl-8 offset-xxl-2 col-xl-10 offset-xl-1 col-lg-10 offset-lg-1">
               <h1>Get Home Faster</h1>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s</p>
+              {/* <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s</p> */}
               <form action="#" className="property-search-form">
                   <div className="form-group-wrap">
                       <div className="form-group">
