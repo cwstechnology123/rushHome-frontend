@@ -11,10 +11,7 @@ export default function Grid({item}) {
                         <div className="property-card style3">
                             <Skeleton variant="rect" width={350} height={250} />
                             <div className="property-info">
-                                <div className="property-status-wrap">
-                                <p className="property-price"><Skeleton variant="text" /></p>
-                                </div>
-                                <h3><Skeleton variant="text" /></h3>
+                                <h3><Skeleton variant="text" count={2}/></h3>
                                 <ul className="property-metainfo list-style">
                                     <li key={`bed_x`}><i className="flaticon-double-bed" /><Skeleton variant="text"/> Br</li>
                                     <li key={`bath_x`}><i className="flaticon-bath-tub" /><Skeleton variant="text"/> Ba</li>
@@ -29,10 +26,7 @@ export default function Grid({item}) {
                         <div className="property-card style3">
                             <Skeleton variant="rect" width={350} height={250} />
                             <div className="property-info">
-                                <div className="property-status-wrap">
-                                <p className="property-price"><Skeleton variant="text" width={350} /></p>
-                                </div>
-                                <h3><Skeleton variant="text" /></h3>
+                                <h3><Skeleton variant="text" count={2}/></h3>
                                 <ul className="property-metainfo list-style">
                                     <li key={`bed_x`}><i className="flaticon-double-bed" /><Skeleton variant="text"/> Br</li>
                                     <li key={`bath_x`}><i className="flaticon-bath-tub" /><Skeleton variant="text"/> Ba</li>
@@ -46,10 +40,7 @@ export default function Grid({item}) {
                         <div className="property-card style3">
                             <Skeleton variant="rect" width={350} height={250} />
                             <div className="property-info">
-                                <div className="property-status-wrap">
-                                <p className="property-price"><Skeleton variant="text" width={350} /></p>
-                                </div>
-                                <h3><Skeleton variant="text" /></h3>
+                                <h3><Skeleton variant="text" count={2}/></h3>
                                 <ul className="property-metainfo list-style">
                                     <li key={`bed_x`}><i className="flaticon-double-bed" /><Skeleton variant="text"/> Br</li>
                                     <li key={`bath_x`}><i className="flaticon-bath-tub" /><Skeleton variant="text"/> Ba</li>
@@ -63,10 +54,7 @@ export default function Grid({item}) {
                         <div className="property-card style3">
                             <Skeleton variant="rect" width={350} height={250} />
                             <div className="property-info">
-                                <div className="property-status-wrap">
-                                <p className="property-price"><Skeleton variant="text" width={350} /></p>
-                                </div>
-                                <h3><Skeleton variant="text" /></h3>
+                                <h3><Skeleton variant="text" count={2}/></h3>
                                 <ul className="property-metainfo list-style">
                                     <li key={`bed_x`}><i className="flaticon-double-bed" /><Skeleton variant="text"/> Br</li>
                                     <li key={`bath_x`}><i className="flaticon-bath-tub" /><Skeleton variant="text"/> Ba</li>
