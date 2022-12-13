@@ -120,7 +120,7 @@ export default function Buy({ properties }) {
         zoom,
         options: { radius: 75, maxZoom: 20 }
     });
-    console.log(clusters)
+    //console.log(clusters)
     const clusterSets = clusters.map(cluster => {
         const [longitude, latitude] = cluster.geometry.coordinates;
         const {

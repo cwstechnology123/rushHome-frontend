@@ -93,13 +93,13 @@ export default function ScheduleTour() {
                         <h2>Tuesday, March 9th <br/>at 12:30 PM</h2>
                         <form className="row g-3">
                             <div className="col-md-12">
-                                <label for="" className="form-label">First Name</label>
+                                <label className="form-label">First Name</label>
                                 <input type="text" className="form-control" id="inputEmail4" value={schedule.full_name} readOnly/>
                             </div>
 
                             <div className="col-12">
                                 <div className="col-auto">
-                                    <label className="form-label" for="autoSizingInputGroup">Phone Number</label>
+                                    <label className="form-label">Phone Number</label>
                                     <div className="input-group">
                                         <div className="col-auto">
                                             <select className="form-select" id="autoSizingSelect">
@@ -114,7 +114,7 @@ export default function ScheduleTour() {
                                 </div>
                             </div>
                             <div className="col-12">
-                                <label for="inputAddress" className="form-label">Email Address</label>
+                                <label className="form-label">Email Address</label>
                                 <input type="text" className="form-control" id="inputAddress" placeholder="john.doe@gmail.com" value={schedule.schedule_email} />
                             </div>
 
@@ -190,7 +190,7 @@ export default function ScheduleTour() {
                     <div className="form-group mb-3">
                         <div className="form-check">
                             <input className="form-check-input" type="checkbox" id="gridCheck" />
-                            <label className="form-check-label" for="gridCheck">
+                            <label className="form-check-label">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit
                             </label>
                         </div>

@@ -68,12 +68,6 @@ export default function FindAnAgent({agentList}) {
                                 // arrowClosed={<span className="arrow-closed" />}
                                 // arrowOpen={<span className="arrow-open" />}
                             />
-                            {/* <select>
-                                <option value={''}><span className="sorted_list"><i className="fa fa-list-ul" aria-hidden="true" /></span>
-                            &nbsp;Sort By Alphabet</option>
-                                <option value={'name'}>Ascending</option>
-                                <option value={'-name'}>Descending</option>
-                            </select> */}
                         </div>
                     </div>
                     {/* <div className="lising_icons">
@@ -84,7 +78,7 @@ export default function FindAnAgent({agentList}) {
                 <div className="row justify-content-center">
                     {agents.map((agent, i) => (
                         <div key={"list-card-"+i} className="col-xl-3 col-lg-6 col-md-6">
-                            <AgentCard key={"agent-card-"+i} agent={agent} index={(i+1)}/>
+                            <AgentCard agent={agent}/>
                         </div>
                     ))}
                 </div>

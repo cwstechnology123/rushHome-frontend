@@ -15,6 +15,7 @@ export default function Home({properties}) {
   const handleTabClick = async (e, type) => {
     setLoader(true)
     setActiveTab(type)
+    console.log("type:", type)
     e.preventDefault();
     try{
       const payload = {url : `${apiBaseUrl}/properties/${type}/1/12`, method : 'GET'}

@@ -3,7 +3,7 @@ import Iframe from "react-iframe";
 export default function VirtualTour({tourLink}) {
 
     return (
-        <div className="Descriptions_box heading_line">
+        <div className="descriptions_box heading_line">
             <div className="col-xl-12 col-lg-12">
             <div className="section-title style1 text-left mb-40">
                 <h2>Virtual Tour</h2>

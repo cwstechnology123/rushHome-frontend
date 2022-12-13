@@ -11,12 +11,17 @@ import { apiBaseUrl, fetchApi } from '../../utils/fetchApi';
 import { FaBath, FaHotTub } from 'react-icons/fa';
 import NonAccount from './NonAccount';
 import { useSession } from 'next-auth/react';
+import VirtualTour from '../../components/property/VirtualTour';
+import PropertyHeader from '../../components/property/PropertyHeader';
+import PropertyImages from '../../components/property/PropertyImages';
+import PropertyAgentCard from '../../components/property/PropertyAgentCard';
 
 
 const PropertyDetails = ({
     propertyDetails: {
         id,
         listingId,
+        listingKey,
         propertyType,
         listPrice,
         fullStreetAddress,
@@ -30,6 +35,13 @@ const PropertyDetails = ({
         listPictureURL,
         roomsTotal,
         listPicture2URL,
+        listPicture3URL,
+        listAgentMlsId,
+        listAgentFullName,
+        listAgentEmail,
+        listAgentKey,
+        listAgentOfficePhone,
+        listAgentOfficePhoneExt,
         unparsedAddress,
         geography,
         saleType,
@@ -39,7 +51,9 @@ const PropertyDetails = ({
         garageYN,
         garageSpaces,
         totalGarageAndParkingSpaces,
-        mlsStatus
+        mlsStatus,
+        pricePerSquareFoot,
+        virtualTourURLUnbranded
       },
   }) => {
     
@@ -50,35 +64,25 @@ const PropertyDetails = ({
             <div className="container">
                 <div className="row">
                     <div className="col-md-8 col-xl-8 col-lg-8">
-                        <div className="slider_wraper">
-                            <div className="top_slide_nav">
-                                <div className="left_nav_slide">
-                                    <button type="submit" className="btn style2 excl_button">Exclusive</button>
-                                    <span>
-                                    <i className="fa fa-clock-o" />
-                                    Month Ago
-                                    </span>
-                                    <span>
-                                    <i className="fa fa-eye"  />
-                                    15892 Views
-                                    </span>
-                                </div>
-                                <div className="right_slide_nav">
-                                    <button type="button" className="btn style3 button_top"><i className="fa fa-heart-o"  /> Saved</button>
-                                    <button type="button" className="btn style3 button_top"><i className="fa fa-share"  /> Share</button>
-                                    <button type="button" className="btn style3 button_top"><i className="fa fa-print"  /> Print</button>
-                                </div>
-                            </div>
-                            <div className="slide_content">
-                                <div className="slide_content_left">
-                                    <h2>{fullStreetAddress}</h2>
-                                    <p>{county}, {city}</p>
-                                </div>
-                                <div className="slide_content_right">
-                                    <h2>{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0 })}</h2>
-                                    <p>{areaTotal}/SqFt</p>
-                                </div>
-                            </div>
+                        <PropertyHeader 
+                            price={listPrice}
+                            area={pricePerSquareFoot}
+                            address={{
+                                fullAddress: fullStreetAddress,
+                                county: county,
+                                city: city
+                            }}
+                            
+                        />
+                        <PropertyImages 
+                            defaulImages={{
+                                picture3URL: listPicture3URL,
+                                picture2URL: listPicture2URL,
+                                pictureURL: listPictureURL
+                            }}
+                            listingKey={listingKey}
+                        />
+                        {/* <div className="slider_wraper">
                             <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="false">
                             <div className="carousel-indicators">
                                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to={0} className="active" aria-current="true" aria-label="Slide 1"><img src={listPicture2URL} className="d-block w-100" alt="..." /></button>
@@ -126,8 +130,8 @@ const PropertyDetails = ({
                                 <span className="visually-hidden">Next</span>
                             </button>
                             </div>
-                        </div>
-                        <div className="Descriptions_box heading_line">
+                        </div> */}
+                        <div className="descriptions_box heading_line mt-4">
                             <div className="col-xl-12 col-lg-12">
                             <div className="section-title style1 text-left mb-40">
                                 <h2>Descriptions</h2>
@@ -352,6 +356,7 @@ const PropertyDetails = ({
                             </div>
                             </div>
                         </div>
+                        {(virtualTourURLUnbranded!='') &&<VirtualTour tourLink={virtualTourURLUnbranded} />}
                         <PropertyMap address={unparsedAddress} position={geography}/>
                         <PropertyLocation />
                         <Mortgage price={listPrice}/>
@@ -364,35 +369,18 @@ const PropertyDetails = ({
                                 <NonAccount address={fullStreetAddress}/>
                                 )
                             }
-
-                            <div className="col-lg-12 col-xl-12 col-md-12">
-                                <div className="listing_agentbox">
-                                    <h2>Listing Agent</h2>
-                                    <div className="askqu">
-                                        <div className="left_ask">
-                                            <i className="fa fa-user-o"  />
-                                        </div>
-                                        <div className="agent_box">
-                                            <h2>John Doe</h2>
-                                            <h3>Rush<span>Home</span></h3>
-                                            <p>john.doe@rushhome.com</p>
-                                            <p>P: 302.555.5555</p>
-                                        </div>
-                                    </div>
-                                    <div className="askquestion">
-                                        <h2>Ask a question:</h2>
-                                        <div className="col-12">
-                                            <div className="form-floating">
-                                            <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{height: 150}} />
-                                            <label for="floatingTextarea2">I would like more information on 123 Main Street.</label>
-                                            </div>
-                                        </div>
-                                        <div className="col-12 text-center">
-                                            <button type="submit" className="btn style2 contact_button">Ask a Question</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <PropertyAgentCard 
+                                agent={{
+                                    listAgentMlsId,
+                                    listAgentFullName,
+                                    listAgentEmail,
+                                    listAgentKey,
+                                    listAgentOfficePhone,
+                                    listAgentOfficePhoneExt
+                                }} 
+                                address={unparsedAddress}
+                            />
+                            
                         </div>
                     </div>
                 </div>
@@ -411,7 +399,7 @@ export async function getServerSideProps({ params: { slug } }) {
     const payload = {url : `${apiBaseUrl}/properties/details/${propertyId}`, method : 'GET'}
     const res = await fetchApi(payload)
     // Pass data to the page via props
-
+    // console.log(res.data)
     if(res.data){
         return {
             props: {
