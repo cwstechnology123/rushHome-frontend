@@ -28,14 +28,14 @@ const PropertyImages = ({
 
     const images = imageList.propertyImages? imageList.propertyImages.map(item => (
         {
-            original: item.Image,
-            thumbnail: item.Image,
+            original: item.Image.replace(/^http:\/\//i, 'https://'),
+            thumbnail: item.Image.replace(/^http:\/\//i, 'https://'),
             originalClass: 'property-banner-original',
             thumbnailClass: 'property-banner-thumbnail'
         }
     )) : (defaulImages.pictureURL!=""? ([{
-        original: defaulImages.pictureURL,
-        thumbnail: defaulImages.picture2URL,
+        original: defaulImages.picture3URL.replace(/^http:\/\//i, 'https://'),
+        thumbnail: defaulImages.pictureURL.replace(/^http:\/\//i, 'https://'),
         originalClass: 'property-banner-original',
         thumbnailClass: 'property-banner-thumbnail'
     }]) : ([{
