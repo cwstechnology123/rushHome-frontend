@@ -9,7 +9,7 @@ export default function Grid({item}) {
                     {[...new Array(item)].map(() => {
                     <div className="col-xl-4 col-lg-6 col-md-6">
                         <div className="property-card style3">
-                            <Skeleton variant="rect" width={400} height={250} />
+                            <Skeleton variant="rect" width={356} height={250} borderRadius={15} />
                             <div className="property-info">
                                 <h3><Skeleton variant="text" count={2}/></h3>
                                 <ul className="property-metainfo list-style">
@@ -24,7 +24,7 @@ export default function Grid({item}) {
                     })}
                     <div className="col-xl-4 col-lg-6 col-md-6">
                         <div className="property-card style3">
-                            <Skeleton variant="rect" width={400} height={250} />
+                            <Skeleton variant="rect" width={356} height={250} borderRadius={15}/>
                             <div className="property-info">
                                 <h3><Skeleton variant="text" count={2}/></h3>
                                 <ul className="property-metainfo list-style">
@@ -38,7 +38,7 @@ export default function Grid({item}) {
                     </div>
                     <div className="col-xl-4 col-lg-6 col-md-6">
                         <div className="property-card style3">
-                            <Skeleton variant="rect" width={400} height={250} />
+                            <Skeleton variant="rect" width={356} height={250} borderRadius={15} />
                             <div className="property-info">
                                 <h3><Skeleton variant="text" count={2}/></h3>
                                 <ul className="property-metainfo list-style">
@@ -52,7 +52,7 @@ export default function Grid({item}) {
                     </div>
                     <div className="col-xl-4 col-lg-6 col-md-6">
                         <div className="property-card style3">
-                            <Skeleton variant="rect" width={400} height={250} />
+                            <Skeleton variant="rect" width={356} height={250} borderRadius={15} />
                             <div className="property-info">
                                 <h3><Skeleton variant="text" count={2}/></h3>
                                 <ul className="property-metainfo list-style">

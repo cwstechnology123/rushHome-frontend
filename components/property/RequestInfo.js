@@ -22,8 +22,9 @@ export default function RequestInfo({ address }) {
         reset();
     }
     return (
-        <div className="first_box second_box">
-          <h2>Request more information</h2>
+        <>
+            <h5 className="text-center">Request more information</h5>
+            <hr className="my-3" />
             <form className="row g-3" onSubmit={handleSubmit(handleRequestInfo)}>
                 <div className="col-md-12">
                     <label for="" className="form-label">Full Name</label>
@@ -71,6 +72,6 @@ export default function RequestInfo({ address }) {
                 </div>
 
             </form>
-      </div>
+        </>
     )
 }

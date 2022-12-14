@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link";
-import { useState } from "react";
+import agentList from "../../utils/fub_numbers.json";
 import defaultAgentImage from "../../public/assets/img/default-profile-pic.png";
 import blurImage from "../../public/assets/img/placeholder.png";
 
@@ -8,6 +8,8 @@ export default function AgentCard({ agent }) {
     // const [src, setSrc] = useState(agent.picture?.original);
     // console.log(agent.picture)
     // console.log(src)
+    const phoneBlk = agentList.find(person => (person.email === agent.email));
+    // console.log("Phone: ", phoneBlk);
     const src = agent.picture.original ?? defaultAgentImage.src;
     return (
         <div key={'card-'+agent.id} className="agent-card style1">
@@ -49,7 +51,7 @@ export default function AgentCard({ agent }) {
                 </div>
                 <div className="mail_Box">
                     <p>{agent.email}</p>
-                    {/* <span>{agent.phone}</span> */}
+                    <span>{phoneBlk?.phone}</span>
                 </div>
             </div>
         </div>

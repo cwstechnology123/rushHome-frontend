@@ -2,11 +2,13 @@ import Link from "next/link"
 import { fetchFubApi, fubApiBaseUrl } from "../../utils/fubFetchApi";
 import defaultAgentImage from "../../public/assets/img/default-profile-pic.png";
 import blurImage from "../../public/assets/img/placeholder.png";
+import agentList from "../../utils/fub_numbers.json";
 import { useState } from "react";
 import Image from "next/image";
 
 export default function AgentDetail({ agent: { name, firstName, lastName, email, phone, picture } }) {
     const [src, setSrc] = useState(picture.original);
+    const phoneBlk = agentList.find(person => (person.email === email));
     return (
         <>
             <section className="style3 singalagent_box pt-50">
@@ -52,9 +54,9 @@ export default function AgentDetail({ agent: { name, firstName, lastName, email,
                             </ul>
                             </h2>
                             <div className="callemail_box">
-                            {/* <p>
-                                <img src="../assets/img/callus.jpg" /> + {phone}
-                            </p> */}
+                                {phoneBlk?.phone && (<p>
+                                <img src="../assets/img/callus.jpg" /> + {phoneBlk.phone}
+                            </p>)}
                             <p>
                                 <img src="../assets/img/agentemail.jpg" /> {email}
                             </p>

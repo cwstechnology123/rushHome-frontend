@@ -73,19 +73,37 @@
 }
 
 /* change border radius for the tab , apply corners on top*/
-#exTab3 .nav-tabs > li > button {
-    border-color: transparent !important;
-    border-radius: 10px 10px 0 0 !important;
+#exTab3 .nav-tabs .nav-item .nav-link {
+    color: #495057 !important;
+    border-radius: 15px 15px 0px 0px;
+    border-bottom: 0px;
+    padding: 12px 15px !important;
 }
-#exTab3 .nav-tabs > li > button.active {
-    border-bottom: 1px solid #eee !important;
-    /* box-shadow: 0px 0px 29px 0px grey; */
+
+#exTab3 .nav-tabs .nav-item.show .nav-link, #exTab3 .nav-tabs .nav-link.active {
+    color: #0d6efd !important;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+    border-radius: 15px 15px 0px 0px !important;
+    /* box-shadow: 0px 0px 0px 0px #eee, -8px 0px 6px -6px #eee, 8px 0px 6px -6px #eee, 0px 8px 6px -6px #eee !important;
+    -moz-box-shadow: 0px 0px 0px 0px #eee, -8px 0px 6px -6px #eee, 8px 0px 6px -6px #eee, 0px 8px 6px -6px #eee !important;
+    -webkit-box-shadow: 0px 0px 0px 0px #eee, -8px 0px 6px -6px #eee, 8px 0px 6px -6px #eee, 0px 8px 6px -6px #eee !important; */
+}
+#exTab3 .nav-tabs .nav-link:focus, #exTab3 .nav-tabs .nav-link:hover {
+    border-radius: 15px 15px 0px 0px !important;
 }
 
 #exTab3 .tab-content {
-    border-radius: 0 0 10px 10px !important;
+    color : black;
+    background-color: #fff;
     padding : 5px 15px;
-    /* box-shadow: 0px 0px 29px 0px grey; */
+    border: 1px solid #dee2e6;
+    border-top: 0px;
+    border-color: #dee2e6;
+    border-radius: 0px 0px 15px 15px;
+    /* box-shadow: 0px 8px 6px -6px #eee, -8px 0px 6px -6px #eee, 8px 0px 6px -6px #eee, 0px 0px 0px 0px #eee;
+    -moz-box-shadow: 0px 8px 6px -6px #eee, -8px 0px 6px -6px #eee, 8px 0px 6px -6px #eee, 0px 0px 0px 0px #eee;
+    -webkit-box-shadow: 0px 8px 6px -6px #eee, -8px 0px 6px -6px #eee, 8px 0px 6px -6px #eee, 0px 0px 0px 0px #eee; */
 }
 
 #schedule_box .form-control {
