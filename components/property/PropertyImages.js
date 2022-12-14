@@ -34,8 +34,8 @@ const PropertyImages = ({
             thumbnailClass: 'property-banner-thumbnail'
         }
     )) : (defaulImages.pictureURL!=""? ([{
-        original: defaulImages.picture3URL,
-        thumbnail: defaulImages.pictureURL,
+        original: defaulImages.picture3URL.replace(/^http:\/\//i, 'https://'),
+        thumbnail: defaulImages.pictureURL.replace(/^http:\/\//i, 'https://'),
         originalClass: 'property-banner-original',
         thumbnailClass: 'property-banner-thumbnail'
     }]) : ([{
