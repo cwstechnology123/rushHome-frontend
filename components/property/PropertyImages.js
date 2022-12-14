@@ -28,8 +28,8 @@ const PropertyImages = ({
 
     const images = imageList.propertyImages? imageList.propertyImages.map(item => (
         {
-            original: item.Image,
-            thumbnail: item.Image,
+            original: "https://bright-media01.prd.brightmls.com/bright/images/0000/8020/5719/0758/802057190758_1024_768_WM_hlL89RiJxuaRduFs.jpg",
+            thumbnail: "https://bright-media01.prd.brightmls.com/bright/images/0000/8020/5719/0758/802057190758_1024_768_WM_hlL89RiJxuaRduFs.jpg",
             originalClass: 'property-banner-original',
             thumbnailClass: 'property-banner-thumbnail'
         }
