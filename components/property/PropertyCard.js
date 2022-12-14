@@ -26,7 +26,7 @@ const PropertyCard = ({
         <div className="property-card style3">
             <div className="property-img">
                 <img key={`image_${id}`} src={srcimg} onError={()=>setSrcimg(defaultProperty.src)} alt="Image" />
-                <span className="property-status">{listingAgreementType.split(' ')[0]}</span>
+                <span className="property-status">Exclusive</span>
             </div>
             <div className="property-info">
                 <div className="property-status-wrap">
