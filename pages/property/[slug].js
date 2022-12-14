@@ -1,21 +1,18 @@
-import { useState } from 'react'
+import { useSession } from "next-auth/react";
 import { HiOutlineHomeModern, HiOutlineStar } from "react-icons/hi2";
 import { GiCrane, GiBathtub, GiHomeGarage } from "react-icons/gi";
 import { MdSquareFoot } from "react-icons/md";
 import { IoBedOutline } from "react-icons/io5";
-import Mortgage from '../../components/property/Mortgage';
-import PropertyLocation from '../../components/property/PropertyLocation';
-import PropertyMap from '../../components/property/PropertyMap';
-import SimilarHomes from '../../components/property/SimilarHomes';
-import { apiBaseUrl, fetchApi } from '../../utils/fetchApi';
-import { FaBath, FaHotTub } from 'react-icons/fa';
-import NonAccount from './NonAccount';
-import { useSession } from 'next-auth/react';
-import VirtualTour from '../../components/property/VirtualTour';
-import PropertyHeader from '../../components/property/PropertyHeader';
-import PropertyImages from '../../components/property/PropertyImages';
-import PropertyAgentCard from '../../components/property/PropertyAgentCard';
-
+import PropertyHeader from "../../components/property/PropertyHeader";
+import { apiBaseUrl, fetchApi } from "../../utils/fetchApi";
+import PropertyImages from "../../components/property/PropertyImages";
+import { FaBath } from "react-icons/fa";
+import VirtualTour from "../../components/property/VirtualTour";
+import PropertyMap from "../../components/property/PropertyMap";
+import Mortgage from "../../components/property/Mortgage";
+import NonAccount from "./NonAccount";
+import PropertyAgentCard from "../../components/property/PropertyAgentCard";
+import PropertyAmenities from "../../components/property/PropertyAmenities";
 
 const PropertyDetails = ({
     propertyDetails: {
@@ -23,36 +20,33 @@ const PropertyDetails = ({
         listingId,
         listingKey,
         propertyType,
+        yearBuilt,
+        heatingYN,
         listPrice,
         fullStreetAddress,
         description,
         bedroomsTotal,
-        bathroomsTotal,
-        areaTotal,
-        slug,
-        county,
-        city,
-        listPictureURL,
+        fireplacesTotal,
+        bathroomsTotalInteger,
         roomsTotal,
-        listPicture2URL,
-        listPicture3URL,
-        agent,
-        unparsedAddress,
-        geography,
-        saleType,
-        onMarketDate,
-        heatingYN,
-        cooling,
-        garageYN,
         garageSpaces,
         totalGarageAndParkingSpaces,
-        mlsStatus,
+        areaTotal,
+        county,
+        city,
+        standardStatus,
+        listPictureURL,
+        listPicture2URL,
+        listPicture3URL,
         pricePerSquareFoot,
-        virtualTourURLUnbranded
-      },
-  }) => {
-    
-    const { data: session } = useSession()
+        virtualTourURLUnbranded,
+        geography,
+        unparsedAddress,
+        amenities,
+        agent
+    }
+}) => {
+    const { data: session } = useSession();
     return (
         <>
         <section className="style3 ptb-50 product_box">
@@ -67,7 +61,6 @@ const PropertyDetails = ({
                                 county: county,
                                 city: city
                             }}
-                            
                         />
                         <PropertyImages 
                             defaulImages={{
@@ -93,18 +86,16 @@ const PropertyDetails = ({
                                     <hr />
                                     <div className="fact_iconbox">
                                         <ul>
-                                            {saleType!="" && (
-                                                <li>
+                                            <li>
                                                 <span><HiOutlineHomeModern/></span>
                                                 <p>Type</p>
-                                                <h3>{saleType}</h3>
-                                                </li>
-                                            )}
-                                            {onMarketDate!="" && (
+                                                <h3>Single</h3>
+                                            </li>
+                                            {yearBuilt!="" && (
                                                 <li>
                                                 <span><GiCrane/></span>
                                                 <p>Build Year</p>
-                                                <h3>{new Date(onMarketDate).getFullYear()}</h3>
+                                                <h3>{yearBuilt}</h3>
                                                 </li>
                                             )}
                                             {heatingYN==="Y" && (
@@ -128,11 +119,11 @@ const PropertyDetails = ({
                                                 <h3>{bedroomsTotal}</h3>
                                                 </li>
                                             )}
-                                            {bathroomsTotal!="" && (
+                                            {bathroomsTotalInteger && (
                                                 <li>
                                                 <span><FaBath/></span>
                                                 <p>Bathroom</p>
-                                                <h3>{bathroomsTotal}</h3>
+                                                <h3>{bathroomsTotalInteger}</h3>
                                                 </li>
                                             )}
                                             {totalGarageAndParkingSpaces!="" && (
@@ -142,21 +133,15 @@ const PropertyDetails = ({
                                                 <h3>{totalGarageAndParkingSpaces}</h3>
                                                 </li>
                                             )}
-                                            {/* {cooling!="" && (
-                                                <li>
-                                                <span><GiHomeGarage/></span>
-                                                <p>Air Cooler</p>
-                                                <h3>{cooling}</h3>
-                                                </li>
-                                            )} */}
-                                            {mlsStatus!="" && (
+                                            {standardStatus!="" && (
                                                 <li>
                                                 <span><HiOutlineStar/></span>
                                                 <p>Status</p>
-                                                <h3>{mlsStatus}</h3>
+                                                <h3>{standardStatus}</h3>
                                                 </li>
                                             )}
                                         </ul>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -166,72 +151,72 @@ const PropertyDetails = ({
                             <div className="section-title style1 text-left mb-40">
                                 <h2>Additional Details</h2>
                                 <hr />
-                                <div className="additional_box">
-                                    <div className="additional_left">
-                                        <table className='table table-borderless'>
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <table className='table table-borderless table-line'>
                                             <tbody>
                                                 <tr>
                                                     <th>Property ID:</th>
-                                                    <td>{listingId}</td>
+                                                    <td className="text-left">{listingId}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Property Type:</th>
-                                                    <td>{propertyType}</td>
+                                                    <td className="text-left">{propertyType}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Rooms:</th>
-                                                    <td>{roomsTotal}</td>
+                                                    <td className="text-left">{roomsTotal}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Size:</th>
-                                                    <td>{areaTotal} SqFt</td>
+                                                    <td className="text-left">{areaTotal} SqFt</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Garage:</th>
-                                                    <td>{totalGarageAndParkingSpaces}</td>
+                                                    <td className="text-left">{totalGarageAndParkingSpaces}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Garage Size:</th>
-                                                    <td>{garageSpaces} SqFt</td>
+                                                    <td className="text-left">{garageSpaces} SqFt</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Year Build:</th>
-                                                    <td>{new Date(onMarketDate).getFullYear()}</td>
+                                                    <td className="text-left">{yearBuilt}</td>
                                                 </tr>
                                             </tbody>
                                             
                                         </table>
                                     </div>
-                                    <div className="additional_right">
-                                        <table className='table table-borderless'>
+                                    <div className="col-md-6">
+                                        <table className='table table-borderless table-line'>
                                             <tbody>
                                                 <tr>
                                                     <th>Price:</th>
-                                                    <td>{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                                                    <td className="text-left">{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0 })}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Property Status:</th>
-                                                    <td>For Sale</td>
+                                                    <td className="text-left">For Sale</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Bedrooms:</th>
-                                                    <td>{bedroomsTotal}</td>
+                                                    <td className="text-left">{bedroomsTotal}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Bathrooms:</th>
-                                                    <td>{bathroomsTotal} SqFt</td>
+                                                    <td className="text-left">{bathroomsTotalInteger}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Garage:</th>
-                                                    <td>{totalGarageAndParkingSpaces}</td>
+                                                    <th>Fireplace:</th>
+                                                    <td className="text-left">{fireplacesTotal}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Bath Size:</th>
-                                                    <td>50 SqFt</td>
+                                                    <td className="text-left">50 SqFt</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Label:</th>
-                                                    <td>Bestseller</td>
+                                                    <td className="text-left">Bestseller</td>
                                                 </tr>
                                             </tbody>
                                             
@@ -241,70 +226,9 @@ const PropertyDetails = ({
                             </div>
                             </div>
                         </div>
-                        <div className="offices_box heading_line">
-                            <div className="col-xl-12 col-lg-12">
-                            <div className="section-title style1 text-left mb-40">
-                                <h2>Offices Amenities</h2>
-                                <hr />
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed </p>
-                                <div className="offices_wraper">
-                                <ul>
-                                    <li>
-                                    <i className="fa fa-check"  />
-                                    Balcony
-                                    </li>
-                                    <li>
-                                    <i className="fa fa-check"  />
-                                    Fireplace
-                                    </li>
-                                    <li>
-                                    <i className="fa fa-check"  />
-                                    Basement
-                                    </li>
-                                    <li>
-                                    <i className="fa fa-check"  />
-                                    Dishwasher
-                                    </li>
-                                    <li>
-                                    <i className="fa fa-check"  />
-                                    Fireplace 
-                                    </li>
-                                    <li>
-                                    <i className="fa fa-check"  />
-                                    Basement Cooling
-                                    </li>
-                                    <li>
-                                    <i className="fa fa-check"  />
-                                    Dining room
-                                    </li>
-                                    <li>
-                                    <i className="fa fa-check"  />
-                                    Balcony
-                                    </li>
-                                    <li>
-                                    <i className="fa fa-check"  />
-                                    Cooling
-                                    </li>
-                                    <li>
-                                    <i className="fa fa-check"  />
-                                    Balcony
-                                    </li>
-                                    <li>
-                                    <i className="fa fa-check"  />
-                                    Dining room
-                                    </li>
-                                    <li>
-                                    <i className="fa fa-check"  />
-                                    Dishwasher
-                                    </li>
-                                </ul>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                        {(virtualTourURLUnbranded!='') &&<VirtualTour tourLink={virtualTourURLUnbranded} />}
+                        <PropertyAmenities amenities={amenities} />
+                        {(virtualTourURLUnbranded!='') && <VirtualTour tourLink={virtualTourURLUnbranded} />}
                         <PropertyMap address={unparsedAddress} position={geography}/>
-                        <PropertyLocation />
                         <Mortgage price={listPrice}/>
                     </div>
                     <div className="col-md-4 col-xl-4 col-lg-4">
@@ -325,8 +249,6 @@ const PropertyDetails = ({
                 </div>
             </div>
         </section>
-        
-        <SimilarHomes />
         </>
     )
 }

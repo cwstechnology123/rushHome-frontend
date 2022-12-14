@@ -32,8 +32,8 @@ const PropertyDetails = ({
         slug,
         county,
         city,
-        listPictureURL,
         roomsTotal,
+        listPictureURL,
         listPicture2URL,
         listPicture3URL,
         agent,
@@ -308,7 +308,7 @@ const PropertyDetails = ({
                         <Mortgage price={listPrice}/>
                     </div>
                     <div className="col-md-4 col-xl-4 col-lg-4">
-                        <div className="right_box_listing" id="exTab3">
+                    <div className="right_box_listing" id="exTab3">
                             {(session)? (
                                 <></>
                             ) : (
