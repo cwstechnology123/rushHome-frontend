@@ -227,7 +227,7 @@ const PropertyDetails = ({
                             </div>
                         </div>
                         <PropertyAmenities amenities={amenities} />
-                        {(virtualTourURLUnbranded!='') && <VirtualTour tourLink={virtualTourURLUnbranded} />}
+                        {(virtualTourURLUnbranded!='') && <VirtualTour tourLink={virtualTourURLUnbranded.replace(/^http:\/\//i, 'https://')} />}
                         <PropertyMap address={unparsedAddress} position={geography}/>
                         <Mortgage price={listPrice}/>
                     </div>

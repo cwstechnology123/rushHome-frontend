@@ -71,6 +71,9 @@
 .property-banner-original img, .property-banner-thumbnail, .property-banner-thumbnail span img {
     border-radius: 10px;
 }
+.property-banner-thumbnail span img {
+    max-height: 10vh !important;
+}
 
 /* change border radius for the tab , apply corners on top*/
 #exTab3 .nav-tabs .nav-item .nav-link {
