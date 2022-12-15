@@ -154,6 +154,7 @@ export default function ScheduleTour() {
             <div className="form_wraper_box" id="schedule_box">
                 <form onSubmit={handleSubmit(handleScheduleTour)}>
                     <div className="form-group mb-3">
+
                         {/* <div className="calenter_box">
                             <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow} style={{overflow: 'hidden'}}>
                                 {dates.map((item) => (
@@ -165,7 +166,7 @@ export default function ScheduleTour() {
                                 ))}
                             </ScrollMenu>
                         </div> */}
-                        <input type={'date'} className="form-control" name="schedule_date" id="schedule_date" { ...register('schedule_date') } />
+                        {/* <input type={'date'} className="form-control" name="schedule_date" id="schedule_date" { ...register('schedule_date') } /> */}
                         <span className="text-danger">{errors.schedule_date?.message}</span>
                     </div>
                     <div className="form-group mb-3">

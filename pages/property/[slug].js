@@ -6,13 +6,14 @@ import { IoBedOutline } from "react-icons/io5";
 import PropertyHeader from "../../components/property/PropertyHeader";
 import { apiBaseUrl, fetchApi } from "../../utils/fetchApi";
 import PropertyImages from "../../components/property/PropertyImages";
-import { FaBath } from "react-icons/fa";
+import { FaBath, FaHotTub } from "react-icons/fa";
 import VirtualTour from "../../components/property/VirtualTour";
 import PropertyMap from "../../components/property/PropertyMap";
 import Mortgage from "../../components/property/Mortgage";
 import NonAccount from "./NonAccount";
 import PropertyAgentCard from "../../components/property/PropertyAgentCard";
 import PropertyAmenities from "../../components/property/PropertyAmenities";
+import SimilarHomes from "../../components/property/SimilarHomes";
 
 const PropertyDetails = ({
     propertyDetails: {
@@ -249,6 +250,8 @@ const PropertyDetails = ({
                 </div>
             </div>
         </section>
+
+        <SimilarHomes />
         </>
     )
 }

@@ -8,7 +8,7 @@ export default function PropertyAgentCard({ agent, address }) {
     
     const fetcher = async (payload) => await fetchFubApi(payload).then(res => res.data);
     const { data, error, isLoading, isValidating } = useSWR({url : `${fubApiBaseUrl}/users?role=Agent&email=${agent.listAgentEmail}`, method : 'GET'}, fetcher);
-    console.log(data)
+    // console.log(data)
     if(data && data?.user.length>0){
         const src = data.user.picture.original ?? defaultAgentImage.src;
         return (
