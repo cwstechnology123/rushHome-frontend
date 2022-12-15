@@ -24,7 +24,7 @@ export default function Dashboard() {
                             <h2>Overview</h2>
                             <div className="col-md-12">
                                 <select className="form-select">
-                                <option selected>Last 7 Days</option>
+                                <option>Last 7 Days</option>
                                 <option>...</option>
                                 </select>
                             </div>
