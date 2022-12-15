@@ -26,7 +26,7 @@ export default function Client() {
 
     const onSubmit = async formValue => {
         setIsLoading(true)
-        Notiflix.Loading.standard('Login...');
+        Notiflix.Loading.standard('Please wait...');
         console.log(JSON.stringify(formValue));//print form data to console
         const res = await signIn('credentials',
         {
@@ -62,8 +62,8 @@ export default function Client() {
                     <span style={{ color: 'red' }}>{errors.email?.message}</span>
                 </div>
                 <div className="col-md-12">
-                    <label htmlFor="inputPassword4" className="form-label">Password</label>
-                    <input type="password" {...register("password")}  className={`form-control ${errors.password ? 'is-invalid' : ''}`} id="inputPassword4" placeholder="Enter Password" />
+                    <label htmlFor="inputPassword" className="form-label">Password</label>
+                    <input type="password" {...register("password")}  className={`form-control ${errors.password ? 'is-invalid' : ''}`} id="inputPassword" placeholder="Enter Password" />
                     <span style={{ color: 'red' }}>{errors.password?.message}</span>
                 </div>
                 <div className="forgot_box"><Link href="#">Forgot Password?</Link></div>
