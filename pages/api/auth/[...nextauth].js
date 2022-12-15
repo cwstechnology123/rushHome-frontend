@@ -12,33 +12,50 @@ export const authOptions = {
     }),
     CredentialProvider({
       async authorize(credentials) {
-        const response = await fetch(
-          `${apiBaseUrl}/login`,
+        try {
+          const res = await axios.post(`${apiBaseUrl}/login`,
           {
-            method: "POST",
-            body: JSON.stringify(credentials),
+            password: credentials.password,
+            email: credentials.email
+          },
+          {
             headers: {
-              "Content-Type": "application/json",
-            },
+              accept: '*/*',
+              'Content-Type': 'application/json'
+            }
+          })
+          console.log('next auth',res)
+          if (res && res.data) {
+            return {status: 'success', data: res.data}
           }
-        );
-        const data = await response.json();
-        // Returning token to set in session
-        return {
-            token: data,
-          };
+          else{
+             return res 
+          }
+          
+        } catch (e) {
+          const errorMessage = e.response.data.message
+          // Redirecting to the login page with error message in the URL
+          throw new Error(errorMessage + '&email=' + credentials.email)
+        }
       },
     }),
     // ...add more providers here
   ],
   callbacks: {
-    jwt: async ({ token, user }) => {
-      user && (token.user = user);
-      return token;
+    jwt: async (token, user) => {
+      if (user) {
+        token.jwt = user.token;
+        user.name = user && user.profile?.full_name;
+        token.user = user.profile;
+        token.accessToken = user?.token;
+      }
+      return Promise.resolve(token);
     },
-    session: async ({ session, token }) => {
-      session.user = token.user;  // Setting token in session
-      return session;
+    session: async (session, token) => {
+      session.jwt = token.jwt;
+      session.accessToken = token.accessToken ? token.accessToken :
+      session.user = token.user ? token.user : session.user; 
+      return Promise.resolve(session);
     },
   },
 }

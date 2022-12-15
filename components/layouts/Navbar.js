@@ -59,8 +59,8 @@ export default function Navbar() {
                       Favorites
                     </Link>
                   </li>
-                  <li class="nav-item d-lg-none">
-                    <i class="fa fa-bell-o" aria-hidden="true"></i>
+                  <li className="nav-item d-lg-none">
+                    <i className="fa fa-bell-o" aria-hidden="true"></i>
                     <span></span>
                   </li>
                   <li className="nav-item d-lg-none">
@@ -106,12 +106,12 @@ export default function Navbar() {
                   {(session) ?
                     <>
                       <div className="header-btn">
-                        <div class="bell_box">
-                          <i class="fa fa-bell-o" aria-hidden="true"></i>
+                        <div className="bell_box">
+                          <i className="fa fa-bell-o" aria-hidden="true"></i>
                           <span></span>
                         </div>
                         <div className="profile_wraper">
-                          <button onClick={toggle} type="button" className="btn profile_button style3"><span>{session.user.name.charAt(0)}</span>{session.user.name} <i className="fa fa-angle-down" aria-hidden="true" /></button>
+                          <button onClick={toggle} type="button" className="btn profile_button style3"><span>{session.user.name?session.user.name.charAt(0):'-'}</span>{session.user.name?session.user.name:''} <i className="fa fa-angle-down" aria-hidden="true" /></button>
                             <div className="profile_sub" style={{
                               display: showMe?"block":"none"
                             }}>
