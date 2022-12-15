@@ -6,7 +6,7 @@ export default function PropertyAmenities({ amenities }) {
             <div className="section-title style1 text-left mb-40">
                 <h2>Additional Features</h2>
                 <hr />
-                <div className="offices_wraper">
+                <div className="offices_features">
                     <ul>
                         {(amenities.associationAmenities!="") && amenities.associationAmenities.split(',').map((item, i) => (
                             <li key={`aa-${i}`}>

@@ -58,7 +58,7 @@ export default function LocationMap({
             <div className="card" style={{position: 'absolute', bottom: '20px', left: '20px', borderRadius: '15px'}}>
                 <div className="card-body h-50">
                     <h6 className="card-title">Location</h6>
-                    <small>{address}</small>
+                    <small style={{whiteSpace: 'pre-wrap'}}>{address}</small>
                     
                 </div>
             </div>

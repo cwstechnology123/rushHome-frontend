@@ -31,7 +31,7 @@ export default function PropertyHeader({ price, area, address }) {
         <div className="row my-4">
             <div className="col-6">
                 <h2>{address.fullAddress}</h2>
-                <span>{address.county}, {address.city}</span>
+                <span>{address.county}, {address.city}, {address.stateCode} {address.postalCode}</span>
             </div>
             <div className="col-6 text-right">
                 <h2>{Number(price).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0 })}</h2>

@@ -27,14 +27,14 @@ export default function RequestInfo({ address }) {
             <hr className="my-3" />
             <form className="row g-3" onSubmit={handleSubmit(handleRequestInfo)}>
                 <div className="col-md-12">
-                    <label for="" className="form-label">Full Name</label>
+                    <label htmlFor="" className="form-label">Full Name</label>
                     <input type="text" className="form-control" id="full_name" name="full_name" { ...register('full_name') } />
                     <span className="text-danger">{errors.full_name?.message}</span>
                 </div>
 
                 <div className="col-12">
                     <div className="col-auto">
-                    <label className="form-label" for="phone_code">Phone Number</label>
+                    <label className="form-label" htmlFor="phone_code">Phone Number</label>
                     <div className="input-group">
                         <div className="col-auto">
                             <select className="form-select" name="phone_code" id="phone_code" { ...register('phone_code') }>
@@ -52,14 +52,14 @@ export default function RequestInfo({ address }) {
                 </div>
                 </div>
                 <div className="col-12">
-                    <label for="request_email" className="form-label">Email Address</label>
+                    <label htmlFor="request_email" className="form-label">Email Address</label>
                     <input type="text" className="form-control" id="request_email" name="request_email" placeholder="john.doe@gmail.com" { ...register('request_email') } />
                     <span className="text-danger">{errors.request_email?.message}</span>
                 </div>
 
                 <div className="col-12">
                     <div className="form-group">
-                        <label for="request_message" className="form-label">Message</label>
+                        <label htmlFor="request_message" className="form-label">Message</label>
                         <textarea className="form-control" placeholder="Leave a comment here" name="request_message" id="request_message" style={{height: '100px'}} value={`I would like more information on ${address}`} { ...register('request_message') }/>
                         <span className="text-danger">{errors.request_message?.message}</span>
                     </div>

@@ -14,6 +14,7 @@ import NonAccount from "./NonAccount";
 import PropertyAgentCard from "../../components/property/PropertyAgentCard";
 import PropertyAmenities from "../../components/property/PropertyAmenities";
 import SimilarHomes from "../../components/property/SimilarHomes";
+import AgentOtherDetails from "../../components/property/AgentOtherDetails";
 
 const PropertyDetails = ({
     propertyDetails: {
@@ -24,7 +25,6 @@ const PropertyDetails = ({
         yearBuilt,
         heatingYN,
         listPrice,
-        fullStreetAddress,
         description,
         bedroomsTotal,
         fireplacesTotal,
@@ -35,6 +35,9 @@ const PropertyDetails = ({
         areaTotal,
         county,
         city,
+        postalCode,
+        stateOrProvince,
+        fullStreetAddress,
         standardStatus,
         listPictureURL,
         listPicture2URL,
@@ -48,6 +51,8 @@ const PropertyDetails = ({
     }
 }) => {
     const { data: session } = useSession();
+    // console.log(session)
+
     return (
         <>
         <section className="style3 ptb-50 product_box">
@@ -60,7 +65,9 @@ const PropertyDetails = ({
                             address={{
                                 fullAddress: fullStreetAddress,
                                 county: county,
-                                city: city
+                                city: city,
+                                stateCode: stateOrProvince,
+                                postalCode: postalCode
                             }}
                         />
                         <PropertyImages 
@@ -154,7 +161,7 @@ const PropertyDetails = ({
                                 <hr />
                                 <div className="row">
                                     <div className="col-md-6">
-                                        <table className='table table-borderless table-line'>
+                                        <table className="tabel table-borderless table-line" width={`100%`}>
                                             <tbody>
                                                 <tr>
                                                     <th>Property ID:</th>
@@ -189,7 +196,7 @@ const PropertyDetails = ({
                                         </table>
                                     </div>
                                     <div className="col-md-6">
-                                        <table className='table table-borderless table-line'>
+                                        <table className="tabel table-borderless table-line" width={`100%`}>
                                             <tbody>
                                                 <tr>
                                                     <th>Price:</th>
@@ -227,27 +234,43 @@ const PropertyDetails = ({
                             </div>
                             </div>
                         </div>
-                        <PropertyAmenities amenities={amenities} />
+                        <PropertyAmenities amenities={amenities} />  
                         {(virtualTourURLUnbranded!='') && <VirtualTour tourLink={virtualTourURLUnbranded.replace(/^http:\/\//i, 'https://')} />}
-                        <PropertyMap address={unparsedAddress} position={geography}/>
+                        <PropertyMap address={`${fullStreetAddress}\n${city}, ${stateOrProvince} ${postalCode}`} position={geography}/>
                         <Mortgage price={listPrice}/>
+                                             
+                        
                     </div>
                     <div className="col-md-4 col-xl-4 col-lg-4">
                         <div className="right_box_listing" id="exTab3">
                             {(session)? (
                                 <></>
                             ) : (
-                                <NonAccount address={fullStreetAddress}/>
+                                <NonAccount address={`${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`}/>
                                 )
                             }
                             <PropertyAgentCard 
                                 agent={agent} 
-                                address={unparsedAddress}
+                                address={`${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`}
                             />
-                            
                         </div>
                     </div>
                 </div>
+                {/* {session && (
+                    
+                )}  */}
+                <AgentOtherDetails 
+                    propertyId={id} 
+                    agent={agent} 
+                    address={{
+                        fullAddress: fullStreetAddress,
+                        county: county,
+                        city: city,
+                        stateCode: stateOrProvince,
+                        postalCode: postalCode
+                    }}
+                    position={geography}
+                />
             </div>
         </section>
 

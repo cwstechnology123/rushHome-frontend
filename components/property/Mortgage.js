@@ -72,7 +72,7 @@ export default function Mortgage({ price }) {
 
     return (
         <>
-            <div className="Calculator_box heading_line mt-4">
+            <div className="calculator_box heading_line mt-4">
                 <div className="col-xl-12 col-lg-12">
                     <div className="section-title style1 text-left mb-40">
                         <h2>Mortgage Calculator</h2>
