@@ -1,7 +1,54 @@
 import Link from "next/link";
 import { signIn } from "next-auth/react"
+import { useForm } from "react-hook-form"
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as Yup from 'yup'
+import { useState } from 'react'
+import { useRouter } from "next/router"
+import { apiBaseUrl, fetchApi } from '../utils/fetchApi'
+import { handleSuccess, handleError, handleLoading } from "../utils/notify";
 
 export default function SignUp() {
+    const router = useRouter();
+    const [isLoading, setIsLoading] = useState(false)
+
+    //form validations schema 
+    const signupSchema = Yup.object().shape({
+        full_name: Yup.string().required('Full name is required.'),
+        email: Yup.string().email('Enter valid email id.').required('Email id is required.'),
+        password: Yup.string().required('Password is required.')
+            .matches(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+                "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+            ),
+        confirm_password: Yup.string().required('Confirm password is required.').oneOf([Yup.ref('password')], 'Passwords does not match.'),
+    })
+    //validation schema end
+
+    const formOptions = { resolver: yupResolver(signupSchema) }
+    const { register, formState: { errors }, handleSubmit } = useForm(formOptions);
+
+    //signup submit handler
+    const onSubmit = async formValue => {
+        setIsLoading(true)
+        handleLoading('Please wait...');
+        try{
+            const payload = {url : `${apiBaseUrl}/signup`, method : 'POST', data : formValue}
+            const res = await fetchApi(payload)
+            setIsLoading(false)
+            if (res && res.type == 'error') handleError(res.message)
+            if (res && res.type == 'success') {
+                handleSuccess(res.message)
+                router.push('/auth/client-signin')
+            }
+        } catch (error) {
+            setIsLoading(false)
+            console.log(error)
+            handleError('Something went wrong! Please try again.')
+            return false;
+        };
+    }
+
   return (
     <>
         <section className="pt-50 pb-75 client_sign">
@@ -9,25 +56,29 @@ export default function SignUp() {
                 <div className="heading_login">
                 <h2>Sign Up</h2>
                 </div>
-                <form className="g-3">
+                <form onSubmit={handleSubmit(onSubmit)} className="g-3" autoComplete="off">
                 <div className="col-md-12">
                     <label htmlFor="full_name" className="form-label">Name</label>
-                    <input type="text" className="form-control" id="full_name" placeholder="Full Name" />
+                    <input type="text" className="form-control" {...register("full_name")} id="full_name" placeholder="Full Name" />
+                    <span style={{ color: 'red' }}>{errors.full_name?.message}</span>
                 </div>
                 <div className="col-md-12">
                     <label htmlFor="email" className="form-label">Email</label>
-                    <input type="email" className="form-control" id="email" placeholder="Full Name"/>
+                    <input type="email" className="form-control"  {...register("email")} id="email" placeholder="Email"/>
+                    <span style={{ color: 'red' }}>{errors.email?.message}</span>
                 </div>
                 <div className="col-md-12">
                     <label htmlFor="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="password" placeholder="Create Password" />
+                    <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} {...register("password")} id="password" placeholder="Create Password" />
+                    <span style={{ color: 'red' }}>{errors.password?.message}</span>
                 </div>
                 <div className="col-md-12">
                     <label htmlFor="confirm_password" className="form-label">Confirm Password</label>
-                    <input type="password" className="form-control" id="confirm_password" placeholder="Create Password" />
+                    <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} {...register("confirm_password")} id="confirm_password" placeholder="Confirm Password" />
+                    <span style={{ color: 'red' }}>{errors.confirm_password?.message}</span>
                 </div>
                 <div className="col-md-12 text-center">
-                    <button submit="button" className="btn style1 button_agent">Sign Up</button>
+                    <button type="submit" disabled={isLoading} className="btn style1 button_agent">Sign Up</button>
                 </div>
                 <div className="col-md-12 text-center">
                     <button type="button" className="btn style1 button_agent" onClick={() => signIn("google", { callbackUrl: '/client/dashboard' })}><span className="googleicon"><img src="assets/img/googleicon.png" /></span>Continue with Google</button>

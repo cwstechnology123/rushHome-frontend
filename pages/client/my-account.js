@@ -1,7 +1,10 @@
 import Image from 'next/image'
 import Sidebar from '../../components/client/Sidebar'
+import { useSession, signOut } from "next-auth/react"
 
 export default function MyAccount() {
+    const { data: session } = useSession()
+    console.log(session)
   return (
     <>
         <section className="pt-50 pb-75 myprofile_box">
@@ -40,7 +43,7 @@ export default function MyAccount() {
                                 Linked Accounts
                             </label>
                             <p>Link your account for quicker sign in.</p>
-                            <span> <img src="assets/img/googleicon.png" /> Sign in with Google</span>
+                            <span> <img src="../assets/img/googleicon.png" /> Sign in with Google</span>
                             <button type="submit" className="btn style3 remove_button">Remove</button>
                             </div>
                         </div>
