@@ -61,12 +61,8 @@ export default function ScheduleTour() {
     });
 
     const handleScheduleTour = (data) => {
-        // console.log(data)
-        // reset()
         setSchedule(data);
         setShowmodal(true);
-        // console.log("reqmodal: ",reqmodal)
-        // console.log("showmodal: ",showmodal)
     }
     const handleModalClose = (respond) => {
         if(respond){
@@ -74,7 +70,6 @@ export default function ScheduleTour() {
         }
         setShowmodal(false);
         setSchedule({});
-        //console.log(reqmodal)
         reset();
     }
     const handleRequestModalClose = () => {
@@ -154,19 +149,6 @@ export default function ScheduleTour() {
             <div className="form_wraper_box" id="schedule_box">
                 <form onSubmit={handleSubmit(handleScheduleTour)}>
                     <div className="form-group mb-3">
-
-                        {/* <div className="calenter_box">
-                            <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow} style={{overflow: 'hidden'}}>
-                                {dates.map((item) => (
-                                    <div className="day_box">
-                                        <p>Tue</p>
-                                        <h3>7</h3>
-                                        <p>Mar</p> 
-                                    </div>
-                                ))}
-                            </ScrollMenu>
-                        </div> */}
-                        {/* <input type={'date'} className="form-control" name="schedule_date" id="schedule_date" { ...register('schedule_date') } /> */}
                         <span className="text-danger">{errors.schedule_date?.message}</span>
                     </div>
                     <div className="form-group mb-3">

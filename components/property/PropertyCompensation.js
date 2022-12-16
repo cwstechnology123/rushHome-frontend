@@ -21,7 +21,9 @@ export default function PropertyCompensation({ compensation }) {
                                 <tbody>
                                     <tr>
                                         <td width={'50%'}>Buyer Agency Comp:</td>
-                                        <th width={'50%'} className="text-left">{compensation.buyerAgencyCompensation}{compensation.buyerAgencyCompensationType}</th>
+                                        <th width={'50%'} className="text-left">
+                                        {compensation.buyerAgencyCompensation? (`${compensation.buyerAgencyCompensation}${compensation.buyerAgencyCompensationType}`) : '-'}
+                                        </th>
                                     </tr>
                                     
                                 </tbody>
@@ -32,12 +34,14 @@ export default function PropertyCompensation({ compensation }) {
                                 <tbody>
                                     <tr>
                                         <td width={'50%'}>Sub Agency Comp:</td>
-                                        <th width={'50%'} className="text-left">{compensation.subAgencyCompensation}{compensation.subAgencyCompensationType}</th>
+                                        <th width={'50%'} className="text-left">
+                                        {compensation.subAgencyCompensation? (`${compensation.subAgencyCompensation}${compensation.subAgencyCompensationType}`) : '-'}
+                                        </th>
                                     </tr>
                                     <tr>
                                         <td width={'50%'}>Dual/Var Comm:</td>
                                         <th width={'50%'} className="text-left">
-                                        {compensation.dualVariableCompensationYN!="" && (compensation.dualVariableCompensationYN=='Y'? 'Yes' : 'No')}
+                                        {compensation.dualVariableCompensationYN!=""? (compensation.dualVariableCompensationYN=='Y'? 'Yes' : 'No') : '-'}
                                         </th>
                                     </tr>
                                 </tbody>

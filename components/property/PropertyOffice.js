@@ -21,23 +21,27 @@ export default function PropertyOffice({agent, office}) {
                                         <td width={'25%'}>Listing Agent Email:</td>
                                         <th className="text-left" colSpan={3}>{agent.listAgentEmail}</th>
                                     </tr>
-                                    <tr>
+                                    {/* <tr>
                                         <td width={'25%'}>Responsible Broker</td>
                                         <th className="text-left" colSpan={3}></th>
-                                    </tr>
+                                    </tr> */}
                                     <tr>
                                         <td width={'25%'}>Listing Office:</td>
                                         <th className="text-left" colSpan={3}>{office.listOfficeName}{office.listOfficeMlsId!="" && (` (${office.listOfficeMlsId}) `)}<br />{office.listOfficeCounty}</th>
                                     </tr>
                                     <tr>
                                         <td width={'25%'}>Office Phone:</td>
-                                        <th className="text-left" colSpan={3}>{office.listOfficePhoneExt!="" && (`(${office.listOfficePhoneExt}) `)}{office.listOfficePhone}</th>
+                                        <th className="text-left" colSpan={3}>
+                                        {office.listOfficePhone? (
+                                            `${office.listOfficePhoneExt} ${office.listOfficePhone}`
+                                        ) : '-'}
+                                        </th>
                                     </tr>
                                     <tr>
                                         <td width={'25%'}>Office Email:</td>
-                                        <th className="text-left">{office.listOfficeEmail}</th>
+                                        <th className="text-left">{office.listOfficeEmail? office.listOfficeEmail : '-'}</th>
                                         <td>Office Fax:</td>
-                                        <th className="text-left">{office.listOfficeFax}</th>
+                                        <th className="text-left">{office.listOfficeFax? office.listOfficeFax : '-'}</th>
                                     </tr>
                                 </tbody>
                             </table>

@@ -8,11 +8,12 @@ import PropertyOffice from "./PropertyOffice";
 import PropertyCompensation from "./PropertyCompensation";
 import PropertyOtherDetail from "./PropertyOtherDetail";
 import PropertyMap from "./PropertyMap";
+import PropertyShowing from "./PropertyShowing";
 
-export default function AgentOtherDetails({ propertyId, agent, address, position }) {
+export default function AgentOtherDetails({ propertyId, agent, address, position, directions }) {
     const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
     const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/additional-details/${propertyId }`, method : 'GET'}, fetcher)
-    // console.log("Others: ",location, office, tax, compensation, association, otherDetails, attachment)
+    // console.log("Others: ",location, office, tax, compensation, association, otherDetails, attachment, showing)
 
     if(!data){
         return <PropertyOtherLoader/ >;
@@ -32,6 +33,9 @@ export default function AgentOtherDetails({ propertyId, agent, address, position
                 )}
                 {data.propertyAdditionalDetails.office && (
                     <PropertyOffice office={data.propertyAdditionalDetails.office} agent={agent} />
+                )}
+                {data.propertyAdditionalDetails.showing && (
+                    <PropertyShowing showing={data.propertyAdditionalDetails.showing} office={data.propertyAdditionalDetails.office} directions={directions} />
                 )}
                 {data.propertyAdditionalDetails.compensation && (
                     <PropertyCompensation compensation={data.propertyAdditionalDetails.compensation}/>

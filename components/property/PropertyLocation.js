@@ -22,11 +22,16 @@ const PropertyLocation = ({location, address}) => {
                                 <tbody>
                                     <tr>
                                         <td width={'50%'}>Country:</td>
-                                        <th width={'50%'} className="text-left">{address.county}, {address.stateCode}</th>
+                                        <th width={'50%'} className="text-left">
+                                            {address.county!=""? (
+                                                `${address.county}, ${address.stateCode}`
+                                            ) : '-'}
+                                            
+                                        </th>
                                     </tr>
                                     <tr>
                                         <td width={'50%'}>In City Limit:</td>
-                                        <th width={'50%'} className="text-left">{location.inCityLimitsYN=='Y'? 'Yes' : 'No'}</th>
+                                        <th width={'50%'} className="text-left">{location.inCityLimitsYN!=""? (location.inCityLimitsYN=='Y'? 'Yes' : 'No') : '-'}</th>
                                     </tr>
                                     <tr>
                                         <td width={'50%'}>MLS Area:</td>
@@ -34,11 +39,11 @@ const PropertyLocation = ({location, address}) => {
                                     </tr>
                                     <tr>
                                         <td width={'50%'}>Legal Supervision:</td>
-                                        <th width={'50%'} className="text-left">{location.legalSubdivision}</th>
+                                        <th width={'50%'} className="text-left">{location.legalSubdivision? location.legalSubdivision : '-'}</th>
                                     </tr>
                                     <tr>
                                         <td width={'50%'}>Subdiv/Neigh:</td>
-                                        <th width={'50%'} className="text-left">{location.subdivisionName}</th>
+                                        <th width={'50%'} className="text-left">{location.subdivisionName? location.subdivisionName : '-'}</th>
                                     </tr>
                                 </tbody>
                             </table>
@@ -48,12 +53,12 @@ const PropertyLocation = ({location, address}) => {
                                 <tbody>
                                     <tr>
                                         <td width={'50%'}>School District:</td>
-                                        <th width={'50%'} className="text-left">{location.schoolDistrictName}</th>
+                                        <th width={'50%'} className="text-left">{location.schoolDistrictName? location.schoolDistrictName : '-'}</th>
                                     </tr>
                                     {location.highSchool && (
                                         <tr>
                                             <td width={'50%'}>High School:</td>
-                                            <th width={'50%'} className="text-left">{location.highSchool}</th>
+                                            <th width={'50%'} className="text-left">{location.highSchool? location.highSchool : '-'}</th>
                                         </tr>
                                     )}
                                     {location.middleOrJuniorSchool && (

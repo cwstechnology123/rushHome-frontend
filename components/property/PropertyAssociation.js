@@ -4,6 +4,7 @@ export default function PropertyAssociation({association}) {
     //     "associationYN": "Y",
     //     "associationFee": "220.00",
     //     "associationFeeFrequency": "Semi-Annually"
+    //      associationFeeIncludes
     // }
     return (
         <div className="location_box heading_line">
@@ -17,11 +18,11 @@ export default function PropertyAssociation({association}) {
                                 <tbody>
                                     <tr>
                                         <td width={'50%'}>HOA:</td>
-                                        <th width={'50%'} className="text-left">{association.associationYN && (association.associationYN=='Y'? 'Yes' : 'No')}</th>
+                                        <th width={'50%'} className="text-left">{association.associationYN!=""? (association.associationYN=='Y'? 'Yes' : 'No') : '-'}</th>
                                     </tr>
                                     <tr>
                                         <td width={'50%'}>Association Fee Inc.:</td>
-                                        <th width={'50%'} className="text-left">Unknown Fee</th>
+                                        <th width={'50%'} className="text-left">{association.associationFeeIncludes? association.associationFeeIncludes : '-'}</th>
                                     </tr>
                                 </tbody>
                             </table>
@@ -35,7 +36,7 @@ export default function PropertyAssociation({association}) {
                                         {association.associationFee && (
                                             Number(association.associationFee).toLocaleString('en-US', { style: 'currency', currency: 'USD'})
                                         )}
-                                        {association.associationFeeFrequency && (`/${association.associationFeeFrequency}`)}
+                                        {association.associationFeeFrequency!=""? (`/${association.associationFeeFrequency}`) : '-'}
                                         </th>
                                     </tr>
                                 </tbody>

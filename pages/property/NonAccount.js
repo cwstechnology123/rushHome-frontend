@@ -8,8 +8,8 @@ export default function NonAccount({ address }) {
         <>
         <div id="exTab3">	
             <ul className="nav nav-tabs nav-justified">
-                <li className="nav-item"><button type="button" className={`nav-link ${activeTab==='schedule-tour'? 'active' : ''}`} data-toggle="tab" href="javascript:;" onClick={()=>setActiveTab('schedule-tour')}><div>Schedule Tour</div></button></li>
-                <li className="nav-item"><button type="button" className={`nav-link ${activeTab==='request-info'? 'active' : ''}`} data-toggle="tab" href="javascript:;" onClick={()=>setActiveTab('request-info')}><div>Request Info</div></button></li>
+                <li className="nav-item"><button type="button" className={`nav-link ${activeTab==='schedule-tour'? 'active' : ''}`} data-toggle="tab" onClick={()=>setActiveTab('schedule-tour')}><div>Schedule Tour</div></button></li>
+                <li className="nav-item"><button type="button" className={`nav-link ${activeTab==='request-info'? 'active' : ''}`} data-toggle="tab" onClick={()=>setActiveTab('request-info')}><div>Request Info</div></button></li>
             </ul>
 
             <div className="tab-content clearfix">

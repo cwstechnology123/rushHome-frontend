@@ -39,7 +39,7 @@
 
 .carousel-left-indicator {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 0px;
     background: #fff;
     height: 40px;
@@ -52,7 +52,7 @@
 }
 .carousel-right-indicator {
     position: absolute;
-    top: 50%;
+    top: 45%;
     right: 0px;
     background: #fff;
     height: 40px;
@@ -165,8 +165,6 @@
     border-radius: 5px !important;
 }
 
-
-
 .cluster-marker {
     color: #fff;
     background: #1978c8;
@@ -188,46 +186,39 @@
     font-weight: 600;
 }
 .price-tag {
-/* background-color: #4285F4;
-border-radius: 8px;
-color: #FFFFFF;
-font-size: 14px;
-padding: 10px 15px; */
-position: relative;
-right: 0%;
-top: 50%;
-transform: translate(-50%, -100%);
-
-display: flex;
--webkit-box-align: stretch;
-align-items: stretch;
--webkit-box-pack: center;
-justify-content: center;
-/* border: 1px solid rgb(57,125,100); */
-border: 1px solid #000;
-border-radius: 4px;
-padding: 5px 10px;
-min-width: 48px;
-width: max-content;
-font-weight:  500;
-font-size: 12px;
-color: #FCCF67;
-background-color: #000;
-text-rendering: auto;
-cursor: pointer;
+    position: relative;
+    right: 0%;
+    top: 50%;
+    transform: translate(-50%, -100%);
+    display: flex;
+    -webkit-box-align: stretch;
+    align-items: stretch;
+    -webkit-box-pack: center;
+    justify-content: center;
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 5px 10px;
+    min-width: 48px;
+    width: max-content;
+    font-weight:  500;
+    font-size: 12px;
+    color: #FCCF67;
+    background-color: #000;
+    text-rendering: auto;
+    cursor: pointer;
 }
 
 .price-tag::after {
-content: "";
-position: absolute;
-left: 50%;
-top: 100%;
-transform: translate(-50%, 0);
-width: 0;
-height: 0;
-border-left: 4px solid transparent;
-border-right: 4px solid transparent;
-border-top: 8px solid #000;
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, 0);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 8px solid #000;
 }
 
 [class$=api-load-alpha-banner] {
@@ -235,25 +226,90 @@ display: none;
 }
 
 .popup-bubble {
-/* Position the bubble centred-above its parent. */
-position: absolute;
-top: 0;
-left: 0;
-transform: translate(-50%, -130%);
-/* Style the bubble. */
-background-color: white;
-padding: 5px;
-border-radius: 5px;
-font-family: sans-serif;
-/* overflow-y: auto;
-max-height: 60px; */
-box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -130%);
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
 }
 .popup-container {
-cursor: auto;
-height: 0;
-position: absolute;
-/* The max width of the info window. */
-width: 300px;
+    cursor: auto;
+    height: 0;
+    position: absolute;
+    width: 300px;
 }
   
+/* ------------------about page------------------------- */
+.state_tabs .list-group .list-group-block {
+    margin-right: 2em;
+}
+
+.state_tabs .list-group .list-group-block button{
+    text-transform: uppercase;
+    color: #aeaeae;
+    background-color: #f6f6f6;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 15px;
+    border-color: #f6f6f6;
+    font-weight: 500;
+}
+
+/* ---------------listing page---------------- */
+.client_factsicons ul{
+    list-style: none;
+    column-count: 2;
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    -o-column-count: 2;
+    width: 100%;
+    padding: 0;
+}
+.client_factsicons ul li {
+    display: inline-flex;
+    margin-bottom: 20px;
+}
+.client_factsicons ul li .icon-box {
+    width: 60px;
+    height: 60px;
+    background-color: #eee;
+    padding: 12px;
+    border-radius: 15px;
+    float: left;
+    margin-right: 15px;
+}
+.client_factsicons ul li .icon-box > svg {
+    font-size: 35px;
+    color: #000;
+}
+.client_factsicons ul li .icon-facts>h3 {
+    font-size: 18px;
+    font-weight: normal;
+    color: #000;
+}
+/* .client_factsicons ul li span {
+    float: left;
+    width: 20%;
+    font-size: 26px;
+    text-align: center;
+    padding: 9px 7px;
+    background: #f1f1f1;
+    margin: 14px 0;
+    border-radius: 10px;
+}
+.client_factsicons ul li p {
+    float: right;
+    width: 80%;
+    padding: 0px 10px;
+}
+.client_factsicons ul li h3 {
+    float: right;
+    width: 80%;
+    font-size: 18px;
+    font-weight: normal;
+    padding: 0px 10px;
+} */

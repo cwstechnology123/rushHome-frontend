@@ -1,9 +1,25 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react';
 
 export default function AboutUs() {
+  const router = useRouter();
+  
+  const handleScrollTo = (sectionId) => {
+    document.getElementById(sectionId)?.scrollIntoView({behavior:"smooth", block: "start", inline:"nearest"})
+  }
+  
+  useEffect(() => {
+    if(router.query?.link){
+      if(router.query.link === 'become-an-agent'){
+        handleScrollTo('join_us');
+      }
+    }
+  }, [router])
+
   return (
     <>
-      <section className="pt-50 pb-75 text-center citybanner_box">
+      <section className="pb-75 text-center citybanner_box">
         <img src="assets/img/city_banner.jpg" />
         <div className="container">
           <div className="welcome_box">
@@ -14,27 +30,20 @@ export default function AboutUs() {
                 <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut lab </p>
                 <span>JUMP TO</span>
                 <div className="state_tabs">
-                  <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                    <li className="nav-item" role="presentation">
-                      <button className="btn style1" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">All</button>
-                    </li>
-                    <li className="nav-item" role="presentation">
-                      <button className="btn style1" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Delaware</button>
-                    </li>
-                    <li className="nav-item" role="presentation">
-                      <button className="btn style1" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Maryland</button>
-                    </li>
-                    <li className="nav-item" role="presentation">
-                      <button className="btn style1" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Pennsylvania</button>
-                    </li>
+                  <ul className="list-group list-group-horizontal">
+                    <li className="list-group-block"><button type="button" className='btn' onClick={()=>handleScrollTo('service')}>service</button></li>
+                    <li className="list-group-block"><button type="button" className='btn' onClick={()=>handleScrollTo('leadership')}>leadership</button></li>
+                    <li className="list-group-block"><button type="button" className='btn' onClick={()=>handleScrollTo('office_location')}>office location</button></li>
+                    <li className="list-group-block"><button type="button" className='btn' onClick={()=>handleScrollTo('join_us')}>work with us</button></li>
                   </ul>
+
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <section className="advantage-wrap ptb-50 bg-seashell property_wraper">
+      <section className="advantage-wrap ptb-50 bg-seashell property_wraper" id="service">
         <div className="container">
           <div className="col-xl-8 col-lg-8 offset-xl-2 offset-lg-2">
             <div className="section-title style2 text-center mb-40">
@@ -80,7 +89,7 @@ export default function AboutUs() {
           </div>
         </div>
       </section>
-      <section className="advantage-wrap ptb-50 bg-seashell property_wraper">
+      <section className="advantage-wrap ptb-50 bg-seashell property_wraper" id="leadership">
         <div className="container">
           <div className="col-xl-8 col-lg-8 offset-xl-2 offset-lg-2">
             <div className="section-title style2 text-center mb-40">
@@ -126,7 +135,7 @@ export default function AboutUs() {
           </div>
         </div>
       </section>
-      <section className="hw-wrap pt-100 pb-75 contact_box">
+      <section className="hw-wrap pt-100 pb-75 contact_box" id="office_location">
         <div className="container">
           <div className="row">
             <div className="col-xl-10 col-lg-10 offset-xl-1 offset-lg-1">
@@ -179,7 +188,7 @@ export default function AboutUs() {
           </iframe>
         </div>
       </section>
-      <section className="hw-wrap pt-50 pb-75 whychoose_wraper join_team">
+      <section className="hw-wrap pt-50 pb-75 whychoose_wraper join_team" id="join_us">
         <div className="container">
           <div className="row">
             <div className="col-xl-10 col-lg-10 offset-xl-1 offset-lg-1">
@@ -191,7 +200,7 @@ export default function AboutUs() {
             </div>
           </div>
           <div className="col-md-12 text-center">
-            <button type="button" className="btn style1 button_custom">Join Our Team</button>
+            <a href="https://join.rushhome.com/" target="_blank" className="btn style1 button_custom">Join Our Team</a>
           </div>
           <div className="row justify-content-center">
             <div className="col-xxl-8 col-xl-8 col-lg-8 col-md-8">

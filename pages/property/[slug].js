@@ -15,6 +15,7 @@ import PropertyAgentCard from "../../components/property/PropertyAgentCard";
 import PropertyAmenities from "../../components/property/PropertyAmenities";
 import SimilarHomes from "../../components/property/SimilarHomes";
 import AgentOtherDetails from "../../components/property/AgentOtherDetails";
+import ClientBox from "./ClientBox";
 
 const PropertyDetails = ({
     propertyDetails: {
@@ -47,7 +48,8 @@ const PropertyDetails = ({
         geography,
         unparsedAddress,
         amenities,
-        agent
+        agent,
+        directions
     }
 }) => {
     const { data: session } = useSession();
@@ -59,17 +61,19 @@ const PropertyDetails = ({
             <div className="container">
                 <div className="row justify-content-between">
                     <div className="col-md-8 col-xl-8 col-lg-8">
-                        <PropertyHeader 
-                            price={listPrice}
-                            area={pricePerSquareFoot}
-                            address={{
-                                fullAddress: fullStreetAddress,
-                                county: county,
-                                city: city,
-                                stateCode: stateOrProvince,
-                                postalCode: postalCode
-                            }}
-                        />
+                        {!session && (
+                            <PropertyHeader 
+                                price={listPrice}
+                                area={pricePerSquareFoot}
+                                address={{
+                                    fullAddress: fullStreetAddress,
+                                    county: county,
+                                    city: city,
+                                    stateCode: stateOrProvince,
+                                    postalCode: postalCode
+                                }}
+                            />
+                        )}
                         <PropertyImages 
                             defaulImages={{
                                 picture3URL: listPicture3URL,
@@ -156,99 +160,111 @@ const PropertyDetails = ({
                         </div>
                         <div className="factfeature_box heading_line">
                             <div className="col-xl-12 col-lg-12">
-                            <div className="section-title style1 text-left mb-40">
-                                <h2>Additional Details</h2>
-                                <hr />
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <table className="tabel table-borderless table-line" width={`100%`}>
-                                            <tbody>
-                                                <tr>
-                                                    <th>Property ID:</th>
-                                                    <td className="text-left">{listingId}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Property Type:</th>
-                                                    <td className="text-left">{propertyType}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Rooms:</th>
-                                                    <td className="text-left">{roomsTotal}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Size:</th>
-                                                    <td className="text-left">{areaTotal} SqFt</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Garage:</th>
-                                                    <td className="text-left">{totalGarageAndParkingSpaces}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Garage Size:</th>
-                                                    <td className="text-left">{garageSpaces} SqFt</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Year Build:</th>
-                                                    <td className="text-left">{yearBuilt}</td>
-                                                </tr>
-                                            </tbody>
-                                            
-                                        </table>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <table className="tabel table-borderless table-line" width={`100%`}>
-                                            <tbody>
-                                                <tr>
-                                                    <th>Price:</th>
-                                                    <td className="text-left">{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0 })}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Property Status:</th>
-                                                    <td className="text-left">For Sale</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Bedrooms:</th>
-                                                    <td className="text-left">{bedroomsTotal}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Bathrooms:</th>
-                                                    <td className="text-left">{bathroomsTotalInteger}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Fireplace:</th>
-                                                    <td className="text-left">{fireplacesTotal}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Bath Size:</th>
-                                                    <td className="text-left">50 SqFt</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Label:</th>
-                                                    <td className="text-left">Bestseller</td>
-                                                </tr>
-                                            </tbody>
-                                            
-                                        </table>
+                                <div className="section-title style1 text-left mb-40">
+                                    <h2>Additional Details</h2>
+                                    <hr />
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <table className="tabel table-borderless table-line" width={`100%`}>
+                                                <tbody>
+                                                    <tr>
+                                                        <th width={'50%'}>Property ID:</th>
+                                                        <td width={'50%'} className="text-left">{listingId}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width={'50%'}>Property Type:</th>
+                                                        <td width={'50%'} className="text-left">{propertyType}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width={'50%'}>Rooms:</th>
+                                                        <td width={'50%'} className="text-left">{roomsTotal? roomsTotal : '-'}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width={'50%'}>Size:</th>
+                                                        <td width={'50%'} className="text-left">{areaTotal? areaTotal : '-'} SqFt</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width={'50%'}>Garage:</th>
+                                                        <td width={'50%'} className="text-left">{totalGarageAndParkingSpaces? totalGarageAndParkingSpaces : '-'}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width={'50%'}>Garage Size:</th>
+                                                        <td width={'50%'} className="text-left">{garageSpaces? garageSpaces : '-'} SqFt</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width={'50%'}>Year Build:</th>
+                                                        <td width={'50%'} className="text-left">{yearBuilt}</td>
+                                                    </tr>
+                                                </tbody>
+                                                
+                                            </table>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <table className="tabel table-borderless table-line" width={`100%`}>
+                                                <tbody>
+                                                    <tr>
+                                                        <th width={'50%'}>Price:</th>
+                                                        <td width={'50%'} className="text-left">{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0 })}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width={'50%'}>Property Status:</th>
+                                                        <td width={'50%'} className="text-left">For Sale</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width={'50%'}>Bedrooms:</th>
+                                                        <td width={'50%'} className="text-left">{bedroomsTotal? bedroomsTotal : '-'}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width={'50%'}>Bathrooms:</th>
+                                                        <td width={'50%'} className="text-left">{bathroomsTotalInteger? bathroomsTotalInteger : '-'}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width={'50%'}>Fireplace:</th>
+                                                        <td width={'50%'} className="text-left">{fireplacesTotal? fireplacesTotal : '-'}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width={'50%'}>Bath Size:</th>
+                                                        <td width={'50%'} className="text-left">50 SqFt</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width={'50%'}>Label:</th>
+                                                        <td width={'50%'} className="text-left">Bestseller</td>
+                                                    </tr>
+                                                </tbody>
+                                                
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            </div>
                         </div>
                         <PropertyAmenities amenities={amenities} />  
-                        {(virtualTourURLUnbranded!='') && <VirtualTour tourLink={virtualTourURLUnbranded.replace(/^http:\/\//i, 'https://')} />}
+                        {(virtualTourURLUnbranded!='') && <VirtualTour tourLink={virtualTourURLUnbranded?.replace(/^http:\/\//i, 'https://')} />}
                         <PropertyMap address={`${fullStreetAddress}\n${city}, ${stateOrProvince} ${postalCode}`} position={geography}/>
                         <Mortgage price={listPrice}/>
-                                             
-                        
                     </div>
                     <div className="col-md-4 col-xl-4 col-lg-4">
                         <div className="right_box_listing" id="exTab3">
                             {(session)? (
-                                <></>
+                                <>
+                                
+                                </>
                             ) : (
                                 <NonAccount address={`${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`}/>
                                 )
                             }
+                            <ClientBox 
+                                type={propertyType}
+                                price={listPrice}
+                                pricearea={pricePerSquareFoot}
+                                address={unparsedAddress}
+                                amenity={{
+                                    beds: bedroomsTotal,
+                                    baths: bathroomsTotalInteger,
+                                    garages: totalGarageAndParkingSpaces,
+                                    area: areaTotal
+                                }}
+                            />
                             <PropertyAgentCard 
                                 agent={agent} 
                                 address={`${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`}
@@ -270,6 +286,7 @@ const PropertyDetails = ({
                         postalCode: postalCode
                     }}
                     position={geography}
+                    directions={directions}
                 />
             </div>
         </section>

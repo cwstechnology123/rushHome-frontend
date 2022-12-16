@@ -79,7 +79,7 @@ export default function Navbar() {
                           <Link href="/find-an-agent" className={"nav-link" + (router.pathname == '/find-an-agent' ? " active" : "")}>Find an Agent</Link>
                         </li>
                         <li className="nav-item">
-                          <Link href="#" className={"nav-link" + (router.pathname == '/become-an-agent' ? " active" : "")}>Become and Agent</Link>
+                          <Link href={{pathname: 'about-us', query: {link: 'become-an-agent'}}} className={"nav-link"}>Become and Agent</Link>
                         </li>
                       </ul>
                     </li>

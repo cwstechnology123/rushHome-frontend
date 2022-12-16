@@ -21,26 +21,28 @@ const PropertyCard = ({
       fullStreetAddress
     },
   }) => {
-    const [srcimg, setSrcimg] = useState(listPictureURL);
+    const [srcimg, setSrcimg] = useState(listPictureURL.replace(/^http:\/\//i, 'https://'));
     return (
-        <div className="property-card style3">
-            <div className="property-img">
-                <img key={`image_${id}`} src={srcimg} onError={()=>setSrcimg(defaultProperty.src)} alt="Image" />
-                <span className="property-status">Exclusive</span>
-            </div>
-            <div className="property-info">
-                <div className="property-status-wrap">
-                <p className="property-price">${Number(listPrice).toLocaleString('en-US')}</p>
+        <Link href={`/property/${slug}`}>
+            <div className="property-card style3">
+                <div className="property-img">
+                    <img key={`image_${id}`} src={srcimg} onError={()=>setSrcimg(defaultProperty.src)} alt="Image" />
+                    <span className="property-status">Exclusive</span>
                 </div>
-                <h3><Link href={`/property/${slug}`}>{fullStreetAddress?fullStreetAddress:ucfirst(county)}</Link></h3>
-                <ul className="property-metainfo list-style">
-                    <li key={`bed${id}`}><i className="flaticon-double-bed" />{bedroomsTotal} Br</li>
-                    <li key={`bath${id}`}><i className="flaticon-bath-tub" />{bathroomsTotal} Ba</li>
-                    <li key={`square${id}`}><i className="flaticon-square" />{areaTotal} Sq.Ft</li>
-                    <li key={`home${id}`}><i className="flaticon-home" />{garageSpaces} Gr</li>
-                </ul>
+                <div className="property-info">
+                    <div className="property-status-wrap">
+                    <p className="property-price">${Number(listPrice).toLocaleString('en-US')}</p>
+                    </div>
+                    <h3>{fullStreetAddress?fullStreetAddress:ucfirst(county)}</h3>
+                    <ul className="property-metainfo list-style">
+                        <li key={`bed${id}`}><i className="flaticon-double-bed" />{bedroomsTotal} Br</li>
+                        <li key={`bath${id}`}><i className="flaticon-bath-tub" />{bathroomsTotal} Ba</li>
+                        <li key={`square${id}`}><i className="flaticon-square" />{areaTotal} Sq.Ft</li>
+                        <li key={`home${id}`}><i className="flaticon-home" />{garageSpaces} Gr</li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        </Link>
     )
 }
 export default PropertyCard
