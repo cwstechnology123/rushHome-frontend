@@ -51,7 +51,7 @@ export const authOptions = {
     async session({ session, token }) {
       session.user.accessToken = token.accessToken;
       session.user.refreshToken = token.refreshToken;
-      session.user.accessTokenExpires = token.accessTokenExpires;
+      session.user.role = "client";
 
       return session;
     },
