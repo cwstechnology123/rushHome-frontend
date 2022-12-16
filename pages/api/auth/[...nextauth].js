@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialProvider from "next-auth/providers/credentials";
-import { apiBaseUrl } from '../../../utils/fetchApi'
+import { apiBaseUrl, fetchApi } from '../../../utils/fetchApi'
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -11,25 +11,20 @@ export const authOptions = {
         clientSecret: process.env.GOOGLE_SECRET,
     }),
     CredentialProvider({
+      name:"Client Login",
       async authorize(credentials) {
         try {
-          const res = await axios.post(`${apiBaseUrl}/login`,
-          {
-            password: credentials.password,
-            email: credentials.email
-          },
-          {
-            headers: {
-              accept: '*/*',
-              'Content-Type': 'application/json'
-            }
-          })
-          console.log('next auth',res)
+          const payload = {url : `${apiBaseUrl}/login`, method : 'POST', data : {email : credentials.email, password : credentials.password}}
+          const res = await fetchApi(payload)
           if (res && res.data) {
-            return {status: 'success', data: res.data}
+            const profile = res.data?.profile;
+            const name = profile?.full_name;
+            const userRole = profile && profile.user_type == 0 ? "agent" : "client"
+            const user = { id: profile.id, name: name, email: profile.email, userRole: userRole, accessToken : res.data.token }
+            return user
           }
           else{
-             return res 
+            return res.message 
           }
           
         } catch (e) {
@@ -42,20 +37,23 @@ export const authOptions = {
     // ...add more providers here
   ],
   callbacks: {
-    jwt: async (token, user) => {
-      if (user) {
-        token.jwt = user.token;
-        user.name = user && user.profile?.full_name;
-        token.user = user.profile;
-        token.accessToken = user?.token;
+    async jwt({ token, user, account }) {
+      if (account && user) {
+        return {
+          ...token,
+          accessToken: user.token,
+          refreshToken: user.refreshToken,
+        };
       }
-      return Promise.resolve(token);
+
+      return token;
     },
-    session: async (session, token) => {
-      session.jwt = token.jwt;
-      session.accessToken = token.accessToken ? token.accessToken :
-      session.user = token.user ? token.user : session.user; 
-      return Promise.resolve(session);
+    async session({ session, token }) {
+      session.user.accessToken = token.accessToken;
+      session.user.refreshToken = token.refreshToken;
+      session.user.accessTokenExpires = token.accessTokenExpires;
+
+      return session;
     },
   },
 }

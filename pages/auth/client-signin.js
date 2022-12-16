@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import { useState } from 'react'
 import { useRouter } from "next/router"
-import Notiflix from 'notiflix'
+import { handleSuccess, handleError, handleLoading } from "../../utils/notify";
 
 export default function Client() {
     const router = useRouter();
@@ -22,30 +22,27 @@ export default function Client() {
     //validation schema end
 
     const formOptionsLogin = { resolver: yupResolver(loginSchema) }
-    const { register, formState: { errors }, handleSubmit, } = useForm(formOptionsLogin);
+    const { register, formState: { errors }, handleSubmit } = useForm(formOptionsLogin);
 
     const onSubmit = async formValue => {
         setIsLoading(true)
-        Notiflix.Loading.standard('Please wait...');
+        handleLoading('Please wait...');
         console.log(JSON.stringify(formValue));//print form data to console
         const res = await signIn('credentials',
-        {
-            email : formValue.email,
-            password : formValue.password,
-            callbackUrl: `${window.location.origin}/client/dashboard`,
-            redirect: false,
-        }
+            {
+                email : formValue.email,
+                password : formValue.password,
+                callbackUrl: `${window.location.origin}/client/dashboard`,
+                redirect: false,
+            }
         )
         console.log('resss',res)
-        if (res?.error) handleError(res.error)
-        if (res.url) router.push(res.url);
-    }
-
-    const handleError = (err) => {
-        console.log(err)
         setIsLoading(false)
-        Notiflix.Loading.remove();
-        Notiflix.Notify.failure('Please enter valid credentials');
+        if (res?.error) handleError(res.error)
+        if (res.url) {
+            handleSuccess("Login Successfully!")
+            router.push(res.url)
+        }
     }
 
     return (
@@ -55,7 +52,7 @@ export default function Client() {
                 <div className="heading_login">
                 <h2>Sign In</h2>
                 </div>
-                <form onSubmit={handleSubmit(onSubmit)} className="g-3">
+                <form onSubmit={handleSubmit(onSubmit)} className="g-3" autoComplete="off">
                 <div className="col-md-12">
                     <label htmlFor="inputEmail4" className="form-label">Email</label>
                     <input type="email" {...register("email")} className="form-control" id="inputEmail4" placeholder="Enter Email" />
@@ -68,7 +65,7 @@ export default function Client() {
                 </div>
                 <div className="forgot_box"><Link href="#">Forgot Password?</Link></div>
                 <div className="col-md-12 text-center">
-                    <button type="submit" disabled={isLoading}  className="btn style1 button_agent">Login</button>
+                    <button type="submit" disabled={isLoading} className="btn style1 button_agent">Login</button>
                 </div>
                 <div className="col-md-12 text-center">
                     <button type="button" className="btn style1 button_agent" onClick={() => signIn("google", { callbackUrl: '/client/dashboard' })}><span className="googleicon"><img src="../../assets/img/googleicon.png" /></span>Continue with Google</button>

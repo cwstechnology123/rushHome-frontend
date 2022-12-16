@@ -20,6 +20,8 @@ export default function Navbar() {
       router.push(path)
     }
     else if (path === "/signout") {
+      toggle()
+      localStorage.removeItem('user')
       const data = await signOut({redirect: false, callbackUrl: "/"})
       router.push(data.url)
     }

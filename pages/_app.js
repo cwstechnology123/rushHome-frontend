@@ -7,7 +7,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 function MyApp({  Component,  pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session}>
-      <NextNProgress color="#29D" startPosition={0.3} stopDelayMs={50} height={3} showOnShallow={true} />
+      <NextNProgress color="#29D" startPosition={0.3} stopDelayMs={50} height={3} showOnShallow={true}  options={{ showSpinner: false }} />
       <Layout>
         <Component {...pageProps} />
       </Layout>
