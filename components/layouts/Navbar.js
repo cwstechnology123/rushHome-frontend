@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from "next/router";
 import { useSession, signOut } from "next-auth/react"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
   const { data: session } = useSession()
@@ -26,6 +26,14 @@ export default function Navbar() {
       router.push(data.url)
     }
   };
+
+  useEffect(() => {
+    if(showMe){
+      setShowMe(false)
+      setShowMe(false)
+    }
+  }, [router]);
+
   return (
     <>
         <header className="header-wrap">
