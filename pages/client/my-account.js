@@ -5,8 +5,6 @@ import { useSession, signOut } from "next-auth/react"
 export default function MyAccount() {
     const { data: session } = useSession()
     console.log(session)
-    const profile = localStorage.getItem('user')
-    console.log(profile)
   return (
     <>
         <section className="pt-50 pb-75 myprofile_box">
