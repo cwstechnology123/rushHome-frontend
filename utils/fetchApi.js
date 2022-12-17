@@ -8,7 +8,7 @@ export const fetchApi = async (payload) => {
   if(payload.accessToken) {
     headers["authorization"] = `Bearer ${payload.accessToken}`;
   }
-  console.log(headers,data);
+  // console.log(headers,data);
   let options = {}
   options.method = payload.method;
   options.headers = headers;

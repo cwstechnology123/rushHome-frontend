@@ -21,17 +21,18 @@ const PropertyCard = ({
       fullStreetAddress
     },
   }) => {
-    const [srcimg, setSrcimg] = useState(listPictureURL.replace(/^http:\/\//i, 'https://'));
+    // const [srcimg, setSrcimg] = useState(listPictureURL.replace(/^http:\/\//i, 'https://'));
+    const src = listPictureURL? listPictureURL.replace(/^http:\/\//i, 'https://') : defaultProperty.src;
     return (
         <Link href={`/property/${slug}`}>
             <div className="property-card style3">
                 <div className="property-img">
-                    <img key={`image_${id}`} src={srcimg} onError={()=>setSrcimg(defaultProperty.src)} alt="Image" />
+                    <img key={`image_${id}`} src={src} alt="Image" />
                     <span className="property-status">Exclusive</span>
                 </div>
                 <div className="property-info">
                     <div className="property-status-wrap">
-                    <p className="property-price">${Number(listPrice).toLocaleString('en-US')}</p>
+                    <p className="property-price">{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0 })}</p>
                     </div>
                     <h3>{fullStreetAddress?fullStreetAddress:ucfirst(county)}</h3>
                     <ul className="property-metainfo list-style">

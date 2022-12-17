@@ -1,19 +1,28 @@
 
 import * as yup from "yup";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
+import PhoneInput from "react-phone-number-input";
+import 'react-phone-number-input/style.css'
+import { isValidPhoneNumber } from "react-phone-number-input";
+import { isPossiblePhoneNumber } from "react-phone-number-input";
 
-export default function RequestInfo({ address }) {
+export default function RequestInfo({ address, onInit }) {
     const schema = yup.object().shape({
-        phone_code: yup.string().required().label('Phone Code'),
-        full_name: yup.string().required().label('Full Name'),
-        request_email: yup.string().email().required().label('Email Address'),
-        request_phone: yup.string().required().matches(
-            /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-            "Enter a valid phone number"
-        ).label('Phone Number'),
+        // phone_code: yup.string().required().label('Phone Code'),
+        full_name: yup.string().required("Please enter your fullname").label('Full Name'),
+        request_email: yup.string().email().required("Please enter your email address").label('Email Address'),
+        request_phone: yup.string().required(({value}) => {
+            // console.log("Val:", value);
+            if(!value || value?.length === 0){
+                return "Please enter your phone number";
+            }else if((typeof value === 'string') && (isPossiblePhoneNumber(value) === false)){
+                return "Please enter valid phone number";
+            }
+        }).label('Phone Number'),
     });
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    const { register, handleSubmit, formState: { errors }, reset, control } = useForm({
         resolver: yupResolver(schema),
     });
 
@@ -21,8 +30,13 @@ export default function RequestInfo({ address }) {
         console.log(data)
         reset();
     }
+    useEffect(()=>{
+        if(onInit){
+            reset()
+        }
+    }, [onInit]);
     return (
-        <>
+        <div className="form_wraper_box container">
             <h5 className="text-center">Request more information</h5>
             <hr className="my-3" />
             <form className="row g-3" onSubmit={handleSubmit(handleRequestInfo)}>
@@ -34,22 +48,36 @@ export default function RequestInfo({ address }) {
 
                 <div className="col-12">
                     <div className="col-auto">
-                    <label className="form-label" htmlFor="phone_code">Phone Number</label>
-                    <div className="input-group">
-                        <div className="col-auto">
-                            <select className="form-select" name="phone_code" id="phone_code" { ...register('phone_code') }>
-                                <option value=""></option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-
-                        <input type="text" className="form-control" name="request_phone" id="request_phone" placeholder="414-266-9847" { ...register('request_phone') } />
+                        <label className="form-label" htmlFor="phone_code">Phone Number</label>
+                        <Controller
+                            name="request_phone"
+                            control={control}
+                            className="form-control"
+                            { ...register('request_phone') }
+                            render={({ field: { onChange, value } }) => (
+                                <PhoneInput
+                                    placeholder="414-266-9847"
+                                    defaultCountry="US"
+                                    value={value}
+                                    onChange={onChange}
+                                    id="request_phone"
+                                />
+                            )}
+                        />
                         
+                        {/* <div className="input-group">
+                            <div className="col-auto">
+                                <select className="form-select" name="phone_code" id="phone_code" { ...register('phone_code') }>
+                                    <option value=""></option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <input type="text" className="form-control" name="request_phone" id="request_phone" placeholder="414-266-9847" { ...register('request_phone') } />
+                        </div> */}
+                        <span className="text-danger">{errors.phone_code?.message || errors.request_phone?.message}</span>
                     </div>
-                    <span className="text-danger">{errors.phone_code?.message || errors.request_phone?.message}</span>
-                </div>
                 </div>
                 <div className="col-12">
                     <label htmlFor="request_email" className="form-label">Email Address</label>
@@ -72,6 +100,6 @@ export default function RequestInfo({ address }) {
                 </div>
 
             </form>
-        </>
+        </div>
     )
 }

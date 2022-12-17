@@ -1,6 +1,6 @@
 
 export default function PropertyAmenities({ amenities }) {
-    console.log(amenities)
+    // console.log(amenities)
     return (
         <div className="offices_box heading_line">
             <div className="section-title style1 text-left mb-40">

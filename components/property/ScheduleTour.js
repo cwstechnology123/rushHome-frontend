@@ -1,27 +1,14 @@
-import { useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import * as yup from "yup";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/fa";
-
-// const LeftArrow = () => {
-//     const { scrollPrev } = useContext(VisibilityContext)
-//     return (
-//         <div className="justify-content-center align-items-center mr-1">
-//             <span onClick={() => scrollPrev()}><IoIosArrowBack /></span>
-//         </div>
-//     )
-// };
-
-// const RightArrow = () => {
-//     const { scrollNext } = useContext(VisibilityContext)
-//     return (
-//         <div className="justify-content-center align-items-center mr-1">
-//             <span onClick={() => scrollNext()}><IoIosArrowForward /></span>
-//         </div>
-//     )
-// };
+import DatePicker from "./DatePicker";
+import PhoneInputWithCountry from "react-phone-number-input/react-hook-form"
+import 'react-phone-number-input/style.css'
+import { isPossiblePhoneNumber } from "react-phone-number-input";
+import PhoneInput from "react-phone-number-input";
+import { format } from "date-fns";
+import moment from "moment/moment";
 
 function getAllDaysInMonth(year, month) {
     const date = new Date(year, month, 1);
@@ -36,33 +23,40 @@ function getAllDaysInMonth(year, month) {
     return dates;
 }
 
-export default function ScheduleTour() {
+export default function ScheduleTour({onInit}) {
 
     const curdate = new Date();
-    const dates = getAllDaysInMonth(curdate.getFullYear(), curdate.getMonth());
+    let curTime = ("0"+curdate.getHours()).slice(-2)+':'+("0"+curdate.getMinutes()).slice(-2);
     const [showmodal, setShowmodal] = useState(false);
     const [schedule, setSchedule] = useState({});
     const [reqmodal, setReqmodal] = useState(false);
+    const [selectDate, setSelectDate] = useState(new Date());
 
     const schema = yup.object().shape({
-        schedule_date: yup.string().default(() => curdate.toISOString()).required().label('Schedule Date'),
-        schedule_time: yup.string().default(() => (
-            curdate.getHours()+':'+curdate.getMinutes()
-        )).required().label('Schedule Time'),
-        full_name: yup.string().required().label('Full Name'),
-        schedule_email: yup.string().email().required().label('Email Address'),
-        schedule_phone: yup.string().required().matches(
-            /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-            "Enter a valid phone number"
-        ).label('Phone Number'),
+        schedule_time: yup.string().required("Please enter schedule time").label('Schedule Time'),
+        full_name: yup.string().required("Please enter fullname").label('Full Name'),
+        schedule_email: yup.string().email().required("Please enter email address").label('Email Address'),
+        schedule_phone: yup.string().required(({value}) => {
+            // console.log("Val:", value);
+            if(!value || value?.length === 0){
+                return "Please enter your phone number";
+            }else if((typeof value === 'string') && (isPossiblePhoneNumber(value) === false)){
+                return "Please enter valid phone number";
+            }
+        }).label('Phone Number'),
     });
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    const { register, handleSubmit, formState: { errors }, reset, control } = useForm({
         resolver: yupResolver(schema),
     });
 
     const handleScheduleTour = (data) => {
+        // console.log("Data: ",data)
+        data.schedule_date = selectDate;
+        data.schedule_time = selectDate.getDay()+" "+data.schedule_time+":00";
         setSchedule(data);
+        // console.log("Schedule Time: ",data.schedule_time)
         setShowmodal(true);
+        // console.log("Time:",moment(data.schedule_time).format("hh:ss A"));
     }
     const handleModalClose = (respond) => {
         if(respond){
@@ -84,8 +78,9 @@ export default function ScheduleTour() {
                         <h2>Request more information</h2>
                         <button type="button" className="btn-close" onClick={()=>(handleModalClose(0))} aria-label="Close"></button>
                     </div>
-                    <div className="first_box second_box">
-                        <h2>Tuesday, March 9th <br/>at 12:30 PM</h2>
+                    <div className="form_wraper_box container">
+                        {/* <h2>Tuesday, March 9th <br/>at {format(new Date(schedule.schedule_time).getTime(), 'p')}</h2> */}
+                        <h5 className="text-center">{new Date(schedule.schedule_date).toLocaleDateString('en-US', { weekday:"long", month:"long", day:"numeric"})} <br /> at {moment(schedule.schedule_time+':00').format('hh:mm A')}</h5>
                         <form className="row g-3">
                             <div className="col-md-12">
                                 <label className="form-label">First Name</label>
@@ -95,7 +90,13 @@ export default function ScheduleTour() {
                             <div className="col-12">
                                 <div className="col-auto">
                                     <label className="form-label">Phone Number</label>
-                                    <div className="input-group">
+                                    <PhoneInput
+                                        defaultCountry="US"
+                                        international={true}
+                                        value={schedule.schedule_phone}
+                                        readOnly={true}
+                                    />
+                                    {/* <div className="input-group">
                                         <div className="col-auto">
                                             <select className="form-select" id="autoSizingSelect">
                                                 <option className="">Cell</option>
@@ -105,12 +106,12 @@ export default function ScheduleTour() {
                                             </select>
                                         </div>
                                         <input type="text" className="form-control" id="autoSizingInputGroup" placeholder="414-266-9847" value={schedule.schedule_phone} />
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                             <div className="col-12">
                                 <label className="form-label">Email Address</label>
-                                <input type="text" className="form-control" id="inputAddress" placeholder="john.doe@gmail.com" value={schedule.schedule_email} />
+                                <input type="text" className="form-control" id="inputAddress" placeholder="john.doe@gmail.com" value={schedule.schedule_email} readOnly/>
                             </div>
 
                             <label className="review">Reviews</label>
@@ -144,46 +145,77 @@ export default function ScheduleTour() {
         </div>
     )
 
+    const selectedDay = (val) =>{
+        setSelectDate(val)
+    };
+    
+    useEffect(()=>{
+        if(onInit){
+            curTime = ("0"+curdate.getHours()).slice(-2)+':'+("0"+curdate.getMinutes()).slice(-2);
+            reset()
+        }
+    }, [onInit]);
+
     return (
         <>
-            <div className="form_wraper_box" id="schedule_box">
-                <form onSubmit={handleSubmit(handleScheduleTour)}>
-                    <div className="form-group mb-3">
-                        <span className="text-danger">{errors.schedule_date?.message}</span>
-                    </div>
-                    <div className="form-group mb-3">
-                        <input type={'time'} className="form-control" name="schedule_time" id="schedule_time" { ...register('schedule_time') } />
-                        <span className="text-danger">{errors.schedule_time?.message}</span>
-                    </div>
-                    <div className="form-group mb-3">
-                        <input type={'text'} className="form-control" name="full_name" id="full_name" placeholder="Full Name" { ...register('full_name') } />
-                        <span className="text-danger">{errors.full_name?.message}</span>
-                    </div>
-                    <div className="for-group mb-3">
-                        <input type={'email'} className="form-control" name="schedule_email" id="schedule_email" placeholder="Your Email Address" { ...register('schedule_email') } />
-                        <span className="text-danger">{errors.schedule_email?.message}</span>
-                    </div>
-                    <div className="for-group mb-3">
-                        <input type={'number'} className="form-control" name="schedule_phone" id="schedule_phone" placeholder="Your Phone" { ...register('schedule_phone') } />
-                        <span className="text-danger">{errors.schedule_phone?.message}</span>
-                    </div>
-                    <div className="for-group mb-3">
-                        <button type="submit" className="btn style1">Schedule a Tour</button>
-                    </div>
-                    <div className="form-group mb-3">
-                        <div className="form-check">
-                            <input className="form-check-input" type="checkbox" id="gridCheck" />
-                            <label className="form-check-label">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                            </label>
+            <div id="schedule_box">
+                <DatePicker 
+                    startDate={new Date()}
+                    days={100}
+                    selectDate={selectDate}
+                    getSelectedDay={selectedDay}
+                />
+                <div className="form_wraper_box container">
+                    <form onSubmit={handleSubmit(handleScheduleTour)}>
+                        <div className="form-group mb-3">
+                            <input type="time" className="form-control" name="schedule_time" id="schedule_time" { ...register('schedule_time', {value: curTime}) } />
+                            <span className="text-danger">{errors.schedule_time?.message}</span>
                         </div>
-                    </div>
-                    
-                </form>
+                        <div className="form-group mb-3">
+                            <input type={'text'} className="form-control" name="full_name" id="full_name" placeholder="Full Name" { ...register('full_name') } />
+                            <span className="text-danger">{errors.full_name?.message}</span>
+                        </div>
+                        <div className="for-group mb-3">
+                            <input type={'email'} className="form-control" name="schedule_email" id="schedule_email" placeholder="Your Email Address" { ...register('schedule_email') } />
+                            <span className="text-danger">{errors.schedule_email?.message}</span>
+                        </div>
+                        <div className="for-group mb-3">
+                            {/* <Controller
+                                name="schedule_phone"
+                                control={control}
+                                className="form-control"
+                                { ...register('schedule_phone') }
+                                render={({ field: { onChange, value } }) => (
+                                    <PhoneInputWithCountry
+                                        placeholder="414-266-9847"
+                                        defaultCountry="US"
+                                        value={value}
+                                        onChange={onChange}
+                                        id="schedule_phone"
+                                    />
+                                )}
+                            /> */}
+                            <input type="tel" className="form-control" name="schedule_phone" id="schedule_phone" placeholder="Your Phone" { ...register('schedule_phone') } />
+                            <span className="text-danger">{errors.schedule_phone?.message}</span>
+                        </div>
+                        <div className="for-group mb-3">
+                            <button type="submit" className="btn style1" style={{borderRadius:15}}>Schedule a Tour</button>
+                        </div>
+                        <div className="form-group mb-3">
+                            <div className="form-check">
+                                <input className="form-check-input" type="checkbox" id="gridCheck" />
+                                <label className="form-check-label">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                                </label>
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>
+                
             </div>
             <ScheduleModal />
             <ScheduleRequestModal />
-            {/* {reqmodal && <ScheduleRequestModal />} */}
         </>
     )
 }

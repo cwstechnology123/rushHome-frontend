@@ -122,7 +122,7 @@
 #exTab3 .tab-content {
     color : black;
     background-color: #fff;
-    padding : 5px 15px;
+    padding: 15px 0px;
     border: 1px solid #dee2e6;
     border-top: 0px;
     border-color: #dee2e6;
@@ -291,25 +291,67 @@ display: none;
     font-weight: normal;
     color: #000;
 }
-/* .client_factsicons ul li span {
-    float: left;
-    width: 20%;
-    font-size: 26px;
-    text-align: center;
-    padding: 9px 7px;
-    background: #f1f1f1;
-    margin: 14px 0;
-    border-radius: 10px;
+/* ------------------DATEPICKER------------- */
+.form_wraper_box .PhoneInputCountry{
+    border: 1px solid #ced4da !important;
+    border-right: 0px !important;
+    padding: 10px;
+    margin-right: 0px !important;
 }
-.client_factsicons ul li p {
-    float: right;
-    width: 80%;
-    padding: 0px 10px;
+.form_wraper_box .PhoneInputInput{
+    border: 1px solid #ced4da !important;
 }
-.client_factsicons ul li h3 {
-    float: right;
-    width: 80%;
+.datepicker-left-indicator {
+    position: relative;
+    top: 25%;
+    left: 0px;
+    background: #eee;
+    height: 40px;
     font-size: 18px;
-    font-weight: normal;
-    padding: 0px 10px;
-} */
+    text-align: center;
+    border-radius: 0px 10px 10px 0px;
+    cursor: pointer;
+    padding: 5px 0px;
+}
+.datepicker-right-indicator {
+    position: relative;
+    top: 25%;
+    right: 0px;
+    background: #eee;
+    height: 40px;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 10px 0px 0px 10px;
+    cursor: pointer;
+    padding: 5px 0px;
+}
+.date-block {
+    border: 1px solid #999999;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 45px;
+    height: 75px;
+}
+.date-block:hover, .date-block.active {
+    color: #fff;
+    background-color: #FCCF67;
+    border-color: #FCCF67;
+}
+.date-block .day-week{
+    font-size: 10px;
+}
+.date-block .day-date{
+    font-weight: 600;
+    font-size: 15px;
+}
+.date-block .day-month{
+    font-size: 10px;
+}
+.react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
+    display: none;
+}
+.react-horizontal-scrolling-menu--scroll-container {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
