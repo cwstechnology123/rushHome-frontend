@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link';
 import { useRouter } from 'next/router'
 import { useEffect } from 'react';
 
@@ -200,7 +201,7 @@ export default function AboutUs() {
             </div>
           </div>
           <div className="col-md-12 text-center">
-            <a href="https://join.rushhome.com/" target="_blank" className="btn style1 button_custom">Join Our Team</a>
+            <Link href="https://join.rushhome.com/" target="_blank" className="btn style1 button_custom">Join Our Team</Link>
           </div>
           <div className="row justify-content-center">
             <div className="col-xxl-8 col-xl-8 col-lg-8 col-md-8">

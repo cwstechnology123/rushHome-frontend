@@ -3,9 +3,9 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { addDays, addMonths, differenceInMonths, format, isSameDay, lastDayOfMonth, startOfMonth } from "date-fns";
 import React, { useEffect, useState, useContext } from "react";
 
-function dateView(startDate, lastDate, selectDate, getSelectedDay) {
+function dateView(startDate, lastDate, selectDate, getSelectedDay, selectedDate, onDateClick) {
     // console.log(startDate, lastDate, selectDate, getSelectedDay)
-    const [selectedDate, setSelectedDate] = useState(null);
+    //const [selectedDate, setSelectedDate] = useState(null);
     
     const selectedStyle = 'active';
 
@@ -51,46 +51,24 @@ function dateView(startDate, lastDate, selectDate, getSelectedDay) {
         return months;
     }
 
-    const onDateClick = day => {
-        setSelectedDate(day);
-        if (getSelectedDay) {
-            getSelectedDay(day);
-        }
-    };
-
-    useEffect(() => {
-        if (getSelectedDay) {
-            if (selectDate) {
-                getSelectedDay(selectDate);
-            } else {
-                getSelectedDay(startDate);
-            }
-        }
-    }, []);
-
-    useEffect(() => {
-        if (selectDate) {
-            if (!isSameDay(selectedDate, selectDate)) {
-                setSelectedDate(selectDate);
-                setTimeout(() => {
-                    let view = document.getElementById('selected');
-                    if (view) {
-                        view.scrollIntoView({behavior: "smooth", inline: "center", block: "nearest"});
-                    }
-                }, 20);
-            }
-        }
-    }, [selectDate]);
-
     return renderDays();
 }
 
 const DatePicker = (props) => {
 
+    const [selectedDate, setSelectedDate] = useState(null);
+    
+    const onDateClick = day => {
+        setSelectedDate(day);
+        if (props.getSelectedDay) {
+            props.getSelectedDay(day);
+        }
+    };
+
     const startDate = props.startDate || new Date();
     const lastDate = addDays(startDate, props.days || 100);
 
-    let dateComponents = dateView(startDate, lastDate, props.selectDate, props.getSelectedDay);
+    let dateComponents = dateView(startDate, lastDate, props.selectDate, props.getSelectedDay, selectedDate, onDateClick);
     // console.log(DateComponent)
     function LeftArrow() {
         const { scrollPrev } = useContext(VisibilityContext)
@@ -110,6 +88,31 @@ const DatePicker = (props) => {
             </div>
         );
     }
+
+    
+    useEffect(() => {
+        if (props.getSelectedDay) {
+            if (props.selectDate) {
+                props.getSelectedDay(props.selectDate);
+            } else {
+                props.getSelectedDay(startDate);
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        if (props.selectDate) {
+            if (!isSameDay(selectedDate, props.selectDate)) {
+                setSelectedDate(props.selectDate);
+                setTimeout(() => {
+                    let view = document.getElementById('selected');
+                    if (view) {
+                        view.scrollIntoView({behavior: "smooth", inline: "center", block: "nearest"});
+                    }
+                }, 20);
+            }
+        }
+    }, [props.selectDate]);
 
     return (
         <div className="container p-0" style={{position: 'relative'}}>
