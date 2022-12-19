@@ -3,14 +3,14 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { addDays, addMonths, differenceInMonths, format, isSameDay, lastDayOfMonth, startOfMonth } from "date-fns";
 import React, { useEffect, useState, useContext } from "react";
 
-function dateView(startDate, lastDate, selectDate, getSelectedDay, selectedDate, onDateClick) {
+function dateView(startDate, lastDate, selectedDate, onDateClick) {
     // console.log(startDate, lastDate, selectDate, getSelectedDay)
     //const [selectedDate, setSelectedDate] = useState(null);
     
-    const selectedStyle = 'active';
+    // const selectedStyle = 'active';
 
     const getStyles = (day) => {
-        return isSameDay(day, selectedDate)? selectedStyle : null;
+        return isSameDay(day, selectedDate)? 'active' : '';
     }
 
     const getId = (day) => {
@@ -68,7 +68,6 @@ const DatePicker = (props) => {
     const startDate = props.startDate || new Date();
     const lastDate = addDays(startDate, props.days || 100);
 
-    let dateComponents = dateView(startDate, lastDate, props.selectDate, props.getSelectedDay, selectedDate, onDateClick);
     // console.log(DateComponent)
     function LeftArrow() {
         const { scrollPrev } = useContext(VisibilityContext)
@@ -89,7 +88,6 @@ const DatePicker = (props) => {
         );
     }
 
-    
     useEffect(() => {
         if (props.getSelectedDay) {
             if (props.selectDate) {
@@ -114,6 +112,8 @@ const DatePicker = (props) => {
         }
     }, [props.selectDate]);
 
+    let dateComponents = dateView(startDate, lastDate, selectedDate, onDateClick);
+
     return (
         <div className="container p-0" style={{position: 'relative'}}>
             <ScrollMenu 
@@ -122,8 +122,8 @@ const DatePicker = (props) => {
                 style={{overflow: 'hidden'}} 
                 transitionBehavior={'smooth'}
                 transitionDuration={1500}
-                scrollContainerClassName="mx-1"
-                separatorClassName="m-1"
+                scrollContainerClassName="mx-1-5"
+                separatorClassName="m-1-5"
             >
                 {dateComponents.map(DateBox => (
                     DateBox

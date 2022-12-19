@@ -111,7 +111,7 @@ export default function ClientBox({ type, address, price, pricearea, amenity }) 
                             <span className="icon-box"><MdSquareFoot/></span>
                             <div className="icon-facts">
                                 <span>SQFT</span>
-                                <h3>{amenity?.area && parseFloat(amenity.area).toFixed(0)}</h3>
+                                <h3>{(amenity?.area)? parseFloat(amenity.area).toFixed(0) : '-'}</h3>
                             </div>
                         </li>
                         <li>

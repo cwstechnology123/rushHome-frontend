@@ -350,6 +350,12 @@ display: none;
 .date-block .day-month{
     font-size: 10px;
 }
+.mx-1-5 {
+    margin: 0pc 4px;
+}
+.m-1-5 {
+    margin: 4px;
+}
 .react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
     display: none;
 }

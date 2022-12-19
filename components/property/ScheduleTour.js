@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as yup from "yup";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,9 +10,9 @@ import PhoneInput from "react-phone-number-input";
 import moment from "moment/moment";
 
 export default function ScheduleTour({onInit}) {
-
+    const curTime = useRef();
     const curdate = new Date();
-    let curTime = ("0"+curdate.getHours()).slice(-2)+':'+("0"+curdate.getMinutes()).slice(-2);
+    curTime.current = ("0"+curdate.getHours()).slice(-2)+':'+("0"+curdate.getMinutes()).slice(-2);
     const [showmodal, setShowmodal] = useState(false);
     const [schedule, setSchedule] = useState({});
     const [reqmodal, setReqmodal] = useState(false);
@@ -66,11 +66,11 @@ export default function ScheduleTour({onInit}) {
                     </div>
                     <div className="form_wraper_box container">
                         {/* <h2>Tuesday, March 9th <br/>at {format(new Date(schedule.schedule_time).getTime(), 'p')}</h2> */}
-                        <h5 className="text-center">{new Date(schedule.schedule_date).toLocaleDateString('en-US', { weekday:"long", month:"long", day:"numeric"})} <br /> at {moment(schedule.schedule_time+':00').format('hh:mm A')}</h5>
+                        <h5 className="text-center">{schedule && new Date(schedule.schedule_date).toLocaleDateString('en-US', { weekday:"long", month:"long", day:"numeric"})} <br /> at {schedule && moment(schedule.schedule_time+':00').format('hh:mm A')}</h5>
                         <form className="row g-3">
                             <div className="col-md-12">
                                 <label className="form-label">First Name</label>
-                                <input type="text" className="form-control" id="inputEmail4" value={schedule.full_name} readOnly/>
+                                <input type="text" className="form-control" id="inputEmail4" value={schedule?.full_name} readOnly/>
                             </div>
 
                             <div className="col-12">
@@ -79,8 +79,9 @@ export default function ScheduleTour({onInit}) {
                                     <PhoneInput
                                         defaultCountry="US"
                                         international={true}
-                                        value={schedule.schedule_phone}
+                                        value={schedule?.schedule_phone}
                                         readOnly={true}
+                                        onChange={null}
                                     />
                                     {/* <div className="input-group">
                                         <div className="col-auto">
@@ -97,7 +98,7 @@ export default function ScheduleTour({onInit}) {
                             </div>
                             <div className="col-12">
                                 <label className="form-label">Email Address</label>
-                                <input type="text" className="form-control" id="inputAddress" placeholder="john.doe@gmail.com" value={schedule.schedule_email} readOnly/>
+                                <input type="text" className="form-control" id="inputAddress" placeholder="john.doe@gmail.com" value={schedule?.schedule_email} readOnly/>
                             </div>
 
                             <label className="review">Reviews</label>
@@ -137,7 +138,7 @@ export default function ScheduleTour({onInit}) {
     
     useEffect(()=>{
         if(onInit){
-            curTime = ("0"+curdate.getHours()).slice(-2)+':'+("0"+curdate.getMinutes()).slice(-2);
+            curTime.current = ("0"+curdate.getHours()).slice(-2)+':'+("0"+curdate.getMinutes()).slice(-2);
             reset()
         }
     }, [onInit]);
@@ -154,7 +155,7 @@ export default function ScheduleTour({onInit}) {
                 <div className="form_wraper_box container">
                     <form onSubmit={handleSubmit(handleScheduleTour)}>
                         <div className="form-group mb-3">
-                            <input type="time" className="form-control" name="schedule_time" id="schedule_time" { ...register('schedule_time', {value: curTime}) } />
+                            <input type="time" className="form-control" name="schedule_time" id="schedule_time" { ...register('schedule_time', {value: curTime.current}) } />
                             <span className="text-danger">{errors.schedule_time?.message}</span>
                         </div>
                         <div className="form-group mb-3">

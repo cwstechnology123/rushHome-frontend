@@ -41,14 +41,14 @@ export default function RequestInfo({ address, onInit }) {
             <hr className="my-3" />
             <form className="row g-3" onSubmit={handleSubmit(handleRequestInfo)}>
                 <div className="col-md-12">
-                    <label htmlFor="" className="form-label">Full Name</label>
+                    <label htmlFor="full_name" className="form-label">Full Name</label>
                     <input type="text" className="form-control" id="full_name" name="full_name" { ...register('full_name') } />
                     <span className="text-danger">{errors.full_name?.message}</span>
                 </div>
 
                 <div className="col-12">
                     <div className="col-auto">
-                        <label className="form-label" htmlFor="phone_code">Phone Number</label>
+                        <label className="form-label" htmlFor="request_phone">Phone Number</label>
                         <Controller
                             name="request_phone"
                             control={control}
@@ -76,7 +76,7 @@ export default function RequestInfo({ address, onInit }) {
                             </div>
                             <input type="text" className="form-control" name="request_phone" id="request_phone" placeholder="414-266-9847" { ...register('request_phone') } />
                         </div> */}
-                        <span className="text-danger">{errors.phone_code?.message || errors.request_phone?.message}</span>
+                        <span className="text-danger">{errors.request_phone?.message}</span>
                     </div>
                 </div>
                 <div className="col-12">
