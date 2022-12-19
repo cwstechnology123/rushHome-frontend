@@ -7,21 +7,7 @@ import PhoneInputWithCountry from "react-phone-number-input/react-hook-form"
 import 'react-phone-number-input/style.css'
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import PhoneInput from "react-phone-number-input";
-import { format } from "date-fns";
 import moment from "moment/moment";
-
-function getAllDaysInMonth(year, month) {
-    const date = new Date(year, month, 1);
-  
-    const dates = [];
-  
-    while (date.getMonth() === month) {
-      dates.push(new Date(date));
-      date.setDate(date.getDate() + 1);
-    }
-  
-    return dates;
-}
 
 export default function ScheduleTour({onInit}) {
 

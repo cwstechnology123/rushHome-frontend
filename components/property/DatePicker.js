@@ -3,7 +3,7 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { addDays, addMonths, differenceInMonths, format, isSameDay, lastDayOfMonth, startOfMonth } from "date-fns";
 import React, { useEffect, useState, useContext } from "react";
 
-const dateView = (startDate, lastDate, selectDate, getSelectedDay) => {
+function dateView(startDate, lastDate, selectDate, getSelectedDay) {
     // console.log(startDate, lastDate, selectDate, getSelectedDay)
     const [selectedDate, setSelectedDate] = useState(null);
     
