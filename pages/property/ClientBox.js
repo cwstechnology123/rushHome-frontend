@@ -104,28 +104,28 @@ export default function ClientBox({ type, address, price, pricearea, amenity }) 
                             <span className="icon-box"><IoBedOutline/></span>
                             <div className="icon-facts">
                                 <span>Bedrooms</span>
-                                <h3>{amenity.beds || '-'}</h3>
+                                <h3>{amenity?.beds || '-'}</h3>
                             </div>
                         </li>
                         <li>
                             <span className="icon-box"><MdSquareFoot/></span>
                             <div className="icon-facts">
                                 <span>SQFT</span>
-                                <h3>{amenity.area? parseFloat(amenity.area).toFixed(0) : '-'}</h3>
+                                <h3>{amenity?.area && parseFloat(amenity.area).toFixed(0)}</h3>
                             </div>
                         </li>
                         <li>
                             <span className="icon-box"><FaBath/></span>
                             <div className="icon-facts">
                                 <span>Bathrooms</span>
-                                <h3>{amenity.baths || '-'}</h3>
+                                <h3>{amenity?.baths || '-'}</h3>
                             </div>
                         </li>
                         <li>
                             <span className="icon-box"><GiHomeGarage/></span>
                             <div className="icon-facts">
                                 <span>Garage</span>
-                                <h3>{amenity.garages || '-'}</h3>
+                                <h3>{amenity?.garages || '-'}</h3>
                             </div>
                         </li>
                     </ul>
