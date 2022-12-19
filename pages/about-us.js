@@ -5,18 +5,19 @@ import { useEffect } from 'react';
 
 export default function AboutUs() {
   const router = useRouter();
+  const { query } = router;
   
   const handleScrollTo = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({behavior:"smooth", block: "start", inline:"nearest"})
   }
   
   useEffect(() => {
-    if(router.query?.link){
-      if(router.query.link === 'become-an-agent'){
+    if(query?.link){
+      if(query.link === 'become-an-agent'){
         handleScrollTo('join_us');
       }
     }
-  }, [router])
+  }, [query])
 
   return (
     <>

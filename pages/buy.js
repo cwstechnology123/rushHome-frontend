@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Wrapper, Status } from '@googlemaps/react-wrapper';
 import Map from "../components/gmap/Map";
 import PropertyCard from "../components/property/PropertyCard";
-import SearchFilter from "../components/SearchFilter";
+import SearchFilter from "../components/buy/SearchFilter";
 import { apiBaseUrl, fetchApi } from "../utils/fetchApi";
 import useSupercluster from "use-supercluster";
 import SingleMarker from '../components/gmap/CustomSingleMarker';
@@ -286,7 +286,7 @@ export default function Buy({ properties }) {
         }
     };
     
-    console.log("center", center, zoom);
+    // console.log("center", center, zoom);
   return (
     <>
         {searchFilter && <SearchFilter searchFilter={searchFilter} setSerachFilter={setSerachFilter}/>}

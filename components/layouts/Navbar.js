@@ -39,7 +39,7 @@ export default function Navbar() {
         <header className="header-wrap">
           <div className="container">
             <nav className="navbar navbar-expand-md navbar-light">
-              <Link className="navbar-brand" href="/">
+              <Link className="navbar-brand" href="/" passHref>
                 <span className="logo_wraper"><img src="../assets/img/Black Rush home.png" alt="Black Rush home" /></span>
               </Link>
               <div className="collapse navbar-collapse main-menu-wrap" id="navbarSupportedContent">
@@ -48,24 +48,24 @@ export default function Navbar() {
                 </div>
                 <ul className="navbar-nav ms-auto">
                   <li className="nav-item">
-                    <Link href="/buy" className={"nav-link" + (router.pathname == '/buy' ? " active" : "")}>
+                    <Link href="/buy" className={"nav-link" + (router.pathname == '/buy' ? " active" : "")} passHref>
                       Buy
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link href="/sell" className={"nav-link" + (router.pathname == '/sell' ? " active" : "")}>
+                    <Link href="/sell" className={"nav-link" + (router.pathname == '/sell' ? " active" : "")} passHref>
                       Sell
                     </Link>
                   </li>
                 {(session) ?
                   <>
                   <li className="nav-item">
-                    <Link href="/client/dashboard" className={"nav-link" + (router.pathname == '/client/dashboard' ? " active" : "")}>
+                    <Link href="/client/dashboard" className={"nav-link" + (router.pathname == '/client/dashboard' ? " active" : "")} passHref>
                       Dashboard
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link href="/client/favorites" className={"nav-link" + (router.pathname == '/client/favorites' ? " active" : "")}>
+                    <Link href="/client/favorites" className={"nav-link" + (router.pathname == '/client/favorites' ? " active" : "")} passHref>
                       Favorites
                     </Link>
                   </li>
@@ -80,26 +80,26 @@ export default function Navbar() {
                 :
                   <>
                     <li className="nav-item">
-                      <Link href="#" className={"nav-link" + (router.pathname == '/find-an-agent' ? " active" : "")}>
+                      <Link href="#" className={"nav-link" + (router.pathname == '/find-an-agent' ? " active" : "")} passHref>
                         Agents
                         <i className="ri-add-line" />
                       </Link>
                       <ul className="dropdown-menu">
                         <li className="nav-item">
-                          <Link href="/find-an-agent" className={"nav-link" + (router.pathname == '/find-an-agent' ? " active" : "")}>Find an Agent</Link>
+                          <Link href="/find-an-agent" className={"nav-link" + (router.pathname == '/find-an-agent' ? " active" : "")} passHref>Find an Agent</Link>
                         </li>
                         <li className="nav-item">
-                          <Link href={{pathname: 'about-us', query: {link: 'become-an-agent'}}} className={"nav-link"}>Become and Agent</Link>
+                          <Link href='/about-us?link=become-an-agent' className={"nav-link"} passHref>Become and Agent</Link>
                         </li>
                       </ul>
                     </li>
                     <li className="nav-item">
-                      <Link href="/about-us" className={"nav-link" + (router.pathname == '/about-us' ? " active" : "")}>
+                      <Link href="/about-us" className={"nav-link" + (router.pathname == '/about-us' ? " active" : "")} passHref>
                         About Us
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link href="/contact-us" className={"nav-link" + (router.pathname == '/contact-us' ? " active" : "")}>
+                      <Link href="/contact-us" className={"nav-link" + (router.pathname == '/contact-us' ? " active" : "")} passHref>
                         Contact
                       </Link>
                     </li>
