@@ -296,6 +296,20 @@
     }
 }
 @media only screen and (max-width: 767px) {
+	.style3.ptb-50.product_box {
+	padding-top: 10px;
+}
+	.welcome_box {margin-top: 10px;}
+	.state_tabs {
+	float: none;
+}
+	.property-search-form {
+	position: relative;
+}
+	.btn.style2.search_button {
+	position: absolute;
+	right: 0px;
+}
 	.page-nav li {
 	margin: 0 0px;
 	display: inline-block;
@@ -501,9 +515,9 @@
     .btn {
         font-size: 14px;
     }
-    .btn {
+    /*.btn {
         padding: 12px 25px;
-    }
+    }*/
     .content-wrapper {
         margin-top: 63px;
     }
@@ -613,10 +627,11 @@
     .hero-wrap.style2 .hero-slide-item .hero-content h1 span img {
         bottom: 6px;
     }
-    .hero-wrap.style3 .hero-content .property-search-form {
-        background-color: #fff;
-        border-radius: 5px;
-    }
+.hero-wrap.style3 .hero-content .property-search-form .form-group-wrap {
+	width: 80%;
+	margin-right: 0;
+	position: relative;
+}
     .hero-wrap.style3 .hero-content .property-search-form .form-group-wrap {
         width: 100%;
         margin-right: 0;
@@ -630,10 +645,11 @@
     .hero-wrap.style3 .hero-content .property-search-form .form-group-wrap .form-group select {
         height: 54px;
     }
-    .hero-wrap.style3 .hero-content .property-search-form button {
-	width: 100% !important;
+.hero-wrap.style3 .hero-content .property-search-form button {
+	/* width: 100% !important; */
 	border-radius: 0 0 5px 5px;
 	margin: 0;
+	height: 56px;
 }
     .hero-slider-two.owl-carousel .owl-nav button.owl-prev,
     .hero-slider-two.owl-carousel .owl-nav button.owl-next {
@@ -1466,7 +1482,7 @@
         text-align: center !important;
     }
     .hero-wrap {
-        margin-top: 65px;
+        margin-top: 15px;
     }
     .hero-wrap.style1 {
         padding: 50px 0 110px;
