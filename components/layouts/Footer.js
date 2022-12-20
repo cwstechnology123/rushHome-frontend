@@ -25,7 +25,7 @@ export default function Footer() {
                               </div>
                               <div className="right_box">
                               <h6>Call</h6>
-                              <p>+845 5884 5845</p>
+                              <p>+1 (302) 219-6707</p>
                               </div>
                           </div>
                           <div className="col-md-12">

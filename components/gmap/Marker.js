@@ -16,8 +16,9 @@ const Marker = (options) => {
     var myIcon = {
       url: '/location.png',
       size: new google.maps.Size(64,64), 
+      opacity: 0.6,
       origin: new google.maps.Point(0,0),
-      anchor: new google.maps.Point(15, 30),
+      anchor: new google.maps.Point(30, 25),
     };
     useEffect(() => {
       if (!marker) {
@@ -33,6 +34,7 @@ const Marker = (options) => {
     }, [marker]);
     useEffect(() => {
       if (marker) {
+        // {...options, icon: myIcon}
         marker.setOptions({...options, icon: myIcon});
       }
     }, [marker, options]);

@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import useDeepCompareEffectForMaps from "./useDeepCompareMemorize";
 import mapStyle from './mapStyle';
 
-export default function LocationMap({
+export default function OfficeLocationMap({
     address,
     children,
     style,
@@ -33,16 +33,15 @@ export default function LocationMap({
 
     return (
         <>
-            <div style={{width: 100+'%', height: 100+'%', borderRadius: '10px'}} id="map" ref={mapRef}/>
+            <div style={{width: 100+'%', height: 100+'%'}} id="map" ref={mapRef}/>
             {React.Children.map(children, (child) => {
             if (React.isValidElement(child)) {
-                //console.log("element set")
                 return React.cloneElement(child, { map });
             }
             })}
-            <div className="card" style={{position: 'absolute', bottom: '20px', left: '20px', borderRadius: '15px'}}>
+            <div className="card" style={{position: 'absolute', top: 0, left: '5%', borderRadius: '0px 0px 15px 15px;'}}>
                 <div className="card-body h-50">
-                    <h6 className="card-title">Location</h6>
+                    <h6 className="card-title">Visit our office at</h6>
                     <small style={{whiteSpace: 'pre-wrap'}}>{address}</small>
                     
                 </div>

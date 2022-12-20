@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link';
 import { useRouter } from 'next/router'
 import { useEffect } from 'react';
+import OfficeMap from '../components/about/OfficeMap';
 
 export default function AboutUs() {
   const router = useRouter();
@@ -34,7 +35,7 @@ export default function AboutUs() {
                 <div className="state_tabs">
                   <ul className="list-group list-group-horizontal">
                     <li className="list-group-block"><button type="button" className='btn' onClick={()=>handleScrollTo('service')}>service</button></li>
-                    <li className="list-group-block"><button type="button" className='btn' onClick={()=>handleScrollTo('leadership')}>leadership</button></li>
+                    {/* <li className="list-group-block"><button type="button" className='btn' onClick={()=>handleScrollTo('leadership')}>leadership</button></li> */}
                     <li className="list-group-block"><button type="button" className='btn' onClick={()=>handleScrollTo('office_location')}>office location</button></li>
                     <li className="list-group-block"><button type="button" className='btn' onClick={()=>handleScrollTo('join_us')}>work with us</button></li>
                   </ul>
@@ -91,7 +92,7 @@ export default function AboutUs() {
           </div>
         </div>
       </section>
-      <section className="advantage-wrap ptb-50 bg-seashell property_wraper" id="leadership">
+      {/* <section className="advantage-wrap ptb-50 bg-seashell property_wraper" id="leadership">
         <div className="container">
           <div className="col-xl-8 col-lg-8 offset-xl-2 offset-lg-2">
             <div className="section-title style2 text-center mb-40">
@@ -136,7 +137,7 @@ export default function AboutUs() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       <section className="hw-wrap pt-100 pb-75 contact_box" id="office_location">
         <div className="container">
           <div className="row">
@@ -156,7 +157,7 @@ export default function AboutUs() {
                 </div>
                 <div className="hw-info">
                   <h3>Address</h3>
-                  <p>SB Howard Street #2 San Francisco<br />SB Howard Street</p>
+                  <p>200 S. DuPont Blvd, Ste 105, Smyrna, DE 19977</p>
                 </div>
               </div>
             </div>
@@ -167,7 +168,7 @@ export default function AboutUs() {
                 </div>
                 <div className="hw-info">
                   <h3>Call Us</h3>
-                  <p>+5854 8845 8555 <br />+5854 8845 8555</p>
+                  <p>+1 (302) 219-6707</p>
                 </div>
               </div>
             </div>
@@ -178,17 +179,21 @@ export default function AboutUs() {
                 </div>
                 <div className="hw-info">
                   <h3>Open Hours</h3>
-                  <p>Mon - Fri 10.00 AM to 6.00 PM<br />
-                    Set - Sun 10.00 AM to 6.00 PM</p>
+                  <p>Mon - Fri 8:30 AM to 5 PM<br />
+                    Sat - 9 AM to 12 PM</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="contact_map">
+        <OfficeMap address={`200 S. DuPont Blvd, Ste 105, Smyrna, DE 19977`} position={{
+          lat: 39.29978446764322,
+          lng: -75.60011688096353
+        }}/>
+        {/* <div className="contact_map">
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8385385572983!2d144.95358331584498!3d-37.81725074201705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4dd5a05d97%3A0x3e64f855a564844d!2s121%20King%20St%2C%20Melbourne%20VIC%203000%2C%20Australia!5e0!3m2!1sen!2sbd!4v1612419490850!5m2!1sen!2sbd">
           </iframe>
-        </div>
+        </div> */}
       </section>
       <section className="hw-wrap pt-50 pb-75 whychoose_wraper join_team" id="join_us">
         <div className="container">
