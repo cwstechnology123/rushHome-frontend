@@ -1,20 +1,32 @@
+import { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 import PropertyCard from "./PropertyCard";
 
 
 export default function BuyPropertyList({ properties, setHighlight }){
 
-    const showCount = 6;
-    const pageBlock = () => {
-        let totalPage = properties.length? properties.length/showCount : 1;
-        let pageBlock = 0;
-        // for(let i=1; i <= totalPage; i++){
+    const showPerPage = 40;
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageCount = properties? Math.round(properties.length/showPerPage) : 1;
+    const [showproperty, setShowproerty] = useState([]);
 
-        // }
+    const handleShowProperty = ({selected}) => {
+        let offset = selected? selected : 0;
+        let dataList = JSON.parse(JSON.stringify(properties));
+        let limit = (offset==0) ? 1 : offset+1;
+        setCurrentPage(limit);
+        document.getElementById('property_list')?.scrollIntoView({behavior:"smooth", block: "start", inline:"nearest"});
+        setShowproerty(dataList.splice((showPerPage * offset), (showPerPage * limit)));
+        
     }
 
+    useEffect(() => {
+        handleShowProperty(0, showPerPage);
+    }, [properties]);
+
     return (
-        <section className="listing-wrap px-3 pt-3">
-            <div className="row align-items-center mb-25">
+        <section className="listing-wrap px-3" id="property_list">
+            <div className="row align-items-center py-3" style={{position: 'sticky', top: 0, zIndex: 999, backgroundColor: '#f9f9f9'}}>
                 <div className="col-xl-6 col-lg-8 col-md-8">
                     <div className="profuct-result">
                         <p>We found <span>{properties.length}</span> properties available for you</p>
@@ -40,8 +52,8 @@ export default function BuyPropertyList({ properties, setHighlight }){
                     <span className="list_th_icon"><i className="fa fa-th" aria-hidden="true" /></span>
                 </div>
             </div>
-            <div className="row" id="property-list">
-                {properties.map(property => (
+            <div className="row">
+                {showproperty.map(property => (
                     <div className="col-xl-6 col-lg-6 col-md-6" key={`property-block-${property.id}`} onMouseEnter={()=>setHighlight(property.id)} onMouseLeave={()=>setHighlight(null)}>
                         <PropertyCard property={property}/>
                     </div>
@@ -50,7 +62,22 @@ export default function BuyPropertyList({ properties, setHighlight }){
                     <div className="col-12"><h4 className="text-danger text-center">No result found</h4></div>
                 )}
             </div>
-            <ul className="page-nav list-style mt-10">
+            <ReactPaginate
+                previousLabel={'Prev'}
+                nextLabel={'Next'}
+                breakLabel={'...'}
+                breakClassName={'break-me'}
+                activeClassName={'active'}
+                containerClassName={'pagination list-style mt-10'}
+                subContainerClassName={''}
+
+                initialPage={currentPage - 1}
+                pageCount={pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={5}
+                onPageChange={handleShowProperty}
+            />
+            {/* <ul className="page-nav list-style mt-10">
                 <li><a href="#"><i className="fa fa-angle-left" style={{fontSize: 1.2+'rem'}}></i>&nbsp;&nbsp;&nbsp;&nbsp;Prev</a></li>
                 <li><a className="active" href="#">1</a></li>
                 <li><a href="#">2</a></li>
@@ -59,7 +86,7 @@ export default function BuyPropertyList({ properties, setHighlight }){
                 <li><a href="#">5</a></li>
                 <li><a href="#">6</a></li>
                 <li><a href="#">Next&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-angle-right" style={{fontSize: 1.2+'rem'}}></i></a></li>
-            </ul>
+            </ul> */}
         </section>
     )
 }

@@ -10,6 +10,8 @@ const PropertyCard = ({
         listPrice,
         listPictureURL,
         county,
+        city,
+        country,
         fullStreetAddress,
         bedroomsTotal,
         bathroomsTotal,
@@ -27,23 +29,23 @@ const PropertyCard = ({
                         key={`image_${id}`} 
                         src={src} alt="Image" 
                         width={300} 
-                        height={250} 
+                        height={200} 
                         loading="lazy"
                     />
                     <span className="property-status">Exclusive</span>
                 </div>
                 <div className="property-info">
                     <span>Home at {county}</span>
-                    <p className="mb-0">{fullStreetAddress?fullStreetAddress:ucfirst(county)}</p>
+                    <p className="mb-0" style={{whiteSpace: 'pre-wrap'}}>{fullStreetAddress?`${fullStreetAddress}\n${country}, ${city}`:ucfirst(county)}</p>
                     <div className="property-status-wrap">
                         <p className="property-price mb-0">{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0 })}</p>
                     </div>
                     
                     <ul className="property-metainfo list-style">
-                        <li key={`bed${id}`}><i className="flaticon-double-bed" />{bedroomsTotal} Br</li>
-                        <li key={`bath${id}`}><i className="flaticon-bath-tub" />{bathroomsTotal} Ba</li>
-                        <li key={`square${id}`}><i className="flaticon-square" />{areaTotal} Sq.Ft</li>
-                        <li key={`home${id}`}><i className="flaticon-home" />{garageSpaces} Gr</li>
+                        <li key={`bed${id}`}><i className="flaticon-double-bed" />{bedroomsTotal? bedroomsTotal : '-'} Br</li>
+                        <li key={`bath${id}`}><i className="flaticon-bath-tub" />{bathroomsTotal? bathroomsTotal : '-'} Ba</li>
+                        <li key={`square${id}`}><i className="flaticon-square" />{areaTotal? Number(areaTotal).toLocaleString('en-US') : '-'} Sq.Ft</li>
+                        <li key={`home${id}`}><i className="flaticon-home" />{garageSpaces? garageSpaces : '-'} Gr</li>
                     </ul>
                 </div>
             </div>

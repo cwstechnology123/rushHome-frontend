@@ -167,6 +167,52 @@
     border-radius: 5px !important;
 }
 
+/* --------------------BUY PROPERTY PAGINATION----------------- */
+.pagination {
+    text-align: center;
+    justify-content: center;
+}
+.pagination li {
+    margin: 0 5px;
+    display: inline-block;
+}
+.pagination li {
+    display: block;
+    width: 45px;
+    height: 45px;
+    border-radius: 25%;
+    font-size: 16px;
+    line-height: 44px;
+    font-weight: 400;
+    opacity: 0.7;
+    color: #666;
+    background: #f9f9f9;
+    text-align: center;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+/* .pagination li a i {
+    font-size: 14px;
+    line-height: 42px;
+    position: relative;
+    top: 1px;
+    color: #002172;
+    margin: 0 auto;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+} */
+.pagination li.active,
+.pagination li:hover {
+    color: #fff !important;
+    opacity: 1;
+    background-color: #fdce64;
+    border-color: transparent;
+    cursor: pointer;
+}
+/* .pagination li.active i,
+.pagination li:hover i {
+    color: #fff;
+} */
 
 /* --------------------------MAP------------------- */
 #mapBox{
