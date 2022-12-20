@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Map from "../components/Map";
-import SearchFilter from "../components/SearchFilter";
+import SearchFilter from "../components/buy/SearchFilter";
 
 export default function Buy() {
     const [searchFilter, setSerachFilter] = useState(false);
