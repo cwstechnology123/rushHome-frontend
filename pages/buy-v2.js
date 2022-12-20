@@ -1,32 +1,18 @@
 import { useEffect, useState } from "react";
-import useSWR from "swr";
+// import useSWR from "swr";
 import { apiBaseUrl, fetchApi } from "../utils/fetchApi";
 import SearchFilter from "../components/buy/SearchFilter";
 import BuyPropertyList from "../components/buy/BuyPropertyList";
-import PropertyOtherLoader from "../components/skeletonLoader/PropertyOtherLoader";
 
-export default function Buy(){
+export default function Buy({ properties }){
     const [searchFilter, setSerachFilter] = useState(false);
     const [loader, setLoader] = useState(false);
     const [highlight, setHighlight] = useState(null);
-    const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
-    const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/all/1/1000`, method : 'GET'}, fetcher);
-    // console.log(isLoading, isValidating)
-    // console.log(data)
-    const [filterData, setFilterData] = useState([]);
-    useEffect(()=>{
-        if(isLoading){
-            setLoader(true)
-        }else{
-            if(data){
-                setFilterData(data.properties);
-                setLoader(false);
-            } 
-        }
-        // console.log(isLoading, isValidating)
-        // console.log("data", data)
-        // console.log(filterData)
-    }, [isLoading, data]);
+    // const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
+    // const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/all/1/1000`, method : 'GET'}, fetcher);
+
+    const [filterData, setFilterData] = useState(properties);
+
     return (
         <>
             {searchFilter && <SearchFilter searchFilter={searchFilter} setSerachFilter={setSerachFilter}/>}
@@ -105,7 +91,7 @@ export default function Buy(){
                         <div className="col-md-6 col-xl-6 col-lg-6 col-md-6">
                             {/* FOR PROPERTIES */}
                             {/* <BuyPropertyList properties={filterData} setHighlight={setHighlight} /> */}
-                            {loader? <PropertyOtherLoader /> : <BuyPropertyList properties={filterData} setHighlight={setHighlight} />}
+                            <BuyPropertyList properties={filterData} setHighlight={setHighlight} />
                             
                         </div>
                     </div>
@@ -113,4 +99,23 @@ export default function Buy(){
             </section>
         </>
     )
+}
+
+export async function getServerSideProps() {
+    const payload = {url : `${apiBaseUrl}/properties/all/1/1000`, method : 'GET'}
+    const res = await fetchApi(payload)
+    // Pass data to the page via props
+
+    if(res.data){
+        return {
+            props: {
+                properties : res && res.data?.properties,
+            },
+        };
+    }
+    return {
+        props: {
+            properties : null,
+        },
+    };
 }
