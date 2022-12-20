@@ -10,7 +10,7 @@ const render = (status) => {
     return <p>Loading...</p>;
 };
 
-const OfficeMap = ({ address, position }) => {
+const OfficeMap = ({ address, position, timing }) => {
     return (
         <div className="contact_map mt-0" style={{ height: "80vh", width: "100%", position: 'relative' }}>
             <Wrapper
@@ -23,6 +23,7 @@ const OfficeMap = ({ address, position }) => {
                         lng: parseFloat(position.lng),
                     }}
                     address={address}
+                    timing={timing}
                     zoom={15}
                     minZoom={3}
                     maxZoom={20}

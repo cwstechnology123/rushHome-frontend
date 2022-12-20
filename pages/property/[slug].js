@@ -61,27 +61,30 @@ const PropertyDetails = ({
             <div className="container">
                 <div className="row justify-content-between">
                     <div className="col-md-8 col-xl-8 col-lg-8">
-                        {!session && (
-                            <PropertyHeader 
-                                price={listPrice}
-                                area={pricePerSquareFoot}
-                                address={{
-                                    fullAddress: fullStreetAddress,
-                                    county: county,
-                                    city: city,
-                                    stateCode: stateOrProvince,
-                                    postalCode: postalCode
+                        <div className="slider_wraper">
+                            {!session && (
+                                <PropertyHeader 
+                                    price={listPrice}
+                                    area={pricePerSquareFoot}
+                                    address={{
+                                        fullAddress: fullStreetAddress,
+                                        county: county,
+                                        city: city,
+                                        stateCode: stateOrProvince,
+                                        postalCode: postalCode
+                                    }}
+                                />
+                            )}
+                            <PropertyImages 
+                                defaulImages={{
+                                    picture3URL: listPicture3URL,
+                                    picture2URL: listPicture2URL,
+                                    pictureURL: listPictureURL
                                 }}
+                                listingKey={listingKey}
                             />
-                        )}
-                        <PropertyImages 
-                            defaulImages={{
-                                picture3URL: listPicture3URL,
-                                picture2URL: listPicture2URL,
-                                pictureURL: listPictureURL
-                            }}
-                            listingKey={listingKey}
-                        />
+                        </div>
+      
                         <div className="descriptions_box heading_line mt-4">
                             <div className="col-xl-12 col-lg-12">
                             <div className="section-title style1 text-left mb-40">

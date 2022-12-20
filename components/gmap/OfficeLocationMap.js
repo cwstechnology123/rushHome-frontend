@@ -4,6 +4,7 @@ import mapStyle from './mapStyle';
 
 export default function OfficeLocationMap({
     address,
+    timing,
     children,
     style,
     ...options
@@ -39,10 +40,12 @@ export default function OfficeLocationMap({
                 return React.cloneElement(child, { map });
             }
             })}
-            <div className="card" style={{position: 'absolute', top: 0, left: '5%', borderRadius: '0px 0px 15px 15px;'}}>
+            <div className="card" style={{position: 'absolute', top: 0, left: '5%', borderRadius: '0px 0px 15px 15px'}}>
                 <div className="card-body h-50">
-                    <h6 className="card-title">Visit our office at</h6>
+                    <h6 className="card-title">Office Location</h6>
                     <small style={{whiteSpace: 'pre-wrap'}}>{address}</small>
+                    <h6 className="card-title mt-3">Visit our office at</h6>
+                    <small style={{whiteSpace: 'pre-wrap'}}>{timing}</small>
                     
                 </div>
             </div>

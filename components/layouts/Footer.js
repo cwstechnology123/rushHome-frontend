@@ -10,7 +10,7 @@ export default function Footer() {
                   <div className="footer-top">
                   <div className="container">
                       <div className="row pb-75">
-                      <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6 pe-xl-5">
+                      <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                           <div className="footer-widget">
                           <Link href="/" className="footer-logo">
                               <span className="logo_wraper"><img src="../assets/img/Black Rush home.png" alt="Black Rush home" /></span>
@@ -54,7 +54,7 @@ export default function Footer() {
                           </div>
                           </div>
                       </div>
-                      <div className="col-xl-5 col-lg-6 col-md-6 col-sm-6">
+                      <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                           <div className="footer-widget cities">
                           <h3 className="footer-widget-title">Search by City</h3>
                           <ul className="footer-menu list-style">
@@ -117,7 +117,7 @@ export default function Footer() {
                           </ul>
                           </div>
                       </div>
-                      <div className="col-xl-3 col-lg-6 col-md-6 col-sm-6 ps-xl-5">
+                      <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                           <div className="footer-widget">
                           <h3 className="footer-widget-title">Quick Links</h3>
                           <ul className="footer-menu list-style">

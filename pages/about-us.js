@@ -186,7 +186,7 @@ export default function AboutUs() {
             </div>
           </div>
         </div>
-        <OfficeMap address={`200 S. DuPont Blvd, Ste 105, Smyrna, DE 19977`} position={{
+        <OfficeMap address={`200 S. DuPont Blvd, Ste 105,\nSmyrna, DE 19977`} timing={`Mon - Fri 8:30 AM to 5 PM\nSat - 9 AM to 12 PM`} position={{
           lat: 39.29978446764322,
           lng: -75.60011688096353
         }}/>

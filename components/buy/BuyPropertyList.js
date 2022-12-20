@@ -40,7 +40,7 @@ export default function BuyPropertyList({ properties, setHighlight }){
                     <span className="list_th_icon"><i className="fa fa-th" aria-hidden="true" /></span>
                 </div>
             </div>
-            <div className="row" style={{height: '1200px', overflowY: 'auto'}}>
+            <div className="row" id="property-list">
                 {properties.map(property => (
                     <div className="col-xl-6 col-lg-6 col-md-6" key={`property-block-${property.id}`} onMouseEnter={()=>setHighlight(property.id)} onMouseLeave={()=>setHighlight(null)}>
                         <PropertyCard property={property}/>

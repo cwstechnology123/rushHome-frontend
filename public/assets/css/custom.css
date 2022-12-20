@@ -167,6 +167,13 @@
     border-radius: 5px !important;
 }
 
+
+/* --------------------------MAP------------------- */
+#mapBox{
+    max-height: 2000px;
+    background-color: #000;
+    width: 100%;
+}
 .cluster-marker {
     color: #fff;
     background: #1978c8;
@@ -252,7 +259,7 @@ display: none;
 
 .state_tabs .list-group .list-group-block button{
     text-transform: uppercase;
-    color: #aeaeae;
+    color: #000;
     background-color: #f6f6f6;
     cursor: pointer;
     padding: 10px 15px;

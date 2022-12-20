@@ -23,23 +23,20 @@ const PropertyCard = ({
         <Link href={`/property/${slug}`}>
             <div className="property-card style3">
                 <div className="property-img">
-                    {/* <img key={`image_${id}`} src={src} alt="Image" loading="lazy" /> */}
                     <Image 
                         key={`image_${id}`} 
                         src={src} alt="Image" 
                         width={300} 
                         height={250} 
-                        sizes="320 640 750"
                         loading="lazy"
                     />
                     <span className="property-status">Exclusive</span>
                 </div>
                 <div className="property-info">
                     <span>Home at {county}</span>
-                    <p>{fullStreetAddress?fullStreetAddress:ucfirst(county)}</p>
+                    <p className="mb-0">{fullStreetAddress?fullStreetAddress:ucfirst(county)}</p>
                     <div className="property-status-wrap">
-                        
-                        <p className="property-price">{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0 })}</p>
+                        <p className="property-price mb-0">{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0 })}</p>
                     </div>
                     
                     <ul className="property-metainfo list-style">

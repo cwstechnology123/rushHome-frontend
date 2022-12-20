@@ -3,8 +3,23 @@ import { useEffect, useState } from "react";
 import { apiBaseUrl, fetchApi } from "../utils/fetchApi";
 import SearchFilter from "../components/buy/SearchFilter";
 import BuyPropertyList from "../components/buy/BuyPropertyList";
+import Footer from "../components/layouts/BuyFooter";
+import useWindowDimensions from "../components/buy/useWindowDimensions";
 
-export default function Buy({ properties }){
+const Buy = ({ properties }) => { 
+
+    const windowDimensions = useWindowDimensions();
+    const [mapHeight, setMapHeight] = useState(windowDimensions?.height || 500);
+    useEffect(() => {
+        if(windowDimensions && (windowDimensions.width <= 768)){
+            setMapHeight('auto');
+        }else{
+            let mh = (windowDimensions?.height)? windowDimensions.height : (window?.innerHeight || 500);
+            setMapHeight(Math.round(mh * 0.7915));
+        }
+        
+    }, [windowDimensions])
+    // console.log(windowDimensions)
     const [searchFilter, setSerachFilter] = useState(false);
     const [loader, setLoader] = useState(false);
     const [highlight, setHighlight] = useState(null);
@@ -82,16 +97,19 @@ export default function Buy({ properties }){
                     </form>
                 </div>
             </section>
-            <section className="listing_wraper">
+            <section className="listing_wraper mt-2">
                 <div className="container-fluid">
                     <div className="row">
-                        <div className="col-md-6 col-xl-6 col-lg-6 col-md-6 d-sm-none  d-md-block">
+                        <div className="col-md-6 col-xl-6 col-lg-6 col-md-6 p-0 d-none d-sm-block d-sm-none d-md-block">
                             {/* FOR MAP */}
+                            <div id="mapBox" style={{height: mapHeight}}></div>
                         </div>
                         <div className="col-md-6 col-xl-6 col-lg-6 col-md-6">
                             {/* FOR PROPERTIES */}
-                            {/* <BuyPropertyList properties={filterData} setHighlight={setHighlight} /> */}
-                            <BuyPropertyList properties={filterData} setHighlight={setHighlight} />
+                            <div style={{width:'100%', height: mapHeight, overflowY: 'auto'}}>
+                                <BuyPropertyList properties={filterData} setHighlight={setHighlight} />
+                                <Footer />
+                            </div>
                             
                         </div>
                     </div>
@@ -100,9 +118,11 @@ export default function Buy({ properties }){
         </>
     )
 }
+Buy.layout = 1;
+export default Buy;
 
 export async function getServerSideProps() {
-    const payload = {url : `${apiBaseUrl}/properties/all/1/1000`, method : 'GET'}
+    const payload = {url : `${apiBaseUrl}/properties/all/1/10`, method : 'GET'}
     const res = await fetchApi(payload)
     // Pass data to the page via props
 
