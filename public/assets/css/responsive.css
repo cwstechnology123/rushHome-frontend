@@ -296,6 +296,10 @@
     }
 }
 @media only screen and (max-width: 767px) {
+	.btn.style2.search_button {
+	position: absolute;
+	right: 0px;
+}
 	.page-nav li {
 	margin: 0 0px;
 	display: inline-block;
@@ -501,9 +505,9 @@
     .btn {
         font-size: 14px;
     }
-    .btn {
+    /*.btn {
         padding: 12px 25px;
-    }
+    }*/
     .content-wrapper {
         margin-top: 63px;
     }
@@ -613,10 +617,11 @@
     .hero-wrap.style2 .hero-slide-item .hero-content h1 span img {
         bottom: 6px;
     }
-    .hero-wrap.style3 .hero-content .property-search-form {
-        background-color: #fff;
-        border-radius: 5px;
-    }
+.hero-wrap.style3 .hero-content .property-search-form .form-group-wrap {
+	width: 80%;
+	margin-right: 0;
+	position: relative;
+}
     .hero-wrap.style3 .hero-content .property-search-form .form-group-wrap {
         width: 100%;
         margin-right: 0;
@@ -1466,7 +1471,7 @@
         text-align: center !important;
     }
     .hero-wrap {
-        margin-top: 65px;
+        margin-top: 15px;
     }
     .hero-wrap.style1 {
         padding: 50px 0 110px;
