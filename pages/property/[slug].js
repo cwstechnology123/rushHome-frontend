@@ -124,7 +124,9 @@ const PropertyDetails = ({
                                                 <li>
                                                 <span><MdSquareFoot/></span>
                                                 <p>SQFT</p>
-                                                <h3>{parseFloat(areaTotal).toFixed(1)}</h3>
+                                                <h3>
+                                                {areaTotal? Number(areaTotal).toLocaleString('en-US') : '-'}
+                                                </h3>
                                                 </li>
                                             )}
                                             {bedroomsTotal!="" && (
@@ -184,7 +186,7 @@ const PropertyDetails = ({
                                                     </tr>
                                                     <tr>
                                                         <th width={'50%'}>Size:</th>
-                                                        <td width={'50%'} className="text-left">{areaTotal? areaTotal : '-'} SqFt</td>
+                                                        <td width={'50%'} className="text-left">{areaTotal? Number(areaTotal).toLocaleString('en-US') : '-'} SqFt</td>
                                                     </tr>
                                                     <tr>
                                                         <th width={'50%'}>Garage:</th>
