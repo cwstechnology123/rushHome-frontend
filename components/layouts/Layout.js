@@ -2,7 +2,7 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 import Head from 'next/head'
 
-export default function Layout({ children }) {
+export default function Layout({ getLayout, children }) {
   return (
     <>
       <Head>
@@ -13,7 +13,7 @@ export default function Layout({ children }) {
       <div className="page-wrapper">
           <Navbar />
           <main>{children}</main>
-          <Footer />
+          {!getLayout && <Footer />}
       </div>
     </>
   )

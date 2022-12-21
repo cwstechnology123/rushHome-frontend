@@ -155,10 +155,4 @@ export async function getServerSideProps() {
     };
 }
 
-HomesForSale.getLayout = function getLayout(page) {
-    return (
-        <BuyLayout>
-            {page}
-        </BuyLayout>
-    )
-}
+HomesForSale.getLayout = 1;
