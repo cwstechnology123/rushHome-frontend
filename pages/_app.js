@@ -6,14 +6,15 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 function MyApp({  Component,  pageProps: { session, ...pageProps } }) {
   // let CustomLayout = Component.layout? BuyLayout : Layout;
-  const getLayout = Component.getLayout ||
-  function (page) {
-    return <Layout>{page}</Layout>;
-  };
+  const renderWithLayout =
+    Component.getLayout ||
+    function (page) {
+      return <Layout>{page}</Layout>;
+    };
   return (
     <SessionProvider session={session}>
       <NextNProgress color="#29D" startPosition={0.3} stopDelayMs={50} height={3} showOnShallow={true}  options={{ showSpinner: false }} />
-      {getLayout(<Component {...pageProps} />)}
+      {renderWithLayout(<Component {...pageProps} />)}
       {/* <CustomLayout>
         <Component {...pageProps} />
       </CustomLayout> */}
