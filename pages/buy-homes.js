@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { apiBaseUrl, fetchApi } from "../utils/fetchApi";
 import SearchFilter from "../components/buy/SearchFilter";
 import BuyPropertyList from "../components/buy/BuyPropertyList";
-import BuyLayout from "../components/layouts/BuyLayout";
+import { getLayout } from "../components/layouts/BuyHomesLayout";
 import Footer from "../components/layouts/BuyFooter";
 import useWindowDimensions from "../components/buy/useWindowDimensions";
 import BuyMap from "../components/buy/BuyMap";
@@ -136,9 +136,7 @@ const BuyHomes = ({ properties }) => {
     )
 }
 
-BuyHomes.getLayout = function(page) {
-    return <BuyLayout>{page}</BuyLayout>
-};
+BuyHomes.getLayout = getLayout
 
 export default BuyHomes
 
