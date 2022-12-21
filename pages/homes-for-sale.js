@@ -8,7 +8,7 @@ import Footer from "../components/layouts/BuyFooter";
 import useWindowDimensions from "../components/buy/useWindowDimensions";
 import BuyMap from "../components/buy/BuyMap";
 
-const HomesForSale = ({ properties }) => { 
+export default function HomesForSale({ properties }) { 
 
     const windowDimensions = useWindowDimensions();
     const [mapHeight, setMapHeight] = useState(windowDimensions?.height || 500);
@@ -109,7 +109,7 @@ const HomesForSale = ({ properties }) => {
             <section className="listing_wraper mt-2">
                 <div className="container-fluid">
                     <div className="row">
-                        <div className="col-md-6 col-xl-6 col-lg-6 col-md-6 p-0 d-none d-sm-block d-sm-none d-md-block">
+                        <div className="col-xl-5 col-lg-5 col-md-6 p-0 d-none d-sm-block d-sm-none d-md-block">
                             {/* FOR MAP */}
                             <div id="mapBox" style={{width:'100%', height: mapHeight, position: 'relative'}}>
                                 <BuyMap
@@ -117,17 +117,17 @@ const HomesForSale = ({ properties }) => {
                                 setCenter={setCenter}
                                 bounds={bounds}
                                 setBounds={setBounds}
-                                filterData={filterData}
-                                propertyList={properties}
+                                filterData={filterData || []}
+                                propertyList={properties || []}
                                 setFilterData={setFilterData}
                                 highlight={highlight}
                                 />
                             </div>
                         </div>
-                        <div className="col-md-6 col-xl-6 col-lg-6 col-md-6" style={{height: mapHeight, overflowY: 'auto'}}>
+                        <div className="col-xl-7 col-lg-7 col-md-6" style={{height: mapHeight, overflowY: 'auto'}}>
                             {/* FOR PROPERTIES */}
-                            <BuyPropertyList properties={filterData} setHighlight={setHighlight} />
-                            {/* <Footer /> */}
+                            <BuyPropertyList properties={filterData || []} setHighlight={setHighlight} />
+                            <Footer />
                         </div>
                     </div>
                 </div>
@@ -136,17 +136,11 @@ const HomesForSale = ({ properties }) => {
     )
 }
 
-// HomesForSale.getLayout = function(page) {
-//     return <BuyLayout>{page}</BuyLayout>;
-// };
-
-export default HomesForSale
-
 export async function getServerSideProps() {
-    const payload = {url : `${apiBaseUrl}/properties/all/1/10000`, method : 'GET'}
+    const payload = {url : `${apiBaseUrl}/properties/all/1/10`, method : 'GET'}
     const res = await fetchApi(payload)
     // Pass data to the page via props
-
+    console.log(res)
     if(res.data){
         return {
             props: {

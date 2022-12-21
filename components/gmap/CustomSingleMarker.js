@@ -1,10 +1,12 @@
 import millify from "millify";
 import Image from "next/image";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import OverlayView from "./marker/OverlayView";
 import PopupView from "./popups/PopupView";
 
 export default function CustomSingleMarker({ hotel, map, highlight }) {
+    // console.log(hotel)
     const [show, setShow] = useState(false);
     const price = useMemo(() => {
         return `$ ${millify(hotel.listPrice)}`;
@@ -12,19 +14,25 @@ export default function CustomSingleMarker({ hotel, map, highlight }) {
     const contentPopup = (hotel) =>{
         return (
             <div className="popup-bubble d-flex shadow bg-light text-white">
-                <Image src={hotel.listPictureURL} alt={`property for ${hotel.slug}`} width={100} height={100}/>
+                <Image src={hotel.listPictureURL} alt={`property for ${hotel.slug}`} width={120} height={120} loading="lazy"/>
                 <div className="grow p-2">
                     <span className="font-weight-bold">
                         {hotel.id && (
-                        <a
-                            href={`/property/${hotel.id}`}
-                            className="text-info"
+                        <Link
+                            href={`/property/${hotel.slug}`}
+                            className="text-dark"
                             target="_blank"
                             rel="noreferrer"
+                            passHref
                         >
-                            {hotel.fullStreetAddress}<br/>
-                            <strong>$ {hotel.listPrice}</strong>
-                        </a>
+                            <h6 style={{fontSize:'1.2em'}}>{hotel.fullStreetAddress}</h6>
+                            <h6 className="small" style={{fontWeight: '400 !important'}}>
+                                {Number(hotel.listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 })}
+                            </h6>
+                            <span>
+                                {`${hotel.bedroomsTotal || '-'} BD | ${hotel.bathroomsTotalInteger || '-'} BA | ${hotel.areaTotal? Number(hotel.areaTotal).toLocaleString('en-US') : '-'} SF `}
+                            </span>
+                        </Link>
                         )}
                     </span>
                     <p className="small mb-0 text-dark">{}</p>
@@ -44,7 +52,7 @@ export default function CustomSingleMarker({ hotel, map, highlight }) {
             map={map}
             zIndex={highlight? 99 : 0}
         >
-            <div key={`marker-button-${hotel.id}`} className={`price-tag ${highlight===hotel.id && "font-weight-bold p-2"}`} onClick={()=>setShow(!show)} >{price}</div>
+            <div key={`marker-button-${hotel.id}`} className={`price-tag ${highlight===hotel.id && "active"}`} onClick={()=>setShow(!show)} >{price}</div>
         </OverlayView>
         {show && <PopupView
             position={{
