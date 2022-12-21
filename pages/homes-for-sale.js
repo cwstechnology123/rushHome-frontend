@@ -135,13 +135,6 @@ export default function HomesForSale({ properties }) {
         </>
     )
 }
-HomesForSale.getLayout = function getLayout(page) {
-    return (
-      <BuyLayout>
-        {page}
-      </BuyLayout>
-    )
-  }
 
 export async function getServerSideProps() {
     const payload = {url : `${apiBaseUrl}/properties/all/1/10000`, method : 'GET'}
@@ -160,4 +153,12 @@ export async function getServerSideProps() {
             properties : null,
         },
     };
+}
+
+HomesForSale.getLayout = function getLayout(page) {
+    return (
+        <BuyLayout>
+            {page}
+        </BuyLayout>
+    )
 }
