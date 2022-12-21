@@ -6,8 +6,9 @@ import BuyPropertyList from "../components/buy/BuyPropertyList";
 import Footer from "../components/layouts/BuyFooter";
 import useWindowDimensions from "../components/buy/useWindowDimensions";
 import BuyMap from "../components/buy/BuyMap";
+import BuyLayout from "../components/layouts/BuyLayout";
 
-const HomesForSale = ({ properties }) => { 
+export default function HomesForSale({ properties }) { 
 
     const windowDimensions = useWindowDimensions();
     const [mapHeight, setMapHeight] = useState(windowDimensions?.height || 500);
@@ -134,8 +135,13 @@ const HomesForSale = ({ properties }) => {
         </>
     )
 }
-HomesForSale.layout = 1;
-export default HomesForSale;
+HomesForSale.getLayout = function getLayout(page) {
+    return (
+      <BuyLayout>
+        {page}
+      </BuyLayout>
+    )
+  }
 
 export async function getServerSideProps() {
     const payload = {url : `${apiBaseUrl}/properties/all/1/10000`, method : 'GET'}

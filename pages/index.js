@@ -125,7 +125,7 @@ export default function Home({properties}) {
             </div>
           </div>
           <div className="row justify-content-center">
-            <div className="col-xxl-3 col-xl-3 col-lg-4 col-md-6">
+            <div className="col-xxl-3 col-xl-3 col-lg-4 col-md-12">
               <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
                 <div className="city-card style1 city_height">
                   <img src="assets/img/city/city-1.jpg" alt="Image" />
@@ -145,7 +145,7 @@ export default function Home({properties}) {
                 </div>
               </div>
             </div>	
-            <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+            <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-12">
               <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
                 <div className="city-card style1">
                   <img src="assets/img/city/city-1.jpg" alt="Image" />
@@ -176,7 +176,7 @@ export default function Home({properties}) {
                 </div>
               </div>
             </div>	
-            <div className="col-xxl-3 col-xl-3 col-lg-4 col-md-6">
+            <div className="col-xxl-3 col-xl-3 col-lg-4 col-md-12">
               <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
                 <div className="city-card style1">
                   <img src="assets/img/city/city-1.jpg" alt="Image" />
