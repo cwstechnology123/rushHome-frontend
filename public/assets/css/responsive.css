@@ -296,6 +296,14 @@
     }
 }
 @media only screen and (max-width: 767px) {
+	.aut_wraper {
+	width: 400px;
+	margin: 0 auto;
+}
+.client_sign {
+	width: 400px;
+	margin: 0 auto;
+}
 	.style3.ptb-50.product_box {
 	padding-top: 10px;
 }
@@ -1119,6 +1127,14 @@
     }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+	.aut_wraper {
+	width: 400px;
+	margin: 0 auto;
+}
+.client_sign {
+	width: 400px;
+	margin: 0 auto;
+}
 	.bye_topnav div.col-12 {
 	width: auto;
 }
