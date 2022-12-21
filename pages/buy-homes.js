@@ -137,7 +137,7 @@ const BuyHomes = ({ properties }) => {
 }
 
 BuyHomes.getLayout = function(page) {
-    return <BuyLayout>{page}</BuyLayout>;
+    return <BuyLayout>{page}</BuyLayout>
 };
 
 export default BuyHomes
