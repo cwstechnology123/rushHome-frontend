@@ -11,12 +11,14 @@ const PropertyCard = ({
         listPictureURL,
         county,
         city,
+        postalCode,
         country,
         fullStreetAddress,
         bedroomsTotal,
         bathroomsTotal,
         areaTotal,
-        garageSpaces
+        garageSpaces,
+        totalGarageAndParkingSpaces
     }
   }) => {
     // const [srcimg, setSrcimg] = useState(listPictureURL.replace(/^http:\/\//i, 'https://'));
@@ -36,7 +38,7 @@ const PropertyCard = ({
                 </div>
                 <div className="property-info">
                     <span>Home at {county}</span>
-                    <p className="mb-0" style={{whiteSpace: 'pre-wrap'}}>{fullStreetAddress?`${fullStreetAddress}\n${country}, ${city}`:ucfirst(county)}</p>
+                    <p className="mb-0" style={{whiteSpace: 'pre-wrap'}}>{fullStreetAddress?`${fullStreetAddress}\n${country}, ${city} ${postalCode}`:ucfirst(county)}</p>
                     <div className="property-status-wrap">
                         <p className="property-price mb-0">{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0 })}</p>
                     </div>
@@ -45,7 +47,7 @@ const PropertyCard = ({
                         <li key={`bed${id}`}><i className="flaticon-double-bed" />{bedroomsTotal? bedroomsTotal : '-'} Br</li>
                         <li key={`bath${id}`}><i className="flaticon-bath-tub" />{bathroomsTotal? bathroomsTotal : '-'} Ba</li>
                         <li key={`square${id}`}><i className="flaticon-square" />{areaTotal? Number(areaTotal).toLocaleString('en-US') : '-'} Sq.Ft</li>
-                        <li key={`home${id}`}><i className="flaticon-home" />{garageSpaces? garageSpaces : '-'} Gr</li>
+                        <li key={`home${id}`}><i className="flaticon-home" />{totalGarageAndParkingSpaces? totalGarageAndParkingSpaces : '-'} Gr</li>
                     </ul>
                 </div>
             </div>
