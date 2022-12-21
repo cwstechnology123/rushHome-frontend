@@ -215,7 +215,9 @@
 } */
 
 /* --------------------------MAP------------------- */
-
+.btn_block{
+    border: 1px;
+}
 #mapBox{
     max-height: 2000px;
     background-color: #000;
@@ -223,9 +225,9 @@
 }
 .cluster-marker {
     color: #fff;
-    background: #1978c8;
+    background: #000;
     border-radius: 50%;
-    padding: 10px;
+    padding: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -263,7 +265,6 @@
     text-rendering: auto;
     cursor: pointer;
 }
-
 .price-tag::after {
     content: "";
     position: absolute;
@@ -276,9 +277,22 @@
     border-right: 4px solid transparent;
     border-top: 8px solid #000;
 }
+.price-tag.active, .price-tag:hover{
+    font-weight: 500;
+    font-size: 14px;
+}
+.popup-close{
+    position: absolute;
+    top: 0;
+    right: -20px;
+    padding: 5px;
+    background-color: #000;
+    color: #FCCF67;
+    border: 1px solid #000;
+}
 
 [class$=api-load-alpha-banner] {
-display: none;
+    display: none;
 }
 
 .popup-bubble {
@@ -288,7 +302,6 @@ display: none;
     transform: translate(-50%, -130%);
     background-color: white;
     padding: 5px;
-    border-radius: 5px;
     font-family: sans-serif;
     box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
 }
@@ -296,7 +309,7 @@ display: none;
     cursor: auto;
     height: 0;
     position: absolute;
-    width: 300px;
+    width: 350px !important;
 }
   
 /* ------------------about page------------------------- */

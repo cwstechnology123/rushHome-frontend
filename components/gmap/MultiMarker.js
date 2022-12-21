@@ -10,6 +10,7 @@ export default function MultiMarker({
     hotels,
     map
 }) {
+    // console.log("MultiMaker:",hotels)
     const [show, setShow] = useState(false);
     const contentPopup = (hotels) =>{
         return (

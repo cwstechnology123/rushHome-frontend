@@ -121,6 +121,7 @@ const BuyMap = ({
                             lat: latitude,
                             lng: longitude
                         }}
+                        highlight={highlight}
                         clusterId={cluster.id}
                         pointCount={pointCount}
                         hotels={supercluster.getChildren(cluster.id)}
@@ -132,12 +133,14 @@ const BuyMap = ({
                     <ClusterMarker
                         key={`cluster-${cluster.id}`}
                         clusterId={cluster.id}
+                        highlight={highlight}
                         position={{
                             lat: latitude,
                             lng: longitude
                         }}
                         pointCount={pointCount}
                         pointsLength={points.length}
+                        hotels={supercluster.getChildren(cluster.id)}
                     />
                 );
             }

@@ -7,9 +7,20 @@ export default function ClusterMarker({
     clusterId,
     pointCount,
     pointsLength,
-    // onClusterClick
+    highlight,
+    hotels
 }) {
-
+    // const hasHotel = hotels.map(({properties}) => {
+    //     let hotels = properties.hotel;
+    //     return hotels.filter(hotel => (hotel.id === highlight));
+    //     // console.log(hotel)
+    //     // if(hotel.id === highlight){
+    //     //     return hotel;
+    //     // }
+    //     // return null
+    // })
+    // console.log(hasHotel)
+    // console.log("ClusterMaker:",hotels)
     return (
         <OverlayView
             position={{

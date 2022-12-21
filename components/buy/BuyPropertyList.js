@@ -29,7 +29,7 @@ export default function BuyPropertyList({ properties, setHighlight }){
             <div className="row align-items-center py-3" style={{position: 'sticky', top: 0, zIndex: 999, backgroundColor: '#f9f9f9'}}>
                 <div className="col-xl-6 col-lg-8 col-md-8">
                     <div className="profuct-result">
-                        <p>We found <span>{properties.length}</span> properties available for you</p>
+                        <p>We found <span>{properties?.length || 0}</span> properties available for you</p>
                     </div>
                 </div>
                 <div className="col-xl-2 col-lg-4 col-md-4">
@@ -54,7 +54,7 @@ export default function BuyPropertyList({ properties, setHighlight }){
             </div>
             <div className="row">
                 {showproperty.map(property => (
-                    <div className="col-xl-6 col-lg-6 col-md-6" key={`property-block-${property.id}`} onMouseEnter={()=>setHighlight(property.id)} onMouseLeave={()=>setHighlight(null)}>
+                    <div className="col-md-6" key={`property-block-${property.id}`} onMouseEnter={()=>setHighlight(property.id)} onMouseLeave={()=>setHighlight(null)}>
                         <PropertyCard property={property}/>
                     </div>
                 ))}
