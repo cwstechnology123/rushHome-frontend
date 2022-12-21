@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { apiBaseUrl, fetchApi } from "../utils/fetchApi";
 import SearchFilter from "../components/buy/SearchFilter";
 import BuyPropertyList from "../components/buy/BuyPropertyList";
+import BuyLayout from "../components/layouts/BuyLayout";
 import Footer from "../components/layouts/BuyFooter";
 import useWindowDimensions from "../components/buy/useWindowDimensions";
 import BuyMap from "../components/buy/BuyMap";
-import BuyLayout from "../components/layouts/BuyLayout";
 
 export default function HomesForSale({ properties }) { 
 
@@ -155,4 +155,6 @@ export async function getServerSideProps() {
     };
 }
 
-HomesForSale.getLayout = 1;
+HomesForSale.getLayout = function(page) {
+  return <BuyLayout>{page}</BuyLayout>;
+};
