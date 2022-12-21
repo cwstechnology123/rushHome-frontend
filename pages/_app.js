@@ -5,7 +5,6 @@ import NextNProgress from 'nextjs-progressbar'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 function MyApp({  Component,  pageProps: { session, ...pageProps } }) {
-  // console.log(Component)
   // let CustomLayout = Component.layout? BuyLayout : Layout;
   const getLayout = Component.getLayout ||
   function (page) {
