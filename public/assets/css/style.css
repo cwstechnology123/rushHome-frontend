@@ -7528,8 +7528,30 @@ margin-left: 0px;}
     right: 0;
     height: 57px;
 }
+.byfooter div.left_box {
+    width: 100%;
+    display: inline-block;
+    margin-top: 10px;
+}
+.byfooter div.bx_wraper {
+    display: inline-block;
+    margin: 0;
+}
+.byfooter div.right_box {
+    margin-left: 0;
+}
+.byfooter div.right_box {
+    margin-left: 0;
+    text-align: left;
+    margin-top: 10px;
+}
+.byfooter div.right_box p {
+    text-align: left;
+}
 
-
+.byfooter div.cities ul {
+    width: 100%;
+}
 
 
 
