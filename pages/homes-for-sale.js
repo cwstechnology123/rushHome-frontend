@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 // import useSWR from "swr";
+import { BsFilterLeft } from "react-icons/bs";
 import { apiBaseUrl, fetchApi } from "../utils/fetchApi";
 import SearchFilter from "../components/buy/SearchFilter";
 import BuyPropertyList from "../components/buy/BuyPropertyList";
@@ -87,9 +88,10 @@ export default function HomesForSale({ properties }) {
                         </div>
                         <div className="col-12">
                             <button type="button" className="btn refresh_button" onClick={() => setSerachFilter(!searchFilter)}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
+                                <BsFilterLeft/>
+                                {/* <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
                                 <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-                                </svg>
+                                </svg> */}
                             </button>
                         </div>
                         <div className="col-12">

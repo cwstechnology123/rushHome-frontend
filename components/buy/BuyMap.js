@@ -129,7 +129,7 @@ const BuyMap = ({
                     </MultiMarker>
                 )
             }else{
-                // console.log(supercluster.getChildren(cluster.id))
+                // console.log({...supercluster.getLeaves(cluster.id)})
                 return (
                     <ClusterMarker
                         key={`cluster-${cluster.id}`}
@@ -141,7 +141,6 @@ const BuyMap = ({
                         }}
                         pointCount={pointCount}
                         pointsLength={points.length}
-                        hotels={supercluster.getChildren(cluster.id)}
                     />
                 );
             }

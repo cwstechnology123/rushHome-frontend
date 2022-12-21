@@ -54,7 +54,7 @@ export default function BuyPropertyList({ properties, setHighlight }){
             </div>
             <div className="row">
                 {showproperty.map(property => (
-                    <div className="col-md-6" key={`property-block-${property.id}`} onMouseEnter={()=>setHighlight(property.id)} onMouseLeave={()=>setHighlight(null)}>
+                    <div className="col-md-6" key={`property-block-${property.id}`} onMouseEnter={()=>setHighlight({id: property.id, position: property.geography, price: property.listPrice})} onMouseLeave={()=>setHighlight(null)}>
                         <PropertyCard property={property}/>
                     </div>
                 ))}

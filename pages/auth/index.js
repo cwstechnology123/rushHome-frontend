@@ -19,7 +19,7 @@ export default function SignInOpt() {
     
     return (
       <>
-        <section className="pt-100 pb-75">
+        <section className="pt-100 pb-75 aut_wraper">
             <div className="col-md-4 col-lg-4 col-xl-4 offset-lg-4">
                 <div className="heading_login">
                 <h2><Link href="/"><i className="flaticon-left-arrow" /></Link>Login / Sign up <span className="close_button" onClick={(e) => handleClick(e, "/")}><i className="flaticon-close" /></span></h2>
