@@ -129,6 +129,7 @@ const BuyMap = ({
                     </MultiMarker>
                 )
             }else{
+                // console.log(supercluster.getChildren(cluster.id))
                 return (
                     <ClusterMarker
                         key={`cluster-${cluster.id}`}

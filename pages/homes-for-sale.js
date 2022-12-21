@@ -136,8 +136,8 @@ export default function HomesForSale({ properties }) {
     )
 }
 
-export async function getServerSideProps() {
-    const payload = {url : `${apiBaseUrl}/properties/all/1/10`, method : 'GET'}
+export async function getStaticProps() {
+    const payload = {url : `${apiBaseUrl}/properties/all/1/10000`, method : 'GET'}
     const res = await fetchApi(payload)
     // Pass data to the page via props
     console.log(res)

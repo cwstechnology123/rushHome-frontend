@@ -6,11 +6,11 @@ export default function BuyFooter(){
     if(router.pathname != '/auth' && router.pathname != '/auth/client-signin' && router.pathname != '/auth/agent-signin' && router.pathname != '/signup'){
         return (
             <>
-              <footer className="footer-wrap style1 pt-100">
+              <footer className="footer-wrap style1 pt-100 byfooter">
                   <div className="footer-top">
                   <div className="container">
                       <div className="row pb-75">
-                      <div className="col-12">
+                      <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                           <div className="footer-widget">
                             <Link href="/" className="footer-logo">
                                 <span className="logo_wraper"><img src="../assets/img/Black Rush home.png" alt="Black Rush home" /></span>
@@ -51,7 +51,7 @@ export default function BuyFooter(){
                             </div>
                           </div>
                       </div>
-                      <div className="col-12">
+                      <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                           <div className="footer-widget cities">
                             <h3 className="footer-widget-title">Search by City</h3>
                             <ul className="footer-menu list-style">
@@ -114,7 +114,7 @@ export default function BuyFooter(){
                             </ul>
                           </div>
                       </div>
-                      <div className="col-12">
+                      <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                           <div className="footer-widget">
                             <h3 className="footer-widget-title">Quick Links</h3>
                             <ul className="footer-menu list-style">
