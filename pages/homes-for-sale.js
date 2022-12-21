@@ -137,7 +137,7 @@ const HomesForSale = ({ properties }) => {
 HomesForSale.layout = 1;
 export default HomesForSale;
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const payload = {url : `${apiBaseUrl}/properties/all/1/10000`, method : 'GET'}
     const res = await fetchApi(payload)
     // Pass data to the page via props
