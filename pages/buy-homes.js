@@ -39,6 +39,7 @@ const BuyHomes = ({ properties }) => {
     // console.log(filterData.length)
     return (
         <>
+        <getLayout>
             {searchFilter && <SearchFilter searchFilter={searchFilter} setSerachFilter={setSerachFilter}/>}
             <section className="bye_topnav">
                 <div className="container-fluid">    
@@ -132,11 +133,10 @@ const BuyHomes = ({ properties }) => {
                     </div>
                 </div>
             </section>
+            </getLayout>
         </>
     )
 }
-
-BuyHomes.getLayout = getLayout
 
 export default BuyHomes
 
