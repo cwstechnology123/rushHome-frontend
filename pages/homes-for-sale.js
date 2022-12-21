@@ -127,7 +127,7 @@ const HomesForSale = ({ properties }) => {
                         <div className="col-md-6 col-xl-6 col-lg-6 col-md-6" style={{height: mapHeight, overflowY: 'auto'}}>
                             {/* FOR PROPERTIES */}
                             <BuyPropertyList properties={filterData} setHighlight={setHighlight} />
-                            <Footer />
+                            {/* <Footer /> */}
                         </div>
                     </div>
                 </div>
@@ -136,9 +136,9 @@ const HomesForSale = ({ properties }) => {
     )
 }
 
-HomesForSale.getLayout = function(page) {
-    return <BuyLayout>{page}</BuyLayout>;
-};
+// HomesForSale.getLayout = function(page) {
+//     return <BuyLayout>{page}</BuyLayout>;
+// };
 
 export default HomesForSale
 
@@ -160,3 +160,7 @@ export async function getServerSideProps() {
         },
     };
 }
+
+HomesForSale.getLayout = function(page) {
+  return <BuyLayout>{page}</BuyLayout>;
+};
