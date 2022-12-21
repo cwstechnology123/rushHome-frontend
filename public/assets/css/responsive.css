@@ -1119,6 +1119,18 @@
     }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+	.btn.style2.search_button {
+	position: absolute !important;
+	right: 0;
+	height: 57px;
+}
+	.city-card img {
+	width: 100%;
+}
+	.state_tabs {
+	float: none;
+	text-align: center;
+}
     .container-fluid {
         max-width: 720px;
         padding-left: 15px;
@@ -1244,11 +1256,11 @@
         padding: 0 60px;
     }
     .hero-wrap.style3 .hero-content .property-search-form .form-group-wrap {
-        width: calc(100% - 175px);
-        margin-right: 22px;
-        background-color: #fff;
-        border-radius: 5px;
-    }
+	width: 100%;
+	margin-right: 0px;
+	background-color: #fff;
+	border-radius: 5px;
+}
     .hero-wrap.style3 .hero-content .property-search-form .form-group-wrap .form-group {
         width: 33.33%;
         border-right: 1px solid rgba(0, 0, 0, 0.1);
