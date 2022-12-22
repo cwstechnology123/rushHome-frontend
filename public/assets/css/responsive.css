@@ -314,9 +314,10 @@
 	.property-search-form {
 	position: relative;
 }
-	.btn.style2.search_button {
-	position: absolute;
-	right: 0px;
+.btn.style2.search_button {
+    position: absolute;
+    right: -2px;
+    top: -1px;
 }
 	.page-nav li {
 	margin: 0 0px;
@@ -657,7 +658,7 @@
 	/* width: 100% !important; */
 	border-radius: 0 0 5px 5px;
 	margin: 0;
-	height: 56px;
+	height: 57px;
 }
     .hero-slider-two.owl-carousel .owl-nav button.owl-prev,
     .hero-slider-two.owl-carousel .owl-nav button.owl-next {
@@ -1138,10 +1139,10 @@
 	.bye_topnav div.col-12 {
 	width: auto;
 }
-	.btn.style2.search_button {
-	position: absolute !important;
-	right: 0;
-	height: 57px;
+.btn.style2.search_button {
+    position: absolute !important;
+    right: 0;
+    height: 59px;
 }
 	.city-card img {
 	width: 100%;
@@ -1281,7 +1282,7 @@
 	border-radius: 5px;
 }
     .hero-wrap.style3 .hero-content .property-search-form .form-group-wrap .form-group {
-        width: 33.33%;
+       /* width: 33.33%;*/
         border-right: 1px solid rgba(0, 0, 0, 0.1);
     }
     .hero-wrap.style3 .hero-content .property-search-form .form-group-wrap .form-group input,

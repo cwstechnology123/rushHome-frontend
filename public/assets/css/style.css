@@ -7526,7 +7526,8 @@ margin-left: 0px;}
 .btn.style2.search_button {
     position: absolute;
     right: 0;
-    height: 57px;
+    height: 59px;
+    top: -1px;
 }
 .byfooter div.left_box {
     width: 100%;
