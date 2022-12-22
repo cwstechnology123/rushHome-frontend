@@ -14,6 +14,7 @@ const PropertyCard = ({
         city,
         postalCode,
         country,
+        stateOrProvince,
         fullStreetAddress,
         bedroomsTotal,
         bathroomsTotal,
@@ -40,7 +41,7 @@ const PropertyCard = ({
                 </div>
                 <div className="property-info">
                     <span>Home at {county}</span>
-                    <p className="mb-0" style={{whiteSpace: 'pre-wrap'}}>{fullStreetAddress?`${fullStreetAddress}\n${country}, ${city} ${postalCode}`:ucfirst(county)}</p>
+                    <p className="mb-0" style={{whiteSpace: 'pre-wrap'}}>{fullStreetAddress?`${fullStreetAddress}\n${stateOrProvince}, ${city} ${postalCode}`:ucfirst(county)}</p>
                     <div className="property-status-wrap">
                         <p className="property-price mb-0">{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0 })}</p>
                     </div>

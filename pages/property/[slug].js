@@ -54,7 +54,32 @@ const PropertyDetails = ({
 }) => {
     const { data: session } = useSession();
     // console.log(session)
-
+    const SessionSideBox = () => {
+        if(session){
+            if(session.user.role === 'client'){
+                return <ClientBox 
+                        type={propertyType}
+                        price={listPrice}
+                        pricearea={pricePerSquareFoot}
+                        address={unparsedAddress}
+                        amenity={{
+                            beds: bedroomsTotal,
+                            baths: bathroomsTotalInteger,
+                            garages: totalGarageAndParkingSpaces,
+                            area: areaTotal
+                        }}
+                    />
+            }else if(session.user.role === 'agent'){
+                return <PropertyAgentCard 
+                    agent={agent} 
+                    address={`${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`}
+                />
+            }
+        }else{
+            return <NonAccount address={`${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`}/>
+        }
+        return null;
+    }
     return (
         <>
         <section className="style3 ptb-50 product_box">
@@ -250,30 +275,7 @@ const PropertyDetails = ({
                     </div>
                     <div className="col-md-4 col-xl-4 col-lg-4">
                         <div className="right_box_listing" id="exTab3">
-                            {(session)? (
-                                <>
-                                
-                                </>
-                            ) : (
-                                <NonAccount address={`${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`}/>
-                                )
-                            }
-                            <ClientBox 
-                                type={propertyType}
-                                price={listPrice}
-                                pricearea={pricePerSquareFoot}
-                                address={unparsedAddress}
-                                amenity={{
-                                    beds: bedroomsTotal,
-                                    baths: bathroomsTotalInteger,
-                                    garages: totalGarageAndParkingSpaces,
-                                    area: areaTotal
-                                }}
-                            />
-                            <PropertyAgentCard 
-                                agent={agent} 
-                                address={`${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`}
-                            />
+                            <SessionSideBox/>
                         </div>
                     </div>
                 </div>

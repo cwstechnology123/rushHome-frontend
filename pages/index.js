@@ -45,13 +45,13 @@ export default function Home({properties}) {
                       <button className={`btn style1 ${activeTab==='all'? 'active' : ''}`} id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onClick={(e)=> handleTabClick(e,'all')} >All</button>
                     </li>
                     <li className="nav-item" role="presentation">
-                      <button className={`btn style1 ${activeTab==='delaware'? 'active' : ''}`} id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onClick={(e)=> handleTabClick(e,'delaware')}>Delaware</button>
+                      <button className={`btn style1 ${activeTab==='DE'? 'active' : ''}`} id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onClick={(e)=> handleTabClick(e,'DE')}>Delaware</button>
                     </li>
                     <li className="nav-item" role="presentation">
-                      <button className={`btn style1 ${activeTab==='maryland'? 'active' : ''}`} id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onClick={(e)=>handleTabClick(e,'maryland')}>Maryland</button>
+                      <button className={`btn style1 ${activeTab==='MD'? 'active' : ''}`} id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onClick={(e)=>handleTabClick(e,'MD')}>Maryland</button>
                     </li>
                     <li className="nav-item" role="presentation">
-                      <button className={`btn style1 ${activeTab==='pennsylvania'? 'active' : ''}`} id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onClick={(e)=>handleTabClick(e,'pennsylvania')}>Pennsylvania</button>
+                      <button className={`btn style1 ${activeTab==='PA'? 'active' : ''}`} id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onClick={(e)=>handleTabClick(e,'PA')}>Pennsylvania</button>
                     </li>
                   </ul>
                 </div>	
