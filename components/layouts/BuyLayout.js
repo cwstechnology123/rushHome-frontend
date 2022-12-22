@@ -1,4 +1,4 @@
-import Navbar from './Navbar'
+import NavbarHeader from './NavbarHeader'
 import Head from 'next/head'
 
 export default function BuyLayout({ children }) {
@@ -10,7 +10,7 @@ export default function BuyLayout({ children }) {
         <title>RushHome</title>
       </Head>
       <div className="page-wrapper">
-          <Navbar />
+          <NavbarHeader />
           <main>{children}</main>
       </div>
     </>

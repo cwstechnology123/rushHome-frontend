@@ -296,6 +296,10 @@
     }
 }
 @media only screen and (max-width: 767px) {
+	.client_factsicons ul li {
+	display: inline-block;
+	margin-bottom: 20px;
+}
 	.aut_wraper {
 	width: 400px;
 	margin: 0 auto;
@@ -1128,6 +1132,19 @@
     }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+	.byfooter p.copyright-text {
+	font-size: 13px;
+}
+.byfooter .logo_copyright img {
+	width: 100px !important;
+}
+.bye_topnav {
+	margin-bottom: 20px;
+}
+	.lising_icons {
+	width: 18%;
+	
+}
 	.aut_wraper {
 	width: 400px;
 	margin: 0 auto;

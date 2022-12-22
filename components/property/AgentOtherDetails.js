@@ -22,25 +22,25 @@ export default function AgentOtherDetails({ propertyId, agent, address, position
     return (
         <div className="row">
             <div className="col-12">
-                {data.propertyAdditionalDetails.location && (
+                {data?.propertyAdditionalDetails.location && (
                     <PropertyLocation location={data.propertyAdditionalDetails.location} address={address} />
                 )}
-                {data.propertyAdditionalDetails.association && (
+                {data?.propertyAdditionalDetails.association && (
                     <PropertyAssociation association={data.propertyAdditionalDetails.association} />
                 )}
-                {data.propertyAdditionalDetails.tax && (
+                {data?.propertyAdditionalDetails.tax && (
                     <PropertyTax tax={data.propertyAdditionalDetails.tax} />
                 )}
-                {data.propertyAdditionalDetails.office && (
+                {data?.propertyAdditionalDetails.office && (
                     <PropertyOffice office={data.propertyAdditionalDetails.office} agent={agent} />
                 )}
-                {data.propertyAdditionalDetails.showing && (
+                {data?.propertyAdditionalDetails.showing && (
                     <PropertyShowing showing={data.propertyAdditionalDetails.showing} office={data.propertyAdditionalDetails.office} directions={directions} />
                 )}
-                {data.propertyAdditionalDetails.compensation && (
+                {data?.propertyAdditionalDetails.compensation && (
                     <PropertyCompensation compensation={data.propertyAdditionalDetails.compensation}/>
                 )}
-                {data.propertyAdditionalDetails.otherDetails && (
+                {data?.propertyAdditionalDetails.otherDetails && (
                     <PropertyOtherDetail listing={data.propertyAdditionalDetails.otherDetails}/>
                 )}
                 <div className="row">

@@ -16,6 +16,7 @@ import PropertyAmenities from "../../components/property/PropertyAmenities";
 import SimilarHomes from "../../components/property/SimilarHomes";
 import AgentOtherDetails from "../../components/property/AgentOtherDetails";
 import ClientBox from "./ClientBox";
+import ClientOtherDetails from "../../components/property/ClientOtherDetails";
 
 const PropertyDetails = ({
     propertyDetails: {
@@ -49,7 +50,8 @@ const PropertyDetails = ({
         unparsedAddress,
         amenities,
         agent,
-        directions
+        directions,
+        tag
     }
 }) => {
     const { data: session } = useSession();
@@ -80,6 +82,33 @@ const PropertyDetails = ({
         }
         return null;
     }
+
+    const ClientComponent = () => {
+        if(session){
+            if(session.user.role === 'client'){
+                return (
+                    <ClientOtherDetails 
+                        propertyId={id} 
+                        address={`${fullStreetAddress}\n${city}, ${stateOrProvince} ${postalCode}`}
+                        position={geography}
+                        tourLink={virtualTourURLUnbranded}
+                        price={listPrice}
+                    />
+                )
+            }else{
+                return null
+            }
+        }
+        return (
+            <ClientOtherDetails 
+                propertyId={id} 
+                address={`${fullStreetAddress}\n${city}, ${stateOrProvince} ${postalCode}`}
+                position={geography}
+                tourLink={virtualTourURLUnbranded}
+                price={listPrice}
+            />
+        )
+    }
     return (
         <>
         <section className="style3 ptb-50 product_box">
@@ -98,6 +127,7 @@ const PropertyDetails = ({
                                         stateCode: stateOrProvince,
                                         postalCode: postalCode
                                     }}
+                                    tag={tag}
                                 />
                             )}
                             <PropertyImages 
@@ -268,10 +298,8 @@ const PropertyDetails = ({
                                 </div>
                             </div>
                         </div>
-                        <PropertyAmenities amenities={amenities} />  
-                        {(virtualTourURLUnbranded!='') && <VirtualTour tourLink={virtualTourURLUnbranded?.replace(/^http:\/\//i, 'https://')} />}
-                        <PropertyMap address={`${fullStreetAddress}\n${city}, ${stateOrProvince} ${postalCode}`} position={geography}/>
-                        <Mortgage price={listPrice}/>
+                        <PropertyAmenities amenities={amenities} /> 
+                        <ClientComponent />                        
                     </div>
                     <div className="col-md-4 col-xl-4 col-lg-4">
                         <div className="right_box_listing" id="exTab3">
@@ -279,22 +307,22 @@ const PropertyDetails = ({
                         </div>
                     </div>
                 </div>
-                {/* {session && (
-                    
-                )}  */}
-                <AgentOtherDetails 
-                    propertyId={id} 
-                    agent={agent} 
-                    address={{
-                        fullAddress: fullStreetAddress,
-                        county: county,
-                        city: city,
-                        stateCode: stateOrProvince,
-                        postalCode: postalCode
-                    }}
-                    position={geography}
-                    directions={directions}
-                />
+                {(session && session.user.role === 'agent') && (
+                    <AgentOtherDetails 
+                        propertyId={id} 
+                        agent={agent} 
+                        address={{
+                            fullAddress: fullStreetAddress,
+                            county: county,
+                            city: city,
+                            stateCode: stateOrProvince,
+                            postalCode: postalCode
+                        }}
+                        position={geography}
+                        directions={directions}
+                    />
+                )} 
+                
             </div>
         </section>
 

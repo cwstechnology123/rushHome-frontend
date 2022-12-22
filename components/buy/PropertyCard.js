@@ -3,6 +3,7 @@ import Link from "next/link";
 import defaultProperty from "../../public/default_home.jpg";
 import noImage from "../../public/no_picture_available.png";
 import ucfirst from "../../utils/ucfirst";
+import stateNames from "../../utils/states_hash.json"
 
 const PropertyCard = ({
     property: {
@@ -20,10 +21,12 @@ const PropertyCard = ({
         bathroomsTotal,
         areaTotal,
         garageSpaces,
-        totalGarageAndParkingSpaces
+        totalGarageAndParkingSpaces,
+        tag,
+        mlsStatus
     }
   }) => {
-    // console.log(noImage)
+
     // const [srcimg, setSrcimg] = useState(listPictureURL.replace(/^http:\/\//i, 'https://'));
     const src = listPictureURL? listPictureURL.replace(/^http:\/\//i, 'https://') : noImage.src;
     return (
@@ -37,10 +40,10 @@ const PropertyCard = ({
                         height={200} 
                         loading="lazy"
                     />
-                    <span className="property-status">Exclusive</span>
+                    {tag && (<span className="property-status">{tag}</span>)}
                 </div>
                 <div className="property-info">
-                    <span>Home at {county}</span>
+                    <span>Home at {stateNames[stateOrProvince]}</span>
                     <p className="mb-0" style={{whiteSpace: 'pre-wrap'}}>{fullStreetAddress?`${fullStreetAddress}\n${stateOrProvince}, ${city} ${postalCode}`:ucfirst(county)}</p>
                     <div className="property-status-wrap">
                         <p className="property-price mb-0">{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0 })}</p>

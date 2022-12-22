@@ -4,6 +4,7 @@ import { useState } from "react";
 import defaultProperty from "../../public/default_home.jpg";
 import noImage from "../../public/no_picture_available.png";
 import ucfirst from "../../utils/ucfirst";
+import stateNames from "../../utils/states_hash.json"
 
 const PropertyCard = ({
     property: {
@@ -24,7 +25,8 @@ const PropertyCard = ({
       listPicture3URL,
       garageSpaces,
       fullStreetAddress,
-      totalGarageAndParkingSpaces
+      totalGarageAndParkingSpaces,
+      tag
     },
   }) => {
     // const [srcimg, setSrcimg] = useState(listPictureURL.replace(/^http:\/\//i, 'https://'));
@@ -34,13 +36,13 @@ const PropertyCard = ({
             <div className="property-card style3">
                 <div className="property-img">
                     <img key={`image_${id}`} src={src} alt="Image" />
-                    <span className="property-status">Exclusive</span>
+                    {tag && (<span className="property-status">{tag}</span>)}
                 </div>
                 <div className="property-info">
                     <div className="property-status-wrap">
                     <p className="property-price">{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0 })}</p>
                     </div>
-                    <h3 className="text-dark" style={{whiteSpace: 'pre-wrap'}}>{fullStreetAddress ? `${fullStreetAddress}\n${stateOrProvince}, ${city} ${postalCode}`: ucfirst(county)}</h3>
+                    <h3 className="text-dark text-uppercase" style={{whiteSpace: 'pre-wrap'}}>{fullStreetAddress ? `${fullStreetAddress}\n${stateNames[stateOrProvince]}, ${city} ${postalCode}`: ucfirst(county)}</h3>
                     <ul className="property-metainfo list-style">
                         <li key={`bed${id}`}><i className="flaticon-double-bed" />{bedroomsTotal? bedroomsTotal : '-'} Br</li>
                         <li key={`bath${id}`}><i className="flaticon-bath-tub" />{bathroomsTotal? bathroomsTotal : '-'} Ba</li>
