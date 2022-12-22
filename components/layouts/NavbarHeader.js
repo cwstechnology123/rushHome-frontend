@@ -41,7 +41,7 @@ export default function NavbarHeader(){
           <Navbar.Brand href="/" passHref>
             <span className="logo_wraper"><img src="../assets/img/Black Rush home.png" alt="Black Rush home" /></span>
           </Navbar.Brand>
-          {session && (
+          {session? (
             <div className="others-options d-lg-none d-flex">
               <div className="header-btn">
                 <div className="bell_box">
@@ -63,6 +63,10 @@ export default function NavbarHeader(){
                 <div className="mobile-menu d-lg-none"><i className="ri-menu-line" /></div>
               </Navbar.Toggle>
             </div>
+          ) : (
+            <Navbar.Toggle as={'div'} aria-controls="navbarScroll" className="mobile-bar-wrap" style={{cursor: 'pointer'}}>
+              <div className="mobile-menu d-lg-none"><i className="ri-menu-line" /></div>
+            </Navbar.Toggle>
           )}
           
           <Navbar.Collapse id="navbarScroll">
