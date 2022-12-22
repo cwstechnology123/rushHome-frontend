@@ -24,7 +24,7 @@ export default function PropertyHeader({ price, area, address, tag }) {
         <div className="slide_content">
             <div className="slide_content_left">
                 <h2>{address.fullAddress}</h2>
-                <p className="text-uppercase">{stateNames[address.stateCode]}, {address.city} {address.postalCode}</p>
+                <p className="text-uppercase"> {address.city}, {stateNames[address.stateCode]} {address.postalCode}</p>
             </div>
             <div className="slide_content_right">
                 <h2>{Number(price).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0 })}</h2>

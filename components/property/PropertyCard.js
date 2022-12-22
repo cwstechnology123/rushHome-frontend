@@ -42,7 +42,7 @@ const PropertyCard = ({
                     <div className="property-status-wrap">
                     <p className="property-price">{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0 })}</p>
                     </div>
-                    <h3 className="text-dark text-uppercase" style={{whiteSpace: 'pre-wrap'}}>{fullStreetAddress ? `${fullStreetAddress}\n${stateNames[stateOrProvince]}, ${city} ${postalCode}`: ucfirst(county)}</h3>
+                    <h3 className="text-dark text-uppercase" style={{whiteSpace: 'pre-wrap'}}>{fullStreetAddress ? `${fullStreetAddress}\n${city}, ${stateNames[stateOrProvince]} ${postalCode}`: ucfirst(county)}</h3>
                     <ul className="property-metainfo list-style">
                         <li key={`bed${id}`}><i className="flaticon-double-bed" />{bedroomsTotal? bedroomsTotal : '-'} Br</li>
                         <li key={`bath${id}`}><i className="flaticon-bath-tub" />{bathroomsTotal? bathroomsTotal : '-'} Ba</li>

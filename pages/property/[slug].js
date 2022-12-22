@@ -145,7 +145,7 @@ const PropertyDetails = ({
                             <div className="section-title style1 text-left mb-40">
                                 <h2>Descriptions</h2>
                                 <hr />
-                                <p>{description}</p>
+                                <p className="text-justify">{description}</p>
                             </div>
                             </div>
                         </div>
@@ -338,7 +338,7 @@ export async function getServerSideProps({ params: { slug } }) {
     const payload = {url : `${apiBaseUrl}/properties/details/${propertyId}`, method : 'GET'}
     const res = await fetchApi(payload)
     // Pass data to the page via props
-    // console.log(res.data)
+    console.log(res.data)
     if(res.data){
         return {
             props: {
