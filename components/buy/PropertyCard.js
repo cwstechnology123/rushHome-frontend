@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import defaultProperty from "../../public/default_home.jpg";
+import noImage from "../../public/no_picture_available.png";
 import ucfirst from "../../utils/ucfirst";
 
 const PropertyCard = ({
@@ -21,8 +22,9 @@ const PropertyCard = ({
         totalGarageAndParkingSpaces
     }
   }) => {
+    // console.log(noImage)
     // const [srcimg, setSrcimg] = useState(listPictureURL.replace(/^http:\/\//i, 'https://'));
-    const src = listPictureURL? listPictureURL.replace(/^http:\/\//i, 'https://') : defaultProperty.src;
+    const src = listPictureURL? listPictureURL.replace(/^http:\/\//i, 'https://') : noImage.src;
     return (
         <Link href={`/property/${slug}`}>
             <div className="property-card style3">

@@ -1,4 +1,5 @@
 import defaultProperty from "../../public/default_home.jpg";
+import noImage from "../../public/no_picture_available.png";
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 import useSWR from "swr";
@@ -39,8 +40,8 @@ const PropertyImages = ({
         originalClass: 'property-banner-original',
         thumbnailClass: 'property-banner-thumbnail'
     }]) : ([{
-        original: defaultProperty.src,
-        thumbnail: defaultProperty.src,
+        original: noImage.src,
+        thumbnail: noImage.src,
         originalClass: 'property-banner-original',
         thumbnailClass: 'property-banner-thumbnail'
     }]));

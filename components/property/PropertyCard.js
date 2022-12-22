@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import defaultProperty from "../../public/default_home.jpg";
+import noImage from "../../public/no_picture_available.png";
 import ucfirst from "../../utils/ucfirst";
 
 const PropertyCard = ({
@@ -26,7 +27,7 @@ const PropertyCard = ({
     },
   }) => {
     // const [srcimg, setSrcimg] = useState(listPictureURL.replace(/^http:\/\//i, 'https://'));
-    const src = listPictureURL? listPictureURL.replace(/^http:\/\//i, 'https://') : defaultProperty.src;
+    const src = listPictureURL? listPictureURL.replace(/^http:\/\//i, 'https://') : noImage.src;
     return (
         <Link href={`/property/${slug}`}>
             <div className="property-card style3">
@@ -38,7 +39,7 @@ const PropertyCard = ({
                     <div className="property-status-wrap">
                     <p className="property-price">{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0 })}</p>
                     </div>
-                    <h3 className="text-dark" style={{whiteSpace: 'pre-wrap'}}>{fullStreetAddress ? `${fullStreetAddress}\n${county}, ${country}, ${city} ${postalCode}`: ucfirst(county)}</h3>
+                    <h3 className="text-dark" style={{whiteSpace: 'pre-wrap'}}>{fullStreetAddress ? `${fullStreetAddress}\n${country}, ${city} ${postalCode}`: ucfirst(county)}</h3>
                     <ul className="property-metainfo list-style">
                         <li key={`bed${id}`}><i className="flaticon-double-bed" />{bedroomsTotal? bedroomsTotal : '-'} Br</li>
                         <li key={`bath${id}`}><i className="flaticon-bath-tub" />{bathroomsTotal? bathroomsTotal : '-'} Ba</li>
