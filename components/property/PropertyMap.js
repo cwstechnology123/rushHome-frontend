@@ -18,7 +18,7 @@ const PropertyMap = ({ address, position }) => {
                 <div className="section-title style1 text-left">
                     <h2>Location</h2>
                     <hr />
-                    <div className="contact_map mt-0" style={{ height: "70vh", width: "100%" }}>
+                    <div className="contact_map mt-0" style={{ height: "400px", width: "100%" }}>
                         <Wrapper
                             apiKey={process.env.GOOGLE_API_TOKEN}
                             render={render}

@@ -1,6 +1,6 @@
 import stateNames from "../../utils/states_hash.json"
 
-export default function PropertyHeader({ price, area, address, tag }) {
+export default function PropertyHeader({ price, area, address, tag, handlePrint }) {
 
     return (
         <>
@@ -17,7 +17,7 @@ export default function PropertyHeader({ price, area, address, tag }) {
                 <i className="fa fa-heart-o" aria-hidden="true" /> Saved </button>
             <button type="button" className="btn style3 button_top">
                 <i className="fa fa-share" aria-hidden="true" /> Share </button>
-            <button type="button" className="btn style3 button_top">
+            <button type="button" className="btn style3 button_top" onClick={handlePrint}>
                 <i className="fa fa-print" aria-hidden="true" /> Print </button>
             </div>
         </div>

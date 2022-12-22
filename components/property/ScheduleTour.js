@@ -29,7 +29,10 @@ export default function ScheduleTour({onInit}) {
             }else if((typeof value === 'string') && (isPossiblePhoneNumber(value) === false)){
                 return "Please enter valid phone number";
             }
-        }).label('Phone Number'),
+        }).matches(
+            /([+]?\d{1,2}[.-\s]?)?(\d{3}[.-]?){2}\d{4}/g,
+                  "Please enter valid phone number"
+        ).label('Phone Number'),
     });
     const { register, handleSubmit, formState: { errors }, reset, control } = useForm({
         resolver: yupResolver(schema),
@@ -182,7 +185,7 @@ export default function ScheduleTour({onInit}) {
                                     />
                                 )}
                             /> */}
-                            <input type="tel" className="form-control" name="schedule_phone" id="schedule_phone" placeholder="Your Phone" { ...register('schedule_phone') } />
+                            <input type="tel" className="form-control" name="schedule_phone" id="schedule_phone" placeholder="Your Phone with Country Code" { ...register('schedule_phone') } />
                             <span className="text-danger">{errors.schedule_phone?.message}</span>
                         </div>
                         <div className="for-group mb-3">

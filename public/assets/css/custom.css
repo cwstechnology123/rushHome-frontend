@@ -1,3 +1,15 @@
+/* @media all {
+    .pagebreak {
+      display: none;
+    }
+} */
+
+@media print {
+    .pagebreak {
+      page-break-after: always;
+    }
+}
+
 /* width */
 ::-webkit-scrollbar {
     width:5px !important;

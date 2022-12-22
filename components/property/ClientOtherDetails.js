@@ -19,8 +19,10 @@ export default function ClientOtherDetails({
     return (
         <>
         {(tourLink!='') && <VirtualTour tourLink={tourLink?.replace(/^http:\/\//i, 'https://')} />}
+        <div className="pagebreak" />
         <PropertyMap address={address} position={position}/>
         <Mortgage price={price}/>
+        <div className="pagebreak" />
         {data?.propertyAdditionalDetails.association && (
             <PropertyAssociation association={data.propertyAdditionalDetails.association} />
         )}

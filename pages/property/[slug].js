@@ -7,9 +7,6 @@ import PropertyHeader from "../../components/property/PropertyHeader";
 import { apiBaseUrl, fetchApi } from "../../utils/fetchApi";
 import PropertyImages from "../../components/property/PropertyImages";
 import { FaBath, FaHotTub } from "react-icons/fa";
-import VirtualTour from "../../components/property/VirtualTour";
-import PropertyMap from "../../components/property/PropertyMap";
-import Mortgage from "../../components/property/Mortgage";
 import NonAccount from "./NonAccount";
 import PropertyAgentCard from "../../components/property/PropertyAgentCard";
 import PropertyAmenities from "../../components/property/PropertyAmenities";
@@ -17,6 +14,8 @@ import SimilarHomes from "../../components/property/SimilarHomes";
 import AgentOtherDetails from "../../components/property/AgentOtherDetails";
 import ClientBox from "./ClientBox";
 import ClientOtherDetails from "../../components/property/ClientOtherDetails";
+import { useReactToPrint } from "react-to-print";
+import { useRef } from "react";
 
 const PropertyDetails = ({
     propertyDetails: {
@@ -54,8 +53,23 @@ const PropertyDetails = ({
         tag
     }
 }) => {
+    const componentRef = useRef();
     const { data: session } = useSession();
-    // console.log(session)
+    const handlePrint = useReactToPrint({
+        content: () => {
+            const tableStat = componentRef.current.cloneNode(true);
+            const AgentElm = document.getElementById('agent-com');
+            const PrintElem = document.createElement('div');
+            PrintElem.style.cssText = 'margin: 20px; width: 100%';
+            // const statElem = <span>{fullStreetAddress}</span>;
+            // PrintElem.innerHTML = statElem;
+            PrintElem.appendChild(tableStat);
+            // PrintElem.appendChild(AgentElm);
+            return PrintElem;
+        },
+        copyStyles: true,
+        documentTitle: fullStreetAddress
+    })
     const SessionSideBox = () => {
         if(session){
             if(session.user.role === 'client'){
@@ -114,10 +128,11 @@ const PropertyDetails = ({
         <section className="style3 ptb-50 product_box">
             <div className="container">
                 <div className="row justify-content-between">
-                    <div className="col-xl-8 col-lg-8 col-12">
+                    <div className="col-xl-8 col-lg-8 col-12" ref={componentRef}>
                         <div className="slider_wraper">
                             {!session && (
                                 <PropertyHeader 
+                                    handlePrint={handlePrint}
                                     price={listPrice}
                                     area={pricePerSquareFoot}
                                     address={{
@@ -149,6 +164,7 @@ const PropertyDetails = ({
                             </div>
                             </div>
                         </div>
+                        <div className="pagebreak" />
                         <div className="factfeature_box heading_line">
                             <div className="col-xl-12 col-lg-12">
                                 <div className="section-title style1 text-left mb-40">
@@ -235,10 +251,10 @@ const PropertyDetails = ({
                                                         <th width={'50%'}>Property Type:</th>
                                                         <td width={'50%'} className="text-left">{propertyType}</td>
                                                     </tr>
-                                                    <tr>
+                                                    {/* <tr>
                                                         <th width={'50%'}>Rooms:</th>
                                                         <td width={'50%'} className="text-left">{roomsTotal? roomsTotal : '-'}</td>
-                                                    </tr>
+                                                    </tr> */}
                                                     <tr>
                                                         <th width={'50%'}>Size:</th>
                                                         <td width={'50%'} className="text-left">{areaTotal? Number(areaTotal).toLocaleString('en-US') : '-'} SqFt</td>
@@ -247,10 +263,10 @@ const PropertyDetails = ({
                                                         <th width={'50%'}>Garage:</th>
                                                         <td width={'50%'} className="text-left">{totalGarageAndParkingSpaces? totalGarageAndParkingSpaces : '-'}</td>
                                                     </tr>
-                                                    <tr>
+                                                    {/* <tr>
                                                         <th width={'50%'}>Garage Size:</th>
                                                         <td width={'50%'} className="text-left">{garageSpaces? garageSpaces : '-'} SqFt</td>
-                                                    </tr>
+                                                    </tr> */}
                                                     <tr>
                                                         <th width={'50%'}>Year Build:</th>
                                                         <td width={'50%'} className="text-left">{yearBuilt}</td>
@@ -282,14 +298,14 @@ const PropertyDetails = ({
                                                         <th width={'50%'}>Fireplace:</th>
                                                         <td width={'50%'} className="text-left">{fireplacesTotal? fireplacesTotal : '-'}</td>
                                                     </tr>
-                                                    <tr>
+                                                    {/* <tr>
                                                         <th width={'50%'}>Bath Size:</th>
                                                         <td width={'50%'} className="text-left">50 SqFt</td>
                                                     </tr>
                                                     <tr>
                                                         <th width={'50%'}>Label:</th>
                                                         <td width={'50%'} className="text-left">Bestseller</td>
-                                                    </tr>
+                                                    </tr> */}
                                                 </tbody>
                                                 
                                             </table>
@@ -298,7 +314,9 @@ const PropertyDetails = ({
                                 </div>
                             </div>
                         </div>
+                        
                         <PropertyAmenities amenities={amenities} /> 
+                        <div className="pagebreak" />
                         <ClientComponent />                        
                     </div>
                     <div className="col-xl-4 col-lg-4 col-12">
@@ -307,7 +325,7 @@ const PropertyDetails = ({
                         </div>
                     </div>
                 </div>
-                {(session && session.user.role === 'agent') && (
+                <div id="agent-com">
                     <AgentOtherDetails 
                         propertyId={id} 
                         agent={agent} 
@@ -321,8 +339,10 @@ const PropertyDetails = ({
                         position={geography}
                         directions={directions}
                     />
-                )} 
-                
+                {/* {(session && session.user.role === 'agent') && (
+                    
+                )}  */}
+                </div>
             </div>
         </section>
 
