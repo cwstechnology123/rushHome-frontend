@@ -20,6 +20,25 @@
     background: black !important; 
 }
 
+/* --------------------------------- */
+.mobile-menu-box{
+    max-height: 100vh;
+    transition: height 2s linear 1s;
+}
+@media only screen and (max-width: 996px) {
+    .mobile-menu-box{
+        height: 100vh;
+        background-color: #fff;
+        position: relative;
+        z-index: 9;
+        padding: 10px;
+        left: 0px;
+        top: 5px;
+    }
+  }
+
+/* ---------------------------------- */
+
 /* Prperty Share icon*/
 .property-share {
     margin: 0;

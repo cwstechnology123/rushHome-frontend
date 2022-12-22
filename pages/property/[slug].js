@@ -114,7 +114,7 @@ const PropertyDetails = ({
         <section className="style3 ptb-50 product_box">
             <div className="container">
                 <div className="row justify-content-between">
-                    <div className="col-md-8 col-xl-8 col-lg-8">
+                    <div className="col-xl-8 col-lg-8 col-12">
                         <div className="slider_wraper">
                             {!session && (
                                 <PropertyHeader 
@@ -301,7 +301,7 @@ const PropertyDetails = ({
                         <PropertyAmenities amenities={amenities} /> 
                         <ClientComponent />                        
                     </div>
-                    <div className="col-md-4 col-xl-4 col-lg-4">
+                    <div className="col-xl-4 col-lg-4 col-12">
                         <div className="right_box_listing" id="exTab3">
                             <SessionSideBox/>
                         </div>

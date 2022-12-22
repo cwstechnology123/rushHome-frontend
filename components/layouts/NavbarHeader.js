@@ -71,8 +71,7 @@ export default function NavbarHeader(){
           
           <Navbar.Collapse id="navbarScroll">
             <Nav as={'ul'}
-              className="navbar-nav mx-auto"
-              style={{ maxHeight: '200px' }}
+              className="navbar-nav mx-auto mobile-menu-box"
               navbarScroll
             >
               <li className="nav-item">
