@@ -40,6 +40,7 @@
     "react-phone-number-input": "^3.2.13",
     "react-responsive-carousel": "^3.2.23",
     "react-share": "^4.4.1",
+    "react-slider": "^2.0.4",
     "react-to-print": "^2.14.10",
     "supercluster": "^7.1.5",
     "swiper": "^8.4.5",

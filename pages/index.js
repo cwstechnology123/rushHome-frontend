@@ -45,13 +45,13 @@ export default function Home({properties}) {
                       <button className={`btn style1 ${activeTab==='all'? 'active' : ''}`} id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onClick={(e)=> handleTabClick(e,'all')} >All</button>
                     </li>
                     <li className="nav-item" role="presentation">
-                      <button className={`btn style1 ${activeTab==='DE'? 'active' : ''}`} id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onClick={(e)=> handleTabClick(e,'DE')}>Delaware</button>
+                      <button className={`btn style1 ${activeTab==='de'? 'active' : ''}`} id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onClick={(e)=> handleTabClick(e,'de')}>Delaware</button>
                     </li>
                     <li className="nav-item" role="presentation">
-                      <button className={`btn style1 ${activeTab==='MD'? 'active' : ''}`} id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onClick={(e)=>handleTabClick(e,'MD')}>Maryland</button>
+                      <button className={`btn style1 ${activeTab==='md'? 'active' : ''}`} id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onClick={(e)=>handleTabClick(e,'md')}>Maryland</button>
                     </li>
                     <li className="nav-item" role="presentation">
-                      <button className={`btn style1 ${activeTab==='PA'? 'active' : ''}`} id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onClick={(e)=>handleTabClick(e,'PA')}>Pennsylvania</button>
+                      <button className={`btn style1 ${activeTab==='pa'? 'active' : ''}`} id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onClick={(e)=>handleTabClick(e,'pa')}>Pennsylvania</button>
                     </li>
                   </ul>
                 </div>	
@@ -62,7 +62,7 @@ export default function Home({properties}) {
           </div>
           {(loader) ?<Grid item={3} /> : (propertiesData) ?
             <>
-              <List properties={propertiesData? propertiesData : null} />
+              <List properties={propertiesData? propertiesData : null} stateCode={activeTab} />
             </>
             :
             <>
@@ -128,18 +128,18 @@ export default function Home({properties}) {
             <div className="col-xxl-3 col-xl-3 col-lg-4 col-md-12">
               <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
                 <div className="city-card style1 city_height">
-                  <img src="assets/img/city/city-1.jpg" alt="Image" />
+                  <img src="assets/img/city/Dover.jpg" alt="Image" />
                   <div className="city-info">
-                    <h3><Link href="/city">New York City</Link></h3>
+                    <h3><Link href="/city">Dover (Delaware)</Link></h3>
                     <p>+5231 properties</p>
                   </div>
                 </div>
               </div>
               <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
                 <div className="city-card style1">
-                  <img src="assets/img/city/city-1.jpg" alt="Image" />
+                  <img src="assets/img/city/Middletown.jpg" alt="Image" />
                   <div className="city-info">
-                    <h3><Link href="/city">New York City</Link></h3>
+                    <h3><Link href="/city">Middletown (Delaware)</Link></h3>
                     <p>+5231 properties</p>
                   </div>
                 </div>
@@ -148,9 +148,9 @@ export default function Home({properties}) {
             <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-12">
               <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
                 <div className="city-card style1">
-                  <img src="assets/img/city/city-1.jpg" alt="Image" />
+                  <img src="assets/img/city/Wilmington.jpg" alt="Image" />
                   <div className="city-info">
-                    <h3><Link href="/city">New York City</Link></h3>
+                    <h3><Link href="/city">Wilmington (Delaware)</Link></h3>
                     <p>+5231 properties</p>
                   </div>
                 </div>
@@ -158,18 +158,18 @@ export default function Home({properties}) {
               <div className="row justify-content-center">
                 <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
                   <div className="city-card style1">
-                    <img src="assets/img/city/city-1.jpg" alt="Image" />
+                    <img src="assets/img/city/Newark.jpg" alt="Image" />
                     <div className="city-info">
-                      <h3><Link href="/city">New York City</Link></h3>
+                      <h3><Link href="/city">Newark (Delaware)</Link></h3>
                       <p>+5231 properties</p>
                     </div>
                   </div>
                 </div>
                 <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
                   <div className="city-card style1">
-                    <img src="assets/img/city/city-1.jpg" alt="Image" />
+                    <img src="assets/img/city/Philly.jpg" alt="Image" />
                     <div className="city-info">
-                      <h3><Link href="/city">New York City</Link></h3>
+                      <h3><Link href="/city">Philadelphia (Pennsylvania)</Link></h3>
                       <p>+5231 properties</p>
                     </div>
                   </div>
@@ -179,19 +179,19 @@ export default function Home({properties}) {
             <div className="col-xxl-3 col-xl-3 col-lg-4 col-md-12">
               <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
                 <div className="city-card style1">
-                  <img src="assets/img/city/city-1.jpg" alt="Image" />
+                  <img src="assets/img/city/Rehoboth.jpg" alt="Image" />
                   <div className="city-info">
-                    <h3><Link href="/city">New York City</Link></h3>
+                    <h3><Link href="/city">Rehoboth (Delaware)</Link></h3>
                     <p>+5231 properties</p>
                   </div>
                 </div>
               </div>
               <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
                 <div className="city-card style1 city_height">
-                  <img src="assets/img/city/city-1.jpg" alt="Image" />
+                  <img src="assets/img/city/Ocean City.jpg" alt="Image" />
                   <div className="city-info">
-                    <h3><Link href="/city">New York City</Link></h3>
-                    <p>+5231 properties</p>
+                    <h3><Link href="/city">Ocean City (Maryland)</Link></h3>
+                    <p style={{textAlign: 'left !important'}}>+5231 properties</p>
                   </div>
                 </div>
               </div>

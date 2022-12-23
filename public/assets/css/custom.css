@@ -199,6 +199,19 @@
 }
 
 /* --------------------BUY PROPERTY PAGINATION----------------- */
+.custom-control{
+    padding: 13px 30px;
+    border-radius: 15px !important;
+    background-color: #f7f7f7 !important;
+    border: inherit;
+    font-size: 13px;
+    color: #000;
+}
+.custom-control:hover, .custom-control:active{
+    color: #000 !important;
+    border-color: transparent !important;
+}
+/* ---------------------------------------------------------------- */
 .pagination {
     text-align: center;
     justify-content: center;

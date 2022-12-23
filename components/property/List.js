@@ -2,7 +2,7 @@ import PropertyCard from './PropertyCard'
 import { useState } from 'react'
 import { useRouter } from "next/router";
 
-export default function List({properties}) {
+export default function List({properties, stateCode}) {
   const [ listNum, setListNum] = useState(6); // Default number of properties dislplayed
   const router = useRouter();
 
@@ -25,7 +25,7 @@ export default function List({properties}) {
                 </div>
               ))}
               <div className="col-md-12 text-center">
-                <button type="button" onClick={(e) => handleClick(e, "/buy")} className="btn style1 button_custom">See All Properties <i className="flaticon-right-arrow" /></button>
+                <button type="button" onClick={(e) => handleClick(e, `/homes-for-sale${(stateCode!='all')? '/'+stateCode : ''}`)} className="btn style1 button_custom">See All Properties <i className="flaticon-right-arrow" /></button>
               </div>
             </div>
           </div>
