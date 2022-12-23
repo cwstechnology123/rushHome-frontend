@@ -474,3 +474,17 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 }
+/* select options for multilabel */
+.react-select__option, .react-select__single-value{
+    white-space: pre-wrap !important;
+    color:#000 !important;
+    text-align: left;
+}
+.react-select__value-container {
+    height:5em;
+    text-align: left;
+}
+react-select__input {
+    color: #000;
+    height: auto !important;
+}
