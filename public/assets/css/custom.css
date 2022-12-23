@@ -481,10 +481,21 @@
     text-align: left;
 }
 .react-select__value-container {
-    height:5em;
     text-align: left;
+    height: 54px !important;
+    border: none !important;
+    background-color: transparent !important;
+    width: 100% !important;
+    padding: 2px 25px 2px !important;
+    border-radius: 0 !important;
+    font-size: 16px !important;
 }
 react-select__input {
     color: #000;
-    height: auto !important;
+}
+.css-1u9des2-indicatorSeparator {
+    width: 0 !important;
+}
+.css-tj5bde-Svg{
+    display: none !important;
 }
