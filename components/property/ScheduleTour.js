@@ -3,7 +3,6 @@ import * as yup from "yup";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import DatePicker from "./DatePicker";
-import PhoneInputWithCountry from "react-phone-number-input/react-hook-form"
 import 'react-phone-number-input/style.css'
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import PhoneInput from "react-phone-number-input";
@@ -45,9 +44,9 @@ export default function ScheduleTour({onInit}) {
         setSchedule(data);
         // console.log("Schedule Time: ",data.schedule_time)
         setShowmodal(true);
-        // console.log("Time:",moment(data.schedule_time).format("hh:ss A"));
     }
     const handleModalClose = (respond) => {
+        console.log(schedule);
         if(respond){
             setReqmodal(true);
         }
@@ -57,6 +56,11 @@ export default function ScheduleTour({onInit}) {
     }
     const handleRequestModalClose = () => {
         setReqmodal(false)
+    }
+    const handleTest = (val) => {
+        schedule.schedule_phone = val;
+        // setSchedule({...schedule, [schedule_phone]:val})
+        // console.log(val)
     }
 
     const ScheduleModal = () => (
@@ -83,20 +87,10 @@ export default function ScheduleTour({onInit}) {
                                         defaultCountry="US"
                                         international={true}
                                         value={schedule?.schedule_phone}
-                                        readOnly={true}
-                                        onChange={null}
+                                        onChange={handleTest}
+                                        control={control}
+                                        rules={{ required: true }}
                                     />
-                                    {/* <div className="input-group">
-                                        <div className="col-auto">
-                                            <select className="form-select" id="autoSizingSelect">
-                                                <option className="">Cell</option>
-                                                <option className="1">One</option>
-                                                <option className="2">Two</option>
-                                                <option className="3">Three</option>
-                                            </select>
-                                        </div>
-                                        <input type="text" className="form-control" id="autoSizingInputGroup" placeholder="414-266-9847" value={schedule.schedule_phone} />
-                                    </div> */}
                                 </div>
                             </div>
                             <div className="col-12">
@@ -158,7 +152,7 @@ export default function ScheduleTour({onInit}) {
                 <div className="form_wraper_box container">
                     <form onSubmit={handleSubmit(handleScheduleTour)}>
                         <div className="form-group mb-3">
-                            <input type="time" className="form-control" name="schedule_time" id="schedule_time" { ...register('schedule_time', {value: curTime.current}) } />
+                            <input type="time" className="form-control" name="schedule_time" id="schedule_time" step={'00:30'} { ...register('schedule_time', {value: curTime.current}) } />
                             <span className="text-danger">{errors.schedule_time?.message}</span>
                         </div>
                         <div className="form-group mb-3">
@@ -176,16 +170,19 @@ export default function ScheduleTour({onInit}) {
                                 className="form-control"
                                 { ...register('schedule_phone') }
                                 render={({ field: { onChange, value } }) => (
-                                    <PhoneInputWithCountry
+                                    <PhoneInput
                                         placeholder="414-266-9847"
                                         defaultCountry="US"
+                                        international={true}
+                                        useNationalFormatForDefaultCountryValue={true}
+                                        withCountryCallingCode={true}
                                         value={value}
                                         onChange={onChange}
                                         id="schedule_phone"
                                     />
                                 )}
                             /> */}
-                            <input type="tel" className="form-control" name="schedule_phone" id="schedule_phone" placeholder="Your Phone with Country Code" { ...register('schedule_phone') } />
+                            <input type="tel" className="form-control" name="schedule_phone" id="schedule_phone" placeholder="Your Phone Number" { ...register('schedule_phone') } />
                             <span className="text-danger">{errors.schedule_phone?.message}</span>
                         </div>
                         <div className="for-group mb-3">

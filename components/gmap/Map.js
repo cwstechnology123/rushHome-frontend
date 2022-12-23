@@ -5,6 +5,7 @@ import mapStyle from './mapStyle';
 export default function Map({
     onMapClick,
     onMapIdle,
+    onMapBoundChanged,
     draw,
     setMapDraw,
     children,
@@ -28,7 +29,7 @@ export default function Map({
             ...options,
             mapTypeControlOptions: {
                 style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-                mapTypeIds: ["roadmap", "terrain", "satellite"],
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
             }
           });
         }
@@ -36,7 +37,7 @@ export default function Map({
 
     useEffect(() => {
         if (map) {
-          ["click", "idle", "change"].forEach((eventName) =>
+          ["click", "idle", "bounds_changed"].forEach((eventName) =>
             google.maps.event.clearListeners(map, eventName)
           );
           if (onMapClick) {
@@ -46,6 +47,9 @@ export default function Map({
           if (onMapIdle) {
             map.addListener("idle", () => onMapIdle(map));
           }
+          // if(onMapBoundChanged){
+          //   map.addListener("bounds_changed", () => onMapBoundChanged(map));
+          // }
         }
     }, [map, onMapClick, onMapIdle]);
 

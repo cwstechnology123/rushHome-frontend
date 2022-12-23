@@ -1,15 +1,17 @@
+import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { Button, Dropdown, Offcanvas, Overlay } from "react-bootstrap";
 import { BsFilterLeft } from "react-icons/bs";
-import ReactSlider from "react-slider";
 
-export default function SearchFilter() {
+export default function SearchFilter({bounds}) {
+    const router = useRouter();
     const [showFilter, setShowFilter] = useState(false);
     const [showPrice, setShowPrice] = useState(false);
     const priceRef = useRef(null);
     const handleSidebar = () => {
         setShowFilter(!showFilter)
     }
+    console.log(bounds)
     return (
         <>
             <section className="bye_topnav">
@@ -66,6 +68,7 @@ export default function SearchFilter() {
                                     border: '1px solid #eee',
                                     width: 400,
                                     borderRadius: 3,
+                                    zIndex: 9,
                                     ...props.style,
                                     }}
                                 >

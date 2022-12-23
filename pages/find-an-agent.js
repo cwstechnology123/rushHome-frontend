@@ -38,7 +38,7 @@ export default function FindAnAgent({agentList}) {
                             </div>	 */}
                             <div className="form-group-wrap">
                                 <div className="form-group">
-                                    <input type="text" placeholder="Enter an Address, Neighbourhood" />
+                                    <input type="text" placeholder="Agent Name, State" />
                                 </div>
                             </div>
                             <button type="submit" className="btn style2 search_button">Search</button>
