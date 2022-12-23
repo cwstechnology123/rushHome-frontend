@@ -115,13 +115,13 @@ export default function Sell() {
                     <hr />
                     <p> Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet.  Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur ad</p>
                     </div>
-                    <Link href="/about-us" className="btn style1">Download Now</Link>
-                    <Link href="/about-us" className="how_button"><span className="arow_how"><i className="fa fa-caret-right" aria-hidden="true" /></span>How it Works?</Link>
+                    <Link href="/files/Seller_Guide.pdf" rel="noopener noreferrer" target="_blank" locale={false} className="btn style1">Download Now</Link>
+                    {/* <Link href="/about-us" className="how_button"><span className="arow_how"><i className="fa fa-caret-right" aria-hidden="true" /></span>How it Works?</Link> */}
                 </div>
                 </div>
                 <div className="col-lg-5">
                 <div className="about-img-wrap img_box seller_box">
-                    <img src="assets/img/selller.jpg" alt="Iamge" className="about-img-one" />
+                    <img src="assets/img/sellerguide.jpg" alt="Iamge" className="about-img-one shadow" />
                 </div>
                 </div>
             </div>

@@ -121,7 +121,7 @@ export default function Home({properties}) {
             <div className="section-title style2 text-center mb-40">
               <h2>Explore Cities</h2>
               <hr className="center" />
-              <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p>
+              {/* <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p> */}
             </div>
           </div>
           <div className="row justify-content-center">

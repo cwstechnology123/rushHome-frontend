@@ -57,64 +57,64 @@ export default function Footer() {
                       <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12">
                           <div className="footer-widget cities">
                           <h3 className="footer-widget-title">Search by City</h3>
-                          <ul className="footer-menu list-style">
-                              <li>
-                              <Link href="/" target="_blank">
-                                  <i className="ri-arrow-right-s-line" />
-                                  Delaware Real Estate
-                              </Link>
-                              </li>
-                              <li>
-                              <Link href="/" target="_blank">
-                                  <i className="ri-arrow-right-s-line" />
-                                  Florida Real Estate
-                              </Link>
-                              </li>
-                              <li>
-                              <Link href="/" target="_blank">
-                                  <i className="ri-arrow-right-s-line" />
-                                  Istambul Real Estate
-                              </Link>
-                              </li>
-                              <li>
-                              <Link href="/" target="_blank">
-                                  <i className="ri-arrow-right-s-line" />
-                                  San Francisco Real Estate
-                              </Link>
-                              </li>
-                              <li>
-                              <Link href="/" target="_blank">
-                                  <i className="ri-arrow-right-s-line" />
-                                  London Real Estate
-                              </Link>
-                              </li>
-                              <li>
-                              <Link href="/" target="_blank">
-                                  <i className="ri-arrow-right-s-line" />
-                                  New York City Real Estate
-                              </Link>
-                              </li>
-                          </ul>
-                          <ul className="footer-menu list-style">
-                              <li>
-                              <Link href="/" target="_blank">
-                                  <i className="ri-arrow-right-s-line" />
-                                  Delaware Real Estate
-                              </Link>
-                              </li>
-                              <li>
-                              <Link href="/" target="_blank">
-                                  <i className="ri-arrow-right-s-line" />
-                                  Delaware Real Estate
-                              </Link>
-                              </li>
-                              <li>
-                              <Link href="#" target="_blank">
-                                  <i className="ri-arrow-right-s-line" />
-                                  Delaware Real Estate
-                              </Link>
-                              </li>
-                          </ul>
+                            <ul className="footer-menu list-style">
+                                <li>
+                                <Link href="/homes-for-sale/dover-de" target="_blank">
+                                    <i className="ri-arrow-right-s-line" />
+                                    Dover
+                                </Link>
+                                </li>
+                                <li>
+                                <Link href="/homes-for-sale/middletown-de" target="_blank">
+                                    <i className="ri-arrow-right-s-line" />
+                                    Middletown
+                                </Link>
+                                </li>
+                                <li>
+                                <Link href="/homes-for-sale/newark-de" target="_blank">
+                                    <i className="ri-arrow-right-s-line" />
+                                    Newark
+                                </Link>
+                                </li>
+                                <li>
+                                <Link href="/homes-for-sale/ocean-city-md" target="_blank">
+                                    <i className="ri-arrow-right-s-line" />
+                                    Ocean City
+                                </Link>
+                                </li>
+                                <li>
+                                <Link href="/homes-for-sale/philadelphia-pa" target="_blank">
+                                    <i className="ri-arrow-right-s-line" />
+                                    Philadelphia
+                                </Link>
+                                </li>
+                                <li>
+                                <Link href="/homes-for-sale/wilmington-de" target="_blank">
+                                    <i className="ri-arrow-right-s-line" />
+                                    Wilmington
+                                </Link>
+                                </li>
+                            </ul>
+                            <ul className="footer-menu list-style">
+                                <li>
+                                <Link href="/homes-for-sale/annapolis-md" target="_blank">
+                                    <i className="ri-arrow-right-s-line" />
+                                    Annapolis
+                                </Link>
+                                </li>
+                                <li>
+                                <Link href="/homes-for-sale/rehoboth-de" target="_blank">
+                                    <i className="ri-arrow-right-s-line" />
+                                    Rehoboth
+                                </Link>
+                                </li>
+                                <li>
+                                <Link href="/homes-for-sale/new-castle-de" target="_blank">
+                                    <i className="ri-arrow-right-s-line" />
+                                    New Castle
+                                </Link>
+                                </li>
+                            </ul>
                           </div>
                       </div>
                       <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12">

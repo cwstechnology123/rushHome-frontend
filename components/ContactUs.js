@@ -10,7 +10,7 @@ export default function ContactUs() {
                 <div className="content-title">
                     <h2>Need Help! Contact Us.</h2>
                     <hr className="center left" />
-                    <p className="text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p>
+                    <p className="text-left">Our local experts are ready to guide you on your real estate journey. </p>
                 </div>
                 <div className="contact-form">
                     <form className="form-wrap" id="contactForm">

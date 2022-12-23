@@ -7,7 +7,7 @@ export default function City() {
             <section className="pt-50 pb-75 text-center citybanner_box">
                 <div className="container">
                 <h1 className="aos-init aos-animate">Dover, Delaware</h1>  
-                <p className="aos-init">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s</p>                     
+                <p className="aos-init">Dover is the capital city of Delaware. The First State Heritage Park comprises several sites around the centuries-old Green. These include the 1791 Old State House and Biggs Museum of American Art. Dover International Speedway hosts NASCAR races. A variety of aircraft are displayed at the Air Mobility Command Museum, at Dover Air Force Base. Nearby, bird-rich Bombay Hook National Wildlife Refuge is on Delaware Bay.</p>                     
                 </div>
                 <img src="assets/img/city_banner.jpg" />
             </section>
