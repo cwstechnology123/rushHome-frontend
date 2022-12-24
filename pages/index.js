@@ -130,7 +130,7 @@ export default function Home({properties}) {
                 <div className="city-card style1 city_height">
                   <img src="assets/img/city/Dover.jpg" alt="Image" />
                   <div className="city-info">
-                    <h3><Link href="/city">Dover (Delaware)</Link></h3>
+                    <h3><Link href="/city">Dover</Link></h3>
                     <p>+5231 properties</p>
                   </div>
                 </div>
@@ -139,7 +139,7 @@ export default function Home({properties}) {
                 <div className="city-card style1">
                   <img src="assets/img/city/Middletown.jpg" alt="Image" />
                   <div className="city-info">
-                    <h3><Link href="/city">Middletown (Delaware)</Link></h3>
+                    <h3><Link href="/city">Middletown</Link></h3>
                     <p>+5231 properties</p>
                   </div>
                 </div>
@@ -150,7 +150,7 @@ export default function Home({properties}) {
                 <div className="city-card style1">
                   <img src="assets/img/city/Wilmington.jpg" alt="Image" />
                   <div className="city-info">
-                    <h3><Link href="/city">Wilmington (Delaware)</Link></h3>
+                    <h3><Link href="/city">Wilmington</Link></h3>
                     <p>+5231 properties</p>
                   </div>
                 </div>
@@ -160,7 +160,7 @@ export default function Home({properties}) {
                   <div className="city-card style1">
                     <img src="assets/img/city/Newark.jpg" alt="Image" />
                     <div className="city-info">
-                      <h3><Link href="/city">Newark (Delaware)</Link></h3>
+                      <h3><Link href="/city">Newark</Link></h3>
                       <p>+5231 properties</p>
                     </div>
                   </div>
@@ -169,7 +169,7 @@ export default function Home({properties}) {
                   <div className="city-card style1">
                     <img src="assets/img/city/Philly.jpg" alt="Image" />
                     <div className="city-info">
-                      <h3><Link href="/city">Philadelphia (Pennsylvania)</Link></h3>
+                      <h3><Link href="/city">Philadelphia</Link></h3>
                       <p>+5231 properties</p>
                     </div>
                   </div>
@@ -181,7 +181,7 @@ export default function Home({properties}) {
                 <div className="city-card style1">
                   <img src="assets/img/city/Rehoboth.jpg" alt="Image" />
                   <div className="city-info">
-                    <h3><Link href="/city">Rehoboth (Delaware)</Link></h3>
+                    <h3><Link href="/city">Rehoboth</Link></h3>
                     <p>+5231 properties</p>
                   </div>
                 </div>
@@ -190,8 +190,8 @@ export default function Home({properties}) {
                 <div className="city-card style1 city_height">
                   <img src="assets/img/city/Ocean City.jpg" alt="Image" />
                   <div className="city-info">
-                    <h3><Link href="/city">Ocean City (Maryland)</Link></h3>
-                    <p style={{textAlign: 'left !important'}}>+5231 properties</p>
+                    <h3><Link href="/city">Ocean City</Link></h3>
+                    <p>+5231 properties</p>
                   </div>
                 </div>
               </div>

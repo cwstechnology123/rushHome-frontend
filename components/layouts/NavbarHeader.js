@@ -38,7 +38,7 @@ export default function NavbarHeader(){
     <header className="header-wrap">
       <Navbar expand="lg">
         <Container>
-          <Navbar.Brand href="/" passHref>
+          <Navbar.Brand href="/" passhref>
             <span className="logo_wraper"><img src="../assets/img/Black Rush home.png" alt="Black Rush home" /></span>
           </Navbar.Brand>
           {session? (
