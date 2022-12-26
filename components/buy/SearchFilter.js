@@ -1,9 +1,12 @@
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Dropdown, Offcanvas, Overlay } from "react-bootstrap";
 import { BsFilterLeft } from "react-icons/bs";
+import { Select, SelectOption } from "reaselct";
+import { priceFilter } from "../../utils/propertyFilters";
 
 export default function SearchFilter({bounds}) {
+
     const router = useRouter();
     const [form, setForm] = useState({});
     const [showFilter, setShowFilter] = useState(false);
@@ -23,9 +26,9 @@ export default function SearchFilter({bounds}) {
         if(form){
             console.log(form)
         }
-        console.log(router)
+        // console.log(router)
     }
-    
+    console.log(priceFilter)
     return (
         <>
             <section className="bye_topnav">
@@ -88,7 +91,21 @@ export default function SearchFilter({bounds}) {
                                 >
                                     <div className="row">
                                         <div className="col-6">
-                                            <input type={'number'} className="form-control" id="main_min_price" placeholder="Min Price" value={form?.prop_min_price || ''} onChange={(ev)=>handleOnChange('prop_min_price', ev)} />
+                                            {/* <select className="form-control" id="main_min_price" value={form?.prop_min_price || ''} onChange={(ev)=>handleOnChange('prop_min_price', ev)}>
+                                                <option value="">Min Price</option>
+                                                {priceFilter.items.map(item => 
+                                                    (<option value={item.value}>{item.name}</option>)
+                                                )}
+                                            </select> */}
+                                            <Select
+                                                value={form?.prop_min_price || ''}
+                                                onChange={(ev)=>handleOnChange('prop_min_price', ev)}
+                                            >
+                                                <SelectOption value="">Min Price</SelectOption>
+                                                {priceFilter.items.map(item => 
+                                                    (<SelectOption value={item.value}>{item.name}</SelectOption>)
+                                                )}
+                                            </Select>
                                         </div>
                                         <div className="col-6">
                                             <input type={'number'} className="form-control" id="main_max_price" placeholder="Max Price" value={form?.prop_max_price || ''} onChange={(ev)=>handleOnChange('prop_max_price', ev)}/>
@@ -127,7 +144,7 @@ export default function SearchFilter({bounds}) {
                         <div className="row">
                             <div className="col-12" style={{maxHeight: '80vh', overflowY: 'auto'}}>
                                 <div className="form-group mb-3">
-                                    <label>Price</label>
+                                    <label className="mb-3">Price</label>
                                     <div className="row">
                                         <div className="col-6">
                                             <input type={'number'} className="form-control" id="sb_min_price" placeholder="Min Price" value={form?.prop_min_price || ''} onChange={(ev)=>handleOnChange('prop_min_price', ev)} />
@@ -140,7 +157,7 @@ export default function SearchFilter({bounds}) {
                                 <div className="row mb-3">
                                     <div className="col-6">
                                         <div className="form-group">
-                                            <label>Beds</label>
+                                            <label className="mb-3">Beds</label>
                                             <select className="form-select" id="sb_bed" value={form?.prop_bed || 'any'} onChange={(ev)=>handleOnChange('prop_bed', ev)}>
                                                 <option value={'any'}>Any</option>
                                                 <option value={1}>1+</option>
@@ -152,7 +169,7 @@ export default function SearchFilter({bounds}) {
                                     </div>
                                     <div className="col-6">
                                     <div className="form-group">
-                                            <label>Baths</label>
+                                            <label className="mb-3">Baths</label>
                                             <select className="form-select" id="ab_bath" value={form?.prop_bath || 'any'} onChange={(ev)=>handleOnChange('prop_bath', ev)}>
                                                 <option value={'any'}>Any</option>
                                                 <option value={1}>1+</option>
@@ -165,7 +182,7 @@ export default function SearchFilter({bounds}) {
                                 </div>
                                 
                                 <div className="form-group mb-3">
-                                    <label>Status</label>
+                                    <label className="mb-3">Listing Status</label>
                                     <select className="form-select" id="sb_status" value={form?.prop_status || 'any'} onChange={(ev)=>handleOnChange('prop_status', ev)}>
                                         <option selected value={'any'} >Any</option>
                                         <option value={'active'}>Active</option>
@@ -183,7 +200,7 @@ export default function SearchFilter({bounds}) {
                                 className="form-group py-3"
                                 >
                                     <button type="reset" className="btn btn-danger btn-sm" onClick={()=>setForm({})}>Reset</button>
-                                    <button type="submit" onClick={handlePropFilter} className="btn btn-dark btn-sm pull-right">Submit</button>
+                                    <button type="submit" onClick={handlePropFilter} className="btn btn-dark btn-sm pull-right">Apply</button>
                                 </div>
                             </div>
                         </div>

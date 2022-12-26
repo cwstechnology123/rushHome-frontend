@@ -46,7 +46,7 @@ export default function HomesForSale({ properties }) {
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-xl-5 col-lg-5 col-md-6 p-0 d-none d-sm-block d-sm-none d-md-block">
-                            {/* FOR MAP */ }
+                            {/* FOR MAP */}
                             <div id="mapBox" style={{width:'100%', height: mapHeight, position: 'relative'}}>
                                 <BuyMap
                                     center={center}
@@ -74,7 +74,14 @@ export default function HomesForSale({ properties }) {
 }
 
 export async function getServerSideProps({ query }) {
-    const payload = {url : `${apiBaseUrl}/properties/all/1/10000`, method : 'GET'}
+    // const payload = {url : `${apiBaseUrl}/properties/all/1/10000`, method : 'GET'}
+    const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: {
+        bedroomsTotal: '',
+        bathroomsTotalInteger: '',
+        listPrice: '',
+        mlsStatus: '',
+        page_limit: 1000
+    }}
     const res = await fetchApi(payload)
     // Pass data to the page via props
     // console.log(res)

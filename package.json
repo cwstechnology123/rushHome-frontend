@@ -43,6 +43,7 @@
     "react-share": "^4.4.1",
     "react-slider": "^2.0.4",
     "react-to-print": "^2.14.10",
+    "reaselct": "^2.1.0",
     "supercluster": "^7.1.5",
     "swiper": "^8.4.5",
     "use-supercluster": "^0.4.0",

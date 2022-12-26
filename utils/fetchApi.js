@@ -14,6 +14,9 @@ export const fetchApi = async (payload) => {
   options.headers = headers;
   options.mode = 'cors'; // no-cors, *cors, same-origin
   options.cache = 'no-cache'; // *default, no-cache, reload, force-cache, only-if-cached
+  // options.api = {
+  //   responseLimit: false,
+  // };
   payload.method == "POST" ? options.body =  JSON.stringify(data) : "";
 
   return await fetch(payload.url, options)
