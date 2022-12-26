@@ -3,12 +3,17 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { FaDollarSign, FaPercent } from "react-icons/fa";
+import { Button, Modal } from "react-bootstrap";
 
 export default function Mortgage({ price }) {
     
     const [mortgage, setMortgage] = useState({
-        amountPaid: 0,
-        interestPaid: 0
+        housePrice: 0,
+        downPayment: 0,
+        loanAmount: 0,
+        monthlyPay: 0,
+        totalInterest: 0,
+        mortgagePayment: 0
     });
     const [showmodal, setShowmodal] = useState(false);
     const schema = yup.object().shape({
@@ -25,16 +30,26 @@ export default function Mortgage({ price }) {
         // down_payment
         // duration
         // rate
+        // console.log(down_payment)
+        let loan_amt = (total_amount - down_payment);
         if(period === 'monthly'){
             rate = (rate / 1200);
             duration = duration * 12;
         }else{
             rate = (rate/100);
         }
-        let paymentAmount = ( (total_amount - down_payment) * ( rate * (Math.pow( (1+rate), duration )) ) )/ (Math.pow( (1+rate), duration ) - 1)
+        let rate_per_month = parseFloat(Math.pow((1+rate), duration));
+
+        let paymentAmount = parseFloat(loan_amt * ((rate * rate_per_month) / (rate_per_month - 1)))
+
+        // let paymentAmount = ( loan_amt * ( rate * (Math.pow( (1+rate), duration )) ) )/ (Math.pow( (1+rate), duration ) - 1)
         setMortgage({
-            amountPaid: paymentAmount.toFixed(2),
-            interestPaid: ((paymentAmount.toFixed(2) * duration) - total_amount)
+            housePrice: total_amount,
+            downPayment: down_payment,
+            loanAmount: loan_amt,
+            monthlyPay: paymentAmount.toFixed(2),
+            totalInterest: ((paymentAmount.toFixed(2) * duration)),
+            mortgagePayment: ((paymentAmount.toFixed(2) * duration) + loan_amt)
         });
         setShowmodal(true);
         //console.log(showmodal, mortgage)
@@ -42,34 +57,66 @@ export default function Mortgage({ price }) {
     }
     const handleModalClose = () => {
         setMortgage({
-            amountPaid: 0,
-            interestPaid: 0
+            housePrice: 0,
+            downPayment: 0,
+            loanAmount: 0,
+            monthlyPay: 0,
+            totalInterest: 0,
+            mortgagePayment: 0
         });
         setShowmodal(false);
         reset();
     }
-
-    const PaymentModal = () => (
-        <div className={`modal fade ${showmodal? 'show' : ''}`} id="calculateModal" style={{display: (showmodal? 'block' : 'none')}}>
-            <div className="modal-dialog">
-                <div className="modal-content">
-            
-                    <div className="modal-header">
-                        <h4 className="modal-title">Mortgage Payment</h4>
-                        <button type="button" className="close" data-dismiss="modal" onClick={handleModalClose}>&times;</button>
-                    </div>
-                    <div className="modal-body">
-                    Your monthly payment will be <strong>{Number(mortgage.amountPaid).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</strong> and total interest payable is <strong>{Number(mortgage.interestPaid).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</strong>
-                    </div>
-
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-danger btn-sm" data-dismiss="modal" onClick={handleModalClose}>Close</button>
-                    </div>
-            
-                </div>
-            </div>
-        </div>
-    )
+    const PaymentModal = (props) => {
+        return (
+            <Modal
+              {...props}
+              size="md"
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              id="calculateModal"
+            >
+              <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                Mortgage Payment Details
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <table className="table table-striped">
+                    <tbody>
+                        <tr>
+                            <th>House Price</th>
+                            <td>{Number(mortgage.housePrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                        </tr>
+                        <tr>
+                            <th>Down Payment</th>
+                            <td>{Number((mortgage.housePrice - mortgage.downPayment)).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                        </tr>
+                        <tr>
+                            <th>Loan Amount</th>
+                            <td>{Number(mortgage.loanAmount).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                        </tr>
+                        <tr>
+                            <th>Mortgage Payment</th>
+                            <td>{Number(mortgage.mortgagePayment).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                        </tr>
+                        <tr>
+                            <th>Total Interest</th>
+                            <td>{Number(mortgage.totalInterest).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                        </tr>
+                        <tr className="bg-success text-white">
+                            <th>Monthly Payment</th>
+                            <td>{Number(mortgage.monthlyPay).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                        </tr>
+                    </tbody>
+                </table>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onClick={props.onHide}>Close</Button>
+              </Modal.Footer>
+            </Modal>
+        );
+    }
 
     return (
         <>
@@ -100,7 +147,7 @@ export default function Mortgage({ price }) {
                                     <div className="input-group-text">
                                     <FaDollarSign width={16} height={16} fill="currentColor"/>    
                                     </div>
-                                    <input type="number" className="form-control" name="down_payment" id="down_payment" {...register('down_payment', { value: parseFloat(price)/2 } )} step={1}/>
+                                    <input type="number" className="form-control" name="down_payment" id="down_payment" {...register('down_payment', { value: (parseFloat(price)* 0.8) } )} step={1}/>
                                 </div>
                                
                                 <span className="text-danger">{errors.down_payment?.message}</span>
@@ -137,8 +184,10 @@ export default function Mortgage({ price }) {
                     </div>
                 </div>
             </div>
-            <PaymentModal />
-            
+            <PaymentModal
+                show={showmodal}
+                onHide={() => handleModalClose(false)}
+            />
         </>
     )
 }

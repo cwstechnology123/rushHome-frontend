@@ -326,6 +326,8 @@ const PropertyDetails = ({
                     </div>
                 </div>
                 <div id="agent-com">
+                    
+                {(session && session.user.role === 'agent') && (
                     <AgentOtherDetails 
                         propertyId={id} 
                         agent={agent} 
@@ -339,9 +341,7 @@ const PropertyDetails = ({
                         position={geography}
                         directions={directions}
                     />
-                {/* {(session && session.user.role === 'agent') && (
-                    
-                )}  */}
+                )} 
                 </div>
             </div>
         </section>
