@@ -32,7 +32,7 @@ const PropertyCard = ({
     // const [srcimg, setSrcimg] = useState(listPictureURL.replace(/^http:\/\//i, 'https://'));
     const src = listPictureURL? listPictureURL.replace(/^http:\/\//i, 'https://') : noImage.src;
     return (
-        <Link href={`/property/${slug}`}>
+        <Link href={`/property/${slug}`} scroll={true}>
             <div className="property-card style3">
                 <div className="property-img">
                     <img key={`image_${id}`} src={src} alt="Image" />

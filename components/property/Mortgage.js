@@ -170,7 +170,7 @@ export default function Mortgage({ price }) {
                             </div>
                             <div className="col-md-12">
                                 <label className="form-label">Payment Period</label>
-                                <select id="period" className="form-select" name="period" {...register('period')}>
+                                <select id="period" className="form-control" name="period" {...register('period')}>
                                     <option value={'monthly'}>Monthly</option>
                                     {/* <option value={'yearly'}>Yearly</option> */}
                                 </select>

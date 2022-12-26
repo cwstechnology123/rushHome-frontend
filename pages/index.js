@@ -5,6 +5,7 @@ import List from '../components/property/List'
 import { apiBaseUrl, fetchApi } from '../utils/fetchApi'
 import { useState } from 'react'
 import Grid from '../components/skeletonLoader/Grid'
+import HomeBanner from '../components/layouts/HomeBanner'
 
 export default function Home({properties}) {
   const [loader, setLoader] = useState(false);
@@ -33,7 +34,8 @@ export default function Home({properties}) {
 
   return (
     <>
-      <MainBanner />
+      {/* <MainBanner /> */}
+      <HomeBanner />
       <section className="property-slider-wrap pt-100 pb-75 property_wraper">
         <div className="container">
           <div className="row">

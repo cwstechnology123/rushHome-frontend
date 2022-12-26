@@ -96,7 +96,6 @@ const PropertyDetails = ({
         }
         return null;
     }
-
     const ClientComponent = () => {
         if(session){
             if(session.user.role === 'client'){
@@ -164,7 +163,7 @@ const PropertyDetails = ({
                             </div>
                             </div>
                         </div>
-                        <div className="pagebreak" />
+                        {/* <div className="pagebreak" /> */}
                         <div className="factfeature_box heading_line">
                             <div className="col-xl-12 col-lg-12">
                                 <div className="section-title style1 text-left mb-40">
@@ -316,32 +315,31 @@ const PropertyDetails = ({
                         </div>
                         
                         <PropertyAmenities amenities={amenities} /> 
-                        <div className="pagebreak" />
+                        {/* <div className="pagebreak" /> */}
                         <ClientComponent />                        
                     </div>
                     <div className="col-xl-4 col-lg-4 col-12">
-                        <div className="right_box_listing" id="exTab3">
-                            <SessionSideBox/>
+                        <div className="right_box_listing">
+                            <SessionSideBox />
                         </div>
                     </div>
                 </div>
                 <div id="agent-com">
-                    
-                {(session && session.user.role === 'agent') && (
-                    <AgentOtherDetails 
-                        propertyId={id} 
-                        agent={agent} 
-                        address={{
-                            fullAddress: fullStreetAddress,
-                            county: county,
-                            city: city,
-                            stateCode: stateOrProvince,
-                            postalCode: postalCode
-                        }}
-                        position={geography}
-                        directions={directions}
-                    />
-                )} 
+                    {(session && session.user.role === 'agent') && (
+                        <AgentOtherDetails 
+                            propertyId={id} 
+                            agent={agent} 
+                            address={{
+                                fullAddress: fullStreetAddress,
+                                county: county,
+                                city: city,
+                                stateCode: stateOrProvince,
+                                postalCode: postalCode
+                            }}
+                            position={geography}
+                            directions={directions}
+                        />
+                    )} 
                 </div>
             </div>
         </section>
@@ -358,7 +356,7 @@ export async function getServerSideProps({ params: { slug } }) {
     const payload = {url : `${apiBaseUrl}/properties/details/${propertyId}`, method : 'GET'}
     const res = await fetchApi(payload)
     // Pass data to the page via props
-    console.log(res.data)
+    // console.log(res.data)
     if(res.data){
         return {
             props: {

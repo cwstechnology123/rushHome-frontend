@@ -238,3 +238,22 @@ export const priceFilter = {
         "value": 25000000
     }
 ]};
+
+export const lotSize = {
+    items: [
+        {name:'2,000 sq ft', value:2000},
+        {name:'4,500 sq ft', value:4500},
+        {name:'6,500 sq ft', value:6500},
+        {name:'8,000 sq ft', value:8000},
+        {name:'0.25 acres', value:108890},
+        {name:'0.5 acres', value:21780},
+        {name:'1 acres', value:43560},
+        {name:'2 acres', value:87120},
+        {name:'3 acres', value:130680},
+        {name:'4 acres', value:174240},
+        {name:'5 acres', value:217800},
+        {name:'10 acres', value:435600},
+        {name:'40 acres', value:1742400},
+        {name:'100 acres', value:4356000},
+    ]
+}
