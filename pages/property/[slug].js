@@ -15,13 +15,17 @@ import AgentOtherDetails from "../../components/property/AgentOtherDetails";
 import ClientBox from "./ClientBox";
 import ClientOtherDetails from "../../components/property/ClientOtherDetails";
 import { useReactToPrint } from "react-to-print";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
+import absoluteUrl from "next-absolute-url";
 
 const PropertyDetails = ({
     propertyDetails: {
         id,
+        slug,
         listingId,
         listingKey,
+        mlsListDate,
         propertyType,
         yearBuilt,
         heatingYN,
@@ -50,11 +54,20 @@ const PropertyDetails = ({
         amenities,
         agent,
         directions,
-        tag
+        tag,
+        count,
+        associationFee,
+        taxAnnualAmount
+        // associationYN: 'N',
+        // associationFee: '',
+        // taxAnnualAmount: '2781.00',
     }
 }) => {
+    const router = useRouter();
     const componentRef = useRef();
+    const { origin } = absoluteUrl()
     const { data: session } = useSession();
+    const [saved, setSaved] = useState(false);
     const handlePrint = useReactToPrint({
         content: () => {
             const tableStat = componentRef.current.cloneNode(true);
@@ -70,6 +83,15 @@ const PropertyDetails = ({
         copyStyles: true,
         documentTitle: fullStreetAddress
     })
+    const handleSave = () => {
+        
+        if(session){
+            setSaved(!saved);
+        }else{
+            localStorage.setItem('overridePath', '/property/'+slug);
+            router.push('/auth')
+        }
+    }
     const SessionSideBox = () => {
         if(session){
             if(session.user.role === 'client'){
@@ -106,6 +128,8 @@ const PropertyDetails = ({
                         position={geography}
                         tourLink={virtualTourURLUnbranded}
                         price={listPrice}
+                        hoa={associationFee}
+                        ptax={taxAnnualAmount}
                     />
                 )
             }else{
@@ -119,6 +143,8 @@ const PropertyDetails = ({
                 position={geography}
                 tourLink={virtualTourURLUnbranded}
                 price={listPrice}
+                hoa={associationFee}
+                ptax={taxAnnualAmount}
             />
         )
     }
@@ -131,7 +157,15 @@ const PropertyDetails = ({
                         <div className="slider_wraper">
                             {!session && (
                                 <PropertyHeader 
+                                    info={{
+                                        text: `${description.substring(0,10)}`,
+                                        url: `${origin}/property/${slug}`,
+                                        title: `${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`,
+                                    }}
+                                    saved={saved}
+                                    mlsListDate={mlsListDate}
                                     handlePrint={handlePrint}
+                                    handleSave={handleSave}
                                     price={listPrice}
                                     area={pricePerSquareFoot}
                                     address={{
@@ -142,9 +176,19 @@ const PropertyDetails = ({
                                         postalCode: postalCode
                                     }}
                                     tag={tag}
+                                    count={count}
                                 />
                             )}
                             <PropertyImages 
+                                info={{
+                                    text: `${description.substring(0,10)}`,
+                                    url: `${origin}/property/${slug}`,
+                                    title: `${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`,
+                                }}
+                                saved={saved}
+                                userSession={session}
+                                handlePrint={handlePrint}
+                                handleSave={handleSave}
                                 defaulImages={{
                                     picture3URL: listPicture3URL,
                                     picture2URL: listPicture2URL,
@@ -344,7 +388,12 @@ const PropertyDetails = ({
             </div>
         </section>
 
-        <SimilarHomes />
+        <SimilarHomes 
+            stataCode={stateOrProvince}
+            price={listPrice}
+            beds={bedroomsTotal}
+            baths={bathroomsTotalInteger}
+        />
         </>
     )
 }
@@ -356,7 +405,7 @@ export async function getServerSideProps({ params: { slug } }) {
     const payload = {url : `${apiBaseUrl}/properties/details/${propertyId}`, method : 'GET'}
     const res = await fetchApi(payload)
     // Pass data to the page via props
-    // console.log(res.data)
+    console.log(res.data)
     if(res.data){
         return {
             props: {

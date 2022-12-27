@@ -102,8 +102,8 @@ export default function SearchFilter({bounds}) {
                                                 onChange={(ev)=>handleOnChange('prop_min_price', ev)}
                                             >
                                                 <SelectOption value="">Min Price</SelectOption>
-                                                {priceFilter.items.map(item => 
-                                                    (<SelectOption value={item.value}>{item.name}</SelectOption>)
+                                                {priceFilter.items.map((item, i) => 
+                                                    (<SelectOption key={`mprice-${i}`} value={item.value}>{item.name}</SelectOption>)
                                                 )}
                                             </Select>
                                         </div>

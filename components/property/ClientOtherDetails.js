@@ -11,7 +11,9 @@ export default function ClientOtherDetails({
     address,
     position,
     tourLink,
-    price
+    price,
+    hoa,
+    ptax
 }){
     const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
     const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/additional-details/${propertyId }`, method : 'GET'}, fetcher)
@@ -19,10 +21,10 @@ export default function ClientOtherDetails({
     return (
         <>
         {(tourLink!='') && <VirtualTour tourLink={tourLink?.replace(/^http:\/\//i, 'https://')} />}
-        <div className="pagebreak" />
+        {/* <div className="pagebreak" /> */}
         <PropertyMap address={address} position={position}/>
-        <Mortgage price={price}/>
-        <div className="pagebreak" />
+        <Mortgage price={price} hoa={hoa} ptax={ptax}/>
+        {/* <div className="pagebreak" /> */}
         {data?.propertyAdditionalDetails.association && (
             <PropertyAssociation association={data.propertyAdditionalDetails.association} />
         )}

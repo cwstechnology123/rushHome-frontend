@@ -1,15 +1,16 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { FaDollarSign, FaPercent } from "react-icons/fa";
 import { Button, Modal } from "react-bootstrap";
 
-export default function Mortgage({ price }) {
+const Mortgage = ({ price,hoa, ptax }) => {
     
     const [mortgage, setMortgage] = useState({
         housePrice: 0,
         downPayment: 0,
+        downPercent: 0,
         loanAmount: 0,
         monthlyPay: 0,
         totalInterest: 0,
@@ -27,11 +28,18 @@ export default function Mortgage({ price }) {
     });
 
     const calculateMortgage = ({ total_amount, down_payment, rate, duration, period }) => {
-        // down_payment
-        // duration
-        // rate
-        // console.log(down_payment)
+        let hoaAmt = hoa? parseInt(hoa) : 0;
+        let taxAmt = ptax? parseInt(ptax) : 0;
+        let downPercent = 0;
+        
+        if(taxAmt){
+            taxAmt = parseFloat(taxAmt/12);
+        }
         let loan_amt = (total_amount - down_payment);
+        if(down_payment){
+            downPercent = Math.round(((total_amount - down_payment) / total_amount) * 100);
+        }
+        
         if(period === 'monthly'){
             rate = (rate / 1200);
             duration = duration * 12;
@@ -39,33 +47,31 @@ export default function Mortgage({ price }) {
             rate = (rate/100);
         }
         let rate_per_month = parseFloat(Math.pow((1+rate), duration));
-
+        console.log(total_amount, down_payment, rate, duration, hoaAmt, taxAmt, downPercent)
         let paymentAmount = parseFloat(loan_amt * ((rate * rate_per_month) / (rate_per_month - 1)))
-
-        // let paymentAmount = ( loan_amt * ( rate * (Math.pow( (1+rate), duration )) ) )/ (Math.pow( (1+rate), duration ) - 1)
+        let monthlyPay = (paymentAmount + taxAmt + hoaAmt);
         setMortgage({
             housePrice: total_amount,
             downPayment: down_payment,
             loanAmount: loan_amt,
-            monthlyPay: paymentAmount.toFixed(2),
-            totalInterest: ((paymentAmount.toFixed(2) * duration)),
-            mortgagePayment: ((paymentAmount.toFixed(2) * duration) + loan_amt)
+            monthlyPay: monthlyPay.toFixed(2),
+            totalInterest: (monthlyPay * duration).toFixed(2),
+            mortgagePayment: ((monthlyPay * duration) + loan_amt).toFixed(2)
         });
-        setShowmodal(true);
-        //console.log(showmodal, mortgage)
-        
+        setShowmodal(true);        
     }
     const handleModalClose = () => {
         setMortgage({
             housePrice: 0,
             downPayment: 0,
+            downPercent: 0,
             loanAmount: 0,
             monthlyPay: 0,
             totalInterest: 0,
             mortgagePayment: 0
         });
         setShowmodal(false);
-        reset();
+        // reset();
     }
     const PaymentModal = (props) => {
         return (
@@ -78,7 +84,7 @@ export default function Mortgage({ price }) {
             >
               <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                Mortgage Payment Details
+                Mortgage Repayment Summary
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
@@ -90,7 +96,7 @@ export default function Mortgage({ price }) {
                         </tr>
                         <tr>
                             <th>Down Payment</th>
-                            <td>{Number((mortgage.housePrice - mortgage.downPayment)).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                            <td>{Number(mortgage.downPayment).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
                         </tr>
                         <tr>
                             <th>Loan Amount</th>
@@ -147,7 +153,7 @@ export default function Mortgage({ price }) {
                                     <div className="input-group-text">
                                     <FaDollarSign width={16} height={16} fill="currentColor"/>    
                                     </div>
-                                    <input type="number" className="form-control" name="down_payment" id="down_payment" {...register('down_payment', { value: (parseFloat(price)* 0.8) } )} step={1}/>
+                                    <input type="number" className="form-control" name="down_payment" id="down_payment" {...register('down_payment', { value: (parseFloat(price)* 0.2) } )} step={1}/>
                                 </div>
                                
                                 <span className="text-danger">{errors.down_payment?.message}</span>
@@ -158,14 +164,14 @@ export default function Mortgage({ price }) {
                                     <div className="input-group-text">
                                         <FaPercent width={16} height={16} fill="currentColor" />
                                     </div>
-                                    <input type="number" className="form-control" name="rate" id="rate" step={0.1}{...register('rate', { value: 1 } )}/>
+                                    <input type="number" className="form-control" name="rate" id="rate" step={0.1}{...register('rate', { value: 6.7 } )}/>
                                 </div>
                                 
                                 <span className="text-danger">{errors.rate?.message}</span>
                             </div>
                             <div className="col-md-6">
                                 <label className="form-label">Number of Years</label>
-                                <input type="number" className="form-control" name="duration" id="duration" {...register('duration', { value: 1 } )}/>
+                                <input type="number" className="form-control" name="duration" id="duration" {...register('duration', { value: 30 } )}/>
                                 <span className="text-danger">{errors.duration?.message}</span>
                             </div>
                             <div className="col-md-12">
@@ -191,3 +197,5 @@ export default function Mortgage({ price }) {
         </>
     )
 }
+
+export default memo(Mortgage);

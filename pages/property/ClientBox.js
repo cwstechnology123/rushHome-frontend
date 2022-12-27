@@ -3,89 +3,154 @@ import { GiHomeGarage } from "react-icons/gi";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoBedOutline } from "react-icons/io5";
 import { MdSquareFoot } from "react-icons/md";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import * as yup from "yup";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Modal } from "react-bootstrap";
+import DatePicker from "../../components/property/DatePicker";
+import { scheduleTime } from "../../utils/propertyFilters";
+import 'react-phone-number-input/style.css'
+import { isPossiblePhoneNumber } from "react-phone-number-input";
+import PhoneInput from "react-phone-number-input";
+import moment from "moment/moment";
 
 export default function ClientBox({ type, address, price, pricearea, amenity }) {
 
     const [showscheduletour, setShowscheduletour] = useState(false);
+    const [showsrequest, setShowsrequest] = useState(false);
+    const curTime = useRef();
     const curdate = new Date();
+    const [selectDate, setSelectDate] = useState(new Date());
+    curTime.current = ("0"+curdate.getHours()).slice(-2)+':00:00';
 
     const schema = yup.object().shape({
-        // schedule_date: yup.string().default(() => curdate.toISOString()).required().label('Schedule Date'),
-        // schedule_time: yup.string().default(() => (
-        //     curdate.getHours()+':'+curdate.getMinutes()
-        // )).required().label('Schedule Time'),
-        schedule_datetime: yup.string().required().label('Date-Time'),
-        full_name: yup.string().required().label('Full Name'),
-        schedule_email: yup.string().email().required().label('Email Address'),
-        schedule_phone_prefix: yup.string().required().label('Phone Prefix'),
-        schedule_phone: yup.string().required().matches(
-            /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-            "Enter a valid phone number"
+        schedule_time: yup.string().required("Please enter schedule time").label('Schedule Time'),
+        full_name: yup.string().required("Please enter fullname").label('Full Name'),
+        schedule_email: yup.string().email().required("Please enter email address").label('Email Address'),
+        schedule_phone: yup.string().required(({value}) => {
+            // console.log("Val:", value);
+            if(!value || value?.length === 0){
+                return "Please enter your phone number";
+            }else if((typeof value === 'string') && (isPossiblePhoneNumber(value) === false)){
+                return "Please enter valid phone number";
+            }
+        }).matches(
+            /([+]?\d{1,2}[.-\s]?)?(\d{3}[.-]?){2}\d{4}/g,
+                  "Please enter valid phone number"
         ).label('Phone Number'),
     });
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    const { register, handleSubmit, formState: { errors }, control, reset } = useForm({
         resolver: yupResolver(schema),
     });
-
-    const ScheduleTourModal = () => (
-        <div className={`modal fade ${showscheduletour? 'show' : ''}`} id="scheduleModal" style={{display: (showscheduletour? 'block' : 'none')}}>
-            <div className="modal-dialog">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h2>Schedule a Tour with Your Agent</h2>
-                        <button type="button" className="btn-close" onClick={() => setShowscheduletour(false)} aria-label="Close"></button>
+    const selectedDay = (val) =>{
+        setSelectDate(val)
+    };
+    const handleScheduleModalClose = () => {
+        reset();
+        setShowscheduletour(false);
+    }
+    const handleScheduleTour = (data) => {
+        console.log("Data: ",data)
+        setShowscheduletour(false);
+        // data.schedule_date = selectDate;
+        // data.schedule_time = selectDate.getDay()+" "+data.schedule_time;
+        // setSchedule(data);
+        // // console.log("Schedule Time: ",data.schedule_time)
+        // setShowmodal(true);
+        setShowsrequest(true)
+    }
+    const ScheduleTourModal = (props) => (
+        <Modal
+            {...props}
+            size="md"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+        >
+        <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter" style={{color:'black'}}>
+            Schedule a Tour with Your Agent
+            </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <div className="form_wraper_box" id="schedule_box">
+                
+                <form onSubmit={handleSubmit(handleScheduleTour)}>
+                    <div className="form-group mb-3">
+                        <DatePicker 
+                            startDate={new Date()}
+                            days={100}
+                            selectDate={selectDate}
+                            getSelectedDay={selectedDay}
+                        />
                     </div>
-                    <div className="first_box second_box">
-                        <form className="row g-3">
-                            <div className="col-md-12">
-                                <label className="form-label">DateTime</label>
-                                <input type="datetime-local" className="form-control" name="schedule_datetime" id="schedule_datetime" {...register('schedule_datetime')} />
-                                <span className="text-danger">{errors.schedule_datetime?.message}</span>
-                            </div>
-                            <div className="col-md-12">
-                                <label className="form-label">Name</label>
-                                <input type="text" className="form-control" name="full_name" id="full_name" placeholder="Full Name" {...register('full_name')} />
-                                <span className="text-danger">{errors.full_name?.message}</span>
-                            </div>
-                            <div className="col-12">
-                                <div className="col-auto">
-                                    <label className="form-label">Phone Number</label>
-                                    <div className="input-group">
-                                        <div className="col-auto">
-                                            <select className="form-select" id="autoSizingSelect" {...register('schedule_phone_prefix')}>
-                                                <option className="">Cell</option>
-                                                <option className="1">One</option>
-                                                <option className="2">Two</option>
-                                                <option className="3">Three</option>
-                                            </select>
-                                        </div>
-                                        <input type="text" className="form-control" id="autoSizingInputGroup" placeholder="414-266-9847" {...register('schedule_phone')} />
-                                    </div>
-                                    <span className="text-danger">{errors.schedule_phone_prefix?.message}{errors.schedule_phone?.message}</span>
-                                </div>
-                            </div>
-                            <div className="col-12">
-                                <label className="form-label">Email Address</label>
-                                <input type="text" className="form-control" name="schedule_email" id="schedule_email" placeholder="john.doe@gmail.com" {...register('schedule_email')} />
-                                <span className="text-danger">{errors.schedule_email?.message}</span>
-                            </div>
-
-                            <label className="review">Reviews</label>
-                            <p className="agent_content">By pressing Request Showing, you agree that Rush Home and it’s real estate professionals may call/text you about your inquiry, which may involve use of automated means and prerecorded/artificial voices. </p>
-                            
-                            <div className="col-12 text-center">
-                                <button type="submit" className="btn style2 contact_button">Request Showing</button>
-                            </div>
-
-                        </form>
-                    </div> 
-                </div>
+                    <div className="form-group mb-3">
+                        {/* <input type="time" className="form-control" name="schedule_time" id="schedule_time" step={30} { ...register('schedule_time', {value: curTime.current}) } /> */}
+                        <select className="form-control" name="schedule_time" id="schedule_time" placeholder="Full Name"  { ...register('schedule_time', {value: curTime.current}) }>
+                            {scheduleTime.items.map((item, i)=>(
+                                <option key={`optime-${i}`} value={item.value}>{item.name}</option>
+                            ))}
+                        </select>
+                        <span className="text-danger">{errors.schedule_time?.message}</span>
+                    </div>
+                    <div className="form-group mb-3">
+                        <input type={'text'} className="form-control" name="full_name" id="full_name" placeholder="Full Name" { ...register('full_name') } />
+                        <span className="text-danger">{errors.full_name?.message}</span>
+                    </div>
+                    <div className="for-group mb-3">
+                        <input type={'email'} className="form-control" name="schedule_email" id="schedule_email" placeholder="Your Email Address" { ...register('schedule_email') } />
+                        <span className="text-danger">{errors.schedule_email?.message}</span>
+                    </div>
+                    <div className="for-group mb-3">
+                        <Controller
+                            name="schedule_phone"
+                            control={control}
+                            className="form-control"
+                            { ...register('schedule_phone') }
+                            render={({ field: { onChange, value } }) => (
+                                <PhoneInput
+                                    placeholder="414-266-9847"
+                                    defaultCountry="US"
+                                    international={true}
+                                    withCountryCallingCode={true}
+                                    value={value}
+                                    onChange={onChange}
+                                    id="schedule_phone"
+                                />
+                            )}
+                        />
+                        {/* <input type="tel" className="form-control" name="schedule_phone" id="schedule_phone" placeholder="Your Phone Number" { ...register('schedule_phone') } /> */}
+                        <span className="text-danger">{errors.schedule_phone?.message}</span>
+                    </div>
+                    <label className="review">Reviews</label>
+                    <p className="agent_content">By pressing Request Showing, you agree that Rush Home and it’s real estate professionals may call/text you about your inquiry, which may involve use of automated means and prerecorded/artificial voices. </p>
+                    <div className="form-group text-center">
+                        <button type="submit" className="btn style2 contact_button">Request Showing</button>
+                    </div>                   
+                </form>
             </div>
-        </div>
+        </Modal.Body>
+        </Modal>
+    )
+    const RequestSendModal = (props) => (
+        <Modal
+            {...props}
+            size="md"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+        >
+        <Modal.Header closeButton>
+            {/* <Modal.Title id="contained-modal-title-vcenter" style={{color:'black'}}>
+            Schedule a Tour with Your Agent
+            </Modal.Title> */}
+        </Modal.Header>
+        <Modal.Body>
+            <h6 className="font-weight-bolf text-center m-5">Request Sent</h6>
+            <div className="form-group text-center">
+                <button type="button" className="btn style2 contact_button"  onClick={props.onHide}>Close</button>
+            </div> 
+        </Modal.Body>
+        </Modal>
     )
 
     return (
@@ -136,7 +201,14 @@ export default function ClientBox({ type, address, price, pricearea, amenity }) 
                 <button type="button" className="btn style2 contact_button w-100" style={{borderRadius: 15}}>Message Agent</button>
             </div>
         </div>
-        <ScheduleTourModal/>
+        <ScheduleTourModal 
+            show={showscheduletour}
+            onHide={handleScheduleModalClose}
+        />
+        <RequestSendModal
+            show={showsrequest}
+            onHide={() => setShowsrequest(false)}
+        />
         </>
     )
 }

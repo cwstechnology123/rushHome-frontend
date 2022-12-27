@@ -6,8 +6,14 @@ import useSWR from "swr";
 import { apiBaseUrl, fetchApi } from "../../utils/fetchApi";
 import PropertyBannerLoader from "../skeletonLoader/PropertyBannerLoader";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { RWebShare } from "react-web-share";
 
 const PropertyImages = ({
+    info,
+    saved,
+    userSession,
+    handlePrint, 
+    handleSave,
     defaulImages,
     listingKey
 }) => {
@@ -45,10 +51,35 @@ const PropertyImages = ({
         originalClass: 'property-banner-original',
         thumbnailClass: 'property-banner-thumbnail'
     }]));
+    // console.log(saved)
     return (
         <>
+        <div style={{position: 'relative'}}>
+            {(userSession) && (<div className="carousel_icons">
+                <ul>
+                    <li>
+                        <a href="javascript:void(0)" onClick={handleSave} style={{color: `${saved? 'red' : ''}`}}>
+                            <i className={`fa fa-heart${saved? '' : '-o'}`} aria-hidden="true" ></i>
+                        </a>
+                    </li>
+                    <li>
+                    <RWebShare
+                        data={info}
+                        onClick={() => console.log("shared successfully!")}
+                        sites='["facebook", "twitter", "mail", "linkedin", "copy"]'
+                    >
+                        <a href="javascript:void(0)"><i className="fa fa-share" aria-hidden="true" /> </a>
+                    </RWebShare>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" onClick={handlePrint}>
+                        <i className="fa fa-print" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>)}
             {(isLoading && isValidating)? <PropertyBannerLoader/ > : <ImageGallery items={images} showPlayButton={false} lazyLoad={true} showFullscreenButton={false} useBrowserFullscreen={false} renderLeftNav={leftButton} renderRightNav={rightButton} />}
-            
+        </div>
         </>
     )
 }

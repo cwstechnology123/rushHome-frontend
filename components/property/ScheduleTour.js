@@ -7,11 +7,12 @@ import 'react-phone-number-input/style.css'
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import PhoneInput from "react-phone-number-input";
 import moment from "moment/moment";
+import { scheduleTime } from "../../utils/propertyFilters";
 
 export default function ScheduleTour({onInit}) {
     const curTime = useRef();
     const curdate = new Date();
-    curTime.current = ("0"+curdate.getHours()).slice(-2)+':'+("0"+curdate.getMinutes()).slice(-2);
+    curTime.current = ("0"+curdate.getHours()).slice(-2)+':00:00';
     const [showmodal, setShowmodal] = useState(false);
     const [schedule, setSchedule] = useState({});
     const [reqmodal, setReqmodal] = useState(false);
@@ -40,13 +41,13 @@ export default function ScheduleTour({onInit}) {
     const handleScheduleTour = (data) => {
         // console.log("Data: ",data)
         data.schedule_date = selectDate;
-        data.schedule_time = selectDate.getDay()+" "+data.schedule_time+":00";
+        data.schedule_time = selectDate.getDay()+" "+data.schedule_time;
         setSchedule(data);
         // console.log("Schedule Time: ",data.schedule_time)
         setShowmodal(true);
     }
     const handleModalClose = (respond) => {
-        console.log(schedule);
+        // console.log(schedule);
         if(respond){
             setReqmodal(true);
         }
@@ -135,7 +136,7 @@ export default function ScheduleTour({onInit}) {
     
     useEffect(()=>{
         if(onInit){
-            curTime.current = ("0"+curdate.getHours()).slice(-2)+':'+("0"+curdate.getMinutes()).slice(-2);
+            curTime.current = ("0"+curdate.getHours()).slice(-2)+':00:00';
             reset()
         }
     }, [onInit]);
@@ -152,7 +153,12 @@ export default function ScheduleTour({onInit}) {
                 <div className="form_wraper_box container">
                     <form onSubmit={handleSubmit(handleScheduleTour)}>
                         <div className="form-group mb-3">
-                            <input type="time" className="form-control" name="schedule_time" id="schedule_time" step={'00:30'} { ...register('schedule_time', {value: curTime.current}) } />
+                            {/* <input type="time" className="form-control" name="schedule_time" id="schedule_time" step={30} { ...register('schedule_time', {value: curTime.current}) } /> */}
+                            <select className="form-control" name="schedule_time" id="schedule_time" placeholder="Full Name"  { ...register('schedule_time', {value: curTime.current}) }>
+                                {scheduleTime.items.map((item, i)=>(
+                                    <option key={`optime-${i}`} value={item.value}>{item.name}</option>
+                                ))}
+                            </select>
                             <span className="text-danger">{errors.schedule_time?.message}</span>
                         </div>
                         <div className="form-group mb-3">
@@ -164,7 +170,7 @@ export default function ScheduleTour({onInit}) {
                             <span className="text-danger">{errors.schedule_email?.message}</span>
                         </div>
                         <div className="for-group mb-3">
-                            {/* <Controller
+                            <Controller
                                 name="schedule_phone"
                                 control={control}
                                 className="form-control"
@@ -174,15 +180,14 @@ export default function ScheduleTour({onInit}) {
                                         placeholder="414-266-9847"
                                         defaultCountry="US"
                                         international={true}
-                                        useNationalFormatForDefaultCountryValue={true}
                                         withCountryCallingCode={true}
                                         value={value}
                                         onChange={onChange}
                                         id="schedule_phone"
                                     />
                                 )}
-                            /> */}
-                            <input type="tel" className="form-control" name="schedule_phone" id="schedule_phone" placeholder="Your Phone Number" { ...register('schedule_phone') } />
+                            />
+                            {/* <input type="tel" className="form-control" name="schedule_phone" id="schedule_phone" placeholder="Your Phone Number" { ...register('schedule_phone') } /> */}
                             <span className="text-danger">{errors.schedule_phone?.message}</span>
                         </div>
                         <div className="for-group mb-3">

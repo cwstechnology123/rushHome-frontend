@@ -3,13 +3,24 @@ import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from "next/router"
 import { handleSuccess, handleError, handleLoading } from "../../utils/notify";
 
 export default function Client() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false)
+    const [redirectUrl, setRedirectUrl] = useState('/client/dashboard');
+    useEffect(()=>{
+        let newPath = '';
+        if(localStorage.getItem('overridePath') !== null){
+            newPath = localStorage.getItem('overridePath');
+            localStorage.removeItem('overridePath');
+        }
+        if(newPath){
+            setRedirectUrl(newPath);
+        }
+    }, []);
     //form validations schema
     const loginSchema = Yup.object().shape({
         email: Yup.string().email('Enter valid email id.').required('Email id is required.'),
@@ -20,23 +31,23 @@ export default function Client() {
             ),
     })
     //validation schema end
-
+    console.log(redirectUrl)
     const formOptionsLogin = { resolver: yupResolver(loginSchema) }
     const { register, formState: { errors }, handleSubmit } = useForm(formOptionsLogin);
 
     const onSubmit = async formValue => {
         setIsLoading(true)
         handleLoading('Please wait...');
-        console.log(JSON.stringify(formValue));//print form data to console
+        // console.log(JSON.stringify(formValue));//print form data to console
         const res = await signIn('credentials',
             {
                 email : formValue.email,
                 password : formValue.password,
-                callbackUrl: `${window.location.origin}/client/dashboard`,
+                callbackUrl: `${window.location.origin}${redirectUrl}`,
                 redirect: false,
             }
         )
-        console.log('resss',res)
+        // console.log('resss',res)
         setIsLoading(false)
         if (res?.error) handleError(res.error)
         if (res.url) {
@@ -68,7 +79,7 @@ export default function Client() {
                     <button type="submit" disabled={isLoading} className="btn style1 button_agent">Login</button>
                 </div>
                 <div className="col-md-12 text-center">
-                    <button type="button" className="btn style1 button_agent" onClick={() => signIn("google", { callbackUrl: '/client/dashboard' })}><span className="googleicon"><img src="../../assets/img/googleicon.png" /></span>Continue with Google</button>
+                    <button type="button" className="btn style1 button_agent" onClick={() => signIn("google", { callbackUrl: redirectUrl })}><span className="googleicon"><img src="../../assets/img/googleicon.png" /></span>Continue with Google</button>
                 </div>
                 <p className="policy_content">Don’t have an account? <Link href="/signup">Sign up for free</Link></p>
                 </form>

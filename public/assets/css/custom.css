@@ -170,6 +170,16 @@
     border-color: #eee !important;
     background-color: #eee;
 }
+#schedule_box .PhoneInputCountry{
+    border-radius: 15px 0px 0px 15px !important;
+    border-color: transparent !important;
+    background-color: #eee;
+}
+#schedule_box .PhoneInputInput{
+    border-radius: 0px 15px 15px 0px !important;
+    border-color: transparent !important;
+    background-color: #eee;
+}
 
 /* .additional_box .table tr {
     line-height: 35px;

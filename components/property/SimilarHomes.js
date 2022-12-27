@@ -1,4 +1,24 @@
-export default function SimilarHomes() {
+import { useEffect, useState } from "react";
+import { apiBaseUrl, fetchApi } from "../../utils/fetchApi";
+import useSWR from "swr";
+import Grid from "../skeletonLoader/Grid";
+import List from "./List";
+import PropertyCard from "./PropertyCard";
+
+export default function SimilarHomes({
+    stataCode,
+    price,
+    beds,
+    baths
+}) {
+
+    const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
+    const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/similar`, method : 'POST', data: {
+        bedroomsTotal: beds,
+        bathroomsTotalInteger: baths,
+        listPrice: price,
+        stateOrProvince: stataCode
+    }}, fetcher);
 
     return (
         <section className="property-slider-wrap pb-75 property_wraper">
@@ -13,70 +33,22 @@ export default function SimilarHomes() {
                             </div>
                         </div>
                     </div>
-                    
-                    <div className="col-xl-4 col-lg-6 col-md-6">
-                        <div className="property-card style3">
-                            <div className="property-img">
-                            <img src="../../assets/img/property/property-26.jpg" alt="Image" />
-                            <span className="property-status">Exclusive</span>
-                            {/* <span class="property-condo">New</span> */}
-                            </div>
-                            <div className="property-info">
-                            <div className="property-status-wrap">
-                                <p className="property-price">$8,587.00</p>
-                            </div>
-                            <h3><a href="listing-details.html">Home in Delaware</a></h3>
-                            <ul className="property-metainfo list-style">
-                                <li><i className="flaticon-double-bed" />3 Br</li>
-                                <li><i className="flaticon-bath-tub" />3 Ba</li>
-                                <li><i className="flaticon-square" />2300 Sq.Ft</li>
-                                <li><i className="flaticon-home" />3 Gr</li>
-                            </ul>
-                            </div>
+                    {(isLoading)? <Grid item={3} /> : (
+                        data? (<>
+                        <div className="row justify-content-center">
+                            {data.properties.slice(0, 3).map((property, i) => (
+                                <div key={`first${i}`} className="col-xl-4 col-lg-6 col-md-6">
+                                    <PropertyCard property={property}/>
+                                </div>
+                            ))}
                         </div>
-                    </div>
-                    <div className="col-xl-4 col-lg-6 col-md-6">
-                        <div className="property-card style3">
-                            <div className="property-img">
-                            <img src="../../assets/img/property/property-26.jpg" alt="Image" />
-                            <span className="property-status">Exclusive</span>
-                            {/* <span class="property-condo">New</span> */}
-                            </div>
-                            <div className="property-info">
-                            <div className="property-status-wrap">
-                                <p className="property-price">$8,587.00</p>
-                            </div>
-                            <h3><a href="listing-details.html">Home in Delaware</a></h3>
-                            <ul className="property-metainfo list-style">
-                                <li><i className="flaticon-double-bed" />3 Br</li>
-                                <li><i className="flaticon-bath-tub" />3 Ba</li>
-                                <li><i className="flaticon-square" />2300 Sq.Ft</li>
-                                <li><i className="flaticon-home" />3 Gr</li>
-                            </ul>
-                            </div>
+                        </>) : (<>
+                        <div className="col-md-12 text-left">
+                            No Records...
                         </div>
-                    </div>
-                    <div className="col-xl-4 col-lg-6 col-md-6">
-                        <div className="property-card style3">
-                            <div className="property-img">
-                            <img src="../../assets/img/property/property-26.jpg" alt="Image" />
-                            <span className="property-status">Exclusive</span>
-                            {/* <span class="property-condo">New</span> */}
-                            </div>
-                            <div className="property-info">
-                            <div className="property-status-wrap">
-                                <p className="property-price">$8,587.00</p>
-                            </div>
-                            <h3><a href="listing-details.html">Home in Delaware</a></h3>
-                            <ul className="property-metainfo list-style">
-                                <li><i className="flaticon-double-bed" />3 Br</li>
-                                <li><i className="flaticon-bath-tub" />3 Ba</li>
-                                <li><i className="flaticon-square" />2300 Sq.Ft</li>
-                                <li><i className="flaticon-home" />3 Gr</li>
-                            </ul>
-                            </div>
-                        </div>
-                    </div>
+                        </>)
+                        )
+                    }
                 </div>
             </div>
         </section>
