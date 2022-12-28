@@ -43,7 +43,6 @@ const PropertyCard = ({
                     {tag && (<span className="property-status">{tag}</span>)}
                 </div>
                 <div className="property-info">
-                    <span>Home at {stateNames[stateOrProvince]}</span>
                     <p className="mb-0" style={{whiteSpace: 'pre-wrap'}}>{fullStreetAddress?`${fullStreetAddress}\n${city}, ${stateOrProvince} ${postalCode}`:ucfirst(county)}</p>
                     <div className="property-status-wrap">
                         <p className="property-price mb-0">{Number(listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0 })}</p>

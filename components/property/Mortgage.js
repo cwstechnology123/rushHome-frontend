@@ -8,13 +8,10 @@ import { Button, Modal } from "react-bootstrap";
 const Mortgage = ({ price,hoa, ptax }) => {
     
     const [mortgage, setMortgage] = useState({
-        housePrice: 0,
-        downPayment: 0,
-        downPercent: 0,
-        loanAmount: 0,
+        pi: 0,
+        taxes: 0,
+        insurance: 0,
         monthlyPay: 0,
-        totalInterest: 0,
-        mortgagePayment: 0
     });
     const [showmodal, setShowmodal] = useState(false);
     const schema = yup.object().shape({
@@ -31,7 +28,7 @@ const Mortgage = ({ price,hoa, ptax }) => {
         let hoaAmt = hoa? parseInt(hoa) : 0;
         let taxAmt = ptax? parseInt(ptax) : 0;
         let downPercent = 0;
-        
+        let homeIns = 65;
         if(taxAmt){
             taxAmt = parseFloat(taxAmt/12);
         }
@@ -47,28 +44,23 @@ const Mortgage = ({ price,hoa, ptax }) => {
             rate = (rate/100);
         }
         let rate_per_month = parseFloat(Math.pow((1+rate), duration));
-        console.log(total_amount, down_payment, rate, duration, hoaAmt, taxAmt, downPercent)
+        // console.log(total_amount, down_payment, rate, duration, hoaAmt, taxAmt, downPercent)
         let paymentAmount = parseFloat(loan_amt * ((rate * rate_per_month) / (rate_per_month - 1)))
-        let monthlyPay = (paymentAmount + taxAmt + hoaAmt);
+        let monthlyPay = (paymentAmount + taxAmt + hoaAmt + homeIns);
         setMortgage({
-            housePrice: total_amount,
-            downPayment: down_payment,
-            loanAmount: loan_amt,
+            pi: paymentAmount,
+            taxes: taxAmt,
+            insurance: homeIns,
             monthlyPay: monthlyPay.toFixed(2),
-            totalInterest: (monthlyPay * duration).toFixed(2),
-            mortgagePayment: ((monthlyPay * duration) + loan_amt).toFixed(2)
         });
         setShowmodal(true);        
     }
     const handleModalClose = () => {
         setMortgage({
-            housePrice: 0,
-            downPayment: 0,
-            downPercent: 0,
-            loanAmount: 0,
+            pi: 0,
+            taxes: 0,
+            insurance: 0,
             monthlyPay: 0,
-            totalInterest: 0,
-            mortgagePayment: 0
         });
         setShowmodal(false);
         // reset();
@@ -90,7 +82,7 @@ const Mortgage = ({ price,hoa, ptax }) => {
               <Modal.Body>
                 <table className="table table-striped">
                     <tbody>
-                        <tr>
+                        {/*<tr>
                             <th>House Price</th>
                             <td>{Number(mortgage.housePrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
                         </tr>
@@ -109,6 +101,19 @@ const Mortgage = ({ price,hoa, ptax }) => {
                         <tr>
                             <th>Total Interest</th>
                             <td>{Number(mortgage.totalInterest).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                        </tr>
+                        */}
+                        <tr>
+                            <th>Principle & Interest</th>
+                            <td>{Number(mortgage.pi).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                        </tr>
+                        <tr>
+                            <th>Taxes</th>
+                            <td>{Number(mortgage.taxes).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                        </tr>
+                        <tr>
+                            <th>Mortgage Insurance</th>
+                            <td>{Number(mortgage.insurance).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
                         </tr>
                         <tr className="bg-success text-white">
                             <th>Monthly Payment</th>

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const fubApiBaseUrl = process.env.NEXT_FUB_APIBASEURL;
+export const fubApiBaseUrl = process.env.NEXT_PUBLIC_APIFUBURL;
 
 export const fetchFubApi = async (payload) => {
     const options = {
@@ -17,7 +17,7 @@ export const fetchFubApi = async (payload) => {
     };
       
     return await axios
-        .request(options)
+        .request(payload.url, options)
         .then(function (response) {
             //console.log(response)
             return response.data;
@@ -25,4 +25,14 @@ export const fetchFubApi = async (payload) => {
         .catch(function (error) {
           //console.error(error);
         });
-  };
+    // return await fetch(payload.url, options)
+    //     .then(response => response.json())
+    //     .then(returnData => {
+    //       //console.log('returnData', returnData);
+    //       return returnData
+    //     })
+    //     .catch((err) => {
+    //       console.log(err)
+    //       return null;
+    //     });
+};

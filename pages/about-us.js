@@ -17,6 +17,9 @@ export default function AboutUs() {
       if(query.link === 'become-an-agent'){
         handleScrollTo('join_us');
       }
+      if(query.link === 'contact-us'){
+        handleScrollTo('office_location');
+      }
     }
   }, [query])
 
@@ -138,11 +141,11 @@ export default function AboutUs() {
           </div>
         </div>
       </section> */}
-      <section className="hw-wrap pt-100 pb-75 contact_box" id="office_location">
+      <section className="hw-wrap pt-100 pb-75 contact_box">
         <div className="container">
           <div className="row">
             <div className="col-xl-10 col-lg-10 offset-xl-1 offset-lg-1">
-              <div className="section-title style2 text-center mb-40">
+              <div className="section-title style2 text-center mb-40" id="office_location">
                 <h2>We are always eager to hear from you!</h2>
                 <hr className="center" />
                 <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p>

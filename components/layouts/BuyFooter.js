@@ -56,37 +56,37 @@ export default function BuyFooter(){
                             <h3 className="footer-widget-title">Search by City</h3>
                             <ul className="footer-menu list-style">
                                 <li>
-                                <Link href="/homes-for-sale/de-dover" target="_blank">
+                                <Link href="/homes-for-sale/dover-de" target="_blank">
                                     <i className="ri-arrow-right-s-line" />
                                     Dover
                                 </Link>
                                 </li>
                                 <li>
-                                <Link href="/homes-for-sale/de-middletown" target="_blank">
+                                <Link href="/homes-for-sale/middletown-de" target="_blank">
                                     <i className="ri-arrow-right-s-line" />
                                     Middletown
                                 </Link>
                                 </li>
                                 <li>
-                                <Link href="/homes-for-sale/de-newark" target="_blank">
+                                <Link href="/homes-for-sale/newark-de" target="_blank">
                                     <i className="ri-arrow-right-s-line" />
                                     Newark
                                 </Link>
                                 </li>
                                 <li>
-                                <Link href="/homes-for-sale/md-ocean-city" target="_blank">
+                                <Link href="/homes-for-sale/ocean-city-md" target="_blank">
                                     <i className="ri-arrow-right-s-line" />
                                     Ocean City
                                 </Link>
                                 </li>
                                 <li>
-                                <Link href="/homes-for-sale/pa-philadelphia" target="_blank">
+                                <Link href="/homes-for-sale/philadelphia-pa" target="_blank">
                                     <i className="ri-arrow-right-s-line" />
                                     Philadelphia
                                 </Link>
                                 </li>
                                 <li>
-                                <Link href="/homes-for-sale/de-wilmington" target="_blank">
+                                <Link href="/homes-for-sale/wilmington-de" target="_blank">
                                     <i className="ri-arrow-right-s-line" />
                                     Wilmington
                                 </Link>
@@ -94,19 +94,19 @@ export default function BuyFooter(){
                             </ul>
                             <ul className="footer-menu list-style">
                                 <li>
-                                <Link href="/homes-for-sale/md-annapolis" target="_blank">
+                                <Link href="/homes-for-sale/annapolis-md" target="_blank">
                                     <i className="ri-arrow-right-s-line" />
                                     Annapolis
                                 </Link>
                                 </li>
                                 <li>
-                                <Link href="/homes-for-sale/de-rehoboth" target="_blank">
+                                <Link href="/homes-for-sale/rehoboth-de" target="_blank">
                                     <i className="ri-arrow-right-s-line" />
                                     Rehoboth
                                 </Link>
                                 </li>
                                 <li>
-                                <Link href="/homes-for-sale/de-new-castle" target="_blank">
+                                <Link href="/homes-for-sale/new-castle-de" target="_blank">
                                     <i className="ri-arrow-right-s-line" />
                                     New Castle
                                 </Link>

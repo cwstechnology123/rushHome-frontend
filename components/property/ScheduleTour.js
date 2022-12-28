@@ -40,8 +40,8 @@ export default function ScheduleTour({onInit}) {
 
     const handleScheduleTour = (data) => {
         // console.log("Data: ",data)
-        data.schedule_date = selectDate;
-        data.schedule_time = selectDate.getDay()+" "+data.schedule_time;
+        data.schedule_date = moment(selectDate).format('YYYY-MM-DD');
+        data.schedule_time = moment(selectDate).format('YYYY-MM-DD')+" "+data.schedule_time;
         setSchedule(data);
         // console.log("Schedule Time: ",data.schedule_time)
         setShowmodal(true);
@@ -74,7 +74,7 @@ export default function ScheduleTour({onInit}) {
                     </div>
                     <div className="form_wraper_box container">
                         {/* <h2>Tuesday, March 9th <br/>at {format(new Date(schedule.schedule_time).getTime(), 'p')}</h2> */}
-                        <h5 className="text-center">{schedule && new Date(schedule.schedule_date).toLocaleDateString('en-US', { weekday:"long", month:"long", day:"numeric"})} <br /> at {schedule && moment(schedule.schedule_time+':00').format('hh:mm A')}</h5>
+                        <h5 className="text-center">{schedule && new Date(schedule.schedule_date).toLocaleDateString('en-US', { weekday:"long", month:"long", day:"numeric"})} <br /> at {schedule && moment(schedule.schedule_time).format('hh:mm a')}</h5>
                         <form className="row g-3">
                             <div className="col-md-12">
                                 <label className="form-label">First Name</label>

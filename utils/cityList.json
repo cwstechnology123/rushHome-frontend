@@ -1,0 +1,107 @@
+[
+    {
+        "slug": "dover-de",
+        "name": "Dover",
+        "state_code": "de",
+        "description": "Dover is the capital city of Delaware. The First State Heritage Park comprises several sites around the centuries-old Green. These include the 1791 Old State House and Biggs Museum of American Art. Dover International Speedway hosts NASCAR races. A variety of aircraft are displayed at the Air Mobility Command Museum, at Dover Air Force Base. Nearby, bird-rich Bombay Hook National Wildlife Refuge is on Delaware Bay.",
+        "cover_image": "assets/img/city/Dover.jpg",
+        "main_image": "assets/img/city/Dover Cover.jpg",
+        "demographics": {
+            "median_age":"34",
+            "household_income":"$48,500",
+            "college_educated":"26%",
+            "avg_home_price":"$182,100"
+        },
+        "location": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d99001.61454060857!2d-75.59582166550203!3d39.156520004282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c7633375685ead%3A0xa9e2e447fb006cf0!2sDover%2C%20DE%2C%20USA!5e0!3m2!1sen!2sin!4v1672221618153!5m2!1sen!2sin\" width=\"100%\" height=\"450\" style=\"border:0; border-radius:15px;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+    },
+    {
+        "slug": "middletown-de",
+        "name": "Middletown",
+        "state_code": "de",
+        "description": "Recent annexations of land have stimulated Middletown's growth; it is known as the fastest growing area in Delaware. Between 2000 and 2010, the population of the town grew 206.3%.  Many affluent housing developments surround the town's center, especially to its north, attracting, among others, commuters from Wilmington, and even Philadelphia. Middletown's commerce has grown accordingly. National retail and food chain stores have opened locations in the area, with significant growth along the U.S. 301 corridor. An Amazon fulfillment center is located in Middletown. This growth is more characteristic of suburban sprawl, a stark difference from Middletown's historic growth patterns.",
+        "cover_image": "assets/img/city/Middletown.jpg",
+        "main_image": "assets/img/city/Wilmington Cover.jpg",
+        "demographics": {
+            "median_age":"40",
+            "household_income":"$91,663",
+            "college_educated":"22%",
+            "avg_home_price":"$294,800"
+        },
+        "location": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49298.905075311515!2d-75.74980119075376!3d39.44262801793051!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c70bcf9d3982e9%3A0x429df6e46d2050c2!2sMiddletown%2C%20DE%2C%20USA!5e0!3m2!1sen!2sin!4v1672222273775!5m2!1sen!2sin\" width=\"100%\" height=\"450\" style=\"border:0; border-radius:15px;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+    },
+    {
+        "slug": "wilmington-de",
+        "name": "Wilmington",
+        "state_code": "de",
+        "description": "",
+        "cover_image": "assets/img/city/Wilmington.jpg",
+        "main_image": "assets/img/city/Wilmington Cover.jpg",
+        "demographics": {
+            "median_age":"36",
+            "household_income":"$45,139",
+            "college_educated":"17%",
+            "avg_home_price":"$173,500"
+        },
+        "location": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d98189.73999336512!2d-75.61188613291276!3d39.73000489829046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c70f185c46af6f%3A0x8516da5077308c00!2sWilmington%2C%20DE%2C%20USA!5e0!3m2!1sen!2sin!4v1672222322220!5m2!1sen!2sin\" width=\"100%\" height=\"450\" style=\"border:0; border-radius:15px;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+    },
+    {
+        "slug": "newark-de",
+        "name": "Newark",
+        "state_code": "de",
+        "description": "Newark is a small city in Delaware. It's known for its green spaces, like Rittenhouse Park, with its trout-filled creek. On the outskirts, White Clay Creek State Park has miles of forest trails, plus a late-1700s mansion on the estate of Judge Morris. A path circling Newark Reservoir offers city views. The University Museums at the University of Delaware include collections of art, plus the Mineralogical Museum.",
+        "cover_image": "assets/img/city/Newark.jpg",
+        "main_image": "assets/img/city/Newark Cover.jpg",
+        "demographics": {
+            "median_age":"25",
+            "household_income":"$60,767",
+            "college_educated":"28%",
+            "avg_home_price":"$277,700"
+        },
+        "location": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49131.329666373575!2d-75.7976546874332!3d39.678780231088425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c77a9ae39789eb%3A0x2ee246f2974c385c!2sNewark%2C%20DE%2C%20USA!5e0!3m2!1sen!2sin!4v1672222395758!5m2!1sen!2sin\" width=\"100%\" height=\"450\" style=\"border:0; border-radius:15px;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+    },
+    {
+        "slug": "philadelphia-pa",
+        "name": "Philadelphia",
+        "state_code": "pa",
+        "description": "Philadelphia, Pennsylvania's largest city, is notable for its rich history, on display at the Liberty Bell, Independence Hall (where the Declaration of Independence and Constitution were signed) and other American Revolutionary sites. Also iconic are the steps of the Philadelphia Museum of Art, immortalized by Sylvester Stallone's triumphant run in the film \"Rocky.\"",
+        "cover_image": "assets/img/city/Philly.jpg",
+        "main_image": "assets/img/city/Philly Cover.jpg",
+        "demographics": {
+            "median_age":"35",
+            "household_income":"$49,127",
+            "college_educated":"18%",
+            "avg_home_price":"$171,600"
+        },
+        "location": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d391207.6721051361!2d-75.7089190186838!3d40.00152396579041!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c6b7d8d4b54beb%3A0x89f514d88c3e58c1!2sPhiladelphia%2C%20PA%2C%20USA!5e0!3m2!1sen!2sin!4v1672222453407!5m2!1sen!2sin\" width=\"100%\" height=\"450\" style=\"border:0; border-radius:15px;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+    },
+    {
+        "slug": "rehoboth-de",
+        "name": "Rehoboth",
+        "state_code": "de",
+        "description": "The town often bills itself as \"The Nation's Summer Capital\" because it is a frequent summer vacation destination for Washington, D.C. residents as well as visitors from Maryland, Virginia, and Pennsylvania. Vacationers are drawn for many reasons, including the town's charm and the absence of a sales tax in Delaware. The Rehoboth Beach Boardwalk is a 1-mile long wooden boardwalk adjacent to the beach with restaurants, shops, amusements, and attractions. The Funland amusement park, which opened in 1962, is located along the boardwalk between Delaware and Brooklyn avenues. Several restaurants and shops are located along the town's main street, Rehoboth Avenue.",
+        "cover_image": "assets/img/city/Rehoboth.jpg",
+        "main_image": "assets/img/city/Rehoboth Cover.jpg",
+        "demographics": {
+            "median_age":"62",
+            "household_income":"$117,083",
+            "college_educated":"43%",
+            "avg_home_price":"$1.15M"
+        },
+        "location": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49803.554022717086!2d-75.13149485074418!3d38.72418823456238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b896667c7333a7%3A0x61182de5a751636a!2sRehoboth%20Beach%2C%20DE%2C%20USA!5e0!3m2!1sen!2sin!4v1672222598599!5m2!1sen!2sin\" width=\"100%\" height=\"450\" style=\"border:0; border-radius:15px;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+    },
+    {
+        "slug": "ocean-city-md",
+        "name": "Ocean City",
+        "state_code": "md",
+        "description": "Ocean City is a resort town in the U.S. state of Maryland between the Atlantic Ocean and Isle of Wight Bay. It features miles of beach and a wooden boardwalk lined with restaurants, shops and hotels. At the boardwalk's southern end, Trimper's Rides has hosted theme-park attractions for decades. The surrounding waters are active with kayaks and tour boats, some of which journey to popular Assateague Island nearby.",
+        "cover_image": "assets/img/city/Ocean City.jpg",
+        "main_image": "assets/img/city/Ocean City Cover.jpg",
+        "demographics": {
+            "median_age":"56",
+            "household_income":"$55,954",
+            "college_educated":"20%",
+            "avg_home_price":"$292,100"
+        },
+        "location": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100074.18884048896!2d-75.21534069930595!3d38.38788647048417!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b8d671ac93de8b%3A0xb4bc715a3af31672!2sOcean%20City%2C%20MD%2C%20USA!5e0!3m2!1sen!2sin!4v1672222661770!5m2!1sen!2sin\" width=\"100%\" height=\"450\" style=\"border:0; border-radius:15px;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+    }
+]

@@ -119,7 +119,7 @@ export default function NavbarHeader(){
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link href="/contact-us" className={"nav-link" + (router.pathname == '/contact-us' ? " active" : "")} passHref>
+                    <Link href="/about-us?link=contact-us" className={"nav-link"} passHref>
                       Contact
                     </Link>
                   </li>

@@ -3,7 +3,11 @@ import ContactUs from '../components/ContactUs'
 import Link from 'next/link'
 
 export default function Sell() {
-  return (
+    const handleScrollTo = (sectionId) => {
+        document.getElementById(sectionId)?.scrollIntoView({behavior:"smooth", block: "start", inline:"nearest"})
+    }
+
+    return (
     <>
         <section className="about-wrap style1 ptb-100 sell_wraper">
             <img src="assets/img/about/shape-3.png" alt="Image" className="about-shape-three" />
@@ -15,7 +19,7 @@ export default function Sell() {
                     <h2>Sell Home With Rush Home Expert.</h2>
                     <p> Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet. </p>
                     </div>
-                    <Link href="/about-us" className="btn style1">Get Started</Link>
+                    <button type="button" onClick={()=>handleScrollTo('contact')} className="btn style1">Get Started</button>
                 </div>
                 </div>
                 <div className="col-lg-5">
@@ -127,7 +131,10 @@ export default function Sell() {
             </div>
             </div>
         </section>
-        <ContactUs />
+        <div id="contact">
+        <ContactUs type={'Seller Inquiry'}/>
+        </div>
+        
     </>
   )
 }

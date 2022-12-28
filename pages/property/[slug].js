@@ -17,7 +17,6 @@ import ClientOtherDetails from "../../components/property/ClientOtherDetails";
 import { useReactToPrint } from "react-to-print";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import absoluteUrl from "next-absolute-url";
 
 const PropertyDetails = ({
     propertyDetails: {
@@ -65,7 +64,7 @@ const PropertyDetails = ({
 }) => {
     const router = useRouter();
     const componentRef = useRef();
-    const { origin } = absoluteUrl()
+    const origin = process.env.NEXT_PUBLIC_HOST_NAME;
     const { data: session } = useSession();
     const [saved, setSaved] = useState(false);
     const handlePrint = useReactToPrint({
@@ -148,6 +147,17 @@ const PropertyDetails = ({
             />
         )
     }
+    
+
+    // useEffect(()=>{
+    //     const updateViewCount = async () => {
+    //         const payload = {url : `${apiBaseUrl}/properties/views-update/${id}`, method : 'GET'}
+    //         return await fetchApi(payload);
+    //     }
+    //     const result = updateViewCount();  
+    //     console.log("update",result)
+    // }, []);
+
     return (
         <>
         <section className="style3 ptb-50 product_box">
@@ -158,7 +168,7 @@ const PropertyDetails = ({
                             {!session && (
                                 <PropertyHeader 
                                     info={{
-                                        text: `${description.substring(0,10)}`,
+                                        text: description? description.substring(0,10) : 'RushHome Property Details',
                                         url: `${origin}/property/${slug}`,
                                         title: `${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`,
                                     }}
@@ -175,6 +185,7 @@ const PropertyDetails = ({
                                         stateCode: stateOrProvince,
                                         postalCode: postalCode
                                     }}
+                                    listingId={id}
                                     tag={tag}
                                     count={count}
                                 />
@@ -288,7 +299,7 @@ const PropertyDetails = ({
                                                 <tbody>
                                                     <tr>
                                                         <th width={'50%'}>Property ID:</th>
-                                                        <td width={'50%'} className="text-left">{listingId}</td>
+                                                        <td width={'50%'} className="text-left">{listingId}/{listingKey}</td>
                                                     </tr>
                                                     <tr>
                                                         <th width={'50%'}>Property Type:</th>
@@ -405,8 +416,8 @@ export async function getServerSideProps({ params: { slug } }) {
     const payload = {url : `${apiBaseUrl}/properties/details/${propertyId}`, method : 'GET'}
     const res = await fetchApi(payload)
     // Pass data to the page via props
-    console.log(res.data)
-    if(res.data){
+    // console.log(res.data)
+    if(res?.data){
         return {
             props: {
                 propertyDetails : res && res.data?.propertyDetails,

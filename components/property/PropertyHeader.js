@@ -1,9 +1,13 @@
 import moment from "moment";
+import useSWR from "swr";
 import { RWebShare } from "react-web-share";
 import stateNames from "../../utils/states_hash.json"
+import { apiBaseUrl, fetchApi } from "../../utils/fetchApi";
 
-export default function PropertyHeader({ saved,mlsListDate, price, area, address, tag, handlePrint, handleSave, count, info }) {
-
+export default function PropertyHeader({ saved, mlsListDate, price, area, address, tag, handlePrint, handleSave, count, info, listingId }) {
+    const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
+    const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/views-count/${listingId }`, method : 'GET'}, fetcher);
+    console.log("count",data);
     const daysAgo = () => {
         let starts = moment(mlsListDate);
         let ends = moment();
@@ -28,7 +32,7 @@ export default function PropertyHeader({ saved,mlsListDate, price, area, address
             <span>
                 <i className="fa fa-clock-o" aria-hidden="true" /> {daysAgo()} </span>
             <span>
-                <i className="fa fa-eye" aria-hidden="true" /> {count?.views || 0} Views </span>
+                <i className="fa fa-eye" aria-hidden="true" /> {isLoading? '-' : (data?.count | 0)} Views </span>
             </div>
             <div className="right_slide_nav">
             <button type="button" className="btn style3 button_top" onClick={handleSave}>
@@ -36,7 +40,7 @@ export default function PropertyHeader({ saved,mlsListDate, price, area, address
             <RWebShare
                 data={info}
                 onClick={() => console.log("shared successfully!")}
-                sites='["facebook", "twitter", "mail", "linkedin", "copy"]'
+                sites={["facebook", "linkedin", "copy", "mail"]}
             >
                 <button type="button" className="btn style3 button_top" ><i className="fa fa-share" aria-hidden="true" /> Share </button>
             </RWebShare>
