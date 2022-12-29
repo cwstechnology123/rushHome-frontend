@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import { apiBaseUrl, fetchApi } from '../../utils/fetchApi';
 import { useRouter } from "next/router";
