@@ -48,7 +48,7 @@ export default function Navbar() {
                 </div>
                 <ul className="navbar-nav ms-auto">
                   <li className="nav-item">
-                    <Link href="/homes-for-sale" className={"nav-link" + (router.pathname == '/homes-for-sale' ? " active" : "")} passhref>
+                    <Link href="/homes-for-sale/delaware-de" className={"nav-link" + (router.pathname == '/homes-for-sale/delaware-de' ? " active" : "")} passhref>
                       Buy
                     </Link>
                   </li>

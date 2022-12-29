@@ -19,7 +19,8 @@ export default function Home({properties}) {
     // console.log("type:", type)
     e.preventDefault();
     try{
-      const payload = {url : `${apiBaseUrl}/properties/${type}/1/12`, method : 'GET'}
+      const stateCode = type.substring(type.lastIndexOf('-') + 1)
+      const payload = {url : `${apiBaseUrl}/properties/${stateCode}/1/12`, method : 'GET'}
       const res = await fetchApi(payload)
       let resData = res && res.data ? res.data.properties : null
       setPropertiesData(resData)
@@ -47,13 +48,13 @@ export default function Home({properties}) {
                       <button className={`btn style1 ${activeTab==='all'? 'active' : ''}`} id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onClick={(e)=> handleTabClick(e,'all')} >All</button>
                     </li>
                     <li className="nav-item" role="presentation">
-                      <button className={`btn style1 ${activeTab==='de'? 'active' : ''}`} id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onClick={(e)=> handleTabClick(e,'de')}>Delaware</button>
+                      <button className={`btn style1 ${activeTab==='delaware-de'? 'active' : ''}`} id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" onClick={(e)=> handleTabClick(e,'delaware-de')}>Delaware</button>
                     </li>
                     <li className="nav-item" role="presentation">
-                      <button className={`btn style1 ${activeTab==='md'? 'active' : ''}`} id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onClick={(e)=>handleTabClick(e,'md')}>Maryland</button>
+                      <button className={`btn style1 ${activeTab==='maryland-md'? 'active' : ''}`} id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" onClick={(e)=>handleTabClick(e,'maryland-md')}>Maryland</button>
                     </li>
                     <li className="nav-item" role="presentation">
-                      <button className={`btn style1 ${activeTab==='pa'? 'active' : ''}`} id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onClick={(e)=>handleTabClick(e,'pa')}>Pennsylvania</button>
+                      <button className={`btn style1 ${activeTab==='pennsylvania-pa'? 'active' : ''}`} id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" onClick={(e)=>handleTabClick(e,'pennsylvania-pa')}>Pennsylvania</button>
                     </li>
                   </ul>
                 </div>	

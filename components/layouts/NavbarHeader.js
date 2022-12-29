@@ -75,7 +75,7 @@ export default function NavbarHeader(){
               navbarScroll
             >
               <li className="nav-item">
-                <Link href="/homes-for-sale" className={"nav-link" + (router.pathname == '/homes-for-sale' ? " active" : "")} passHref>
+                <Link href="/homes-for-sale/delaware-de" className={"nav-link" + (router.pathname == '/homes-for-sale/delaware-de' ? " active" : "")} passHref>
                   Buy
                 </Link>
               </li>
