@@ -10,7 +10,7 @@ import { handleSuccess, handleError, handleLoading } from "../../utils/notify";
 export default function Client() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false)
-    const [redirectUrl, setRedirectUrl] = useState('/client/dashboard');
+    const [redirectUrl, setRedirectUrl] = useState('/homes-for-sale/delaware-de');
     useEffect(()=>{
         let newPath = '';
         if(localStorage.getItem('overridePath') !== null){
@@ -79,7 +79,7 @@ export default function Client() {
                     <button type="submit" disabled={isLoading} className="btn style1 button_agent">Login</button>
                 </div>
                 <div className="col-md-12 text-center">
-                    <button type="button" className="btn style1 button_agent" onClick={() => signIn("google", { callbackUrl: redirectUrl })}><span className="googleicon"><img src="../../assets/img/googleicon.png" /></span>Continue with Google</button>
+                    <button type="button" className="btn style1 button_agent" onClick={() => signIn("google", { callbackUrl: redirectUrl,  role: 'client', })}><span className="googleicon"><img src="../../assets/img/googleicon.png" /></span>Continue with Google</button>
                 </div>
                 <p className="policy_content">Don’t have an account? <Link href="/signup">Sign up for free</Link></p>
                 </form>

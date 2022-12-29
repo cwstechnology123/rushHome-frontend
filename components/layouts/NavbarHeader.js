@@ -25,7 +25,6 @@ export default function NavbarHeader(){
     }
     else if (path === "/signout") {
       toggle()
-      localStorage.removeItem('user')
       const data = await signOut({redirect: false, callbackUrl: "/"})
       router.push(data.url)
     }
@@ -86,11 +85,11 @@ export default function NavbarHeader(){
               </li>
               {(session)? (
                 <>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <Link href="/client/dashboard" className={"nav-link" + (router.pathname == '/client/dashboard' ? " active" : "")} passHref={true}>
                       Dashboard
                     </Link>
-                  </li>
+                  </li> */}
                   <li className="nav-item">
                     <Link href="/client/favorites" className={"nav-link" + (router.pathname == '/client/favorites' ? " active" : "")} passHref={true}>
                       Favorites
