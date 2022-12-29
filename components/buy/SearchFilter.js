@@ -4,6 +4,8 @@ import { Button, Dropdown, Offcanvas, Overlay } from "react-bootstrap";
 import { BsFilterLeft } from "react-icons/bs";
 import { Select, SelectOption } from "reaselct";
 import { priceFilter } from "../../utils/propertyFilters";
+import AsyncSelect from 'react-select/async';
+import { apiBaseUrl, fetchApi } from '../../utils/fetchApi';
 
 export default function SearchFilter({bounds}) {
 
@@ -29,6 +31,32 @@ export default function SearchFilter({bounds}) {
         // console.log(router)
     }
     console.log(priceFilter)
+
+    const loadOptions = async (inputValue, callback) => {
+        if(inputValue.length > 1) {
+          // perform a request
+          try {
+            const payload = {url : `${apiBaseUrl}/properties/search-autocomplete`, method : 'POST', data : {search_key : inputValue}}
+            const res = await fetchApi(payload)
+            if (res && res.data) {
+              const searchList = res.data?.searchList;
+              callback(searchList)
+            }
+            else{
+              callback([])
+            }
+            
+          } catch (e) {
+            console.log(e)
+          }
+        }
+    };
+
+    const handleOnSelectOptChange = async (selectedOption) => {
+        const path = selectedOption.value
+        console.log(path)
+    };
+
     return (
         <>
             <section className="bye_topnav">
@@ -39,7 +67,11 @@ export default function SearchFilter({bounds}) {
                                 <div className="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                                 </svg></div>
-                                <input type="text" className="form-control" id placeholder="Enter an address neighborhood" />
+                                <AsyncSelect cacheOptions loadOptions={loadOptions} defaultOptions 
+                                isMulti
+                                placeholder="Enter an address neighborhood" classNamePrefix="react-select"
+                                onChange={handleOnSelectOptChange}
+                                className="form-control" />
                             </div>
                         </div>
                         <div className="col-12">
