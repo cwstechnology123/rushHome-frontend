@@ -24,7 +24,7 @@ export default function AgentCard({ agent }) {
             </div>
             <div key={'card-info-'+agent.id}  className="agent-info-wrap">
                 <div key={'agent-'+agent.id} className="agent-info">
-                    <h5><Link href={`/agent/${agent.id}`} passhref>{agent.name}</Link></h5>
+                    <h5><Link href={`/agent/${agent.id}`} passHref={true}>{agent.name}</Link></h5>
                     <span>Real Estate Agent</span>
                     <ul className="social-profile list-style style1">
                     <li key={"twitter-"+agent.id}>

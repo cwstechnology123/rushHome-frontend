@@ -112,7 +112,7 @@ const Mortgage = ({ price,hoa, ptax }) => {
                             <td>{Number(mortgage.taxes).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
                         </tr>
                         <tr>
-                            <th>Mortgage Insurance</th>
+                            <th>Insurance</th>
                             <td>{Number(mortgage.insurance).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
                         </tr>
                         <tr className="bg-success text-white">
@@ -158,7 +158,7 @@ const Mortgage = ({ price,hoa, ptax }) => {
                                     <div className="input-group-text">
                                     <FaDollarSign width={16} height={16} fill="currentColor"/>    
                                     </div>
-                                    <input type="number" className="form-control" name="down_payment" id="down_payment" {...register('down_payment', { value: (parseFloat(price)* 0.2) } )} step={1}/>
+                                    <input type="number" className="form-control" name="down_payment" id="down_payment" {...register('down_payment', { value: (parseFloat(price)* 0.2) } )} step={0.01}/>
                                 </div>
                                
                                 <span className="text-danger">{errors.down_payment?.message}</span>

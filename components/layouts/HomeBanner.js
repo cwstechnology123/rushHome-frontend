@@ -1,42 +1,86 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import { apiBaseUrl, fetchApi } from '../../utils/fetchApi';
 import { useRouter } from "next/router";
 import Link from 'next/link';
+import { Button, Modal } from 'react-bootstrap';
+
+const SearchModal = (props) => {
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Did you mean?
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body style={{maxHeight: '60vh', overflowY: 'auto'}}>
+        <h5>You typed "{props.inputValue}" but did you mean</h5>
+        {props.content}
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
 
 export default function HomeBanner() {
   const router = useRouter();
+  const [showList, setShowList] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [searchList, setSearchList] = useState({});
-  const loadOptions = async (inputValue) => {
-    [];
-    if(inputValue.length > 1) {
+  // const [inputValue, setInputValue] = useState("");
+  const inputValue = useRef();
+  const loadOptions = async (ev) => {
+    inputValue.current = ev.target.value;
+    // console.log("inputValue",inputValue.current)
+    if(inputValue.current.length > 1) {
       // perform a request
       try {
-        const payload = {url : `${apiBaseUrl}/properties/search-autocomplete`, method : 'POST', data : {search_key : inputValue}}
+        const payload = {url : `${apiBaseUrl}/properties/search-autocomplete`, method : 'POST', data : {search_key : inputValue.current}}
         const res = await fetchApi(payload)
         if (res && res.data) {
           let searchList = res.data?.searchList;
           setSearchList(searchList)
+          setShowList(true);
         }
         else{
           setSearchList({})
+          setShowList(false);
         }
-        
       } catch (e) {
         console.log(e)
+        setShowList(false);
       }
     }else{
       setSearchList({})
+      setShowList(false);
     }
   };
 
-  const handleOnChange = async (selectedOption) => {
-    const path = selectedOption.value
-    console.log(path)
-    router.push(path)
+  const handleOnSearch = () => {
+    setShowList(false);
+    setShowModal(true);
+    console.log(showList, showModal)
   };
-  console.log(searchList)
+  const searchContent = (searchList.length)? searchList.map((items, index) => (
+    <>
+    <label key={`label-${index}`}>{items.label}</label>
+    <ul className='list-group list-group-flush mb-2'>
+      {items.options.map((item, i) => {
+        let hrefLink = JSON.parse(item.value).path;
+        return (<li key={`li-${index}-${i}`} className='list-group-item'><Link key={`link-${index}-${i}`} href={hrefLink} style={{}}>{item.label}</Link></li>)
+      })}
+    </ul>
+    </>
+  )) : ("<h6>No option found!</h6>");
+
   return (
     <>
       <section className="hero-wrap style3">
@@ -53,12 +97,12 @@ export default function HomeBanner() {
                         onChange={handleOnChange} />
                         onChange={(ev)=>handleOnChange(ev.target.value)} 
                         */}
-                      <input type="text" className="form-control" onChange={(ev)=>loadOptions(ev.target.value)} placeholder="Address, City, Zip, School District" />
+                      <input type="text" className="form-control" onChange={loadOptions} placeholder="Address, City, Zip, School District" />
                       <div className="input-group-append">
-                          <button className="btn style_button" type="button">Search</button>
+                          <button className="btn style_button" type="button" onClick={handleOnSearch}>Search</button>
                       </div>
                   </div>
-                  {(searchList.length > 0) && (<div style={{
+                  <div style={{
                     width: '100%',
                     height: '50vh',
                     backgroundColor: '#fff',
@@ -67,20 +111,9 @@ export default function HomeBanner() {
                     padding: 10,
                     overflowY: 'auto',
                     textAlign: 'left',
-                    border: '1px solid #eee'
-                  }}>
-                    {searchList.map((items, index) => (
-                      <>
-                      <label key={`label-${index}`}>{items.label}</label>
-                      <ul className='list-group list-group-flush mb-2'>
-                        {items.options.map((item, i) => {
-                          let hrefLink = JSON.parse(item.value).path;
-                          return (<li key={`li-${index}-${i}`} className='list-group-item'><Link key={`link-${index}-${i}`} href={hrefLink} style={{}}>{item.label}</Link></li>)
-                        })}
-                      </ul>
-                      </>
-                    ))}
-                  </div>)}
+                    border: '1px solid #eee',
+                    display: showList? 'block' : 'none',
+                  }}>{searchContent}</div>
                   {/* <div className="form-group-wrap">
                       <div className="form-group">
                         <AsyncSelect cacheOptions loadOptions={loadOptions} defaultOptions placeholder="Address, City, Zip, School District" classNamePrefix="react-select"
@@ -94,6 +127,12 @@ export default function HomeBanner() {
           </div>
         </div>
       </section>
+      <SearchModal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        inputValue={inputValue.current}
+        content={searchContent}
+      />
     </>
   )
 }
