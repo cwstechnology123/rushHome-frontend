@@ -46,6 +46,7 @@
     "react-to-print": "^2.14.10",
     "react-web-share": "^2.0.2",
     "reaselct": "^2.1.0",
+    "styled-components": "^5.3.6",
     "supercluster": "^7.1.5",
     "swiper": "^8.4.5",
     "use-supercluster": "^0.4.0",

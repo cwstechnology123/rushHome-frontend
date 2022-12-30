@@ -92,7 +92,7 @@ export async function getServerSideProps({ params: { slug } }) {
         }
     }
     
-    console.log('sendData',sendData)
+    // console.log('sendData',sendData)
 
     // payload = {url : `${apiBaseUrl}/properties/all/1/10000`, method : 'GET'}
     // payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: {
@@ -105,7 +105,12 @@ export async function getServerSideProps({ params: { slug } }) {
     // }}
     const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: sendData}
     const res = await fetchApi(payload)
-    console.log(res)
+    // const response = await fetch('http://localhost:3000/api/map-properties/?age=30', {
+    //     method: 'POST',
+    //     body: JSON.stringify(sendData),
+    // });
+    // const data = await response.json();
+    // console.log("result",data)
     if(res && res.data){
         return {
             props: {

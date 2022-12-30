@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { useState } from 'react';
-import AsyncSelect from 'react-select/async';
 import { apiBaseUrl, fetchApi } from '../../utils/fetchApi';
 import { useRouter } from "next/router";
 import Link from 'next/link';
@@ -31,7 +30,6 @@ const SearchModal = (props) => {
 }
 
 export default function HomeBanner() {
-  const router = useRouter();
   const [showList, setShowList] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [searchList, setSearchList] = useState({});
@@ -97,7 +95,7 @@ export default function HomeBanner() {
                         onChange={handleOnChange} />
                         onChange={(ev)=>handleOnChange(ev.target.value)} 
                         */}
-                      <input type="text" className="form-control" onChange={loadOptions} placeholder="Address, City, Zip, School District" />
+                      <input type="text" className="form-control" onKeyUp={loadOptions} placeholder="Address, City, Zip, School District" />
                       <div className="input-group-append">
                           <button className="btn style_button" type="button" onClick={handleOnSearch}>Search</button>
                       </div>

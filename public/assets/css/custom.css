@@ -555,10 +555,10 @@
     display: none;
 }
 .react-horizontal-scrolling-menu--scroll-container {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
 }
-/* select options for multilabel */
+/* select options for multilabel 
 .react-select__option, .react-select__single-value{
     white-space: pre-wrap !important;
     color:#000 !important;
@@ -582,4 +582,36 @@ react-select__input {
 }
 .css-tj5bde-Svg{
     display: none !important;
+} */
+.filter_topnav .css-1nmdiq5-menu{
+    z-index: 999;
+}
+.filter_topnav .css-13cymwt-control,.filter_topnav .css-t3ipsp-control{
+    background-color: #f7f7f7 !important;
+    border-radius: 15px !important;
+    padding: 4px 5px !important;
+    border-color: #f7f7f7 !important;
+}
+.filter_topnav .react-select__control .react-select__multi-value {
+    border-radius: 10px !important;
+    border: 1px solid #000 !important;
+}
+.filter_topnav .react-select__control .react-select__multi-value .react-select__multi-value__remove{
+    background-color: #000 !important;
+    color: #fff !important;
+    border-radius: 10px !important;
+}
+.filter_topnav .dropdown-control {
+    padding: 12px 15px;
+    border-radius: 15px !important;
+    background-color: #f7f7f7 !important;
+    border: inherit;
+    font-size: 14px;
+    color: #000;
+}
+.filter_topnav .dropdown-control.dropdown-toggle::after{
+    display: none !important;
+}
+.filter_topnav  .dropdown-menu{
+    min-width: 20rem !important;
 }

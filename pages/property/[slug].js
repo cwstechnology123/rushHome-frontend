@@ -168,7 +168,7 @@ const PropertyDetails = ({
                             {!session && (
                                 <PropertyHeader 
                                     info={{
-                                        text: description? description.substring(0,10) : 'RushHome Property Details',
+                                        text: 'Check out this RushHome property.',
                                         url: `${origin}/property/${slug}`,
                                         title: `${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`,
                                     }}

@@ -21,7 +21,7 @@ export default function PropertyHeader({ saved, mlsListDate, price, area, addres
         }else if(diffs.days()){
             return diffs.days()+ ' Days Ago';
         }else{
-            return '-'
+            return '1 Day Ago'
         }
     }
     return (

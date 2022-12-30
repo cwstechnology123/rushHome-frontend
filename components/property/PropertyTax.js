@@ -33,7 +33,7 @@ export default function PropertyTax({tax}) {
                                         <td width={'50%'}>Tax Annual Amt/Year:</td>
                                         <th width={'50%'} className="text-left">
                                         {tax.taxAnnualAmount? (
-                                            Number(tax.taxAnnualAmount).toLocaleString('en-US', { style: 'currency', currency: 'USD'})
+                                            Number(tax.taxAnnualAmount).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0})
                                         ) : '-'}
                                         /{tax.taxYear? tax.taxYear : '-'}
                                         </th>
@@ -42,7 +42,7 @@ export default function PropertyTax({tax}) {
                                         <td width={'50%'}>School Tax:</td>
                                         <th width={'50%'} className="text-left">
                                         {tax.schoolTax? (
-                                            Number(tax.schoolTax).toLocaleString('en-US', { style: 'currency', currency: 'USD'})
+                                            Number(tax.schoolTax).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0})
                                         ) : '-'}
                                         {tax.schoolTaxPaymentFrequency && (`/${tax.schoolTaxPaymentFrequency}`)}
                                         </th>
@@ -51,7 +51,7 @@ export default function PropertyTax({tax}) {
                                         <td width={'50%'}>Country Tax:</td>
                                         <th width={'50%'} className="text-left">
                                             {tax.countyTax? (
-                                                Number(tax.countyTax).toLocaleString('en-US', { style: 'currency', currency: 'USD'})
+                                                Number(tax.countyTax).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0})
                                             ) : '-'}
                                             {tax.countyTaxPaymentFrequency && (`/${tax.countyTaxPaymentFrequency}`)}
                                         </th>
@@ -78,7 +78,7 @@ export default function PropertyTax({tax}) {
                                         <td width={'50%'}>Tax Assessed Value:</td>
                                         <th width={'50%'} className="text-left">
                                         {tax.taxAssessmentAmount? (
-                                            Number(tax.taxAssessmentAmount).toLocaleString('en-US', { style: 'currency', currency: 'USD'})
+                                            Number(tax.taxAssessmentAmount).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0})
                                         ) : '-'}
                                         {tax.assessmentYear && (`/${tax.assessmentYear}`)}
                                         </th>
