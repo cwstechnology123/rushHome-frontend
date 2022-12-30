@@ -4,7 +4,7 @@ import { useSession, signOut } from "next-auth/react"
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import { FiBell } from "react-icons/fi";
 import { useState } from 'react';
 import { Dropdown } from 'react-bootstrap';
 
@@ -40,38 +40,26 @@ export default function NavbarHeader(){
           <Navbar.Brand href="/" passHref={true}>
             <span className="logo_wraper"><img src="../assets/img/Black Rush home.png" alt="Black Rush home" /></span>
           </Navbar.Brand>
-          {session? (
-            <div className="others-options d-lg-none d-flex">
-              <div className="header-btn">
-                <div className="bell_box">
-                  <i className="fa fa-bell-o" aria-hidden="true"></i>
-                  <span></span>
-                </div>
-                <div className="profile_wraper">
-                  <Dropdown>
-                    <Dropdown.Toggle id="dropdown-button-short-profile" className="profile_button style3">{shortProfileTitle}</Dropdown.Toggle>
-                    <Dropdown.Menu variant="white" className="profile_sub">
-                      <Dropdown.Item href="/client/my-profile">My Profile</Dropdown.Item>
-                      <Dropdown.Item href="/client/my-account">My Account</Dropdown.Item>
-                      <Dropdown.Item href="#" onClick={(e) => handleClick(e, "/signout")}>Logout</Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </div>
-              </div>
-              <Navbar.Toggle as={'div'} aria-controls="navbarScroll" className="mobile-bar-wrap" style={{cursor: 'pointer'}}>
-                <div className="mobile-menu d-lg-none"><i className="ri-menu-line" /></div>
-              </Navbar.Toggle>
+          {(session) && (
+            <div className="profile_wrap">
+              <Dropdown align={{ lg: 'end' }}>
+                <Dropdown.Toggle id="dropdown-menu-button-profile" className="profile_icon style3">{shortProfileTitle}</Dropdown.Toggle>
+                <Dropdown.Menu variant="white" className="profile_sub" style={{position:'absolute', padding: 5}}>
+                  <Dropdown.Item href="/client/my-profile">My Profile</Dropdown.Item>
+                  <Dropdown.Item href="/client/my-account">My Account</Dropdown.Item>
+                  <Dropdown.Item href="#" onClick={(e) => handleClick(e, "/signout")}>Logout</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </div>
-          ) : (
-            <Navbar.Toggle as={'div'} aria-controls="navbarScroll" className="mobile-bar-wrap" style={{cursor: 'pointer'}}>
-              <div className="mobile-menu d-lg-none"><i className="ri-menu-line" /></div>
-            </Navbar.Toggle>
           )}
-          
+          <Navbar.Toggle as={'div'} aria-controls="navbarScroll" className="mobile-bar-wrap" style={{cursor: 'pointer'}}>
+            <div className="mobile-menu d-lg-none"><i className="ri-menu-line" /></div>
+          </Navbar.Toggle>
           <Navbar.Collapse id="navbarScroll">
             <Nav as={'ul'}
               className="navbar-nav mx-auto mobile-menu-box"
               navbarScroll
+              collapseOnSelect={true}
             >
               <li className="nav-item">
                 <Link href="/homes-for-sale/delaware-de" className={"nav-link" + (router.pathname == '/homes-for-sale/delaware-de' ? " active" : "")} passHref>
@@ -98,20 +86,16 @@ export default function NavbarHeader(){
                 </>
               ) : (
                 <>
-                  <li className="nav-item">
-                    <Link href="#" className={"nav-link" + (router.pathname == '/find-an-agent' ? " active" : "")} passHref={true}>
-                      Agents
-                      <i className="ri-add-line" />
-                    </Link>
-                    <ul className="dropdown-menu">
-                      <li className="nav-item">
-                        <Link href="/find-an-agent" className={"nav-link" + (router.pathname == '/find-an-agent' ? " active" : "")} passHref={true}>Find an Agent</Link>
-                      </li>
-                      <li className="nav-item">
-                        <Link href='/about-us?link=become-an-agent' className={"nav-link"} passHref={true}>Become and Agent</Link>
-                      </li>
-                    </ul>
-                  </li>
+                  <Dropdown as={'li'} className="nav-item">
+                    <Dropdown.Toggle as={'a'} className="nav-link" id="dropdown-autoclose-true">
+                      Agent <i className="ri-add-line" />
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu as={'ul'}>
+                      <Dropdown.Item as={'li'} className="nav-item"><Nav.Link href="/find-an-agent" className={(router.pathname == '/find-an-agent' ? " active" : "")} passHref={true}>Find an Agent</Nav.Link></Dropdown.Item>
+                      <Dropdown.Item as={'li'} className="nav-item"><Nav.Link href="/about-us?link=become-an-agent" passHref={true}>Become an Agent</Nav.Link></Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                   <li className="nav-item">
                     <Link href="/about-us" className={"nav-link" + (router.pathname == '/about-us' ? " active" : "")} passHref={true}>
                       About Us

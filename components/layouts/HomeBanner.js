@@ -19,8 +19,18 @@ const SearchModal = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body style={{maxHeight: '60vh', overflowY: 'auto'}}>
-        <h5>You typed "{props.inputValue}" but did you mean</h5>
-        {props.content}
+        <h5>You typed &quot;{props.inputValue}&quot; but did you mean</h5>
+        {(props.content.length)? props.content.map((items, index) => (
+          <>
+          <label key={`label-${index}`}>{items.label}</label>
+          <ul className='list-group list-group-flush mb-2'>
+            {items.options.map((item, i) => {
+              let hrefLink = JSON.parse(item.value).path;
+              return (<li key={`li-${index}-${i}`} className='list-group-item'><Link key={`mslink-${index}-${i}`} href={`${hrefLink}`}>{item.label}</Link></li>)
+            })}
+          </ul>
+          </>
+        )) : (<h6>No option found!</h6>)}
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
@@ -30,6 +40,7 @@ const SearchModal = (props) => {
 }
 
 export default function HomeBanner() {
+  const router = useRouter();
   const [showList, setShowList] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [searchList, setSearchList] = useState({});
@@ -65,20 +76,12 @@ export default function HomeBanner() {
   const handleOnSearch = () => {
     setShowList(false);
     setShowModal(true);
-    console.log(showList, showModal)
+    // console.log(showList, showModal)
   };
-  const searchContent = (searchList.length)? searchList.map((items, index) => (
-    <>
-    <label key={`label-${index}`}>{items.label}</label>
-    <ul className='list-group list-group-flush mb-2'>
-      {items.options.map((item, i) => {
-        let hrefLink = JSON.parse(item.value).path;
-        return (<li key={`li-${index}-${i}`} className='list-group-item'><Link key={`link-${index}-${i}`} href={hrefLink} style={{}}>{item.label}</Link></li>)
-      })}
-    </ul>
-    </>
-  )) : ("<h6>No option found!</h6>");
-
+  const handleSearchRoute = (searchValue) => {
+    router.push(searchValue.path)
+  }
+      // console.dir(searchContent)
   return (
     <>
       <section className="hero-wrap style3">
@@ -111,7 +114,17 @@ export default function HomeBanner() {
                     textAlign: 'left',
                     border: '1px solid #eee',
                     display: showList? 'block' : 'none',
-                  }}>{searchContent}</div>
+                  }}>{(searchList.length)? searchList.map((items, index) => (
+                    <>
+                    <label key={`label-${index}`}>{items.label}</label>
+                    <ul className='list-group list-group-flush mb-2'>
+                      {items.options.map((item, i) => {
+                        let hrefLink = JSON.parse(item.value).path;
+                        return (<li key={`li-${index}-${i}`} className='list-group-item'><Link key={`link-${index}-${i}`} href={`${hrefLink}`}>{item.label}</Link></li>)
+                      })}
+                    </ul>
+                    </>
+                  )) : (<h6>No option found!</h6>)}</div>
                   {/* <div className="form-group-wrap">
                       <div className="form-group">
                         <AsyncSelect cacheOptions loadOptions={loadOptions} defaultOptions placeholder="Address, City, Zip, School District" classNamePrefix="react-select"
@@ -129,7 +142,7 @@ export default function HomeBanner() {
         show={showModal}
         onHide={() => setShowModal(false)}
         inputValue={inputValue.current}
-        content={searchContent}
+        content={searchList}
       />
     </>
   )

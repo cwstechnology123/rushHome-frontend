@@ -74,23 +74,23 @@ export default function HomesForSale({ properties }) {
 }
 
 export async function getServerSideProps({ params: { slug } }) {
-    let sendData = {}
-    const lastIndexVal = slug.substring(slug.lastIndexOf('-') + 1);
-    if(!isNaN(lastIndexVal)){
-        sendData = {
-            postalCode : lastIndexVal,
-            page_limit: 100
-        }
-    }
-    else{
-        const stateOrProvince = slug.substring(slug.lastIndexOf('-') + 1);
-        const searchKey = slug.substring(0, slug.lastIndexOf("-"));
-        sendData = {
-            stateOrProvince : stateOrProvince,
-            //search_key : searchKey,
-            page_limit: 1000
-        }
-    }
+    // let sendData = {}
+    // const lastIndexVal = slug.substring(slug.lastIndexOf('-') + 1);
+    // if(!isNaN(lastIndexVal)){
+    //     sendData = {
+    //         postalCode : lastIndexVal,
+    //         page_limit: 100
+    //     }
+    // }
+    // else{
+    //     const stateOrProvince = slug.substring(slug.lastIndexOf('-') + 1);
+    //     const searchKey = slug.substring(0, slug.lastIndexOf("-"));
+    //     sendData = {
+    //         stateOrProvince : stateOrProvince,
+    //         //search_key : searchKey,
+    //         page_limit: 1000
+    //     }
+    // }
     
     // console.log('sendData',sendData)
 
@@ -103,18 +103,15 @@ export async function getServerSideProps({ params: { slug } }) {
     //     county: 'delaware',
     //     page_limit: 1000
     // }}
-    const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: sendData}
-    const res = await fetchApi(payload)
-    // const response = await fetch('http://localhost:3000/api/map-properties/?age=30', {
-    //     method: 'POST',
-    //     body: JSON.stringify(sendData),
-    // });
-    // const data = await response.json();
-    // console.log("result",data)
-    if(res && res.data){
+    // const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: sendData}
+    // const res = await fetchApi(payload)
+    const response = await fetch(`http://localhost:3000/api/map-properties/${slug}`);
+    const {result} = await response.json();
+    console.log("result",result)
+    if(result && result.data){
         return {
             props: {
-                properties : res && res.data?.properties,
+                properties : result && result.data?.properties,
             },
         };
     }

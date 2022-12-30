@@ -615,3 +615,18 @@ react-select__input {
 .filter_topnav  .dropdown-menu{
     min-width: 20rem !important;
 }
+
+/* -----------------------HEADER------------------------ */
+.header-wrap .dropdown-toggle::after {
+    border: none !important;
+    margin-left: 0px !important;
+}
+.header-wrap .profile_wrap {
+    margin-left: auto;
+    align-self: end;
+    margin-right: 70px;
+}
+.header-wrap .profile_icon{
+    padding: 2px 15px;
+    border-radius: 15px;
+}
