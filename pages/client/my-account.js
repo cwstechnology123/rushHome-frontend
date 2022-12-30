@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Sidebar from '../../components/client/Sidebar'
-import { useSession, signOut } from "next-auth/react"
+import { useSession } from "next-auth/react"
 
 export default function MyAccount() {
     const { data: session } = useSession()

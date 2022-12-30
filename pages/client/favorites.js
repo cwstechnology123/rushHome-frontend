@@ -1,6 +1,19 @@
-import Image from 'next/image'
+import useSWR from "swr";
+import List from "../../components/property/List";
+import Grid from "../../components/skeletonLoader/Grid";
+import { apiBaseUrl, fetchApi } from "../../utils/fetchApi";
+import { useSession } from "next-auth/react";
 
 export default function Favorites() {
+
+    const { data: session } = useSession()
+    const userId = session && session.user?.userId
+    console.log('userId', userId)
+    const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
+    const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/favorites`, method : 'POST', data: {
+        userId: userId
+    }}, fetcher);
+
   return (
     <>
         <section className="client_favorites">
@@ -9,17 +22,17 @@ export default function Favorites() {
                 <div className="left_client">
                 <select className="form-select" id="inlineFormSelectPref">
                     <option selected>Showing all</option>
-                    <option value={1}>One</option>
-                    <option value={2}>Two</option>
-                    <option value={3}>Three</option>
+                    <option value={'ACTIVE'}>Active</option>
+                    <option value={'COMING SOON'}>Coming Soon</option>
+                    <option value={'PENDING'}>Pending</option>
                 </select>
                 </div>
                 <div className="right_client">
-                <select className="form-select" id="inlineFormSelectPref">
-                    <option selected>By date added</option>
-                    <option value={1}>One</option>
-                    <option value={2}>Two</option>
-                    <option value={3}>Three</option>
+                <select className="form-select" id="column">
+                    <option selected value={'onMarketDate'}>By date added</option>
+                    <option value={'bedroomsTotal'}>Bed</option>
+                    <option value={'bathroomsTotalInteger'}>Bath</option>
+                    <option value={'listPrice'}>Price</option>
                 </select>
                 <span><i className="fa fa-bars" aria-hidden="true" /></span>
                 <span><i className="fa fa-bars" aria-hidden="true" /></span>
@@ -32,132 +45,17 @@ export default function Favorites() {
         <section className="list_clientbox">
             <div className="container">
             <div className="row justify-content-center">
-                <div className="col-xl-4 col-lg-6 col-md-6">
-                <div className="property-card style3">
-                    <div className="property-img">
-                    <img src="../../assets/img/property/property-26.jpg" alt="Image" />
-                    <span className="property-status">Exclusive</span>
-                    {/* <span class="property-condo">New</span> */}
+                {(isLoading) ?<Grid item={3} /> : (data) ?
+                    <>
+                    <List properties={data.properties? data.properties : null} stateCode={''} />
+                    </>
+                    :
+                    <>
+                    <div className="col-md-12 text-center">
+                        No Records...
                     </div>
-                    <div className="property-info">
-                    <div className="property-status-wrap">
-                        <p className="property-price">$8,587.00/<span>month</span></p>
-                        <p className="property-price property_name">123 Main Street</p>
-                    </div>
-                    <h3><a href="listing-details.html">Home in Delaware</a></h3>
-                    <ul className="property-metainfo list-style">
-                        <li><i className="flaticon-double-bed" />3 Br</li>
-                        <li><i className="flaticon-bath-tub" />3 Ba</li>
-                        <li><i className="flaticon-square" />2300 Sq.Ft</li>
-                    </ul>
-                    </div>
-                </div>
-                </div>
-                <div className="col-xl-4 col-lg-6 col-md-6">
-                <div className="property-card style3">
-                    <div className="property-img">
-                    <img src="../../assets/img/property/property-26.jpg" alt="Image" />
-                    <span className="property-status">Exclusive</span>
-                    {/* <span class="property-condo">New</span> */}
-                    </div>
-                    <div className="property-info">
-                    <div className="property-status-wrap">
-                        <p className="property-price">$8,587.00/<span>month</span></p>
-                        <p className="property-price property_name">123 Main Street</p>
-                    </div>
-                    <h3><a href="listing-details.html">Home in Delaware</a></h3>
-                    <ul className="property-metainfo list-style">
-                        <li><i className="flaticon-double-bed" />3 Br</li>
-                        <li><i className="flaticon-bath-tub" />3 Ba</li>
-                        <li><i className="flaticon-square" />2300 Sq.Ft</li>
-                    </ul>
-                    </div>
-                </div>
-                </div>
-                <div className="col-xl-4 col-lg-6 col-md-6">
-                <div className="property-card style3">
-                    <div className="property-img">
-                    <img src="../../assets/img/property/property-26.jpg" alt="Image" />
-                    <span className="property-status">Exclusive</span>
-                    {/* <span class="property-condo">New</span> */}
-                    </div>
-                    <div className="property-info">
-                    <div className="property-status-wrap">
-                        <p className="property-price">$8,587.00/<span>month</span></p>
-                        <p className="property-price property_name">123 Main Street</p>
-                    </div>
-                    <h3><a href="listing-details.html">Home in Delaware</a></h3>
-                    <ul className="property-metainfo list-style">
-                        <li><i className="flaticon-double-bed" />3 Br</li>
-                        <li><i className="flaticon-bath-tub" />3 Ba</li>
-                        <li><i className="flaticon-square" />2300 Sq.Ft</li>
-                    </ul>
-                    </div>
-                </div>
-                </div>
-                <div className="col-xl-4 col-lg-6 col-md-6">
-                <div className="property-card style3">
-                    <div className="property-img">
-                    <img src="../../assets/img/property/property-26.jpg" alt="Image" />
-                    <span className="property-status">Exclusive</span>
-                    {/* <span class="property-condo">New</span> */}
-                    </div>
-                    <div className="property-info">
-                    <div className="property-status-wrap">
-                        <p className="property-price">$8,587.00/<span>month</span></p>
-                        <p className="property-price property_name">123 Main Street</p>
-                    </div>
-                    <h3><a href="listing-details.html">Home in Delaware</a></h3>
-                    <ul className="property-metainfo list-style">
-                        <li><i className="flaticon-double-bed" />3 Br</li>
-                        <li><i className="flaticon-bath-tub" />3 Ba</li>
-                        <li><i className="flaticon-square" />2300 Sq.Ft</li>
-                    </ul>
-                    </div>
-                </div>
-                </div>
-                <div className="col-xl-4 col-lg-6 col-md-6">
-                <div className="property-card style3">
-                    <div className="property-img">
-                    <img src="../../assets/img/property/property-26.jpg" alt="Image" />
-                    <span className="property-status">Exclusive</span>
-                    {/* <span class="property-condo">New</span> */}
-                    </div>
-                    <div className="property-info">
-                    <div className="property-status-wrap">
-                        <p className="property-price">$8,587.00/<span>month</span></p>
-                        <p className="property-price property_name">123 Main Street</p>
-                    </div>
-                    <h3><a href="listing-details.html">Home in Delaware</a></h3>
-                    <ul className="property-metainfo list-style">
-                        <li><i className="flaticon-double-bed" />3 Br</li>
-                        <li><i className="flaticon-bath-tub" />3 Ba</li>
-                        <li><i className="flaticon-square" />2300 Sq.Ft</li>
-                    </ul>
-                    </div>
-                </div>
-                </div>
-                <div className="col-xl-4 col-lg-6 col-md-6">
-                <div className="property-card style3">
-                    <div className="property-img">
-                    <img src="../../assets/img/property/property-26.jpg" alt="Image" />
-                    <span className="property-status">Exclusive</span>
-                    {/* <span class="property-condo">New</span> */}
-                    </div>
-                    <div className="property-info">
-                    <div className="property-status-wrap">
-                        <p className="property-price">$8,587.00/<span>month</span></p>
-                        <p className="property-price property_name">123 Main Street</p>
-                    </div>
-                    <h3><a href="listing-details.html">Home in Delaware</a></h3>
-                    <ul className="property-metainfo list-style">
-                        <li><i className="flaticon-double-bed" />3 Br</li>
-                        <li><i className="flaticon-bath-tub" />3 Ba</li>
-                        <li><i className="flaticon-square" />2300 Sq.Ft</li>
-                    </ul>
-                    </div>
-                </div>
-                </div>
+                    </>
+                }
             </div>
             </div>
         </section>

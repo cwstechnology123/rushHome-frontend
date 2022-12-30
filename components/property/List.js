@@ -24,9 +24,15 @@ export default function List({properties, stateCode}) {
                     <PropertyCard property={property}/>
                 </div>
               ))}
-              <div className="col-md-12 text-center">
-                <button type="button" onClick={(e) => handleClick(e, `/homes-for-sale${(stateCode!='all')? '/'+stateCode : ''}`)} className="btn style1 button_custom">See All Properties <i className="flaticon-right-arrow" /></button>
-              </div>
+              {stateCode ? 
+                <>
+                  <div className="col-md-12 text-center">
+                    <button type="button" onClick={(e) => handleClick(e, `/homes-for-sale${(stateCode!='all')? '/'+stateCode : '/delaware-de'}`)} className="btn style1 button_custom">See All Properties <i className="flaticon-right-arrow" /></button>
+                  </div>
+                </> 
+                : 
+                <></>
+              }
             </div>
           </div>
           {/* <div className="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabIndex={0}>
