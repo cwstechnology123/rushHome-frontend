@@ -17,7 +17,7 @@ export default async function handler(req, res) {
         sendData = {
             stateOrProvince : stateOrProvince,
             //search_key : searchKey,
-            page_limit: 2500
+            page_limit: 2000
         }
     }
    

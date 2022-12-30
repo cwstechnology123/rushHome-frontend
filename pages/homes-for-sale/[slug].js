@@ -105,7 +105,7 @@ export async function getServerSideProps({ params: { slug } }) {
     // }}
     // const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: sendData}
     // const res = await fetchApi(payload)
-    const response = await fetch(`http://localhost:3000/api/map-properties/${slug}`);
+    const response = await fetch(`https://starfish-app-jusy6.ondigitalocean.app/api/map-properties/${slug}`);
     const {result} = await response.json();
     console.log("result",result)
     if(result && result.data){
