@@ -14,16 +14,17 @@ import 'react-phone-number-input/style.css'
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import PhoneInput from "react-phone-number-input";
 import moment from "moment/moment";
+import { useSession } from "next-auth/react";
 
-export default function ClientBox({ type, address, price, pricearea, amenity }) {
-
+export default function ClientBox({ type, address, price, pricearea, amenity, fubObj }) {
+    const { data: session } = useSession();
     const [showscheduletour, setShowscheduletour] = useState(false);
     const [showsrequest, setShowsrequest] = useState(false);
     const curTime = useRef();
     const curdate = new Date();
     const [selectDate, setSelectDate] = useState(new Date());
     curTime.current = ("0"+curdate.getHours()).slice(-2)+':00:00';
-
+    console.log(session)
     const schema = yup.object().shape({
         schedule_time: yup.string().required("Please enter schedule time").label('Schedule Time'),
         full_name: yup.string().required("Please enter fullname").label('Full Name'),
@@ -94,7 +95,7 @@ export default function ClientBox({ type, address, price, pricearea, amenity }) 
                         <span className="text-danger">{errors.schedule_time?.message}</span>
                     </div>
                     <div className="form-group mb-3">
-                        <input type={'text'} className="form-control" name="full_name" id="full_name" placeholder="Full Name" { ...register('full_name') } />
+                        <input type={'text'} className="form-control" name="full_name" id="full_name" placeholder="Full Name" { ...register('full_name', {value: ""}) } />
                         <span className="text-danger">{errors.full_name?.message}</span>
                     </div>
                     <div className="for-group mb-3">

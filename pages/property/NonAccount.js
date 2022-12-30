@@ -3,7 +3,7 @@ import { Tab, Tabs } from "react-bootstrap";
 import RequestInfo from "../../components/property/RequestInfo";
 import ScheduleTour from "../../components/property/ScheduleTour";
 
-export default function NonAccount({ address }) {
+export default function NonAccount({ address, fubObj }) {
     // const [activeTab, setActiveTab] = useState('schedule-tour');
     const [tabStatus, setTabStatus] = useState({
         scheduleTab: true,
@@ -30,10 +30,10 @@ export default function NonAccount({ address }) {
                 onSelect={handleTabClick}
             >
                 <Tab eventKey="home" title="Schedule Tour">
-                    <ScheduleTour onInit={tabStatus.scheduleTab} />
+                    <ScheduleTour onInit={tabStatus.scheduleTab} fubObj={fubObj}/>
                 </Tab>
                 <Tab eventKey="profile" title="Request Info">
-                    <RequestInfo address={address} onInit={tabStatus.requestTab} />
+                    <RequestInfo address={address} onInit={tabStatus.requestTab} fubObj={fubObj} />
                 </Tab>
             </Tabs>
         </div>

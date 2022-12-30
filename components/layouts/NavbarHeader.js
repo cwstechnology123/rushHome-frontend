@@ -41,7 +41,7 @@ export default function NavbarHeader(){
             <span className="logo_wraper"><img src="../assets/img/Black Rush home.png" alt="Black Rush home" /></span>
           </Navbar.Brand>
           {(session) && (
-            <div className="profile_wrap">
+            <div className="profile_wrap d-xl-none d-lg-none d-xl-block d-md-none d-lg-block">
               <Dropdown align={{ lg: 'end' }}>
                 <Dropdown.Toggle id="dropdown-menu-button-profile" className="profile_icon style3">{shortProfileTitle}</Dropdown.Toggle>
                 <Dropdown.Menu variant="white" className="profile_sub" style={{position:'absolute', padding: 5}}>

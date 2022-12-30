@@ -82,6 +82,24 @@ const PropertyDetails = ({
         copyStyles: true,
         documentTitle: fullStreetAddress
     })
+    const fubObj = {
+        propertyURL: `${origin}/property/${slug}`,
+        property: {
+            street: fullStreetAddress,
+            city: city,
+            state: stateOrProvince,
+            code: postalCode,
+            mlsNumber: listingId,
+            price: listPrice,
+            forRent: false,
+            url: `${origin}/property/${slug}`,
+            type: propertyType,
+            bedrooms: bedroomsTotal,
+            bathrooms: bathroomsTotalInteger,
+            area: areaTotal,
+            lot: ''
+        }
+    };
     const handleSave = () => {
         
         if(session){
@@ -105,6 +123,7 @@ const PropertyDetails = ({
                             garages: totalGarageAndParkingSpaces,
                             area: areaTotal
                         }}
+                        fubObj={fubObj}
                     />
             }else if(session.user.role === 'agent'){
                 return <PropertyAgentCard 
@@ -113,7 +132,7 @@ const PropertyDetails = ({
                 />
             }
         }else{
-            return <NonAccount address={`${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`}/>
+            return <NonAccount address={`${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`} fubObj={fubObj}/>
         }
         return null;
     }

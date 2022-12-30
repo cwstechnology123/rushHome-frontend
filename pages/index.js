@@ -96,7 +96,7 @@ export default function Home({properties}) {
                   </div>
                   <div className="hw-info">
                     <h3>Buy a New Home</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. </p>
+                    <p>Find your new home faster with constant updates, and real recommendations from a live professional. </p>
                   </div>
                 </div>
               </Link>
@@ -109,7 +109,7 @@ export default function Home({properties}) {
                   </div>
                   <div className="hw-info">
                     <h3>Sell a Home</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. </p>
+                    <p>Whether you're ready to sell or looking for answers, we're here to guide you with expertise specific to your area.</p>
                   </div>
                 </div>
               </Link>

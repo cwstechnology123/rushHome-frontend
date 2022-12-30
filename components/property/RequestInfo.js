@@ -7,8 +7,12 @@ import PhoneInput from "react-phone-number-input";
 import 'react-phone-number-input/style.css'
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
-export default function RequestInfo({ address, onInit }) {
+export default function RequestInfo({ address, onInit, fubObj }) {
+    const {data: session} = useSession();
+    const router = useRouter();
     const schema = yup.object().shape({
         // phone_code: yup.string().required().label('Phone Code'),
         full_name: yup.string().required("Please enter your fullname").label('Full Name'),
@@ -27,6 +31,13 @@ export default function RequestInfo({ address, onInit }) {
     });
 
     const handleRequestInfo = (data) => {
+        // if(session){
+
+        // }else{
+        //     localStorage.setItem('overridePath', '/property/'+slug);
+        //     localStorage.setItem('request_info', data);
+        //     router.push('/auth')
+        // }
         console.log(data)
         reset();
     }

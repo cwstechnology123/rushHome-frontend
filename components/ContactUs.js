@@ -2,18 +2,11 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/router";
-// import { fetchFubApi, fubApiBaseUrl } from "../utils/fubFetchApi"
+// import toast, { Toaster } from 'react-hot-toast';
 import { fetchFubApi, fubApiBaseUrl } from "../utils/fubFetchApi";
-
 import { useState } from "react";
-
-const splitName = (name = '') => {
-    const [firstName, ...lastName] = name.split(' ').filter(Boolean);
-    return {
-      firstName: firstName,
-      lastName: lastName.join(' ')
-    }
-}
+import { toast, Toaster } from "react-hot-toast";
+import splitName from "../utils/splitName";
 
 export default function ContactUs({ type }) {
     const [isLoading, setIsLoading] = useState(false);
@@ -51,11 +44,11 @@ export default function ContactUs({ type }) {
         try{
             const payload = {url : `${fubApiBaseUrl}/events`, method : 'POST', data: leadObj}
             const res = await fetchFubApi(payload)
-            //.then(res => res.data);
             if(res){
-                alert("Leads send successfully")
+                toast.success('Request Send');
+                // alert("Leads send successfully")
             }else{
-                alert("Leads send failed")
+                toast.error('Request failed to send');
             }
             setIsLoading(false)
         } catch (error) {
@@ -65,6 +58,7 @@ export default function ContactUs({ type }) {
     }
     return (
       <>
+        <Toaster />
         <div className="video-wrap video-bg-1 style2 bg-f ptb-100">
             <div className="container">
             <div className="row">

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-import PropertyCard from "./PropertyCard";
+import PropertyCard from "../property/PropertyCard";
+// import PropertyCard from "./PropertyCard";
 
 
 export default function BuyPropertyList({ properties, setHighlight }){
