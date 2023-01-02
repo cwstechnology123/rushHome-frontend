@@ -211,7 +211,7 @@ const PropertyDetails = ({
                             )}
                             <PropertyImages 
                                 info={{
-                                    text: `${description.substring(0,10)}`,
+                                    text: 'Check out this RushHome property.',
                                     url: `${origin}/property/${slug}`,
                                     title: `${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`,
                                 }}
