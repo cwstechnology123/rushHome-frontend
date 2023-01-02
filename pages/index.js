@@ -109,7 +109,7 @@ export default function Home({properties}) {
                   </div>
                   <div className="hw-info">
                     <h3>Sell a Home</h3>
-                    <p>Whether you're ready to sell or looking for answers, we&#39;re here to guide you with expertise specific to your area.</p>
+                    <p>Whether you&#39;re ready to sell or looking for answers, we&#39;re here to guide you with expertise specific to your area.</p>
                   </div>
                 </div>
               </Link>
