@@ -83,7 +83,7 @@ export default function Home({properties}) {
               <div className="section-title style2 text-center mb-40">
                 <h2>We have the most listings &amp; constant updates. So you will never miss out.</h2>
                 <hr className="center" />
-                <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p>
+                {/* <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p> */}
               </div>
             </div>
           </div>
@@ -109,7 +109,7 @@ export default function Home({properties}) {
                   </div>
                   <div className="hw-info">
                     <h3>Sell a Home</h3>
-                    <p>Whether you're ready to sell or looking for answers, we're here to guide you with expertise specific to your area.</p>
+                    <p>Whether you're ready to sell or looking for answers, we&#39;re here to guide you with expertise specific to your area.</p>
                   </div>
                 </div>
               </Link>
