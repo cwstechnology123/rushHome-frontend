@@ -26,7 +26,8 @@ const PropertyCard = ({
       garageSpaces,
       fullStreetAddress,
       totalGarageAndParkingSpaces,
-      tag
+      tag,
+      mlsStatus
     },
   }) => {
     // const [srcimg, setSrcimg] = useState(listPictureURL.replace(/^http:\/\//i, 'https://'));
@@ -37,6 +38,7 @@ const PropertyCard = ({
                 <div className="property-img">
                     <img key={`image_${id}`} src={src} alt="Image" />
                     {tag && (<span className="property-status">{tag}</span>)}
+                    {mlsStatus && mlsStatus == 'COMING SOON' ? <span className="property-status">{mlsStatus}</span> : ''}
                 </div>
                 <div className="property-info">
                     <div className="property-status-wrap">

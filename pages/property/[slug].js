@@ -177,7 +177,6 @@ const PropertyDetails = ({
             />
         )
     }
-    
 
     // useEffect(()=>{
     //     const updateViewCount = async () => {
