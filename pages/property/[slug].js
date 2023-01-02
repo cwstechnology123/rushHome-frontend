@@ -65,7 +65,7 @@ const PropertyDetails = ({
     const router = useRouter();
     const componentRef = useRef();
     const origin = process.env.NEXT_PUBLIC_HOST_NAME;
-    const { data: session } = useSession();
+    const { data: session, loading } = useSession();
     const [saved, setSaved] = useState(false);
     const handlePrint = useReactToPrint({
         content: () => {
@@ -100,10 +100,21 @@ const PropertyDetails = ({
             lot: ''
         }
     };
-    const handleSave = () => {
-        
+    const handleSave = async () => {
         if(session){
-            setSaved(!saved);
+            try{
+                const userId = session && session.user?.userId;
+                const accessToken = session && session.user?.accessToken;
+                const isSaved = !saved ? 1 : 0;
+                const payload = {url : `${apiBaseUrl}/properties/fav-update`, accessToken: accessToken, method : 'POST', data : {userId: userId, propertyId: id.toString(), isSaved: isSaved.toString()}}
+                const res = await fetchApi(payload)
+                if (res && res.type == 'success') {
+                    setSaved(!saved);
+                }
+            } catch (error) {
+                console.log(error)
+                return false;
+            };
         }else{
             localStorage.setItem('overridePath', '/property/'+slug);
             router.push('/auth')
@@ -176,6 +187,31 @@ const PropertyDetails = ({
     //     const result = updateViewCount();  
     //     console.log("update",result)
     // }, []);
+
+    useEffect(() => {
+        console.log('check saved property')
+        if(session && !loading){
+            console.log('===============')
+            const userId = session && session.user?.userId;
+            const accessToken = session && session.user?.accessToken;
+            isSavedProperty(userId, accessToken) 
+        }
+    }, [session, loading, id]);
+
+    async function isSavedProperty(userId, accessToken) {
+        try{
+            const payload = {url : `${apiBaseUrl}/users/profile/${userId}`, accessToken: accessToken, method : 'GET'}
+            const res = await fetchApi(payload)
+            if (res && res.type == 'success') {
+                let propertyIds = res.data.profile && res.data.profile.propertyIds ? res.data.profile.propertyIds.split(',') : []
+                console.log(propertyIds)
+                setSaved(propertyIds.includes(id.toString()))
+            }
+        } catch (error) {
+            console.log(error)
+            return false;
+        };
+    }
 
     return (
         <>
