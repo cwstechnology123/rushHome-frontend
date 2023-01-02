@@ -258,6 +258,28 @@ export const lotSize = {
     ]
 }
 
+export const squareFeet = {
+    items: [
+        {name:'500', value:500},
+        {name:'750', value:750},
+        {name:'1000', value:1000},
+        {name:'1250', value:1250},
+        {name:'1500', value:1500},
+        {name:'1750', value:1750},
+        {name:'2000', value:2000},
+        {name:'2250', value:2250},
+        {name:'2500', value:2500},
+        {name:'2750', value:2750},
+        {name:'3000', value:3000},
+        {name:'3500', value:3500},
+        {name:'4000', value:4000},
+        {name:'5000', value:5000},
+        {name:'6000', value:6000},
+        {name:'7000', value:7000},
+        {name:'8000', value:8000}
+    ]
+}
+
 export const scheduleTime = {
     items: [
         {name: "01:00 AM", value: "01:00:00"},
@@ -305,6 +327,6 @@ export const scheduleTime = {
         {name: "10:00 PM", value: "22:00:00"},
         {name: "10:30 PM", value: "22:30:00"},
         {name: "11:00 PM", value: "23:00:00"},
-        {name: "11:30 PM", value: "23:30:00"}
+        {name: "11:30 PM", value: "23:30:00"},
     ]
 }

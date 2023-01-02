@@ -592,6 +592,9 @@ react-select__input {
     padding: 4px 5px !important;
     border-color: #f7f7f7 !important;
 }
+.filter_topnav .css-1jqq78o-placeholder {
+    color: black !important;
+}
 .filter_topnav .react-select__control .react-select__multi-value {
     border-radius: 10px !important;
     border: 1px solid #000 !important;
@@ -602,7 +605,7 @@ react-select__input {
     border-radius: 10px !important;
 }
 .filter_topnav .dropdown-control {
-    padding: 12px 15px;
+    padding: 12px 30px;
     border-radius: 15px !important;
     background-color: #f7f7f7 !important;
     border: inherit;

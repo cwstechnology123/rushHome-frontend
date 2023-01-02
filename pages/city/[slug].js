@@ -13,8 +13,10 @@ export default function CityDetails() {
     const cityDetail = cityList.find(city => city.slug === query.slug);
 
     const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
-    const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/similar`, method : 'POST', data: {
-        stateOrProvince: cityDetail?.state_code
+    const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/search`, method : 'POST', data: {
+        stateOrProvince: cityDetail?.state_code,
+        city: cityDetail?.name,
+        page_limit: 12
     }}, fetcher);
 
     if(cityDetail){

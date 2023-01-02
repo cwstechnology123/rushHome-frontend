@@ -7,7 +7,6 @@ import BuyLayout from "../../components/layouts/BuyLayout";
 import Footer from "../../components/layouts/BuyFooter";
 import useWindowDimensions from "../../components/buy/useWindowDimensions";
 import BuyMap from "../../components/buy/BuyMap";
-import { Dropdown, DropdownButton } from "react-bootstrap";
 
 export default function HomesForSale({ properties }) { 
     
@@ -23,24 +22,21 @@ export default function HomesForSale({ properties }) {
         
     }, [windowDimensions])
     // console.log(windowDimensions)
-    const [searchFilter, setSerachFilter] = useState(false);
     const [highlight, setHighlight] = useState(null);
+    const [mapView, setMapView] = useState(null);
     const [bounds, setBounds] = useState(null);
     const [center, setCenter] = useState({
-        lat: 39.2587655033923,
-        lng: -76.78864682699246,
+        lat: 39.000000,
+        lng: -75.500000,
     })
     // const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
     // const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/all/1/1000`, method : 'GET'}, fetcher);
 
     const [filterData, setFilterData] = useState(properties);
-    // useEffect(()=>{
-    //     setFilterData(properties)
-    // }, [properties]);
-    // console.log(filterData.length)
+
     return (
         <>
-            <SearchFilter bounds={bounds}/>
+            <SearchFilter mapView={mapView}/>
             
             <section className="listing_wraper mt-2">
                 <div className="container-fluid">
@@ -51,6 +47,7 @@ export default function HomesForSale({ properties }) {
                                 <BuyMap
                                     center={center}
                                     setCenter={setCenter}
+                                    setMapView={setMapView}
                                     bounds={bounds}
                                     setBounds={setBounds}
                                     filterData={filterData || []}
@@ -73,41 +70,38 @@ export default function HomesForSale({ properties }) {
     )
 }
 
-export async function getServerSideProps({ params: { slug } }) {
-    let sendData = {}
-    const lastIndexVal = slug.substring(slug.lastIndexOf('-') + 1);
-    if(!isNaN(lastIndexVal)){
-        sendData = {
-            postalCode : lastIndexVal,
-            page_limit: 100
-        }
-    }
-    else{
-        const stateOrProvince = slug.substring(slug.lastIndexOf('-') + 1);
-        const searchKey = slug.substring(0, slug.lastIndexOf("-"));
-        sendData = {
-            stateOrProvince : stateOrProvince,
-            //search_key : searchKey,
-            page_limit: 1000
-        }
-    }
-    
-    // console.log('sendData',sendData)
 
-    // payload = {url : `${apiBaseUrl}/properties/all/1/10000`, method : 'GET'}
-    // payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: {
-    //     bedroomsTotal: '',
-    //     bathroomsTotalInteger: '',
-    //     listPrice: '',
-    //     mlsStatus: '',
-    //     county: 'delaware',
-    //     page_limit: 1000
-    // }}
+export async function getServerSideProps({ query }) {
+    let slug = query.slug;
+    // slug.lastIndexOf('-')
+    let stateCode = slug.substring(0, slug.lastIndexOf('-')-1);
+    let city = slug.substring(slug.lastIndexOf('-')+1);
+
+    let sendData = {
+        stateOrProvince : stateCode.toUpperCase(),
+        coty: city,
+        page_limit: 1000
+    }
+    // const lastIndexVal = slug.substring(slug.lastIndexOf('-') + 1);
+    // if(!isNaN(lastIndexVal)){
+    //     sendData = {
+    //         postalCode : lastIndexVal,
+    //         page_limit: 100
+    //     }
+    // }
+    // else{
+    //     const stateOrProvince = slug.substring(slug.lastIndexOf('-') + 1);
+    //     const searchKey = slug.substring(0, slug.lastIndexOf("-"));
+    //     sendData = {
+    //         stateOrProvince : stateOrProvince,
+    //         //search_key : searchKey,
+    //         page_limit: 1000
+    //     }
+    // }
+    
     const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: sendData}
     const res = await fetchApi(payload)
-    // const response = await fetch(`http://localhost:3000/api/map-properties/${slug}`);
-    // const {result} = await response.json();
-    // console.log("result",result)
+
     if(res && res.data){
         return {
             props: {

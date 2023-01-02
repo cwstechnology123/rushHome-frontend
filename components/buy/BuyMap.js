@@ -14,6 +14,7 @@ const render = (status) => {
 };
 
 const BuyMap = ({
+    setMapView,
     center, setCenter,
     bounds, setBounds,
     filterData, setFilterData,
@@ -21,13 +22,21 @@ const BuyMap = ({
     highlight
 }) => {
     //initialize
-    const [zoom, setZoom] = useState(5);
+    const [zoom, setZoom] = useState(8);
     const [clicks, setClicks] = useState([]);
     const poly = useRef(null);
     const [haspoly, setHaspoly] = useState(false);
     const [draw, setDraw] = useState(false);
     const onMapClick = (e) => {
         setClicks([...clicks, e.latLng]);
+    };
+    const onMapZoom = (e) => {
+        setMapView(bounds? [
+            bounds.nw.lng,
+            bounds.se.lat,
+            bounds.se.lng,
+            bounds.nw.lat
+        ] : []);
     };
     const onMapIdle = (map) => {
         let bounds = map.getBounds();
@@ -272,7 +281,7 @@ const BuyMap = ({
 
         }
     };
-
+    // console.log("Zoom",zoom, center)
     return (
         <>
         <Wrapper
@@ -286,6 +295,7 @@ const BuyMap = ({
                 maxZoom={20}
                 onMapIdle={onMapIdle}
                 onMapClick={onMapClick}
+                onMapZoom={onMapZoom}
                 draw={draw}
                 setMapDraw={setMapDraw}
                 fullscreenControl={false}

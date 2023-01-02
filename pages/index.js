@@ -81,7 +81,7 @@ export default function Home({properties}) {
           <div className="row">
             <div className="col-xl-8 col-lg-8 offset-xl-2 offset-lg-2">
               <div className="section-title style2 text-center mb-40">
-                <h2>We have the most listings &amp; constant updates. So you will never miss out.</h2>
+                <h2>We clear the clutter, so you see more of what you want, and less of what you don&#39;t. </h2>
                 <hr className="center" />
                 {/* <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p> */}
               </div>
