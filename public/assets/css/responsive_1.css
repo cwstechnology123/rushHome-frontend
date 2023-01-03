@@ -296,20 +296,6 @@
     }
 }
 @media only screen and (max-width: 767px) {
-
-    /*  ============ homes for sale page add css responsive max-width: 767px code by alam data:03/01/2023 ============ */
-    .btn.refresh_button {
-        width: 15%;
-    }
-    .btn.style2 {
-        width: 70%;
-    }
-    /*  ============ homes for sale page add css responsive max-width: 767px code by alam data:03/01/2023 ============ */
-
-
-
-
-
 	.client_factsicons ul li {
 	display: inline-block;
 	margin-bottom: 20px;
@@ -1605,17 +1591,6 @@
     #signIn .modal-dialog {
         max-width: 900px;
     }
-    /*  ============ homes for sale page add css code by alam data:03/01/2023 ============ */
-    .btn.style2 {
-        width: 60%;
-    }
-    .btn.refresh_button {
-        width: 20%;
-    }
-    .search_top {
-        padding: 10px 0px;
-    }
-    /*  ============ homes for sale page add css code by alam data:03/01/2023 ============ */
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .breadcrumb-title h2,

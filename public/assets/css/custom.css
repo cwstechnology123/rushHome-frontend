@@ -633,3 +633,95 @@ react-select__input {
     padding: 2px 15px;
     border-radius: 15px;
 }
+
+/*  ============ homes for sale page add css code by alam data:03/01/2023 ============ */
+.statusBeds {
+    margin: 10px 0;
+}
+.statusBeds .col-3:nth-child(1){
+    padding-right: 0;
+}
+.statusBeds .col-3:nth-child(2){
+    padding-right: 0;
+}
+.statusBeds .col-3:nth-child(3){
+    padding-right: 0;
+}
+
+.price-input {
+    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+.input-field {
+    display: flex;
+    max-width: 100%;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.input-field .field {
+    width: 48%;
+    max-width: 100%;
+}
+.input-field input[type="number"] {
+    width: 100%;
+    text-align: center;
+    border: 1px solid #f7f7f7;
+    padding: 9px 0;
+    color: #000;
+    font-weight: 600;
+    background-color: #f7f7f7;
+}
+.slider-range {
+    border: 1px solid #f7f7f7;
+    background: #f7f7f7;
+    height: 10px;
+    border-radius: 50px;
+    position: relative;
+}
+.processbar {
+    height: 10px;
+    left: 15%;
+    right: 15%;
+    position: absolute;
+    border-radius: 5px;
+    background-color: #000;
+}
+.range-input {
+    position: relative;
+}
+.range-input input {
+    position: absolute;
+    top: -10px;
+    height: 10px;
+    width: 100%;
+    background: none;
+    -webkit-appearance: none;
+    appearance: none;
+    pointer-events: none;
+}
+.range-input input[type="range"]::-webkit-slider-thumb {
+    height: 17px;
+    width: 17px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    border: 2px solid #000;
+    border-radius: 50px;
+    pointer-events: auto;
+}
+.range-input input[type="range"]::-moz-range-thumb {
+    height: 17px;
+    width: 17px;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    background-color: #0398dc;
+    border-radius: 50px;
+    pointer-events: auto;
+}
+/*  ============ homes for sale page add css code by alam data:03/01/2023 ============ */

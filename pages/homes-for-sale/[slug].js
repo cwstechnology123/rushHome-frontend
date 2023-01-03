@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 // import useSWR from "swr";
 import { apiBaseUrl, fetchApi } from "../../utils/fetchApi";
+import stateCodes from "../../utils/states_hash.json";
 import SearchFilter from "../../components/buy/SearchFilter";
 import BuyPropertyList from "../../components/buy/BuyPropertyList";
 import BuyLayout from "../../components/layouts/BuyLayout";
@@ -10,12 +11,12 @@ import BuyMap from "../../components/buy/BuyMap";
 import { useRouter } from "next/router";
 import Geocode from "react-geocode";
 
-export default function HomesForSale({ properties }) { 
+export default function HomesForSale({ properties, stateCode, city }) { 
+
     Geocode.setApiKey(process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN);
     Geocode.setLanguage("en");
     Geocode.setRegion("us"); 
-    const { query } = useRouter();
-    const locationAddress = (!!query.slug)? `${query.slug.substring(query.slug.lastIndexOf('-')+1)}, ${(query.slug.substring(0, query.slug.lastIndexOf('-'))).replace('-', ' ')}` : "";
+
     const windowDimensions = useWindowDimensions();
     const [mapHeight, setMapHeight] = useState(windowDimensions?.height || 500);
     useEffect(() => {
@@ -38,9 +39,10 @@ export default function HomesForSale({ properties }) {
     // const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
     // const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/all/1/1000`, method : 'GET'}, fetcher);
     useEffect(() => {
-        if(locationAddress && locationAddress != 'map'){
-            Geocode.fromAddress(locationAddress).then(
+        if(stateCode && city){
+            Geocode.fromAddress(`${stateCode}, ${city}`).then(
                 (response) => {
+                //   console.log("Rsponse",response.results[0])
                   const { lat, lng } = response.results[0].geometry.location;
                 //   console.log(lat, lng);
                   setCenter({
@@ -56,19 +58,18 @@ export default function HomesForSale({ properties }) {
         
     }, []);
     const [filterData, setFilterData] = useState(properties);
-
     return (
         <>
             <SearchFilter mapView={mapView}/>
             
-            <section className="listing_wraper mt-2">
+            <section className="listing_wraper mt-0">
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-xl-5 col-lg-5 col-md-6 p-0 d-none d-sm-block d-sm-none d-md-block">
                             {/* FOR MAP */}
                             <div id="mapBox" style={{width:'100%', height: mapHeight, position: 'relative'}}>
                                 <BuyMap
-                                    locationAddress={locationAddress}
+                                    initZoom={stateCode? ((city)? 10 : 8) : 0}
                                     center={center}
                                     setCenter={setCenter}
                                     setMapView={setMapView}
@@ -96,32 +97,23 @@ export default function HomesForSale({ properties }) {
 
 
 export async function getServerSideProps({ query }) {
+    let city="";
+    let stateCode = "";
     let slug = query.slug;
     // slug.lastIndexOf('-')
-    let city = (slug.substring(0, slug.lastIndexOf('-'))).replace('-', ' ');
-    let stateCode = slug.substring(slug.lastIndexOf('-')+1);
-
+    if(slug){
+        city = (slug.substring(0, slug.lastIndexOf('-'))).replace('-', ' ');
+        stateCode = slug.substring(slug.lastIndexOf('-')+1);
+        if(stateCodes[stateCode.toUpperCase()].toLowerCase() === city){
+            city = "";
+        }
+    }
+    
     let sendData = {
         stateOrProvince : stateCode,
         city: city,
         page_limit: 100
     }
-    // const lastIndexVal = slug.substring(slug.lastIndexOf('-') + 1);
-    // if(!isNaN(lastIndexVal)){
-    //     sendData = {
-    //         postalCode : lastIndexVal,
-    //         page_limit: 100
-    //     }
-    // }
-    // else{
-    //     const stateOrProvince = slug.substring(slug.lastIndexOf('-') + 1);
-    //     const searchKey = slug.substring(0, slug.lastIndexOf("-"));
-    //     sendData = {
-    //         stateOrProvince : stateOrProvince,
-    //         //search_key : searchKey,
-    //         page_limit: 1000
-    //     }
-    // }
     
     const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: sendData}
     const res = await fetchApi(payload)
@@ -130,12 +122,16 @@ export async function getServerSideProps({ query }) {
         return {
             props: {
                 properties : res && res.data?.properties,
+                stateCode: stateCode,
+                city: city
             },
         };
     }
     return {
         props: {
             properties : null,
+            stateCode: stateCode,
+            city: city
         },
     };
 }

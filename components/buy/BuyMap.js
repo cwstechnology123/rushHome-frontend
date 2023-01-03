@@ -15,7 +15,7 @@ const render = (status) => {
 };
 
 const BuyMap = ({
-    locationAddress,
+    initZoom,
     setMapView,
     center, setCenter,
     bounds, setBounds,
@@ -26,7 +26,7 @@ const BuyMap = ({
     //initialize
        
     
-    const [zoom, setZoom] = useState(locationAddress? 10 : 5);
+    const [zoom, setZoom] = useState(initZoom? initZoom : 5);
     const [clicks, setClicks] = useState([]);
     const poly = useRef(null);
     const [haspoly, setHaspoly] = useState(false);
@@ -285,7 +285,7 @@ const BuyMap = ({
 
         }
     };
-    console.log("Zoom",zoom, center, locationAddress)
+    // console.log("Zoom",zoom, center, initZoom)
     return (
         <>
         <Wrapper

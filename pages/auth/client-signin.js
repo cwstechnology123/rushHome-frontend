@@ -36,6 +36,7 @@ export default function Client() {
     const { register, formState: { errors }, handleSubmit } = useForm(formOptionsLogin);
 
     const onSubmit = async formValue => {
+        console.log(window.location.origin)
         setIsLoading(true)
         handleLoading('Please wait...');
         // console.log(JSON.stringify(formValue));//print form data to console
@@ -43,7 +44,7 @@ export default function Client() {
             {
                 email : formValue.email,
                 password : formValue.password,
-                callbackUrl: `${window.location.origin}${redirectUrl}`,
+                callbackUrl: `${process.env.NEXT_PUBLIC_HOST_NAME}${redirectUrl}`,
                 redirect: false,
             }
         )
@@ -79,7 +80,7 @@ export default function Client() {
                     <button type="submit" disabled={isLoading} className="btn style1 button_agent">Login</button>
                 </div>
                 <div className="col-md-12 text-center">
-                    <button type="button" className="btn style1 button_agent" onClick={() => signIn("google", { callbackUrl: redirectUrl})}><span className="googleicon"><img src="../../assets/img/googleicon.png" /></span>Continue with Google</button>
+                    <button type="button" className="btn style1 button_agent" onClick={() => signIn("google", { callbackUrl: `${process.env.NEXT_PUBLIC_HOST_NAME}${redirectUrl}`})}><span className="googleicon"><img src="../../assets/img/googleicon.png" /></span>Continue with Google</button>
                 </div>
                 <p className="policy_content">Don’t have an account? <Link href="/signup">Sign up for free</Link></p>
                 </form>
