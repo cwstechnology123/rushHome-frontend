@@ -7,8 +7,8 @@ export const authOptions = {
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
-        clientId: process.env.NEXT_PUBLIC_GOOGLE_ID,
-        clientSecret: process.env.NEXT_PUBLIC_GOOGLE_SECRET,
+        clientId: process.env.GOOGLE_ID,
+        clientSecret: process.env.GOOGLE_SECRET,
         authorization: {
           params: {
             prompt: "consent",
@@ -67,7 +67,7 @@ export const authOptions = {
       if (account && user) {
         if (account.provider === "google") {
           try {
-            const payload = {url : `${apiBaseUrl}/google-login`, method : 'POST', data : {email : user.email, full_name: user.name, NEXT_PUBLIC_GOOGLE_ID : user.id, image: user.image, user_type: '0'}}
+            const payload = {url : `${apiBaseUrl}/google-login`, method : 'POST', data : {email : user.email, full_name: user.name, google_id : user.id, image: user.image, user_type: '0'}}
             const res = await fetchApi(payload)
             if (res && res.data) {
               const profile = res.data?.profile;
