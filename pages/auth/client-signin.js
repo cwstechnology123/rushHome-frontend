@@ -36,7 +36,6 @@ export default function Client() {
     const { register, formState: { errors }, handleSubmit } = useForm(formOptionsLogin);
 
     const onSubmit = async formValue => {
-        console.log(window.location.origin)
         setIsLoading(true)
         handleLoading('Please wait...');
         // console.log(JSON.stringify(formValue));//print form data to console

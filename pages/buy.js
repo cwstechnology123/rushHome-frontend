@@ -362,7 +362,7 @@ export default function Buy({ properties }) {
                     <div className="col-md-6 col-xl-6 col-lg-6">
                         <div style={{width: '100%', height:'170vh', position: 'relative'}}>
                             <Wrapper
-                                apiKey={process.env.GOOGLE_API_TOKEN}
+                                apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN}
                                 render={render}
                             >
                                 <Map

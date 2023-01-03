@@ -14,7 +14,7 @@ const OfficeMap = ({ address, position, timing }) => {
     return (
         <div className="contact_map mt-0" style={{ height: "80vh", width: "100%", position: 'relative' }}>
             <Wrapper
-                apiKey={process.env.GOOGLE_API_TOKEN}
+                apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN}
                 render={render}
             >
                 <OfficeLocationMap

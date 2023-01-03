@@ -103,16 +103,19 @@ const PropertyDetails = ({
     const handleSave = async () => {
         if(session){
             try{
+                toast.loading('Waiting...');
                 const userId = session && session.user?.userId;
                 const accessToken = session && session.user?.accessToken;
                 const isSaved = !saved ? 1 : 0;
                 const payload = {url : `${apiBaseUrl}/properties/fav-update`, accessToken: accessToken, method : 'POST', data : {userId: userId, propertyId: id.toString(), isSaved: isSaved.toString()}}
                 const res = await fetchApi(payload)
                 if (res && res.type == 'success') {
+                    toast.success('Property saved');
                     setSaved(!saved);
                 }
             } catch (error) {
                 console.log(error)
+                toast.error('Failed to update');
                 return false;
             };
         }else{
@@ -188,9 +191,9 @@ const PropertyDetails = ({
     // }, []);
 
     useEffect(() => {
-        console.log('check saved property')
+        // console.log('check saved property')
         if(session && !loading){
-            console.log('===============')
+            // console.log('===============')
             const userId = session && session.user?.userId;
             const accessToken = session && session.user?.accessToken;
             isSavedProperty(userId, accessToken) 
@@ -203,11 +206,11 @@ const PropertyDetails = ({
             const res = await fetchApi(payload)
             if (res && res.type == 'success') {
                 let propertyIds = res.data.profile && res.data.profile.propertyIds ? res.data.profile.propertyIds.split(',') : []
-                console.log(propertyIds)
+                // console.log(propertyIds)
                 setSaved(propertyIds.includes(id.toString()))
             }
         } catch (error) {
-            console.log(error)
+            // console.log(error)
             return false;
         };
     }

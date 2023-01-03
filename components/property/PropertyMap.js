@@ -20,7 +20,7 @@ const PropertyMap = ({ address, position }) => {
                     <hr />
                     <div className="contact_map mt-0" style={{ height: "400px", width: "100%" }}>
                         <Wrapper
-                            apiKey={process.env.GOOGLE_API_TOKEN}
+                            apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN}
                             render={render}
                         >
                             <LocationMap
