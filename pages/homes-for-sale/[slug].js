@@ -112,7 +112,7 @@ export async function getServerSideProps({ query }) {
     let sendData = {
         stateOrProvince : stateCode,
         city: city,
-        page_limit: 100
+        page_limit: 10000
     }
     
     const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: sendData}
