@@ -6,6 +6,7 @@ import SingleMarker from '../gmap/CustomSingleMarker';
 import ClusterMarker from '../gmap/ClusterMarkerr';
 import MultiMarker from '../gmap/MultiMarker';
 
+
 const render = (status) => {
     if (status === Status.FAILURE) {
       return <p>Map failed to load</p>;
@@ -14,6 +15,7 @@ const render = (status) => {
 };
 
 const BuyMap = ({
+    locationAddress,
     setMapView,
     center, setCenter,
     bounds, setBounds,
@@ -22,7 +24,9 @@ const BuyMap = ({
     highlight
 }) => {
     //initialize
-    const [zoom, setZoom] = useState(8);
+       
+    
+    const [zoom, setZoom] = useState(locationAddress? 10 : 5);
     const [clicks, setClicks] = useState([]);
     const poly = useRef(null);
     const [haspoly, setHaspoly] = useState(false);
@@ -281,11 +285,11 @@ const BuyMap = ({
 
         }
     };
-    // console.log("Zoom",zoom, center)
+    console.log("Zoom",zoom, center, locationAddress)
     return (
         <>
         <Wrapper
-            apiKey={process.env.GOOGLE_API_TOKEN}
+            apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN}
             render={render}
         >
             <Map
@@ -307,7 +311,7 @@ const BuyMap = ({
                 {clusterSets}
             </Map>
         </Wrapper>
-        {haspoly && (<button type="button" className="btn_block btn-danger btn-sm" style={{position: 'absolute', top: '2%', left: '2%', zIndex: 9}} onClick={clearMapDraw}>Clear Boundary</button>)}
+        {haspoly && (<button type="button" className="btn_block btn-danger btn-sm" style={{position: 'absolute', top: '2%', left: '2%', zIndex: 9}} onClick={clearMapDraw}>Clear</button>)}
         </>
     )
 }

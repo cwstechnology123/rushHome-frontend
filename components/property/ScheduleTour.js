@@ -193,15 +193,6 @@ export default function ScheduleTour({onInit}) {
                         <div className="for-group mb-3">
                             <button type="submit" className="btn style1" style={{borderRadius:15}}>Schedule a Tour</button>
                         </div>
-                        <div className="form-group mb-3">
-                            <div className="form-check">
-                                <input className="form-check-input" type="checkbox" id="gridCheck" />
-                                <label className="form-check-label">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                </label>
-                            </div>
-                        </div>
-                        
                     </form>
                 </div>
                 

@@ -353,7 +353,7 @@ const PropertyDetails = ({
                                                 <tbody>
                                                     <tr>
                                                         <th width={'50%'}>Property ID:</th>
-                                                        <td width={'50%'} className="text-left">{listingId}/{listingKey}</td>
+                                                        <td width={'50%'} className="text-left">{listingId}</td>
                                                     </tr>
                                                     <tr>
                                                         <th width={'50%'}>Property Type:</th>

@@ -35,7 +35,7 @@ export default function PropertyTax({tax}) {
                                         {tax.taxAnnualAmount? (
                                             Number(tax.taxAnnualAmount).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0})
                                         ) : '-'}
-                                        /{tax.taxYear? tax.taxYear : '-'}
+                                        {/* /{tax.taxYear? tax.taxYear : '-'} */}
                                         </th>
                                     </tr>
                                     <tr>
@@ -48,12 +48,12 @@ export default function PropertyTax({tax}) {
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td width={'50%'}>Country Tax:</td>
+                                        <td width={'50%'}>County Tax:</td>
                                         <th width={'50%'} className="text-left">
                                             {tax.countyTax? (
                                                 Number(tax.countyTax).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0})
                                             ) : '-'}
-                                            {tax.countyTaxPaymentFrequency && (`/${tax.countyTaxPaymentFrequency}`)}
+                                            {/* {tax.countyTaxPaymentFrequency && (`/${tax.countyTaxPaymentFrequency}`)} */}
                                         </th>
                                     </tr>
                                     <tr>
@@ -80,7 +80,7 @@ export default function PropertyTax({tax}) {
                                         {tax.taxAssessmentAmount? (
                                             Number(tax.taxAssessmentAmount).toLocaleString('en-US', { style: 'currency', currency: 'USD',minimumFractionDigits: 0})
                                         ) : '-'}
-                                        {tax.assessmentYear && (`/${tax.assessmentYear}`)}
+                                        {/* {tax.assessmentYear && (`/${tax.assessmentYear}`)} */}
                                         </th>
                                     </tr>
                                     <tr>

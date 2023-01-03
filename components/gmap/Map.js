@@ -29,8 +29,10 @@ export default function Map({
           map.setOptions({
             ...options,
             mapTypeControlOptions: {
-                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                position: google.maps.ControlPosition.TOP_RIGHT,
+                mapTypeIds: ["satellite", "roadmap", "terrain"],
+                // mapTypeId: google.maps.MapTypeId.ROADMAP,
             }
           });
         }
@@ -65,7 +67,7 @@ export default function Map({
                   ) 
                   : 
                   (
-                      <button type="button" className="btn_block btn-primary btn-sm" style={{position: 'absolute', top: '2%', right: '2%', zIndex: 9}} onClick={()=>setMapDraw(true, map)}>Draw on Map</button>
+                      <button type="button" className="btn_block btn-primary btn-sm" style={{position: 'absolute', top: '2%', right: '50%', zIndex: 9, transform: 'translateX(50%)'}} onClick={()=>setMapDraw(true, map)}>Draw</button>
                   )
               }
               <div style={{width: 100+'%', height: 100+'%'}} id="map" ref={mapRef}/>

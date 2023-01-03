@@ -7,9 +7,15 @@ import BuyLayout from "../../components/layouts/BuyLayout";
 import Footer from "../../components/layouts/BuyFooter";
 import useWindowDimensions from "../../components/buy/useWindowDimensions";
 import BuyMap from "../../components/buy/BuyMap";
+import { useRouter } from "next/router";
+import Geocode from "react-geocode";
 
 export default function HomesForSale({ properties }) { 
-    
+    Geocode.setApiKey(process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN);
+    Geocode.setLanguage("en");
+    Geocode.setRegion("us"); 
+    const { query } = useRouter();
+    const locationAddress = (!!query.slug)? `${query.slug.substring(query.slug.lastIndexOf('-')+1)}, ${(query.slug.substring(0, query.slug.lastIndexOf('-'))).replace('-', ' ')}` : "";
     const windowDimensions = useWindowDimensions();
     const [mapHeight, setMapHeight] = useState(windowDimensions?.height || 500);
     useEffect(() => {
@@ -31,7 +37,24 @@ export default function HomesForSale({ properties }) {
     })
     // const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
     // const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/all/1/1000`, method : 'GET'}, fetcher);
-
+    useEffect(() => {
+        if(locationAddress && locationAddress != 'map'){
+            Geocode.fromAddress(locationAddress).then(
+                (response) => {
+                  const { lat, lng } = response.results[0].geometry.location;
+                //   console.log(lat, lng);
+                  setCenter({
+                    lat: lat,
+                    lng: lng,
+                  });
+                },
+                (error) => {
+                  console.error(error);
+                }
+            );
+        }
+        
+    }, []);
     const [filterData, setFilterData] = useState(properties);
 
     return (
@@ -45,6 +68,7 @@ export default function HomesForSale({ properties }) {
                             {/* FOR MAP */}
                             <div id="mapBox" style={{width:'100%', height: mapHeight, position: 'relative'}}>
                                 <BuyMap
+                                    locationAddress={locationAddress}
                                     center={center}
                                     setCenter={setCenter}
                                     setMapView={setMapView}
@@ -74,13 +98,13 @@ export default function HomesForSale({ properties }) {
 export async function getServerSideProps({ query }) {
     let slug = query.slug;
     // slug.lastIndexOf('-')
-    let stateCode = slug.substring(0, slug.lastIndexOf('-')-1);
-    let city = slug.substring(slug.lastIndexOf('-')+1);
+    let city = (slug.substring(0, slug.lastIndexOf('-'))).replace('-', ' ');
+    let stateCode = slug.substring(slug.lastIndexOf('-')+1);
 
     let sendData = {
-        stateOrProvince : stateCode.toUpperCase(),
-        coty: city,
-        page_limit: 1000
+        stateOrProvince : stateCode,
+        city: city,
+        page_limit: 100
     }
     // const lastIndexVal = slug.substring(slug.lastIndexOf('-') + 1);
     // if(!isNaN(lastIndexVal)){
