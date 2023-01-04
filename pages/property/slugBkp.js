@@ -8,7 +8,7 @@ import PropertyLocation from '../../components/property/PropertyLocation';
 import SimilarHomes from '../../components/property/SimilarHomes';
 import { apiBaseUrl, fetchApi } from '../../utils/fetchApi';
 import { FaBath, FaHotTub } from 'react-icons/fa';
-import NonAccount from './NonAccount';
+import NonAccount from '../../components/property/NonAccount';
 import { useSession } from 'next-auth/react';
 import VirtualTour from '../../components/property/VirtualTour';
 import PropertyImages from '../../components/property/PropertyImages';
