@@ -125,7 +125,7 @@ export default function BuyFooter(){
                                 </Link>
                                 </li>
                                 <li>
-                                <Link href="/buy" target="_blank">
+                                <Link href="/homes-for-sale/delaware-de" target="_blank">
                                     <i className="ri-arrow-right-s-line" />
                                     Buy Property
                                 </Link>

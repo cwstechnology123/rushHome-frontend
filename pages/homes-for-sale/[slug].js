@@ -65,7 +65,7 @@ export default function HomesForSale({ properties, stateCode, city }) {
             <section className="listing_wraper mt-0">
                 <div className="container-fluid">
                     <div className="row">
-                        <div className="col-xl-5 col-lg-5 col-md-6 p-0 d-none d-sm-block d-sm-none d-md-block">
+                        <div className="col-xl-5 col-lg-5 d-md-none d-lg-block p-0 d-none d-sm-block d-sm-none d-md-block">
                             {/* FOR MAP */}
                             <div id="mapBox" style={{width:'100%', height: mapHeight, position: 'relative'}}>
                                 <BuyMap
@@ -82,7 +82,7 @@ export default function HomesForSale({ properties, stateCode, city }) {
                                 />
                             </div>
                         </div>
-                        <div className="col-xl-7 col-lg-7 col-md-6" style={{height: mapHeight, overflowY: 'auto'}}>
+                        <div className="col-xl-7 col-lg-7 col-12" style={{height: mapHeight, overflowY: 'auto'}}>
                             {/* FOR PROPERTIES */}
                             <BuyPropertyList properties={filterData || []} setHighlight={setHighlight} />
                             <Footer />

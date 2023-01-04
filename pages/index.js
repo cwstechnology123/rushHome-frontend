@@ -89,7 +89,7 @@ export default function Home({properties}) {
           </div>
           <div className="row justify-content-left">
             <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-              <Link href={`/buy`}>
+              <Link href={`/homes-for-sale/delaware-de`}>
                 <div className="hw-card">
                   <div className="hw-img">
                     <img src="assets/img/Buy a New Home.jpg" alt="Image" />

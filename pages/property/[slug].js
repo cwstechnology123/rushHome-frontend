@@ -473,7 +473,8 @@ export async function getServerSideProps({ params: { slug } }) {
     const payload = {url : `${apiBaseUrl}/properties/details/${propertyId}`, method : 'GET'}
     const res = await fetchApi(payload)
     // Pass data to the page via props
-    // console.log(res.data)
+    
+    console.log(res.data)
     if(res?.data){
         return {
             props: {

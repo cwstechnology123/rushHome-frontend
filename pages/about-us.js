@@ -26,14 +26,14 @@ export default function AboutUs() {
   return (
     <>
       <section className="pb-75 text-center citybanner_box">
-        <img src="assets/img/city_banner.jpg" />
+        <img src="assets/img/about_banner.jpg" />
         <div className="container">
           <div className="welcome_box">
             <div className="col-xl-10 col-lg-10 offset-xl-1 offset-lg-1">
               <div className="section-title style2 text-center mb-40">
                 <h1>Welcome To Rushhome</h1>
                 <h2>We see change as opportunity, not a threat &amp; start with the belief that there is a better way.</h2>
-                <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut lab </p>
+                {/* <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut lab </p> */}
                 <span>JUMP TO</span>
                 <div className="state_tabs">
                   <ul className="list-group list-group-horizontal">
