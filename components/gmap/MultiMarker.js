@@ -2,6 +2,8 @@ import Image from 'next/image';
 import { useState } from "react";
 import PopupView from "./popups/PopupView";
 import OverlayView from "./marker/OverlayView";
+import Link from 'next/link';
+import Marker from './Marker';
 
 export default function MultiMarker({
     clusterId,
@@ -17,33 +19,38 @@ export default function MultiMarker({
             <div className="popup-bubble d-flex shadow bg-light text-white">
                 <div className="card border-0">
                     <div className="card-header" style={{backgroundColor: '#000'}}>
-                        <h4 className='card-title text-white'>{`${hotels.length} For Sale`}
-                            <button type="button" className="btn btn-multiinfo pull-right" onClick={()=>setShow(!show)}>X</button>
+                        <h4 className='card-title text-white'>{`${hotels.length} Homes For Sale`}
+                            <button type="button" className="btn-multiinfo close pull-right" onClick={()=>setShow(!show)}>X</button>
                         </h4>
                         
                     </div>
-                    <div className='card-body p-1' style={{maxHeight:'30vh', overflowY: 'auto'}}>
+                    <div className='card-body p-0' style={{maxHeight:'30vh', overflowY: 'auto'}}>
                         {hotels.map(({properties}) => {
                             let hotel = properties.hotel;
                             return (
                             <div key={`marker_${hotel.id}`} className='d-flex mb-2 border'>
-                                <Image src={hotel.listPictureURL} alt={`property for ${hotel.slug}`} width={100} height={100}/>
-                            <div className="grow p-2">
-                                <span className="font-weight-bold">
-                                    {hotel.id && (
-                                    <a
-                                        href={`/property/${hotel.id}`}
-                                        className="text-info"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >
-                                        {hotel.fullStreetAddress}<br/>
-                                        <strong>$ {hotel.listPrice}</strong>
-                                    </a>
-                                    )}
-                                </span>
-                                <p className="small mb-0 text-dark">{}</p>
-                            </div>
+                                <Image src={hotel.listPictureURL} alt={`property for ${hotel.slug}`}  width={120} height={120} loading="lazy"/>
+                                <div className="grow p-2">
+                                    <span className="font-weight-bold">
+                                        {hotel.id && (
+                                        <Link
+                                            href={`/property/${hotel.slug}`}
+                                            className="text-dark"
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            <h6 style={{fontSize:'1.2em'}}>{hotel.fullStreetAddress}</h6>
+                                            <h6 className="small" style={{fontWeight: '400 !important'}}>
+                                                {Number(hotel.listPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 })}
+                                            </h6>
+                                            <span>
+                                                {`${hotel.bedroomsTotal || '-'} BD | ${hotel.bathroomsTotalInteger || '-'} BA | ${hotel.areaTotal? Number(hotel.areaTotal).toLocaleString('en-US') : '-'} SF `}
+                                            </span>
+                                        </Link>
+                                        )}
+                                    </span>
+                                    <p className="small mb-0 text-dark">{}</p>
+                                </div>
                             </div>)
                         })}
                     </div>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
-import RequestInfo from "../../components/property/RequestInfo";
-import ScheduleTour from "../../components/property/ScheduleTour";
+import RequestInfo from "./RequestInfo";
+import ScheduleTour from "./ScheduleTour";
 
 export default function NonAccount({ address, fubObj }) {
     // const [activeTab, setActiveTab] = useState('schedule-tour');

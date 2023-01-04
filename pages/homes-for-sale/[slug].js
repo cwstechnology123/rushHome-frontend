@@ -39,10 +39,10 @@ export default function HomesForSale({ properties, stateCode, city }) {
     // const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
     // const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/all/1/1000`, method : 'GET'}, fetcher);
     useEffect(() => {
-        if(stateCode && city){
-            Geocode.fromAddress(`${stateCode}, ${city}`).then(
+        if(stateCode){
+            Geocode.fromAddress(`${stateCode.toUpperCase()}, ${city}`).then(
                 (response) => {
-                //   console.log("Rsponse",response.results[0])
+                // console.log("Rsponse",response.results[0])
                   const { lat, lng } = response.results[0].geometry.location;
                 //   console.log(lat, lng);
                   setCenter({
@@ -108,16 +108,17 @@ export async function getServerSideProps({ query }) {
             city = "";
         }
     }
-    
+    // console.log(stateCode, city)
     let sendData = {
         stateOrProvince : stateCode,
         city: city,
         page_limit: 10000
     }
+    // console.log(sendData)
     
     const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: sendData}
     const res = await fetchApi(payload)
-
+    // console.log(sendData)
     if(res && res.data){
         return {
             props: {
@@ -130,7 +131,7 @@ export async function getServerSideProps({ query }) {
     return {
         props: {
             properties : null,
-            stateCode: stateCode,
+            stateCode: city? stateCode : stateCodes[stateCode.toUpperCase()],
             city: city
         },
     };

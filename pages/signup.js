@@ -7,6 +7,8 @@ import { useState } from 'react'
 import { useRouter } from "next/router"
 import { apiBaseUrl, fetchApi } from '../utils/fetchApi'
 import { handleSuccess, handleError, handleLoading } from "../utils/notify";
+import fubApiCall from "../utils/FubApiCall";
+import splitName from "../utils/splitName";
 
 export default function SignUp() {
     const router = useRouter();
@@ -38,6 +40,25 @@ export default function SignUp() {
             setIsLoading(false)
             if (res && res.type == 'error') handleError(res.message)
             if (res && res.type == 'success') {
+                const {firstName, lastName} = splitName(formValue.full_name);
+                let leadObj = {
+                    person: {
+                      contacted: false,
+                      emails: [{isPrimary: true, type: 'work', value: formValue.email}],
+                      firstName: firstName,
+                      lastName: lastName,
+                      stage: 'Lead',
+                      sourceUrl: `${process.env.NEXT_PUBLIC_HOST_NAME}/signup`
+                    },
+                    type: 'Registration',
+                    system: 'NextJS',
+                    source: 'RushHome',
+                };
+                // const res = await fubApiCall(leadObj);
+                // if(res.status){
+                //     let fub_id = res.message.id;
+                //     console.log(fub_id)
+                // }
                 handleSuccess(res.message)
                 router.push('/auth/client-signin')
             }
@@ -58,24 +79,34 @@ export default function SignUp() {
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)} className="g-3" autoComplete="off">
                 <div className="col-md-12">
-                    <label htmlFor="full_name" className="form-label">Name</label>
-                    <input type="text" className="form-control" {...register("full_name")} id="full_name" placeholder="Full Name" />
-                    <span style={{ color: 'red' }}>{errors.full_name?.message}</span>
+                    <div className="form-group">
+                        <label htmlFor="full_name" className="form-label">Name</label>
+                        <input type="text" className="form-control" {...register("full_name")} id="full_name" placeholder="Full Name" />
+                        <span className="text-danger">{errors.full_name?.message}</span>
+                    </div>
                 </div>
                 <div className="col-md-12">
-                    <label htmlFor="email" className="form-label">Email</label>
-                    <input type="email" className="form-control"  {...register("email")} id="email" placeholder="Email"/>
-                    <span style={{ color: 'red' }}>{errors.email?.message}</span>
+                    <div className="form-group">
+                        <label htmlFor="email" className="form-label">Email</label>
+                        <input type="email" className="form-control"  {...register("email")} id="email" placeholder="Email"/>
+                        <span className="text-danger">{errors.email?.message}</span>
+                    </div>
                 </div>
                 <div className="col-md-12">
-                    <label htmlFor="password" className="form-label">Password</label>
-                    <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} {...register("password")} id="password" placeholder="Create Password" />
-                    <span style={{ color: 'red' }}>{errors.password?.message}</span>
+                    <div className="form-group">
+                        <label htmlFor="password" className="form-label">Password</label>
+                        <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} {...register("password")} id="password" placeholder="Create Password" />
+                        <span className="text-danger">{errors.password?.message}</span>
+                    </div>
+                    
                 </div>
                 <div className="col-md-12">
-                    <label htmlFor="confirm_password" className="form-label">Confirm Password</label>
-                    <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} {...register("confirm_password")} id="confirm_password" placeholder="Confirm Password" />
-                    <span style={{ color: 'red' }}>{errors.confirm_password?.message}</span>
+                    <div className="form-group">
+                        <label htmlFor="confirm_password" className="form-label">Confirm Password</label>
+                        <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} {...register("confirm_password")} id="confirm_password" placeholder="Confirm Password" />
+                        <span className="text-danger">{errors.confirm_password?.message}</span>
+                    </div>
+                    
                 </div>
                 <div className="col-md-12 text-center">
                     <button type="submit" disabled={isLoading} className="btn style1 button_agent">Sign Up</button>

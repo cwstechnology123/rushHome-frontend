@@ -184,7 +184,7 @@ export default function Home({properties}) {
                 <div className="city-card style1">
                   <img src="assets/img/city/Rehoboth.jpg" alt="Image" />
                   <div className="city-info">
-                    <h3><Link href="/city/rehoboth-de">Rehoboth</Link></h3>
+                    <h3><Link href="/city/rehoboth-beach-de">Rehoboth</Link></h3>
                     <p>+5231 properties</p>
                   </div>
                 </div>
@@ -209,14 +209,30 @@ export default function Home({properties}) {
 
 // This gets called on every request
 export async function getStaticProps() {
-  const type = 'all';
-  const payload = {url : `${apiBaseUrl}/properties/${type}/1/12`, method : 'GET'}
-  const res = await fetchApi(payload)
+
+  // const getProperties = new Promise(async (resolve, reject) =>{
+  //   let type = 'all';
+  //   let payload = {url : `${apiBaseUrl}/properties/${type}/1/12`, method : 'GET'}
+  //   let res = await fetchApi(payload);
+  //   resolve(res.data?.properties);
+  // })
+  // const getCountyCount = new Promise(async (resolve, reject) =>{
+  //   let payload = {url : `${apiBaseUrl}/count`, method : 'POST'}
+  //     let res = await fetchApi(payload);
+  //     resolve(res.data);
+  // })
+  // const [properties, count] = await Promise.all(
+  //   [getProperties, getCountyCount]
+  // );
+  let type = 'all';
+  let payload = {url : `${apiBaseUrl}/properties/${type}/1/12`, method : 'GET'}
+  let res = await fetchApi(payload);
+  // console.log(properties, count)
   // Pass data to the page via props
   if(res && res.data){
     return {
       props: {
-        properties : res && res.data?.properties,
+        properties : res.data.properties,
       },
     };
   }

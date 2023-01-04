@@ -2,11 +2,11 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/router";
-// import toast, { Toaster } from 'react-hot-toast';
-import { fetchFubApi, fubApiBaseUrl } from "../utils/fubFetchApi";
 import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import splitName from "../utils/splitName";
+import fubApiCall from "../utils/FubApiCall";
+import { fetchFubApi, fubApiBaseUrl } from "../utils/fubFetchApi";
 
 export default function ContactUs({ type }) {
     const [isLoading, setIsLoading] = useState(false);
@@ -41,15 +41,16 @@ export default function ContactUs({ type }) {
             message: contact_data.contact_message,
             description: 'subject: '+contact_data.contact_subject
         };
+
         try{
-            const payload = {url : `${fubApiBaseUrl}/events`, method : 'POST', data: leadObj}
-            const res = await fetchFubApi(payload)
-            if(res){
-                toast.success('Request Send');
-                // alert("Leads send successfully")
+            const toastId = toast.loading('Loading...');
+            const res = await fubApiCall(leadObj);
+            if(res.status){
+                toast.success("Request send");
             }else{
-                toast.error('Request failed to send');
+                toast.error("Failed to send, Error: "+res.message);
             }
+            toast.dismiss(toastId);
             setIsLoading(false)
         } catch (error) {
             setIsLoading(false)

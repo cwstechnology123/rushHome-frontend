@@ -17,22 +17,13 @@ export const fetchFubApi = async (payload) => {
     };
       
     return await axios
-        .request(payload.url, options)
+        .request(options)
         .then(function (response) {
             //console.log(response)
-            return response.data;
+            return {'status':true, 'message':response.data};
         })
         .catch(function (error) {
-          //console.error(error);
+            console.error("Error",error.message);
+            return {'status':false, 'message':error.message};
         });
-    // return await fetch(payload.url, options)
-    //     .then(response => response.json())
-    //     .then(returnData => {
-    //       //console.log('returnData', returnData);
-    //       return returnData
-    //     })
-    //     .catch((err) => {
-    //       console.log(err)
-    //       return null;
-    //     });
 };

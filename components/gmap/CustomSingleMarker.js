@@ -23,7 +23,6 @@ export default function CustomSingleMarker({ hotel, map, highlight }) {
                             className="text-dark"
                             target="_blank"
                             rel="noreferrer"
-                            passHref={true}
                         >
                             <h6 style={{fontSize:'1.2em'}}>{hotel.fullStreetAddress}</h6>
                             <h6 className="small" style={{fontWeight: '400 !important'}}>

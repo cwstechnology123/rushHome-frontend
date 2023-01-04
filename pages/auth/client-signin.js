@@ -68,14 +68,17 @@ export default function Client() {
                         </div>
                         <form onSubmit={handleSubmit(onSubmit)} className="g-3" autoComplete="off">
                         <div className="col-md-12">
-                            <label htmlFor="inputEmail4" className="form-label">Email</label>
-                            <input type="email" {...register("email")} className="form-control" id="inputEmail4" placeholder="Enter Email" />
-                            <span style={{ color: 'red' }}>{errors.email?.message}</span>
+                            <div className="form-group">
+                                <label htmlFor="inputEmail4" className="form-label">Email</label>
+                                <input type="email" {...register("email")} className="form-control" id="inputEmail4" placeholder="Enter Email" />
+                                <span className="text-danger">{errors.email?.message}</span>
+                            </div>
+                            
                         </div>
                         <div className="col-md-12">
                             <label htmlFor="inputPassword" className="form-label">Password</label>
                             <input type="password" {...register("password")}  className={`form-control ${errors.password ? 'is-invalid' : ''}`} id="inputPassword" placeholder="Enter Password" />
-                            <span style={{ color: 'red' }}>{errors.password?.message}</span>
+                            <span className="text-danger">{errors.password?.message}</span>
                         </div>
                         <div className="forgot_box"><Link href="#">Forgot Password?</Link></div>
                         <div className="col-md-12 text-center">

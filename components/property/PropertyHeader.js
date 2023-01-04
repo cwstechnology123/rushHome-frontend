@@ -7,7 +7,7 @@ import { apiBaseUrl, fetchApi } from "../../utils/fetchApi";
 export default function PropertyHeader({ saved, mlsListDate, price, area, address, tag, handlePrint, handleSave, count, info, listingId }) {
     const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
     const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/views-count/${listingId }`, method : 'GET'}, fetcher);
-    console.log("count",data);
+    // console.log("count",data);
     const daysAgo = () => {
         let starts = moment(mlsListDate);
         let ends = moment();

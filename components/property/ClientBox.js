@@ -17,9 +17,9 @@ import moment from "moment/moment";
 import { useSession } from "next-auth/react";
 import splitName from "../../utils/splitName";
 import { fetchFubApi, fubApiBaseUrl } from "../../utils/fubFetchApi";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
-export default function ClientBox({ type, address, price, pricearea, amenity, fubObj }) {
+export default function ClientBox({ type, address, price, pricearea, amenity, fubObj, agent }) {
     const { data: session } = useSession();
     const [showscheduletour, setShowscheduletour] = useState(false);
     const [showsrequest, setShowsrequest] = useState(false);
@@ -78,7 +78,7 @@ export default function ClientBox({ type, address, price, pricearea, amenity, fu
             message: `I want to schedule a tour for this property on ${data && new Date(data.schedule_date).toLocaleDateString('en-US', { weekday:"long", month:"long", day:"numeric"})} at ${data && moment(data.schedule_time).format('hh:mm a')}`,
         };
         try{
-            toast.loading('Waiting...');
+            const toastId = toast.loading('Loading...');
             const payload = {url : `${fubApiBaseUrl}/events`, method : 'POST', data: leadObj}
             const res = await fetchFubApi(payload)
             if(res){
@@ -87,6 +87,7 @@ export default function ClientBox({ type, address, price, pricearea, amenity, fu
             }else{
                 toast.error('Request failed to send');
             }
+            toast.dismiss(toastId);
         } catch (error) {
             toast.error('Request failed. Please try again.');
         };
@@ -188,7 +189,7 @@ export default function ClientBox({ type, address, price, pricearea, amenity, fu
 
     return (
         <>
-        <Toaster />
+        {/* <Toaster /> */}
         <div className="card" style={{borderRadius: 15}}>
             <div className="card-body">
                 <h5 className="card-title font-weight-bold">{type}</h5>

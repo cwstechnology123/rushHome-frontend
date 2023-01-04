@@ -103,7 +103,7 @@ export default function Footer() {
                                 </Link>
                                 </li>
                                 <li>
-                                <Link href="/homes-for-sale/rehoboth-de" target="_blank">
+                                <Link href="/homes-for-sale/rehoboth-beach-de" target="_blank">
                                     <i className="ri-arrow-right-s-line" />
                                     Rehoboth
                                 </Link>

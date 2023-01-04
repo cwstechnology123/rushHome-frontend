@@ -364,12 +364,12 @@
 .btn-multiinfo{
     color: #fff;
     border: 1px solid #333;
+    background-color: #000;
     border-radius: 0;
 }
 .btn-multiinfo:hover{
     color: #000;
     background-color: #FCCF67;
-    font-weight: 600;
 }
 .price-tag {
     position: relative;
