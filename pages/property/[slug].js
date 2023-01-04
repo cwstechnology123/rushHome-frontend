@@ -25,6 +25,7 @@ const PropertyDetails = ({
         slug,
         listingId,
         listingKey,
+        listOfficeName,
         mlsListDate,
         propertyType,
         yearBuilt,
@@ -264,6 +265,7 @@ const PropertyDetails = ({
                                 <h2>Descriptions</h2>
                                 <hr />
                                 <p className="text-justify">{description}</p>
+                                <h6 className="mt-3">Listed by {listOfficeName || '-'}</h6>
                             </div>
                         </div>
                         <div className="factfeature_box heading_line">

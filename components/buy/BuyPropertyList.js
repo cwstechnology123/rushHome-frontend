@@ -42,15 +42,10 @@ export default function BuyPropertyList({ properties, setHighlight }){
                 <div className="col-xl-3 col-lg-4 col-md-4">
                     <div className="filter-item-cat">
                         <select>
-                        <option value={1}>Top Selling</option>
                         <option value={2}>Sort By High To Low</option>
                         <option value={3}>Sort By Low To High</option>
                         </select>
                     </div>
-                </div>
-                <div className="lising_icons">
-                    <span className="list_icon"><i className="fa fa-th-list" aria-hidden="true" /></span>
-                    <span className="list_th_icon"><i className="fa fa-th" aria-hidden="true" /></span>
                 </div>
             </div>
             <div className="row">
