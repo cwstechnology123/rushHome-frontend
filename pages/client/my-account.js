@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react"
 export default function MyAccount() {
     const { data: session, loading } = useSession()
     console.log(session)
+    
   return (
     <>
         <section className="pt-50 pb-75 myprofile_box">

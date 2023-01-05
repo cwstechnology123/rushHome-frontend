@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react"
 
 export default function MyProfile() {
     const { data: session, loading } = useSession()
+    
 
   return (
     <>
