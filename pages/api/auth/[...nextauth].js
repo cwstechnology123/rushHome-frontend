@@ -7,8 +7,8 @@ export const authOptions = {
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
-        clientId: process.env.NEXT_PUBLIC_GOOGLE_ID,
-        clientSecret: process.env.NEXT_PUBLIC_GOOGLE_SECRET,
+        clientId: process.env.GOOGLE_ID,
+        clientSecret: process.env.GOOGLE_SECRET,
         authorization: {
           params: {
             prompt: "consent",
@@ -43,7 +43,7 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
-  secret: process.env.NEXT_PUBLIC_AUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async redirect({ url, baseUrl }) {
       console.log('url', url)
