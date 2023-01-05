@@ -1532,6 +1532,133 @@
     }
 }
 @media only screen and (max-width: 991px) {
+    /* ============ header add css code date: 05/01/2023 =========== */
+    .others-options {
+        width: 100%;
+        height: 45px;
+    }
+    
+    .header-btn {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+    
+    button#dropdown-button-profile {
+        margin: 0;
+        padding: 7px 10px!important;
+        height: 100%!important;
+        width: 100%;
+        text-align: left;
+        border-radius: 0!important;
+        outline: none;
+        box-shadow: none;
+    }
+    .dropdown-toggle::after {
+        border-top: 0!important;
+    }
+    .headerbtn-toggle {
+        width: 100%;
+    }
+    .bell_box {
+        float: left;
+        width: 45px;
+        height: 42px;
+        background: #ccc;
+        text-align: center;
+        line-height: 40px;
+        border-radius: 10px;
+        font-size: 23px;
+        color: #000;
+        position: relative;
+        border-radius: 0;
+        margin-right: 10px;
+    }
+    .dropdown-class {
+        border-radius: 0;
+    }
+    #moon {
+        width: 12px;
+        height: 12px;
+        border-radius: 0;
+        box-shadow: 3px 3px 0 0 #cccccc;
+        transform: rotate(45deg);
+        position: absolute;
+        top: 5px;
+        right: 15px;
+    }
+    .add-rotate-cls {
+        transform: rotate(224deg)!important;
+        top: 21px!important;
+    }
+    .navbar-nav .nav-link {
+        color: #919191;
+    }
+    li.d-lg-none.nav-item {
+        width: 100%;
+        display: block;
+    }
+    .btn.style3 {
+        background-color: transparent;
+        border: 1px solid #333;
+        color: #333;
+        width: 100%;
+        margin-bottom: 10px;
+        margin-top: 15px;
+    }
+    .btn.style1 {
+        background-color: #fdce64;
+        width: 100%;
+    }
+    .dropdown-item.active, .dropdown-item:active {
+        color: #fff;
+        text-decoration: none;
+        background-color: unset;
+    }
+    .navbar-nav .dropdown-menu {
+        padding: 0;
+        margin: 0;
+    }
+    .find-agent-dropdown li:first-child > a:nth-child(1){
+        border-bottom: 1px solid #ddd7d7;
+    }
+    .section-title.style1.text-left.mb-40 {
+        display: flex;
+        flex-direction: column-reverse;
+        position: relative;
+    }
+    
+    .section-title.style1.text-left.mb-40 hr {all: unset;}
+    
+    .section-title.style1.text-left.mb-40 h2 {
+        margin-bottom: 30px;
+        border-bottom: 4px solid #f6ce75;
+        border-width: 6px;
+        padding-bottom: 10px;
+        border-radius: 15px;
+    }
+    /* ============ header add css code date: 05/01/2023 =========== */
+
+    /* ============ favorites add css code date: 05/01/2023 =========== */
+    .btn.style3.removeall {
+        font-size: 12px;
+        padding: 0;
+        margin: 0;
+        height: 100%;
+    }
+    .right_client span {
+        width: auto;
+        border: 1px solid #e7e7e7;
+        height: 100%;
+        margin: 0;
+        padding: 4px 10px;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 35px;
+    }
+    /* ============ favorites add css code date: 05/01/2023 =========== */
     .page-wrapper {
         overflow-x: hidden !important;
     }
@@ -1599,6 +1726,56 @@
     .contact-content {
         margin-bottom: 30px;
     }
+}
+@media only screen and (max-width: 767px) {
+
+    /*  ============ homes for sale page add css responsive max-width: 767px code by alam data:03/01/2023 ============ */
+    .client_favbox {
+        border: 0!important;
+        border-radius: 10px;
+        display: flex;
+        margin-top: 30px;
+        flex-direction: column;
+    }
+    .left_client {
+        width: 100%;
+    }
+    .right_client {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 4px;
+    }
+    .right_client span {
+        width: auto;
+        border: 1px solid #e7e7e7;
+        height: 100%;
+        margin: 0;
+        padding: 0px 10px;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 35px;
+    }
+    .btn.style3.removeall {
+        font-size: 12px;
+        padding: 5px;
+        margin: 0;
+        height: 100%;
+    }
+    .left_client select {
+        height: 45px;
+        border: 0;
+        border-right: 1px solid #e7e7e7;
+        border-radius: 0px;
+        margin-left: 0;
+        box-shadow: unset!important;
+        border: 1px solid #e7e7e7;
+        border-radius: 5px;
+    }
+    .agent_wraper {
+        padding: 130px 25px!important;
+    }
+    /*  ============ homes for sale page add css responsive max-width: 767px code by alam data:03/01/2023 ============ */
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
     /*  ============ homes for sale page add css code by alam data:04/01/2023 ============ */

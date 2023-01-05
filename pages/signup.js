@@ -72,51 +72,57 @@ export default function SignUp() {
 
   return (
     <>
-        <section className="pt-50 pb-75 client_sign">
-            <div className="col-md-4 col-lg-4 col-xl-4 offset-lg-4">
-                <div className="heading_login">
-                <h2>Sign Up</h2>
-                </div>
-                <form onSubmit={handleSubmit(onSubmit)} className="g-3" autoComplete="off">
-                <div className="col-md-12">
-                    <div className="form-group">
-                        <label htmlFor="full_name" className="form-label">Name</label>
-                        <input type="text" className="form-control" {...register("full_name")} id="full_name" placeholder="Full Name" />
-                        <span className="text-danger">{errors.full_name?.message}</span>
+    {/*  */}
+        <section className="pt-50 pb-75 ">
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-xl-4 col-lg-4 col-md-6 col-12 client_sign">
+                        <div className="heading_login">
+                            <h2>Sign Up</h2>
+                        </div>
+                        <form onSubmit={handleSubmit(onSubmit)} className="g-3" autoComplete="off">
+                        <div className="col-md-12">
+                            <div className="form-group mb-2">
+                                <label htmlFor="full_name" className="form-label">Name</label>
+                                <input type="text" className="form-control" {...register("full_name")} id="full_name" placeholder="Full Name" />
+                                <span className="text-danger">{errors.full_name?.message}</span>
+                            </div>
+                        </div>
+                        <div className="col-md-12">
+                            <div className="form-group mb-2">
+                                <label htmlFor="email" className="form-label">Email</label>
+                                <input type="email" className="form-control"  {...register("email")} id="email" placeholder="Email"/>
+                                <span className="text-danger">{errors.email?.message}</span>
+                            </div>
+                        </div>
+                        <div className="col-md-12">
+                            <div className="form-group mb-2">
+                                <label htmlFor="password" className="form-label">Password</label>
+                                <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} {...register("password")} id="password" placeholder="Create Password" />
+                                <span className="text-danger">{errors.password?.message}</span>
+                            </div>
+                            
+                        </div>
+                        <div className="col-md-12">
+                            <div className="form-group mb-2">
+                                <label htmlFor="confirm_password" className="form-label">Confirm Password</label>
+                                <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} {...register("confirm_password")} id="confirm_password" placeholder="Confirm Password" />
+                                <span className="text-danger">{errors.confirm_password?.message}</span>
+                            </div>
+                            
+                        </div>
+                        <div className="col-md-12 text-center">
+                            <button type="submit" disabled={isLoading} className="btn style1 button_agent">Sign Up</button>
+                        </div>
+                        <div className="col-md-12 text-center">
+                            <button type="button" className="btn style1 button_agent" onClick={() => signIn("google", { callbackUrl: '/client/dashboard' })}><span className="googleicon"><img src="assets/img/googleicon.png" /></span>Continue with Google</button>
+                        </div>
+                        <p className="policy_content">Already have an account? <Link href="/auth"> Login</Link></p>
+                        </form>
                     </div>
                 </div>
-                <div className="col-md-12">
-                    <div className="form-group">
-                        <label htmlFor="email" className="form-label">Email</label>
-                        <input type="email" className="form-control"  {...register("email")} id="email" placeholder="Email"/>
-                        <span className="text-danger">{errors.email?.message}</span>
-                    </div>
-                </div>
-                <div className="col-md-12">
-                    <div className="form-group">
-                        <label htmlFor="password" className="form-label">Password</label>
-                        <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} {...register("password")} id="password" placeholder="Create Password" />
-                        <span className="text-danger">{errors.password?.message}</span>
-                    </div>
-                    
-                </div>
-                <div className="col-md-12">
-                    <div className="form-group">
-                        <label htmlFor="confirm_password" className="form-label">Confirm Password</label>
-                        <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} {...register("confirm_password")} id="confirm_password" placeholder="Confirm Password" />
-                        <span className="text-danger">{errors.confirm_password?.message}</span>
-                    </div>
-                    
-                </div>
-                <div className="col-md-12 text-center">
-                    <button type="submit" disabled={isLoading} className="btn style1 button_agent">Sign Up</button>
-                </div>
-                <div className="col-md-12 text-center">
-                    <button type="button" className="btn style1 button_agent" onClick={() => signIn("google", { callbackUrl: '/client/dashboard' })}><span className="googleicon"><img src="assets/img/googleicon.png" /></span>Continue with Google</button>
-                </div>
-                <p className="policy_content">Already have an account? <Link href="/auth"> Login</Link></p>
-                </form>
             </div>
+            
         </section>
     </>
   )

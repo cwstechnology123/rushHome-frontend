@@ -28,6 +28,13 @@ export default function NavbarHeader() {
   };
   const profileTitle = session? (session.user.name? (<><span>{session.user.name.charAt(0)}</span>{session.user.name}</>) : '') : '';
   const shortProfileTitle = session? (session.user.name? (<><span>{session.user.name.charAt(0)}</span></>) : '') : '';
+  const [Sty, setSty] = useState({});
+  const toggleArrow = () => {
+    setSty({class : "add-rotate-cls"})
+    if (Sty.class === "add-rotate-cls") {
+      setSty({class : ""})
+    }
+  }
 
   return (
     <>
@@ -47,7 +54,7 @@ export default function NavbarHeader() {
             placement="end"
           >
             <Offcanvas.Header closeButton>
-              <Offcanvas.Title id={`offcanvasNavbarLabel-expand-mlgd`}>
+              <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
                 Menu
               </Offcanvas.Title>
             </Offcanvas.Header>
@@ -96,10 +103,10 @@ export default function NavbarHeader() {
                         <i className="fa fa-bell-o" aria-hidden="true"></i>
                         <span></span>
                       </div>
-                      <div className="profile_wraper">
+                      <div className="profile_wraper headerbtn-toggle" onClick={toggleArrow}>
                         <Dropdown>
-                          <Dropdown.Toggle id="dropdown-button-profile" className="profile_button style3">{profileTitle}</Dropdown.Toggle>
-                          <Dropdown.Menu variant="white" className="profile_sub">
+                          <Dropdown.Toggle id="dropdown-button-profile" className="profile_button style3">{profileTitle} <div id="moon" className={Sty.class}></div></Dropdown.Toggle>
+                          <Dropdown.Menu variant="white" className="profile_sub dropdown-class">
                             <Dropdown.Item href="/client/my-profile">My Profile</Dropdown.Item>
                             <Dropdown.Item href="/client/my-account">My Account</Dropdown.Item>
                             <Dropdown.Item href="#" onClick={(e) => handleClick(e, "/signout")}>Logout</Dropdown.Item>
