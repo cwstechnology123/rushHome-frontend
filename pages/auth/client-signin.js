@@ -10,7 +10,7 @@ import { handleSuccess, handleError, handleLoading } from "../../utils/notify";
 export default function Client() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false)
-    const [redirectUrl, setRedirectUrl] = useState('/homes-for-sale/delaware-de');
+    const [redirectUrl, setRedirectUrl] = useState('/client/favorites');
     useEffect(()=>{
         let newPath = '';
         if(localStorage.getItem('overridePath') !== null){
