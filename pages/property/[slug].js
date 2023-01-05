@@ -384,7 +384,7 @@ const PropertyDetails = ({
                                                 </tr>
                                                 <tr>
                                                     <th width={'50%'}>Property Status:</th>
-                                                    <td width={'50%'} className="text-left">For Sale</td>
+                                                    <td width={'50%'} className="text-left">{standardStatus? standardStatus : '-'}</td>
                                                 </tr>
                                                 <tr>
                                                     <th width={'50%'}>Bedrooms:</th>

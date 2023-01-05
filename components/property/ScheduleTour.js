@@ -8,8 +8,12 @@ import { isPossiblePhoneNumber } from "react-phone-number-input";
 import PhoneInput from "react-phone-number-input";
 import moment from "moment/moment";
 import { scheduleTime } from "../../utils/propertyFilters";
+import { fetchFubApi, fubApiBaseUrl } from "../../utils/fubFetchApi";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/router";
 
-export default function ScheduleTour({onInit}) {
+export default function ScheduleTour({onInit, fubObj}) {
+    const router = useRouter();
     const curTime = useRef();
     const curdate = new Date();
     curTime.current = ("0"+curdate.getHours()).slice(-2)+':00:00';
@@ -38,18 +42,79 @@ export default function ScheduleTour({onInit}) {
         resolver: yupResolver(schema),
     });
 
-    const handleScheduleTour = (data) => {
+    const handleScheduleTour = async (data) => {
         // console.log("Data: ",data)
-        data.schedule_date = moment(selectDate).format('YYYY-MM-DD');
-        data.schedule_time = moment(selectDate).format('YYYY-MM-DD')+" "+data.schedule_time;
-        setSchedule(data);
-        // console.log("Schedule Time: ",data.schedule_time)
-        setShowmodal(true);
+
+        try {
+            let toastId = toast.loading('Checking...');
+            const payload = {url : `${fubApiBaseUrl}/people?sort=created&limit=1&offset=0&email=${data.schedule_email}&includeTrash=true&includeUnclaimed=true`, method : 'GET'};
+            const res = await fetchFubApi(payload);
+            // console.log(res)
+            toast.dismiss(toastId);
+            if(res.status){
+                let people = res.message.people;
+                if(people.length){
+                    data.fub_id = people.id;
+                    data.firstName = people.firstName;
+                    data.lastName = people.lastName;
+                    data.schedule_date = moment(selectDate).format('YYYY-MM-DD');
+                    data.schedule_time = moment(selectDate).format('YYYY-MM-DD')+" "+data.schedule_time;
+                    setSchedule(data);
+                    // console.log("Schedule Time: ",data.schedule_time)
+                    setShowmodal(true);
+                }else{
+                    reset();
+                    toast.error("You need to register yourself.");
+                    router.push('/signup');
+                }
+            }else{
+                reset();
+                toast.error("Unable to connect, Error: "+res.message);
+            }
+        } catch (error) {
+            // console.log(error)
+            reset();
+            toast.error("Something went wrong. Please try again.");
+        }
+        
     }
-    const handleModalClose = (respond) => {
+    const handleModalClose = async (respond) => {
         // console.log(schedule);
         if(respond){
-            setReqmodal(true);
+            // console.log(firstName, lastName)
+            let leadObj = {
+                person: {
+                    id: schedule.fub_id,
+                    contacted: false,
+                    emails: [{isPrimary: true, type: 'work', value: schedule.schedule_email}],
+                    phones: [{isPrimary: false, value: schedule.schedule_phone, type: 'mobile'}],
+                    firstName: schedule.firstName,
+                    lastName: schedule.lastName,
+                    stage: 'Lead',
+                    sourceUrl: fubObj.propertyURL
+                },
+                property: fubObj.property,
+                type: 'Property Inquiry',
+                system: 'NextJS',
+                source: 'RushHome',
+                message: `I want to schedule a tour for this property on ${schedule && new Date(schedule.schedule_date).toLocaleDateString('en-US', { weekday:"long", month:"long", day:"numeric"})} at ${schedule && moment(schedule.schedule_time).format('hh:mm a')}`,
+            };
+            try{
+                let toastId = toast.loading('Loading...');
+                const payload = {url : `${fubApiBaseUrl}/events`, method : 'POST', data: leadObj}
+                const res = await fetchFubApi(payload)
+                if(res){
+                    reset();
+                    setReqmodal(true);
+                    // alert("Leads send successfully")
+                }else{
+                    toast.error('Request failed to send');
+                }
+                toast.dismiss(toastId);
+            } catch (error) {
+                toast.error('Request failed. Please try again.');
+            };
+            
         }
         setShowmodal(false);
         setSchedule({});
@@ -104,7 +169,7 @@ export default function ScheduleTour({onInit}) {
                             <p className="agent_content">By pressing Request Showing, you agree that Rush Home and it’s real estate professionals may call/text you about your inquiry, which may involve use of automated means and prerecorded/artificial voices. </p>
                             
                             <div className="col-12 text-center">
-                                <button type="submit" className="btn style2 contact_button" onClick={()=>(handleModalClose(1))}>Request Showing</button>
+                                <button type="button" className="btn style2 contact_button" onClick={()=>(handleModalClose(1))}>Request Showing</button>
                             </div>
 
                         </form>

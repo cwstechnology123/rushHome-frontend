@@ -11,7 +11,7 @@ export default function SimilarHomes({
     beds,
     baths
 }) {
-
+    
     const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
     const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/similar`, method : 'POST', data: {
         bedroomsTotal: beds,

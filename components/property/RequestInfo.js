@@ -1,4 +1,3 @@
-
 import * as yup from "yup";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,11 +6,11 @@ import PhoneInput from "react-phone-number-input";
 import 'react-phone-number-input/style.css'
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { fetchFubApi, fubApiBaseUrl } from "../../utils/fubFetchApi";
+import { toast } from "react-hot-toast";
 
 export default function RequestInfo({ address, onInit, fubObj }) {
-    const {data: session} = useSession();
     const router = useRouter();
     const schema = yup.object().shape({
         // phone_code: yup.string().required().label('Phone Code'),
@@ -24,13 +23,16 @@ export default function RequestInfo({ address, onInit, fubObj }) {
             }else if((typeof value === 'string') && (isPossiblePhoneNumber(value) === false)){
                 return "Please enter valid phone number";
             }
-        }).label('Phone Number'),
+        }).matches(
+            /([+]?\d{1,2}[.-\s]?)?(\d{3}[.-]?){2}\d{4}/g,
+                  "Please enter valid phone number"
+        ).label('Phone Number'),
     });
     const { register, handleSubmit, formState: { errors }, reset, control } = useForm({
         resolver: yupResolver(schema),
     });
 
-    const handleRequestInfo = (data) => {
+    const handleRequestInfo = async (data) => {
         // if(session){
 
         // }else{
@@ -39,6 +41,55 @@ export default function RequestInfo({ address, onInit, fubObj }) {
         //     router.push('/auth')
         // }
         console.log(data)
+        try {
+            let toastId = toast.loading('Checking...');
+            const res = await fetchFubApi({url : `${fubApiBaseUrl}/people?sort=created&limit=1&offset=0&email=${data.request_email}&includeTrash=true&includeUnclaimed=true`, method : 'GET'});
+            toast.dismiss(toastId);
+            if(res.status){
+                let people = res.message.people;
+                if(people.length){
+                    let leadObj = {
+                        person: {
+                            id: people.id,
+                            contacted: false,
+                            emails: [{isPrimary: true, type: 'work', value: data.request_email}],
+                            phones: [{isPrimary: false, value: data.request_phone, type: 'mobile'}],
+                            firstName: people.firstName,
+                            lastName: people.lastName,
+                            stage: 'Lead',
+                            sourceUrl: fubObj.propertyURL
+                        },
+                        property: fubObj.property,
+                        type: 'Property Inquiry',
+                        system: 'NextJS',
+                        source: 'RushHome',
+                        message: request_message,
+                    };
+                    console.log(leadObj)
+                    let toastSend = toast.loading('Sending...');
+                    const resFub = await fetchFubApi({url : `${fubApiBaseUrl}/events`, method : 'POST', data: leadObj})
+                    if(resFub){
+                        reset();
+                        toast.success('Request send successfully');
+                        // alert("Leads send successfully")
+                    }else{
+                        toast.error('Request failed to send');
+                    }
+                    toast.dismiss(toastSend);
+                }else{
+                    reset();
+                    toast.error("You need to register yourself.");
+                    router.push('/signup');
+                }
+            }else{
+                reset();
+                toast.error("Unable to connect, Error: "+res.message);
+            }
+        } catch (error) {
+            console.log(error)
+            reset();
+            toast.error("Something went wrong. Please try again.");
+        }
         reset();
     }
     useEffect(()=>{
