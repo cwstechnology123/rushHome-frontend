@@ -7,8 +7,8 @@ export const authOptions = {
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
-        clientId: "927807376818-bjvbg4ga1irr8fphclpgrf2gt796p0q0.apps.googleusercontent.com",
-        clientSecret: "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",
+        clientId: process.env.NEXT_GOOGLE_ID,
+        clientSecret: process.env.NEXT_GOOGLE_SECRET,
         authorization: {
           params: {
             prompt: "consent",
