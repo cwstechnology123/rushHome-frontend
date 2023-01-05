@@ -11,7 +11,7 @@ export const fetchFubApi = async (payload) => {
           'content-type': 'application/json',
           authorization: 'Basic ZmthXzBXQlV2emM0MnJpejJiNWltWFBVbHlMSG4ybkdJZE9POFk6'
         },
-        data: payload.data
+        data: JSON.stringify(payload.data)
     };
      // headers: {
     //     "Accept": 'application/json',
