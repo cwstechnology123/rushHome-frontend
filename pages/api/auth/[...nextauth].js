@@ -2,6 +2,7 @@ import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialProvider from "next-auth/providers/credentials"
 import { apiBaseUrl, fetchApi } from '../../../utils/fetchApi'
+import fubApiCall from "../../../utils/fubApiCall"
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -70,15 +71,38 @@ export const authOptions = {
             const payload = {url : `${apiBaseUrl}/google-login`, method : 'POST', data : {email : user.email, full_name: user.name, google_id : user.id, image: user.image, user_type: '0'}}
             const res = await fetchApi(payload)
             if (res && res.data) {
+              let fub_id = 0;
               const profile = res.data?.profile;
-              const role = profile && profile.user_type == 2 ? "agent" : "client"
+              const role = profile && profile.user_type == 2 ? "agent" : "client";
+              if(role === "client"){
+                const {firstName, lastName} = splitName(formValue.full_name);
+                let leadObj = {
+                  person: {
+                    contacted: false,
+                    emails: [{isPrimary: true, type: 'work', value: user.email}],
+                    firstName: firstName,
+                    lastName: lastName,
+                    stage: 'Lead',
+                    sourceUrl: `${process.env.NEXT_PUBLIC_HOST_NAME}/signup`
+                  },
+                  type: 'Registration',
+                  system: 'NextJS',
+                  source: 'RushHome',
+              };
+                const resFub = await fubApiCall(leadObj);
+                if(resFub.status){
+                    fub_id = resFub.message.id;
+                    console.log(fub_id)
+                }
+              }
               return {
                 ...token,
                 accessToken: res.data.token,
                 refreshToken: res.data.refreshToken,
                 picture: user.image,
                 role: role,
-                userId: profile.id
+                userId: profile.id,
+                fub_id: fub_id
               };
             }
             else{

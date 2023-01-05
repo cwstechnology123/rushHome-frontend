@@ -48,13 +48,14 @@ export default function SignUp() {
                       firstName: firstName,
                       lastName: lastName,
                       stage: 'Lead',
-                      sourceUrl: `${process.env.NEXT_PUBLIC_HOST_NAME}/signup`
+                      sourceUrl: `${process.env.NEXT_PUBLIC_HOST_NAME}/signup`,
+                      source: 'RushHome',
                     },
                     type: 'Registration',
                     system: 'NextJS',
                     source: 'RushHome',
                 };
-                // const res = await fubApiCall(leadObj);
+                const res = await fubApiCall(leadObj);
                 // if(res.status){
                 //     let fub_id = res.message.id;
                 //     console.log(fub_id)
