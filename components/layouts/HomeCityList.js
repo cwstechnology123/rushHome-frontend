@@ -3,9 +3,9 @@ import useSWR from "swr";
 import { apiBaseUrl, fetchApi } from "../../utils/fetchApi";
 
 export default function HomeCityList() {
-    const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
-    const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/count`, method : 'POST'}, fetcher)
-    console.log("COunt data: ", data);
+    // const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
+    // const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/count`, method : 'POST'}, fetcher)
+    // console.log("COunt data: ", data);
     return (
         <section className="city-wrap pt-100 pb-75 bg-seashell">
         <img src="assets/img/shape-2.png" alt="Image" className="city-shape-one" />

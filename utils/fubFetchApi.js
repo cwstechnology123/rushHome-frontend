@@ -7,14 +7,19 @@ export const fetchFubApi = async (payload) => {
         method: payload.method,
         url: payload.url,
         headers: {
-            "Accept": 'application/json',
-			'Content-Type': 'application/json',
-			"Authorization": 'Basic ZmthXzBXQlV2emM0MnJpejJiNWltWFBVbHlMSG4ybkdJZE9POFk6',
-            "X-System": "AwesomeWebsiteBuilder",
-            "X-System-Key": "560270f7914b5b4a5f4dc1793ebc2796"
+          accept: 'application/json',
+          'content-type': 'application/json',
+          authorization: 'Basic ZmthXzBXQlV2emM0MnJpejJiNWltWFBVbHlMSG4ybkdJZE9POFk6'
         },
         data: payload.data
     };
+     // headers: {
+    //     "Accept": 'application/json',
+    // 	'Content-Type': 'application/json',
+    // 	"Authorization": 'Basic ZmthXzBXQlV2emM0MnJpejJiNWltWFBVbHlMSG4ybkdJZE9POFk6',
+    //     "X-System": "AwesomeWebsiteBuilder",
+    //     "X-System-Key": "560270f7914b5b4a5f4dc1793ebc2796"
+    // },
       
     return await axios
         .request(options)
