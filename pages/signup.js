@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { useRouter } from "next/router"
 import { apiBaseUrl, fetchApi } from '../utils/fetchApi'
 import { handleSuccess, handleError, handleLoading } from "../utils/notify";
-import fubApiCall from "../utils/FubApiCall";
+import fubApiCall from "../utils/fubApiCall";
 import splitName from "../utils/splitName";
 
 export default function SignUp() {

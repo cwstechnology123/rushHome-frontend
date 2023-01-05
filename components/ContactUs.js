@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import splitName from "../utils/splitName";
-import fubApiCall from "../utils/FubApiCall";
+import fubApiCall from "../utils/fubApiCall";
 import { fetchFubApi, fubApiBaseUrl } from "../utils/fubFetchApi";
 
 export default function ContactUs({ type }) {
