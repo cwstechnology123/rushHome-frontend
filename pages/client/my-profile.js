@@ -1,7 +1,10 @@
 import Image from 'next/image'
 import Sidebar from '../../components/client/Sidebar'
+import { useSession } from "next-auth/react"
 
 export default function MyProfile() {
+    const { data: session, loading } = useSession()
+
   return (
     <>
         <section className="pt-50 pb-75 myprofile_box">
@@ -14,16 +17,24 @@ export default function MyProfile() {
                     <div className="personal_box">
                     <div className="personal_wrpaer">
                         <h2>Personal Info</h2>
-                        <p>Avatar</p>
+                        <p>Photo</p>
                         <div className="profile_box">
                         <ul>
                             <li className="profile_pic">
-                            <i className="fa fa-user" aria-hidden="true" />
+                            {!session && !loading? 
+                            <>
+                                <img src={session && !loading? session.user.picture : '' } />
+                            </>
+                            :
+                            <>
+                                <i className="fa fa-user" aria-hidden="true" />
+                            </>
+                            }
                             </li>
-                            <li>
+                            {/* <li>
                             <button type="button" className="btn style1">Upload</button>
                             </li>
-                            <li><button type="button" className="btn style3">Remove</button></li>
+                            <li><button type="button" className="btn style3">Remove</button></li> */}
                         </ul>
                         </div>
                     </div>
@@ -31,11 +42,11 @@ export default function MyProfile() {
                         <form className="row g-3">
                         <div className="col-md-6">
                             <label htmlFor="inputEmail4" className="form-label">First Name</label>
-                            <input type="text" className="form-control" id="inputEmail4" />
+                            <input type="text" className="form-control" id="inputEmail4" value={session && !loading? session.user.name : '' }/>
                         </div>
                         <div className="col-md-6">
                             <label htmlFor className="form-label">Last Name</label>
-                            <input type="text" className="form-control" id="inputPassword4" />
+                            <input type="text" className="form-control" id="inputPassword4" value={session && !loading? session.user.name : '' }/>
                         </div>
                         <div className="col-12">
                             <div className="col-auto">
@@ -56,7 +67,7 @@ export default function MyProfile() {
                         </div>
                         <div className="col-12">
                             <label htmlFor="inputAddress" className="form-label">Email Address</label>
-                            <input type="text" className="form-control" id="inputAddress" placeholder="john.doe@gmail.com" />
+                            <input type="text" className="form-control" id="inputAddress" placeholder="example@gmail.com" value={session && !loading? session.user.email : '' } />
                         </div>
                         <div className="col-12">
                             <div className="form_content">

@@ -3,7 +3,7 @@ import Sidebar from '../../components/client/Sidebar'
 import { useSession } from "next-auth/react"
 
 export default function MyAccount() {
-    const { data: session } = useSession()
+    const { data: session, loading } = useSession()
     console.log(session)
   return (
     <>
@@ -22,7 +22,7 @@ export default function MyAccount() {
                         <form className="row g-3">
                         <div className="col-md-12">
                             <label htmlFor="inputEmail4" className="form-label">Email</label>
-                            <input type="text" className="form-control" id="inputEmail4" placeholder="francis@gmail.com" />
+                            <input type="text" className="form-control" id="inputEmail4" placeholder="example@gmail.com" value={session && !loading? session.user.email : '' } />
                             <span className="verify input_in">Verify</span>
                         </div>
                         <div className="col-md-12">
