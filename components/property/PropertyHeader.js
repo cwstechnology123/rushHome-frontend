@@ -28,7 +28,7 @@ export default function PropertyHeader({ saved, mlsListDate, price, area, addres
         <>
         <div className="top_slide_nav">
             <div className="left_nav_slide">
-            {tag && <button type="submit" className="btn style2 excl_button">{tag}</button>}
+            {tag && <button type="submit" className="badge bg-dark p-2">{tag}</button>}
             <span>
                 <i className="fa fa-clock-o" aria-hidden="true" /> {daysAgo()} </span>
             <span>

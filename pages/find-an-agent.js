@@ -87,17 +87,23 @@ export default function FindAnAgent({agentList}) {
 
 export async function getServerSideProps({ query }) {
     //users?limit=10&offset=0&role=Agent&includeDeleted=false',
-    let limit = 25;
-    let offset = 0;
-    const type = 'Agent';
-    const sort = query.sort? (query.sort=='name-asc'? 'name' : '-name') : 'name';
-    const payload = {url : `${fubApiBaseUrl}/users/?limit=${limit}&offset=${offset}&sort=${sort}&role=${type}&includeDeleted=false`, method : 'GET', data: []}
+    let limit = query?.limit || 25;
+    let offset = query?.offset || 0;
+    let sort = query.sort? (query.sort=='name-asc'? 'name' : '-name') : 'name';
+    const payload = {url : `${fubApiBaseUrl}/users/?limit=${limit}&offset=${offset}&sort=${sort}&role=Agent&includeDeleted=false`, method : 'GET', data: []}
     const res = await fetchFubApi(payload);
     // Pass data to the page via props
     // console.log("res:", res)
+    if(res.status){
+        return {
+            props: {
+                agentList : res.message,
+            },
+        };
+    }
     return {
         props: {
-            agentList : res,
+            agentList : null,
         },
     };
 }

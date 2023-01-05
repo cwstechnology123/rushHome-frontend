@@ -6337,7 +6337,9 @@ color: #000000;}
     width: 20px;
     margin-right: 16px;
 }
-
+.client_sign input {
+    margin-bottom: 20px;
+}
 .bye_topnav div.input-group-text {
     background-color: inherit;
     border: inherit;
@@ -7312,15 +7314,21 @@ margin-left: 0px;}
     border:1px solid #F06565;
     background:#fff;
 }
-
+.left_client {width: 60%; }
+.right_client {width: 40%; display: flex; }
 .left_client select {
+    width: 140px;
     height: 45px;
     border: 0;
     border-right: 1px solid #e7e7e7;
     border-radius: 0px;
     margin-left: 5px;
 }
-
+.right_client select {
+    width: 140px;
+    height: 35px;
+    margin:5px;
+}
 .right_client span {
     width: 40px;
     border:1px solid #e7e7e7;
@@ -7545,123 +7553,6 @@ margin-left: 0px;}
 .byfooter div.cities ul {
     width: 100%;
 }
-
-
-/*  ============ homes for sale page add css code by alam data:03/01/2023 ============ */
-.statusBeds {
-    margin: 10px 0;
-}
-.statusBeds .col-3:nth-child(1){
-    padding-right: 0;
-}
-.statusBeds .col-3:nth-child(2){
-    padding-right: 0;
-}
-.statusBeds .col-3:nth-child(3){
-    padding-right: 0;
-}
-
-.price-input {
-    padding: 20px;
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-}
-
-.input-field {
-    display: flex;
-    max-width: 100%;
-    width: 100%;
-    justify-content: space-between;
-    margin-top: 15px;
-}
-
-.input-field .field {
-    width: 48%;
-    max-width: 100%;
-}
-.input-field input[type="number"] {
-    width: 100%;
-    text-align: center;
-    border: 1px solid #f7f7f7;
-    padding: 9px 0;
-    color: #000;
-    font-weight: 600;
-    background-color: #f7f7f7;
-}
-.slider-range {
-    border: 1px solid #f7f7f7;
-    background: #f7f7f7;
-    height: 10px;
-    border-radius: 50px;
-    position: relative;
-}
-.processbar {
-    height: 10px;
-    left: 0;
-    right: 0;
-    position: absolute;
-    border-radius: 5px;
-    background-color: #000;
-}
-.range-input {
-    position: relative;
-}
-.range-input input {
-    position: relative;
-    top: -16px;
-    height: 10px;
-    width: 50%;
-    background: none;
-    -webkit-appearance: none;
-    appearance: none;
-    pointer-events: none;
-}
-.range-input input[type="range"]::-webkit-slider-thumb {
-    height: 17px;
-    width: 17px;
-    -webkit-appearance: none;
-    appearance: none;
-    background-color: #fff;
-    border: 2px solid #000;
-    border-radius: 50px;
-    pointer-events: auto;
-}
-.range-input input[type="range"]::-moz-range-thumb {
-    height: 17px;
-    width: 17px;
-    -moz-appearance: none;
-    appearance: none;
-    border: none;
-    background-color: #0398dc;
-    border-radius: 50px;
-    pointer-events: auto;
-}
-/*  ============ homes for sale page add css code by alam data:03/01/2023 ============ */
-
-/*  ============ homes for favorites page add css code by alam data:03/01/2023 ============ */
-
-.left_client {width: 15%; }
-.right_client {
-    width: 85%; 
-    display: flex; 
-    justify-content: flex-end;
-}
-.left_client select {
-    width: 100%;
-}
-.right_client select {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    border: 0;
-    outline: 1px solid #e1e1e1;
-    box-shadow: unset!important;
-}
-.right_client select:focus {
-    outline: 1px solid #e1e1e1;
-}
-/*  ============ homes for favorites page add css code by alam data:03/01/2023 ============ */
 
 
 

@@ -58,17 +58,17 @@ export default function Client() {
 
     return (
       <>
-      {/* client_sign */}
+      {/*  */}
         <section className="pt-50 pb-75 ">
             <div className="container">
                 <div className="row justify-content-center">
-                    <div className="col-xl-4 col-lg-4 col-md-6 col-12">
+                    <div className="col-xl-4 col-lg-4 col-md-6 col-12 client_sign">
                         <div className="heading_login">
                         <h2>Sign In</h2>
                         </div>
                         <form onSubmit={handleSubmit(onSubmit)} className="g-3" autoComplete="off">
                         <div className="col-md-12">
-                            <div className="form-group">
+                            <div className="form-group mb-2">
                                 <label htmlFor="inputEmail4" className="form-label">Email</label>
                                 <input type="email" {...register("email")} className="form-control" id="inputEmail4" placeholder="Enter Email" />
                                 <span className="text-danger">{errors.email?.message}</span>
@@ -76,9 +76,11 @@ export default function Client() {
                             
                         </div>
                         <div className="col-md-12">
-                            <label htmlFor="inputPassword" className="form-label">Password</label>
-                            <input type="password" {...register("password")}  className={`form-control ${errors.password ? 'is-invalid' : ''}`} id="inputPassword" placeholder="Enter Password" />
-                            <span className="text-danger">{errors.password?.message}</span>
+                            <div className="form-group mb-2">
+                                <label htmlFor="inputPassword" className="form-label">Password</label>
+                                <input type="password" {...register("password")}  className={`form-control ${errors.password ? 'is-invalid' : ''}`} id="inputPassword" placeholder="Enter Password" />
+                                <span className="text-danger">{errors.password?.message}</span>
+                            </div>
                         </div>
                         <div className="forgot_box"><Link href="#">Forgot Password?</Link></div>
                         <div className="col-md-12 text-center">
