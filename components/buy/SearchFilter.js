@@ -61,20 +61,19 @@ export default function SearchFilter({ mapView }) {
 
 
     // range slider code a
-    const [minRange, setminRange] = useState(10);
-    const [styleLeft, setstyleLeft] = useState(12);
-    const [styleRight, setstyleRight] = useState(50);
+    const [minRange, setminRange] = useState(0);
+    const [maxRange, setmaxRange] = useState(200);
+    const [styleLeft, setstyleLeft] = useState(0);
+    const [styleRight, setstyleRight] = useState(0);
 
     const minvalues = 10;
-    const maxRangeValue = 100;
+    // const maxRangeValue = 100;
 
     const MinInputhandle = (e) => {
         const Minvalue = e.target.value;
         setminRange(Minvalue)
-        setstyleLeft((Minvalue / maxRangeValue) * 100 )
+        setstyleLeft((Minvalue * 1))
     }
-
-    const [maxRange, setmaxRange] = useState(100);
 
     const MaxInputhandle = (e) => {
         const Maxvalue = e.target.value;
@@ -103,10 +102,16 @@ export default function SearchFilter({ mapView }) {
                             </div>
                             <div className="col-lg-8 col-md-12 col-sm-12 col-12">
                                 <div className="row justify-content-center align-items-center">
-                                    <div className="col-lg-8 col-md-7  d-lg-block d-md-block statusBeds d-sm-block">
+                                    <div className="col-lg-8 col-md-7 statusBeds">
                                         <div className="row">
                                             <div className="col-3">
-                                                <Select
+                                                <select className="form-control" id="main_status" onChange={(ev)=>handleFormChange('status', ev?.value || "")}>
+                                                    <option value={''}>Status</option>
+                                                    <option value={'active'}>Active</option>
+                                                    <option value={'coming soon'}>Coming Soon</option>
+                                                    <option value={'pending'}>Pending</option>
+                                                </select>
+                                                {/* <Select
                                                     components={{ IndicatorSeparator:() => null }}
                                                     isClearable={true}
                                                     isSearchable={false}
@@ -118,10 +123,19 @@ export default function SearchFilter({ mapView }) {
                                                         {value: "coming soon", label: "Coming Soon"},
                                                         {value: "pending", label: "Pending"}
                                                     ]}
-                                                />
+                                                /> */}
                                             </div>
                                             <div className="col-3">
-                                                <Select
+                                                <select className="form-control" id="main_bed" onChange={(ev)=>handleFormChange('beds', ev?.value || "")}>
+                                                    <option value={''}>Bed</option>
+                                                    <option value={'any'}>Any</option>
+                                                    <option value={'1'}>1+</option>
+                                                    <option value={'2'}>2+</option>
+                                                    <option value={'3'}>3+</option>
+                                                    <option value={'44'}>4+</option>
+                                                    <option value={'5'}>5+</option>
+                                                </select>
+                                                {/* <Select
                                                     components={{ IndicatorSeparator:() => null }}
                                                     isClearable={true}
                                                     isSearchable={false}
@@ -136,10 +150,19 @@ export default function SearchFilter({ mapView }) {
                                                         {value: "4", label: "4+"},
                                                         {value: "5", label: "5+"}
                                                     ]}
-                                                />
+                                                /> */}
                                             </div>
                                             <div className="col-3">
-                                                <Select
+                                                <select className="form-control" id="main_bath" onChange={(ev)=>handleFormChange('baths', ev?.value || "")}>
+                                                    <option value={''}>Baths</option>
+                                                    <option value={'any'}>Any</option>
+                                                    <option value={'1'}>1+</option>
+                                                    <option value={'2'}>2+</option>
+                                                    <option value={'3'}>3+</option>
+                                                    <option value={'44'}>4+</option>
+                                                    <option value={'5'}>5+</option>
+                                                </select>
+                                                {/* <Select
                                                     components={{ IndicatorSeparator:() => null }}
                                                     isClearable={true}
                                                     isSearchable={false}
@@ -154,7 +177,7 @@ export default function SearchFilter({ mapView }) {
                                                         {value: "4", label: "4+"},
                                                         {value: "5", label: "5+"}
                                                     ]}
-                                                />
+                                                /> */}
                                             </div>
                                             <div className="col-3">
                                                 <Dropdown>
@@ -165,18 +188,18 @@ export default function SearchFilter({ mapView }) {
                                                     <Dropdown.Menu>
                                                         <div className="price-input">
                                                             <div className="slider-range">
-                                                                <div className="processbar" style={{left: `${styleLeft}` + '%', right: `${styleRight}` + '%'}}></div>
+                                                                <div className="processbar"></div>
                                                             </div>
                                                             <div className="range-input">
                                                                 <input type="range" onChange={MinInputhandle} classname="range-min" min={0} max={100} defaultValue={minRange} />
-                                                                <input type="range" onChange={MaxInputhandle} classname="range-max" min={0} max={200} defaultValue={maxRange} />
+                                                                <input type="range" onChange={MaxInputhandle} classname="range-max" min={100} max={200} defaultValue={maxRange} />
                                                             </div>
                                                             <div className="input-field">
                                                                 <div className="field">
-                                                                    <input type="number" name="min" placeholder={' $ ' + minRange}/>
+                                                                    <input type="number" name="min" placeholder={'Min: ' + ' $ ' + minRange}/>
                                                                 </div>
                                                                 <div className="field">
-                                                                    <input type="number" name="max" placeholder={' $ ' + maxRange}/>
+                                                                    <input type="number" name="max" placeholder={'Max: ' + ' $ ' + maxRange}/>
                                                                 </div>
                                                             </div>
                                                         </div>

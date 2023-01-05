@@ -1600,13 +1600,6 @@
         margin-bottom: 30px;
     }
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
-    /*  ============ homes for sale page add css code by alam data:04/01/2023 ============ */
-    /* .md-flex-column-reverse {
-        flex-direction: column-reverse;
-    } */
-    /*  ============ homes for sale page add css code by alam data:04/01/2023 ============ */
-}
 @media only screen and (min-width: 992px) {
     #signUp .modal-dialog,
     #signIn .modal-dialog {

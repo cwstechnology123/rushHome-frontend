@@ -300,15 +300,31 @@
     text-align: center;
     justify-content: center;
 }
-.pagination li {
+/* .pagination li {
     margin: 0 5px;
     display: inline-block;
+} */
+.pagination button {
+    border-radius: 15px;
+    font-size: 16px;
+    line-height: 44px;
+    font-weight: 400;
+    color: #666 !important;
+    background-color: transparent;
+    border-color: transparent;
 }
-.pagination li {
-    display: block;
-    width: 45px;
-    height: 45px;
-    border-radius: 25%;
+.pagination button:hover {
+    color: #fff !important;
+    opacity: 1;
+    background-color: #fdce64;
+    border-color: transparent;
+}
+.pagination span {
+    /* width: 45px;
+    height: 45px; */
+    padding: 10px 15px;
+    border-radius: 15px;
+    margin: 0px 5px;
     font-size: 16px;
     line-height: 44px;
     font-weight: 400;
@@ -329,8 +345,8 @@
     -webkit-transition: all 0.4s ease-in-out;
     transition: all 0.4s ease-in-out;
 } */
-.pagination li.active,
-.pagination li:hover {
+.pagination span.active,
+.pagination span:hover {
     color: #fff !important;
     opacity: 1;
     background-color: #fdce64;
@@ -604,8 +620,8 @@ react-select__input {
     color: #fff !important;
     border-radius: 10px !important;
 }
-.filter_topnav .dropdown-control {
-    padding: 12px 30px;
+.filter_topnav .dropdown-control, .filter_topnav .form-control {
+    padding: 12px 15px;
     border-radius: 15px !important;
     background-color: #f7f7f7 !important;
     border: inherit;

@@ -158,7 +158,7 @@ const Mortgage = ({ price,hoa, ptax }) => {
                                     <div className="input-group-text">
                                     <FaDollarSign width={16} height={16} fill="currentColor"/>    
                                     </div>
-                                    <input type="number" className="form-control" name="down_payment" id="down_payment" {...register('down_payment', { value: (parseFloat(price)* 0.2) } )} step={0.01}/>
+                                    <input type="number" className="form-control" name="down_payment" id="down_payment" {...register('down_payment', { value: Math.round(parseFloat(price)* 0.2) } )} step={1}/>
                                 </div>
                                
                                 <span className="text-danger">{errors.down_payment?.message}</span>
@@ -169,7 +169,7 @@ const Mortgage = ({ price,hoa, ptax }) => {
                                     <div className="input-group-text">
                                         <FaPercent width={16} height={16} fill="currentColor" />
                                     </div>
-                                    <input type="number" className="form-control" name="rate" id="rate" step={0.1}{...register('rate', { value: 6.7 } )}/>
+                                    <input type="number" className="form-control" name="rate" id="rate" step={0.001}{...register('rate', { value: 6.7 } )}/>
                                 </div>
                                 
                                 <span className="text-danger">{errors.rate?.message}</span>

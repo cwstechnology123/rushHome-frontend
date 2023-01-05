@@ -1,30 +1,47 @@
 import { useEffect, useState } from "react";
-import ReactPaginate from "react-paginate";
 import PropertyCard from "../property/PropertyCard";
+import { Pagination } from "react-headless-pagination";
 // import PropertyCard from "./PropertyCard";
 
 
 export default function BuyPropertyList({ properties, setHighlight }){
 
     const showPerPage = 40;
-    const [currentPage, setCurrentPage] = useState(1);
-    const pageCount = properties? Math.round(properties.length/showPerPage) : 1;
-    const [showproperty, setShowproerty] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [pageCount, setPageCount] = useState(1);
+    // const pageCount = properties? Math.round(properties.length/showPerPage) : 1;
 
-    const handleShowProperty = ({selected}) => {
-        let offset = selected? selected : 0;
+    const [showproperty, setShowproperty] = useState([]);
+
+    const handleShowProperty = (page) => {
+        // console.log(page)
+        let offset = showPerPage * page;
+        // let limit = (showPerPage * (page+1));
         let dataList = JSON.parse(JSON.stringify(properties));
-        let limit = (offset==0) ? 1 : offset+1;
-        setCurrentPage(limit);
+        // console.log(offset, limit)
+        setCurrentPage(page);
         document.getElementById('property_list')?.scrollIntoView({behavior:"smooth", block: "start", inline:"nearest"});
-        setShowproerty(dataList.splice((showPerPage * offset), (showPerPage * limit)));
+        setShowproperty(dataList.splice(offset, showPerPage));
         
     }
 
     useEffect(() => {
-        handleShowProperty(0, showPerPage);
+        let total = properties.length;
+        
+        if(total > showPerPage){
+            if(total % showPerPage === 0){
+                setPageCount(() =>(total/showPerPage));
+                setCurrentPage(0);
+            }else{
+                setPageCount(() =>(Math.floor(total/showPerPage) + 1));
+                setCurrentPage(0);
+            }
+        }else{
+            setCurrentPage(0);
+        }
+        handleShowProperty(0);
     }, [properties]);
-
+    // console.log(pageCount)
     return (
         <section className="listing-wrap px-3" id="property_list">
             <div className="row align-items-center py-3" style={{position: 'sticky', top: 0, zIndex: 999, backgroundColor: '#f9f9f9'}}>
@@ -58,7 +75,29 @@ export default function BuyPropertyList({ properties, setHighlight }){
                     <div className="col-12"><h4 className="text-danger text-center">No result found</h4></div>
                 )}
             </div>
-            <ReactPaginate
+            <Pagination
+                currentPage={currentPage}
+                setCurrentPage={handleShowProperty}
+                totalPages={pageCount}
+                edgePageCount={2}
+                middlePagesSiblingCount={2}
+                className="pagination list-style mt-10"
+                truncableText="..."
+                truncableClassName=""
+                >
+                <Pagination.PrevButton className=""><i className="fa fa-angle-left" style={{fontSize: 1.2+'rem'}} />  Prev</Pagination.PrevButton>
+
+                <div className="flex items-center justify-center flex-grow">
+                    <Pagination.PageButton
+                    activeClassName="active"
+                    inactiveClassName=""
+                    className=""
+                    />
+                </div>
+
+                <Pagination.NextButton className="">Next  <i className="fa fa-angle-right" style={{fontSize: 1.2+'rem'}} /> </Pagination.NextButton>
+            </Pagination>
+            {/* <ReactPaginate
                 previousLabel={'Prev'}
                 nextLabel={'Next'}
                 breakLabel={'...'}
@@ -72,7 +111,7 @@ export default function BuyPropertyList({ properties, setHighlight }){
                 marginPagesDisplayed={2}
                 pageRangeDisplayed={5}
                 onPageChange={handleShowProperty}
-            />
+            /> */}
             {/* <ul className="page-nav list-style mt-10">
                 <li><a href="#"><i className="fa fa-angle-left" style={{fontSize: 1.2+'rem'}}></i>&nbsp;&nbsp;&nbsp;&nbsp;Prev</a></li>
                 <li><a className="active" href="#">1</a></li>
