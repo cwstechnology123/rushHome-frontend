@@ -9,25 +9,27 @@ export default function PropertyAgentCard({ agent, address }) {
     // if(agent.listAgentEmail.search(/rushhome/i) == -1){
     //     return null;
     // }
-
-    const fetcher = async (payload) => await fetchFubApi(payload).then(res => res.data);
-    const { data, error, isLoading, isValidating } = useSWR((agent.listAgentEmail.search(/rushhome/i) == -1) ?{url : `${fubApiBaseUrl}/users?role=Agent&email=${agent.listAgentEmail}`, method : 'GET'} : null, fetcher);
+    // console.log(agent.listAgentEmail.search(/rushhome/i))
+    // const fetcher = async (payload) => await fetchFubApi(payload).then(res => res.data);
+    // const { data, error, isLoading, isValidating } = useSWR((agent.listAgentEmail.search(/rushhome/i)>0)? {url : `${fubApiBaseUrl}/users?role=Agent&email=${agent.listAgentEmail}`, method : 'GET'} : null, fetcher);
     // console.log(data)
-    if(data && data?.user.length>0){
-        const src = data.user.picture.original ?? defaultAgentImage.src;
+    if(agent.listAgentEmail.endsWith("@rushhome.com")){
+        const src = defaultAgentImage.src;
         return (
             <>
             <div className="col-lg-12 col-xl-12 col-md-12">
                 <div className="listing_agentbox">
                     <h2>Listing Agent</h2>
                     <div className="media d-flex w-100">
-                        <img src={src} className="align-self-center mr-3" alt="Agent Image" style={{width:100, marginRight:10}} />
+                        <img src={src} className="align-self-center mr-3 img-circle" alt="Agent Image" style={{width:100, marginRight:10}} />
                         <div className="media-body text-left">
                             <h5>{agent.listAgentFullName}</h5>
                             <h6>Rush<span style={{color: '#FFC107'}}>Home</span></h6>
                             {agent.listAgentEmail}
                             {(agent.listAgentOfficePhone!="") && (
-                                `<br/>P: (${agent.listAgentOfficePhoneExt}) ${agent.listAgentOfficePhone}`
+                                <>
+                                <br/>P: ({agent.listAgentOfficePhoneExt}) {agent.listAgentOfficePhone}
+                                </>
                             )}
                         </div>
                     </div>

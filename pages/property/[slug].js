@@ -170,13 +170,18 @@ export default function PropertyDetails({
                         fubObj={fubObj}
                     />
             }else if(session.user.role === 'agent'){
-                return <PropertyAgentCard 
+                return null;
+            }
+        }else{
+            return (
+            <>
+                <NonAccount address={`${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`} fubObj={fubObj}/>
+                <PropertyAgentCard 
                     agent={agent} 
                     address={`${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`}
                 />
-            }
-        }else{
-            return <NonAccount address={`${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`} fubObj={fubObj}/>
+            </>
+            )
         }
     }
     const ClientComponent = () => {
@@ -436,7 +441,7 @@ export default function PropertyDetails({
                     </div>
                     <div className="col-xl-4 col-lg-4 col-12">
                         <div className="right_box_listing">
-                            {/* <SessionSideBox /> */}
+                            <SessionSideBox />
                         </div>
                     </div>
                 </div>

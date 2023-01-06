@@ -16,8 +16,6 @@ export default function ScheduleTour({onInit, fubObj, setReqmodal}) {
    
     const router = useRouter();
     const curTime = useRef();
-    const curdate = new Date();
-    curTime.current = ("0"+curdate.getHours()).slice(-2)+':00:00';
     const [showmodal, setShowmodal] = useState(false);
     const [schedule, setSchedule] = useState({});
     const [selectDate, setSelectDate] = useState(new Date());
@@ -98,7 +96,7 @@ export default function ScheduleTour({onInit, fubObj, setReqmodal}) {
                 type: 'Property Inquiry',
                 system: 'NextJS',
                 source: 'RushHome',
-                message: `I want to schedule a tour for this property on ${schedule && new Date(schedule.schedule_date).toLocaleDateString('en-US', { weekday:"long", month:"long", day:"numeric"})} at ${schedule && moment(schedule.schedule_time).format('hh:mm a')}`,
+                message: `I want to schedule a tour for this property on ${schedule && moment(schedule.schedule_date).format('dddd, MMMM Do')} at ${schedule && moment(schedule.schedule_time).format('hh:mm a')}`,
             };
             // console.log("leadObj",leadObj)
             try{
@@ -187,7 +185,7 @@ export default function ScheduleTour({onInit, fubObj, setReqmodal}) {
     
     useEffect(()=>{
         if(onInit){
-            curTime.current = ("0"+curdate.getHours()).slice(-2)+':00:00';
+            curTime.current = moment().format('HH:00:00');
             reset()
         }
     }, [onInit]);
