@@ -18,6 +18,7 @@ export default function Favorites() {
     const { data: session, loading } = useSession()
     const userId = session && session.user?.userId
     const accessToken = session && session.user?.accessToken;
+    console.log(session,userId)
     
 
     useEffect( () => {
