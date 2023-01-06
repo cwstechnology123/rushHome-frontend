@@ -103,7 +103,7 @@ export default function Client() {
                         <div className="col-md-12 text-center">
                             <button type="button" className="btn style1 button_agent" onClick={(e) => handleClickGLogin(e, "/signin")}><span className="googleicon"><img src="../../assets/img/googleicon.png" /></span>Continue with Google</button>
                         </div>
-                        <p className="policy_content">Don’t have an account? <Link href="/signup">Sign up for free</Link></p>
+                        <p className="policy_content">Don&#39;t have an account? <Link href="/signup">Sign up for free</Link></p>
                         </form>
                     </div>
                 </div>

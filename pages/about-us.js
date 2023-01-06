@@ -216,14 +216,14 @@ export default function AboutUs() {
             <div className="col-xxl-8 col-xl-8 col-lg-8 col-md-8">
               <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
                 <div className="city-card style1">
-                  <img src="assets/img/city/city-1.jpg" alt="Image" />
+                  <img src="assets/img/team/join-1.jpg" alt="Image" />
                 </div>
               </div>
             </div>	
             <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
               <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
                 <div className="city-card style1">
-                  <img src="assets/img/city/city-1.jpg" alt="Image" />
+                  <img src="assets/img/team/join-2.jpg" alt="Image" />
                 </div>
               </div>
             </div>	
@@ -232,14 +232,14 @@ export default function AboutUs() {
             <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
               <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
                 <div className="city-card style1">
-                  <img src="assets/img/city/city-1.jpg" alt="Image" />
+                  <img src="assets/img/team/join-3.jpg" alt="Image" />
                 </div>
               </div>
             </div>	
             <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
               <div className="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
                 <div className="city-card style1">
-                  <img src="assets/img/city/city-1.jpg" alt="Image" />
+                  <img src="assets/img/team/join-4.jpg" alt="Image" />
                 </div>
               </div>
             </div>	

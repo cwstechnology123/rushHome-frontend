@@ -7,10 +7,11 @@ import 'react-phone-number-input/style.css'
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { isPossiblePhoneNumber } from "react-phone-number-input";
 import { useRouter } from "next/router";
-import { fetchFubApi, fubApiBaseUrl } from "../../utils/fubFetchApi";
 import { toast } from "react-hot-toast";
+import { checkClientHasFub, sendFubLeads } from "../../utils/fubApiCall";
 
 export default function RequestInfo({ address, onInit, fubObj }) {
+    // console.log("From RI: ",fubObj)
     const router = useRouter();
     const schema = yup.object().shape({
         // phone_code: yup.string().required().label('Phone Code'),
@@ -40,22 +41,22 @@ export default function RequestInfo({ address, onInit, fubObj }) {
         //     localStorage.setItem('request_info', data);
         //     router.push('/auth')
         // }
-        console.log(data)
+        // console.log(data)
         try {
             let toastId = toast.loading('Checking...');
-            const res = await fetchFubApi({url : `${fubApiBaseUrl}/people?sort=created&limit=1&offset=0&email=${data.request_email}&includeTrash=true&includeUnclaimed=true`, method : 'GET'});
+            let res = await checkClientHasFub(data.request_email);
             toast.dismiss(toastId);
             if(res.status){
                 let people = res.message.people;
-                if(people.length){
+                if(people.length === 1){
                     let leadObj = {
                         person: {
-                            id: people.id,
+                            id: people[0].id,
                             contacted: false,
                             emails: [{isPrimary: true, type: 'work', value: data.request_email}],
                             phones: [{isPrimary: false, value: data.request_phone, type: 'mobile'}],
-                            firstName: people.firstName,
-                            lastName: people.lastName,
+                            firstName: people[0].firstName,
+                            lastName: people[0].lastName,
                             stage: 'Lead',
                             sourceUrl: fubObj.propertyURL
                         },
@@ -63,19 +64,21 @@ export default function RequestInfo({ address, onInit, fubObj }) {
                         type: 'Property Inquiry',
                         system: 'NextJS',
                         source: 'RushHome',
-                        message: request_message,
+                        message: data.request_message,
                     };
-                    console.log(leadObj)
+                    // console.log(leadObj)
                     let toastSend = toast.loading('Sending...');
-                    const resFub = await fetchFubApi({url : `${fubApiBaseUrl}/events`, method : 'POST', data: leadObj})
-                    if(resFub){
+                    const resFub = await sendFubLeads(leadObj)
+                    toast.dismiss(toastSend);
+                    if(resFub.status){
                         reset();
                         toast.success('Request send successfully');
                         // alert("Leads send successfully")
                     }else{
+                        // toast.dismiss();
                         toast.error('Request failed to send');
                     }
-                    toast.dismiss(toastSend);
+                    
                 }else{
                     reset();
                     toast.error("You need to register yourself.");
@@ -86,6 +89,7 @@ export default function RequestInfo({ address, onInit, fubObj }) {
                 toast.error("Unable to connect, Error: "+res.message);
             }
         } catch (error) {
+            toast.dismiss();
             console.log(error)
             reset();
             toast.error("Something went wrong. Please try again.");

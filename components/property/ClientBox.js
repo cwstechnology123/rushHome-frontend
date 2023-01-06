@@ -157,7 +157,7 @@ export default function ClientBox({ type, address, price, pricearea, amenity, fu
                             <span className="text-danger">{errors.schedule_phone?.message}</span>
                         </div>
                         <label className="review">Reviews</label>
-                        <p className="agent_content">By pressing Request Showing, you agree that Rush Home and it’s real estate professionals may call/text you about your inquiry, which may involve use of automated means and prerecorded/artificial voices. </p>
+                        <p className="agent_content">By pressing Request Showing, you agree that Rush Home and it&#39;s real estate professionals may call/text you about your inquiry, which may involve use of automated means and prerecorded/artificial voices. </p>
                         <div className="form-group text-center">
                             <button type="submit" className="btn style2 contact_button">Request Showing</button>
                         </div>                   
