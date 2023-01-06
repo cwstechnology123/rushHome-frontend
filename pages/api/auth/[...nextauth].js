@@ -2,7 +2,7 @@ import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialProvider from "next-auth/providers/credentials"
 import { apiBaseUrl, fetchApi } from '../../../utils/fetchApi'
-import fubApiCall from "../../../utils/fubApiCall"
+import { sendFubLeads } from "../../../utils/fubApiCall"
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -89,7 +89,7 @@ export const authOptions = {
                   system: 'NextJS',
                   source: 'RushHome',
               };
-                const resFub = await fubApiCall(leadObj);
+                const resFub = await sendFubLeads(leadObj);
                 if(resFub.status){
                     fub_id = resFub.message.id;
                     console.log(fub_id)

@@ -19,7 +19,7 @@ import PropertyAgentCard from "../../components/property/PropertyAgentCard";
 import ClientOtherDetails from "../../components/property/ClientOtherDetails";
 import AgentOtherDetails from "../../components/property/AgentOtherDetails";
 
-const PropertyDetails = ({
+export default function PropertyDetails({ 
     propertyDetails: {
         id,
         slug,
@@ -59,14 +59,13 @@ const PropertyDetails = ({
         associationFee,
         taxAnnualAmount
     }
-}) => {
+ }){
     const router = useRouter();
     const componentRef = useRef();
     const { data: session, loading } = useSession();
     const [saved, setSaved] = useState(false);
-    const [fubObj, setFubObj] = useState(null);
+    const [fubObj, setFubObj] = useState({});
     const [shareInfo, setShareInfo] = useState({});
-
     //  SETTING FUB DATA OBJ
     useEffect(() => {
         setFubObj({
@@ -116,19 +115,38 @@ const PropertyDetails = ({
                 const isSaved = !saved ? 1 : 0;
                 const payload = {url : `${apiBaseUrl}/properties/fav-update`, accessToken: accessToken, method : 'POST', data : {userId: userId, propertyId: id.toString(), isSaved: isSaved.toString()}}
                 const res = await fetchApi(payload)
+                toast.dismiss(toastId);
                 console.log(isSaved, saved)
                 if (res && res.type == 'success') {
+                    // let leadObj = {
+                    //     person: {
+                    //         id: //FUB ID
+                    //         contacted: false,
+                    //         emails: [{isPrimary: true, type: 'work', value: data.request_email}],
+                    //         phones: [{isPrimary: false, value: data.request_phone, type: 'mobile'}],
+                    //         firstName: people[0].firstName,
+                    //         lastName: people[0].lastName,
+                    //         stage: 'Lead',
+                    //         sourceUrl: fubObj.propertyURL
+                    //     },
+                    //     property: fubObj.property,
+                    //     type: 'Saved Property',
+                    //     system: 'NextJS',
+                    //     source: 'RushHome',
+                    // };
+                    // const resFub = await sendFubLeads(leadObj)
                     toast.success(isSaved? 'Added to Favorites' : 'Removed from Favorites');
                     setSaved(!saved);
                 }
-                toast.dismiss(toastId);
+                
             } catch (error) {
                 console.log(error)
                 toast.error('Failed to update');
+                toast.dismiss();
                 return false;
             };
         }else{
-
+            toast.error('You need to sign in...');
             localStorage.setItem('overridePath', '/property/'+slug);
             router.push('/auth/client-signin')
         }
@@ -216,140 +234,140 @@ const PropertyDetails = ({
         };
     }
 
+    // console.log(fubObj)
     return (
         <>
-        <Toaster />
-        {/* MAIN BLOCK */}
-        <section className="style3 ptb-50 product_box">
-            <div className="container">
-                <div className="row">
-                    <div className="col-xl-8 col-lg-8 col-12" ref={componentRef}>
-                        <div className="slider_wraper">
-                            {!session && (
-                                <PropertyHeader 
+            <Toaster />
+            <section className="style3 ptb-50 product_box">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-xl-8 col-lg-8 col-12" ref={componentRef}>
+                            <div className="slider_wraper">
+                                {!session && (
+                                    <PropertyHeader 
+                                        info={shareInfo}
+                                        saved={saved}
+                                        mlsListDate={mlsListDate}
+                                        handlePrint={handlePrint}
+                                        handleSave={handleSave}
+                                        price={listPrice}
+                                        area={pricePerSquareFoot}
+                                        address={{
+                                            fullAddress: fullStreetAddress,
+                                            county: county,
+                                            city: city,
+                                            stateCode: stateOrProvince,
+                                            postalCode: postalCode
+                                        }}
+                                        listingId={id}
+                                        tag={tag}
+                                        count={count}
+                                    />
+                                )}
+                                <PropertyImages 
                                     info={shareInfo}
                                     saved={saved}
-                                    mlsListDate={mlsListDate}
+                                    userSession={session}
                                     handlePrint={handlePrint}
                                     handleSave={handleSave}
-                                    price={listPrice}
-                                    area={pricePerSquareFoot}
-                                    address={{
-                                        fullAddress: fullStreetAddress,
-                                        county: county,
-                                        city: city,
-                                        stateCode: stateOrProvince,
-                                        postalCode: postalCode
+                                    defaulImages={{
+                                        picture3URL: listPicture3URL,
+                                        picture2URL: listPicture2URL,
+                                        pictureURL: listPictureURL
                                     }}
-                                    listingId={id}
-                                    tag={tag}
-                                    count={count}
+                                    listingKey={listingKey}
                                 />
-                            )}
-                            <PropertyImages 
-                                info={shareInfo}
-                                saved={saved}
-                                userSession={session}
-                                handlePrint={handlePrint}
-                                handleSave={handleSave}
-                                defaulImages={{
-                                    picture3URL: listPicture3URL,
-                                    picture2URL: listPicture2URL,
-                                    pictureURL: listPictureURL
-                                }}
-                                listingKey={listingKey}
-                            />
-                        </div>
-                        <div className="descriptions_box heading_line mt-4">
-                            <div className="section-title style1 mb-40">
-                                <h2>Descriptions</h2>
-                                <hr />
-                                <p className="text-justify">{description}</p>
-                                <h6 className="mt-3">Listed by {listOfficeName || '-'}</h6>
                             </div>
-                        </div>
-                        <div className="factfeature_box heading_line">
-                            <div className="section-title style1 text-left mb-40">
-                                <h2>Facts &amp; Features</h2>
-                                <hr />
-                                <div className="fact_iconbox">
-                                    <ul>
-                                        <li>
-                                            <span><HiOutlineHomeModern/></span>
-                                            <p>Type</p>
-                                            <h3>Single</h3>
-                                        </li>
-                                        {yearBuilt!="" && (
-                                            <li>
-                                            <span><GiCrane/></span>
-                                            <p>Build Year</p>
-                                            <h3>{yearBuilt}</h3>
-                                            </li>
-                                        )}
-                                        {heatingYN==="Y" && (
-                                            <li>
-                                            <span><FaHotTub/></span>
-                                            <p>Heating</p>
-                                            <h3>Radiant</h3>
-                                            </li>
-                                        )}
-                                        {areaTotal!="" && (
-                                            <li>
-                                            <span><MdSquareFoot/></span>
-                                            <p>SQFT</p>
-                                            <h3>
-                                            {areaTotal? Number(areaTotal).toLocaleString('en-US') : '-'}
-                                            </h3>
-                                            </li>
-                                        )}
-                                        {bedroomsTotal!="" && (
-                                            <li>
-                                            <span><IoBedOutline/></span>
-                                            <p>Bedroom</p>
-                                            <h3>{bedroomsTotal}</h3>
-                                            </li>
-                                        )}
-                                        {bathroomsTotalInteger && (
-                                            <li>
-                                            <span><FaBath/></span>
-                                            <p>Bathroom</p>
-                                            <h3>{bathroomsTotalInteger}</h3>
-                                            </li>
-                                        )}
-                                        {totalGarageAndParkingSpaces!="" && (
-                                            <li>
-                                            <span><GiHomeGarage/></span>
-                                            <p>Garage</p>
-                                            <h3>{parseInt(garageSpaces)}</h3>
-                                            </li>
-                                        )}
-                                        {standardStatus!="" && (
-                                            <li>
-                                            <span><HiOutlineStar/></span>
-                                            <p>Status</p>
-                                            <h3>{standardStatus}</h3>
-                                            </li>
-                                        )}
-                                    </ul>
-                                    
+                            <div className="descriptions_box heading_line mt-4">
+                                <div className="section-title style1 mb-40">
+                                    <h2>Descriptions</h2>
+                                    <hr />
+                                    <p className="text-justify">{description}</p>
+                                    <h6 className="mt-3">Listed by {listOfficeName || '-'}</h6>
                                 </div>
                             </div>
-                        </div>
-                        <div className="factfeature_box heading_line">
-                            <div className="section-title style1 text-left mb-40">
-                                <h2>Additional Details</h2>
-                                <hr />
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <table className="tabel table-borderless table-line" width={`100%`}>
-                                            <tbody>
-                                                <tr>
-                                                    <th width={'50%'}>Property ID:</th>
-                                                    <td width={'50%'} className="text-left">{listingId}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th width={'50%'}>Property Type:</th>
-                                                    <td width={'50%'} className="text-left">{propertyType}</td>
+                            <div className="factfeature_box heading_line">
+                                <div className="section-title style1 text-left mb-40">
+                                    <h2>Facts &amp; Features</h2>
+                                    <hr />
+                                    <div className="fact_iconbox">
+                                        <ul>
+                                            <li>
+                                                <span><HiOutlineHomeModern/></span>
+                                                <p>Type</p>
+                                                <h3>Single</h3>
+                                            </li>
+                                            {yearBuilt!="" && (
+                                                <li>
+                                                <span><GiCrane/></span>
+                                                <p>Build Year</p>
+                                                <h3>{yearBuilt}</h3>
+                                                </li>
+                                            )}
+                                            {heatingYN==="Y" && (
+                                                <li>
+                                                <span><FaHotTub/></span>
+                                                <p>Heating</p>
+                                                <h3>Radiant</h3>
+                                                </li>
+                                            )}
+                                            {areaTotal!="" && (
+                                                <li>
+                                                <span><MdSquareFoot/></span>
+                                                <p>SQFT</p>
+                                                <h3>
+                                                {areaTotal? Number(areaTotal).toLocaleString('en-US') : '-'}
+                                                </h3>
+                                                </li>
+                                            )}
+                                            {bedroomsTotal!="" && (
+                                                <li>
+                                                <span><IoBedOutline/></span>
+                                                <p>Bedroom</p>
+                                                <h3>{bedroomsTotal}</h3>
+                                                </li>
+                                            )}
+                                            {bathroomsTotalInteger && (
+                                                <li>
+                                                <span><FaBath/></span>
+                                                <p>Bathroom</p>
+                                                <h3>{bathroomsTotalInteger}</h3>
+                                                </li>
+                                            )}
+                                            {totalGarageAndParkingSpaces!="" && (
+                                                <li>
+                                                <span><GiHomeGarage/></span>
+                                                <p>Garage</p>
+                                                <h3>{parseInt(garageSpaces)}</h3>
+                                                </li>
+                                            )}
+                                            {standardStatus!="" && (
+                                                <li>
+                                                <span><HiOutlineStar/></span>
+                                                <p>Status</p>
+                                                <h3>{standardStatus}</h3>
+                                                </li>
+                                            )}
+                                        </ul>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="factfeature_box heading_line">
+                                <div className="section-title style1 text-left mb-40">
+                                    <h2>Additional Details</h2>
+                                    <hr />
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <table className="tabel table-borderless table-line" width={`100%`}>
+                                                <tbody>
+                                                    <tr>
+                                                        <th width={'50%'}>Property ID:</th>
+                                                        <td width={'50%'} className="text-left">{listingId}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width={'50%'}>Property Type:</th>
+                                                        <td width={'50%'} className="text-left">{propertyType}</td>
                                                 </tr>
                                                 {/* <tr>
                                                     <th width={'50%'}>Rooms:</th>
@@ -451,29 +469,22 @@ const PropertyDetails = ({
             baths={bathroomsTotalInteger}
         />
         </>
-    );
-
+    )
 }
 
-export default PropertyDetails;
-
-export async function getServerSideProps({ params: { slug } }) {
-    // const propertyId = slug.substring(slug.lastIndexOf('-') + 1)
-    const payload = {url : `${apiBaseUrl}/properties/details/${slug}`, method : 'GET'}
+export async function getServerSideProps({ query }){
+    const payload = {url : `${apiBaseUrl}/properties/details/${query.slug}`, method : 'GET'}
     const res = await fetchApi(payload)
-    // Pass data to the page via props
-    
-    // console.log(res.data)
     if(res?.data){
         return {
             props: {
-                propertyDetails : res && res.data?.propertyDetails,
-            },
+                propertyDetails : res.data?.propertyDetails,
+            }
         };
     }
     return {
         props: {
             propertyDetails : null,
-        },
+        }
     };
 }

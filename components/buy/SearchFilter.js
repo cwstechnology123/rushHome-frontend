@@ -273,51 +273,106 @@ export default function SearchFilter({ mapView }) {
                                 </div>
                             </div>
                             <hr/>
-                            <div className="form-group mb-3">
+                            {/* <div className="row mb-3">
+                                
                                 <label className="mb-3 h5" style={{color: "#000"}}>Lot Size</label>
                                 <div className="d-flex align-items-center">
                                     <input type={'number'} className="form-control" id="sb_min_lot" placeholder="Min Lot"/>
                                     <span className="mx-1">-</span>
                                     <input type={'number'} className="form-control" id="sb_max_lot" placeholder="Max Lot"/>
                                 </div>
+                            </div> */}
+                            <div className="row mb-3 justify-content-center align-items-center">
+                                <div className="col-4">
+                                    <div className="form-group sdas">
+                                        <label>Lot Size</label>
+                                    </div>
+                                </div>
+                                <div className="col-8">
+                                    <div className="form-group dfdfd-sd">
+                                        <div className="slect-div">
+                                            <select className="form-select" id="ab_bath" value={form?.prop_bath || 'any'} onChange={(ev)=>handleFormChange('prop_bath', ev.target.value)}>
+                                                <option value={'any'}>No Max</option>
+                                                <option value={1}>1+</option>
+                                                <option value={2}>2+</option>
+                                                <option value={3}>3+</option>
+                                                <option value={4}>4+</option>
+                                            </select>
+                                            <div className="line-code">
+                                                -
+                                            </div>
+                                            <select className="form-select" id="sb_bed" value={form?.prop_bed || 'any'} onChange={(ev)=>handleFormChange('prop_bed', ev.target.value)}>
+                                                <option value={'any'}>No Min</option>
+                                                <option value={1}>1+</option>
+                                                <option value={2}>2+</option>
+                                                <option value={3}>3+</option>
+                                                <option value={4}>4+</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <hr/>
-                            <div className="form-group mb-3">
-                                <label className="mb-3 h5" style={{color: "#000"}}>Year Build</label>
+                            <div className="row mb-3 justify-content-center align-items-center">
+                                <div className="col-4">
+                                    <div className="form-group sdas">
+                                        <label>Year Built</label>
+                                    </div>
+                                </div>
+                                <div className="col-8">
+                                    <div className="form-group dfdfd-sd">
+                                        <div className="slect-div">
+                                            <select className="form-select" id="ab_bath" value={form?.prop_bath || 'any'} onChange={(ev)=>handleFormChange('prop_bath', ev.target.value)}>
+                                                <option value={'any'}>No Max</option>
+                                                <option value={1}>1+</option>
+                                                <option value={2}>2+</option>
+                                                <option value={3}>3+</option>
+                                                <option value={4}>4+</option>
+                                            </select>
+                                            <div className="line-code">
+                                                -
+                                            </div>
+                                            <select className="form-select" id="sb_bed" value={form?.prop_bed || 'any'} onChange={(ev)=>handleFormChange('prop_bed', ev.target.value)}>
+                                                <option value={'any'}>No Min</option>
+                                                <option value={1}>1+</option>
+                                                <option value={2}>2+</option>
+                                                <option value={3}>3+</option>
+                                                <option value={4}>4+</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* <label className="mb-3 h5" style={{color: "#000"}}>Year Build</label>
                                 <div className="d-flex align-items-center">
                                     <input type={'number'} className="form-control" id="sb_min_year" placeholder="Min Year"/>
                                     <span className="mx-1">-</span>
                                     <input type={'number'} className="form-control" id="sb_max_year" placeholder="Max Year"/>
-                                </div>
+                                </div> */}
                             </div>
                             <hr/>
                             <div className="form-group mb-3">
-                                <label className="mb-3 h5" style={{color: "#000"}}>Features</label>
-                                <div className="form-check">
-                                    <label className="form-check-label">
-                                    <input type="checkbox" className="form-check-input" name="features[]" id="basement" defaultValue={'basement'} onChange={()=>handleOnChecked('features[], features')}/> Basement
-                                    </label>
-                                </div>
-                                <div className="form-check">
-                                    <label className="form-check-label">
-                                    <input type="checkbox" className="form-check-input" name="features[]" id="singlestory" defaultValue={'singlestory'} onChange={()=>handleOnChecked('features[], features')}/> Single Story
-                                    </label>
-                                </div>
-                                <div className="form-check">
-                                    <label className="form-check-label">
-                                    <input type="checkbox" className="form-check-input" name="features[]" id="newconstruction" defaultValue={'newconstruction'} onChange={()=>handleOnChecked('features[], features')}/> New Constuction
-                                    </label>
-                                </div>
-                                <div className="form-check">
-                                    <label className="form-check-label">
-                                    <input type="checkbox" className="form-check-input" name="features[]" id="seniorcommunity" defaultValue={'seniorcommunity'} onChange={()=>handleOnChecked('features[], features')}/> Senior Community
-                                    </label>
-                                </div>
-                                <div className="form-check">
-                                    <label className="form-check-label">
-                                    <input type="checkbox" className="form-check-input" name="features[]" id="bedroomonmain" defaultValue={'bedroomonmain'} onChange={()=>handleOnChecked('features[], features')}/> Bedroom on Main
-                                    </label>
-                                </div>
+                                <h3 className="mb-3">Features</h3>
+                                <form action="#" className="check-list">
+                                    <p>
+                                        <input type="radio" id="test1" name="radio-group" defaultChecked />
+                                        <label htmlFor="test1">Basement</label>
+                                    </p>
+                                    <p>
+                                        <input type="radio" id="test2" name="radio-group" />
+                                        <label htmlFor="test2">Single Story</label>
+                                    </p>
+                                    <p>
+                                        <input type="radio" id="test3" name="radio-group" />
+                                        <label htmlFor="test3">Senior Community</label>
+                                    </p>
+                                    <p>
+                                        <input type="radio" id="test4" name="radio-group" />
+                                        <label htmlFor="test4">New Construction Only</label>
+                                    </p>
+                                    <p>
+                                        <input type="radio" id="test5" name="radio-group" />
+                                        <label htmlFor="test5">Bedroom on Main</label>
+                                    </p>
+                                </form>
                             </div>
                             <hr/>
                         </form>

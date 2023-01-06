@@ -8,18 +8,18 @@ import { isPossiblePhoneNumber } from "react-phone-number-input";
 import PhoneInput from "react-phone-number-input";
 import moment from "moment/moment";
 import { scheduleTime } from "../../utils/propertyFilters";
-import { fetchFubApi, fubApiBaseUrl } from "../../utils/fubFetchApi";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
+import { checkClientHasFub, sendFubLeads } from "../../utils/fubApiCall";
 
-export default function ScheduleTour({onInit, fubObj}) {
+export default function ScheduleTour({onInit, fubObj, setReqmodal}) {
+   
     const router = useRouter();
     const curTime = useRef();
     const curdate = new Date();
     curTime.current = ("0"+curdate.getHours()).slice(-2)+':00:00';
     const [showmodal, setShowmodal] = useState(false);
     const [schedule, setSchedule] = useState({});
-    const [reqmodal, setReqmodal] = useState(false);
     const [selectDate, setSelectDate] = useState(new Date());
 
     const schema = yup.object().shape({
@@ -47,16 +47,16 @@ export default function ScheduleTour({onInit, fubObj}) {
 
         try {
             let toastId = toast.loading('Checking...');
-            const payload = {url : `${fubApiBaseUrl}/people?sort=created&limit=1&offset=0&email=${data.schedule_email}&includeTrash=true&includeUnclaimed=true`, method : 'GET'};
-            const res = await fetchFubApi(payload);
+            let res = await checkClientHasFub(data.schedule_email);
             // console.log(res)
             toast.dismiss(toastId);
             if(res.status){
                 let people = res.message.people;
-                if(people.length){
-                    data.fub_id = people.id;
-                    data.firstName = people.firstName;
-                    data.lastName = people.lastName;
+                if(people.length === 1){
+                    // console.log("People",people[0].firstName)
+                    data.fub_id = people[0].id;
+                    data.firstName = people[0].firstName;
+                    data.lastName = people[0].lastName;
                     data.schedule_date = moment(selectDate).format('YYYY-MM-DD');
                     data.schedule_time = moment(selectDate).format('YYYY-MM-DD')+" "+data.schedule_time;
                     setSchedule(data);
@@ -73,13 +73,14 @@ export default function ScheduleTour({onInit, fubObj}) {
             }
         } catch (error) {
             // console.log(error)
+            toast.dismiss();
             reset();
             toast.error("Something went wrong. Please try again.");
         }
         
     }
     const handleModalClose = async (respond) => {
-        // console.log(schedule);
+        // console.log("schedule",schedule);
         if(respond){
             // console.log(firstName, lastName)
             let leadObj = {
@@ -99,19 +100,22 @@ export default function ScheduleTour({onInit, fubObj}) {
                 source: 'RushHome',
                 message: `I want to schedule a tour for this property on ${schedule && new Date(schedule.schedule_date).toLocaleDateString('en-US', { weekday:"long", month:"long", day:"numeric"})} at ${schedule && moment(schedule.schedule_time).format('hh:mm a')}`,
             };
+            // console.log("leadObj",leadObj)
             try{
                 let toastId = toast.loading('Loading...');
-                const payload = {url : `${fubApiBaseUrl}/events`, method : 'POST', data: leadObj}
-                const res = await fetchFubApi(payload)
-                if(res){
+                let res = await sendFubLeads(leadObj)
+                toast.dismiss(toastId);
+                if(res.status){
                     reset();
                     setReqmodal(true);
                     // alert("Leads send successfully")
                 }else{
                     toast.error('Request failed to send');
                 }
-                toast.dismiss(toastId);
+                
             } catch (error) {
+                toast.dismiss();
+                console.log(error)
                 toast.error('Request failed. Please try again.');
             };
             
@@ -120,9 +124,7 @@ export default function ScheduleTour({onInit, fubObj}) {
         setSchedule({});
         reset();
     }
-    const handleRequestModalClose = () => {
-        setReqmodal(false)
-    }
+    
     const handleTest = (val) => {
         schedule.schedule_phone = val;
         // setSchedule({...schedule, [schedule_phone]:val})
@@ -166,7 +168,7 @@ export default function ScheduleTour({onInit, fubObj}) {
 
                             <label className="review">Reviews</label>
                             
-                            <p className="agent_content">By pressing Request Showing, you agree that Rush Home and it’s real estate professionals may call/text you about your inquiry, which may involve use of automated means and prerecorded/artificial voices. </p>
+                            <p className="agent_content">By pressing Request Showing, you agree that Rush Home and it&#39;s real estate professionals may call/text you about your inquiry, which may involve use of automated means and prerecorded/artificial voices. </p>
                             
                             <div className="col-12 text-center">
                                 <button type="button" className="btn style2 contact_button" onClick={()=>(handleModalClose(1))}>Request Showing</button>
@@ -174,22 +176,6 @@ export default function ScheduleTour({onInit, fubObj}) {
 
                         </form>
                     </div> 
-                </div>
-            </div>
-        </div>
-    )
-
-    const ScheduleRequestModal = () => (
-        <div className={`modal fade ${reqmodal? 'show' : ''}`} id="requestModal" style={{display: (reqmodal? 'block' : 'none')}}>
-            <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content">
-                    <div className="modal-body">
-                        <h6 className="text-center my-5">Request Send</h6>
-                        <div className="col-12 text-center">
-                            <button type="button" className="btn style2 contact_button" onClick={()=>(handleRequestModalClose())}>Close</button>
-                        </div>
-                    </div>
-            
                 </div>
             </div>
         </div>
@@ -263,7 +249,6 @@ export default function ScheduleTour({onInit, fubObj}) {
                 
             </div>
             <ScheduleModal />
-            <ScheduleRequestModal />
         </>
     )
 }

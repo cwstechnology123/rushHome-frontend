@@ -75,7 +75,7 @@ export default function MyProfile() {
                             <label className="form-check-label" htmlFor="gridCheck">
                                 Reviews
                             </label>
-                            <p>Manage the reviews you’ve written for professionals and more.</p>
+                            <p>Manage the reviews you&#39;ve written for professionals and more.</p>
                             <span>Manage</span>
                             </div>
                         </div>

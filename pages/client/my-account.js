@@ -34,7 +34,7 @@ export default function MyAccount() {
                         <div className="col-12">
                             <div className="form-switch switch_button">
                             <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Enable 2-steps verification</label>
-                            <p>Make your account extra secure. Along with your password, you’ll need to enter a code that we text to your phone each time you sign in.</p>
+                            <p>Make your account extra secure. Along with your password, you&#39;ll need to enter a code that we text to your phone each time you sign in.</p>
                             <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
                             </div>
                         </div>

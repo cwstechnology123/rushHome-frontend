@@ -5,8 +5,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import splitName from "../utils/splitName";
-import fubApiCall from "../utils/fubApiCall";
-import { fetchFubApi, fubApiBaseUrl } from "../utils/fubFetchApi";
+import { sendFubLeads } from "../utils/fubApiCall";
 
 export default function ContactUs({ type }) {
     const [isLoading, setIsLoading] = useState(false);
@@ -44,7 +43,7 @@ export default function ContactUs({ type }) {
 
         try{
             const toastId = toast.loading('Loading...');
-            const res = await fubApiCall(leadObj);
+            const res = await sendFubLeads(leadObj);
             if(res.status){
                 toast.success("Request send");
             }else{

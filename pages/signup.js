@@ -7,8 +7,8 @@ import { useState } from 'react'
 import { useRouter } from "next/router"
 import { apiBaseUrl, fetchApi } from '../utils/fetchApi'
 import { handleSuccess, handleError, handleLoading } from "../utils/notify";
-import fubApiCall from "../utils/fubApiCall";
 import splitName from "../utils/splitName";
+import { sendFubLeads } from "../utils/fubApiCall";
 
 export default function SignUp() {
     const router = useRouter();
@@ -55,7 +55,7 @@ export default function SignUp() {
                     system: 'NextJS',
                     source: 'RushHome',
                 };
-                const res = await fubApiCall(leadObj);
+                let respond = await sendFubLeads(leadObj);
                 // if(res.status){
                 //     let fub_id = res.message.id;
                 //     console.log(fub_id)
