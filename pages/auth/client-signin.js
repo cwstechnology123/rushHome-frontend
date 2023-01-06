@@ -6,6 +6,7 @@ import * as Yup from 'yup'
 import { useEffect, useState } from 'react'
 import { useRouter } from "next/router"
 import { handleSuccess, handleError, handleLoading } from "../../utils/notify";
+import { setCookie } from 'cookies-next';
 
 export default function Client() {
     const router = useRouter();
@@ -36,10 +37,15 @@ export default function Client() {
     const { register, formState: { errors }, handleSubmit } = useForm(formOptionsLogin);
 
     const onSubmit = async formValue => {
+        setCookie('rh_user', {role : 'client'},{
+            path: "/",
+            maxAge: 60*60*24,
+            sameSite: true,
+        });
         setIsLoading(true)
         handleLoading('Please wait...');
         // console.log(JSON.stringify(formValue));//print form data to console
-        const res = await signIn('credentials',
+        const response = await signIn('credentials',
             {
                 email : formValue.email,
                 password : formValue.password,
@@ -47,14 +53,22 @@ export default function Client() {
                 redirect: false,
             }
         )
-        // console.log('resss',res)
+        // console.log('response',response)
         setIsLoading(false)
-        if (res?.error) handleError(res.error)
-        if (res.url) {
+        if (response?.error) handleError(response.error)
+        if (response.url) {
             handleSuccess("Login Successfully!")
-            router.push(res.url)
+            router.push(response.url)
         }
     }
+
+    const handleClickGLogin = async (e, path) => {
+        e.preventDefault()
+        if (path === "/signin") {
+            setCookie('rh_user', {role : 'client'});
+          const response = await signIn("google", { callbackUrl: `${process.env.NEXT_PUBLIC_HOST_NAME}${redirectUrl}`})
+        }
+    };
 
     return (
       <>
@@ -87,7 +101,7 @@ export default function Client() {
                             <button type="submit" disabled={isLoading} className="btn style1 button_agent">Login</button>
                         </div>
                         <div className="col-md-12 text-center">
-                            <button type="button" className="btn style1 button_agent" onClick={() => signIn("google", { callbackUrl: `${process.env.NEXT_PUBLIC_HOST_NAME}${redirectUrl}`})}><span className="googleicon"><img src="../../assets/img/googleicon.png" /></span>Continue with Google</button>
+                            <button type="button" className="btn style1 button_agent" onClick={(e) => handleClickGLogin(e, "/signin")}><span className="googleicon"><img src="../../assets/img/googleicon.png" /></span>Continue with Google</button>
                         </div>
                         <p className="policy_content">Don’t have an account? <Link href="/signup">Sign up for free</Link></p>
                         </form>
