@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import { apiBaseUrl, fetchApi } from "../../utils/fetchApi";
 import useSWR from "swr";
 import Grid from "../skeletonLoader/Grid";
-import List from "./List";
 import PropertyCard from "./PropertyCard";
 
 export default function SimilarHomes({
+    propertyId,
     stataCode,
     price,
     beds,
     baths
 }) {
-    
+    const [similarHomes, setSimilarHomes] = useState([]);
     const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
     const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/similar`, method : 'POST', data: {
         bedroomsTotal: beds,
@@ -19,6 +19,13 @@ export default function SimilarHomes({
         listPrice: price,
         stateOrProvince: stataCode
     }}, fetcher);
+    useEffect(() => {
+        if(!!data){
+            setSimilarHomes(() => (
+                data?.properties.filter(homes => homes.id != propertyId)
+            ));
+        }
+    }, [data]);
 
     return (
         <section className="property-slider-wrap pb-75 property_wraper">
@@ -35,8 +42,8 @@ export default function SimilarHomes({
                     </div>
                     {(isLoading)? <Grid item={3} /> : (
                         data? (<>
-                        <div className="row justify-content-center">
-                            {data.properties.slice(0, 3).map((property, i) => (
+                        <div className="row">
+                            {!!similarHomes && similarHomes.slice(0, 4).map((property, i) => (
                                 <div key={`first${i}`} className="col-xl-4 col-lg-6 col-md-6">
                                     <PropertyCard property={property}/>
                                 </div>

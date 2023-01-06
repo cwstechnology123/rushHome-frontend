@@ -36,13 +36,13 @@ class MyDocument extends Document {
           <link rel="stylesheet" href="../assets/css/responsive.css" />
           <link rel="stylesheet" href="../assets/css/font-awesome.min.css" />
           <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
-          <Script src="../assets/js/fubWidgetTracker.js"></Script>
-          <Script src="../assets/js/jquery.min.js"></Script>
+          <script src="../assets/js/fubWidgetTracker.js" async></script>
+          <script src="../assets/js/jquery.min.js" async></script>
         </Head>
         <body>
             <Main />
             <NextScript />
-            <Script src="../assets/js/bootstrap.bundle.min.js"></Script>
+            <script src="../assets/js/bootstrap.bundle.min.js" async></script>
         </body>
         </Html>
     )

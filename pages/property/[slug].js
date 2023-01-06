@@ -282,7 +282,7 @@ export default function PropertyDetails({
                                 <div className="section-title style1 mb-40">
                                     <h2>Descriptions</h2>
                                     <hr />
-                                    <p className="text-justify">{description}</p>
+                                    <div className="text-justify" dangerouslySetInnerHTML={{__html: description}} />
                                     <h6 className="mt-3">Listed by {listOfficeName || '-'}</h6>
                                 </div>
                             </div>
@@ -436,7 +436,7 @@ export default function PropertyDetails({
                     </div>
                     <div className="col-xl-4 col-lg-4 col-12">
                         <div className="right_box_listing">
-                            <SessionSideBox />
+                            {/* <SessionSideBox /> */}
                         </div>
                     </div>
                 </div>
@@ -462,7 +462,7 @@ export default function PropertyDetails({
 
         {/* SIMILAR HOMES */}
         <SimilarHomes 
-            listingKey={listingKey}
+            propertyId={id}
             stataCode={stateOrProvince}
             price={listPrice}
             beds={bedroomsTotal}
