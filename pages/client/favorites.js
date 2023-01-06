@@ -22,8 +22,9 @@ export default function Favorites() {
     
 
     useEffect( () => {
-        if(session && !loading)
-        getFavProperties(Inputs, userId);
+        if(session && !loading && userId != undefined){
+            getFavProperties(Inputs, userId);
+        }
     }, [Inputs, session, loading]);
 
     async function getFavProperties(Inputs, userId) {
