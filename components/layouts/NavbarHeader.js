@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { Dropdown, Nav, Navbar, NavDropdown, Offcanvas } from "react-bootstrap";
 import Container from 'react-bootstrap/Container';
+import { deleteCookie } from 'cookies-next';
 
 export default function NavbarHeader() {
   const { data: session } = useSession();
@@ -22,6 +23,7 @@ export default function NavbarHeader() {
     }
     else if (path === "/signout") {
       toggle()
+      deleteCookie('rh_user');
       const data = await signOut({redirect: false, callbackUrl: "/"})
       router.push(data.url)
     }

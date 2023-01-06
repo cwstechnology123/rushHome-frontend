@@ -10,6 +10,7 @@ import useWindowDimensions from "../../components/buy/useWindowDimensions";
 import BuyMap from "../../components/buy/BuyMap";
 import { useRouter } from "next/router";
 import Geocode from "react-geocode";
+import { getCookie, setCookies, deleteCookie } from 'cookies-next';
 
 export default function HomesForSale({ properties, stateCode, city }) { 
 
@@ -96,7 +97,15 @@ export default function HomesForSale({ properties, stateCode, city }) {
 }
 
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query, req, res }) {
+    const searchStr = getCookie('search', { req, res});
+    if(searchStr){
+        const searchObj = JSON.parse(searchStr);
+        const refKey = searchObj.refKey;
+        const refVal = searchObj.refVal;
+        console.log(refKey,refVal)
+    }
+    
     let city="";
     let stateCode = "";
     let slug = query.slug;
@@ -117,12 +126,12 @@ export async function getServerSideProps({ query }) {
     // console.log(sendData)
     
     const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: sendData}
-    const res = await fetchApi(payload)
+    const response = await fetchApi(payload)
     // console.log(sendData)
-    if(res && res.data){
+    if(response && response.data){
         return {
             props: {
-                properties : res && res.data?.properties,
+                properties : response && response.data?.properties,
                 stateCode: stateCode,
                 city: city
             },
