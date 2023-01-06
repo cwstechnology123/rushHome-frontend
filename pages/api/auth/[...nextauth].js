@@ -120,7 +120,6 @@ const authOptions = (req, res) => {
   }
 }
 
-//export default NextAuth(authOptions)
 export default (req, res) => {
   return NextAuth(req, res, authOptions(req, res))
 }

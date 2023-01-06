@@ -4,6 +4,7 @@ import { apiBaseUrl, fetchApi } from '../../utils/fetchApi';
 import { useRouter } from "next/router";
 import Link from 'next/link';
 import { Button, Modal } from 'react-bootstrap';
+import { setCookie } from 'cookies-next';
 
 const SearchModal = (props) => {
   return (
@@ -81,6 +82,12 @@ export default function HomeBanner() {
   const handleSearchRoute = (searchValue) => {
     router.push(searchValue.path)
   }
+  const handleOnClick = (searchValue) => {
+    console.log(searchValue)
+    searchValue = JSON.parse(searchValue);
+    setCookie('search', searchValue);
+    router.push(searchValue.path)
+  }
       // console.dir(searchContent)
   return (
     <>
@@ -117,10 +124,16 @@ export default function HomeBanner() {
                   }}>{(searchList.length)? searchList.map((items, index) => (
                     <>
                     <label key={`label-${index}`}>{items.label}</label>
-                    <ul className='list-group list-group-flush mb-2'>
+                    {/* <ul className='list-group list-group-flush mb-2'>
                       {items.options.map((item, i) => {
                         let hrefLink = JSON.parse(item.value).path;
                         return (<li key={`li-${index}-${i}`} className='list-group-item'><Link key={`link-${index}-${i}`} href={`${hrefLink}`}>{item.label}</Link></li>)
+                      })}
+                    </ul> */}
+                    <ul className='list-group list-group-flush mb-2'>
+                      {items.options.map((item, i) => {
+                        let hrefLink = JSON.parse(item.value).path;
+                        return (<li style={{cursor:'pointer'}} key={`li-${index}-${i}`} className='list-group-item' onClick={()=>handleOnClick(item.value)}>{item.label}</li>)
                       })}
                     </ul>
                     </>

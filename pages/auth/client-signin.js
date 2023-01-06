@@ -37,11 +37,7 @@ export default function Client() {
     const { register, formState: { errors }, handleSubmit } = useForm(formOptionsLogin);
 
     const onSubmit = async formValue => {
-        setCookie('rh_user', {role : 'client'},{
-            path: "/",
-            maxAge: 60*60*24,
-            sameSite: true,
-        });
+        setCookie('rh_user', {role : 'client'});
         setIsLoading(true)
         handleLoading('Please wait...');
         // console.log(JSON.stringify(formValue));//print form data to console
