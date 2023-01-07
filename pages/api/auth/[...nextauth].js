@@ -67,6 +67,27 @@ const authOptions = (req, res) => {
         }
       },
       async jwt({ token, user, account }) {
+        if (req.url === "/api/auth/session?update") {
+          try {
+            let payload = {url : `${apiBaseUrl}/users/profile/${token.userId}`, accessToken: token.accessToken, method : 'GET'}
+            let response = await fetchApi(payload);
+            if(response && response.data){
+              const profile = response.data?.profile;
+              return {
+                ...token,
+                picture: profile.image,
+                name: profile.full_name,
+                userId: profile.id
+              };
+            }
+            else{
+              return token  
+            }
+          }
+          catch (e) {
+            return token
+          } 
+        }
         if (account && user) {
           if (account.provider === "google") {
             try {
