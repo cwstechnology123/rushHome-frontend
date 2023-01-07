@@ -42,7 +42,7 @@ export default function ClientBox({ type, address, price, pricearea, amenity, fu
 
     useEffect(() => {
         setCurTime(moment().format('HH:00:00'));
-        findFubAgent();
+        // findFubAgent();
         // (async () => {
         //     let res = await getAgentFubDetails();
         //     if(res.status){

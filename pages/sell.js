@@ -17,7 +17,7 @@ export default function Sell() {
                 <div className="about-content">
                     <div className="content-title style1">
                     <h2>Sell Home With Rush Home Expert.</h2>
-                    <p> Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet. </p>
+                    {/* <p> Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet. </p> */}
                     </div>
                     <button type="button" onClick={()=>handleScrollTo('contact')} className="btn style1">Get Started</button>
                 </div>
@@ -85,7 +85,7 @@ export default function Sell() {
                 <div className="section-title style2 text-center mb-40">
                     <h2>Why Choose Us</h2>
                     <hr className="center" />
-                    <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p>
+                    {/* <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p> */}
                 </div>
                 </div>
             </div>
@@ -117,7 +117,7 @@ export default function Sell() {
                     <div className="content-title style1 download_box">
                     <h2>Download Our Complete Seller Resource Guide</h2>
                     <hr />
-                    <p> Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet.  Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur ad</p>
+                    {/* <p> Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet.  Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur ad</p> */}
                     </div>
                     <Link href="/files/Seller_Guide.pdf" rel="noopener noreferrer" target="_blank" locale={false} className="btn style1">Download Now</Link>
                     {/* <Link href="/about-us" className="how_button"><span className="arow_how"><i className="fa fa-caret-right" aria-hidden="true" /></span>How it Works?</Link> */}
