@@ -5,9 +5,9 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
 
 export default function PropertyAgentCard({ agent, address, slug }) {
-
+    const router = useRouter();
     if(agent.listAgentEmail.endsWith("@rushhome.com")){
-        const router = useRouter();
+        
         const handleAgentSubmit = (ev) => {
             ev.preventDefault();
             localStorage.setItem('overridePath', '/property/'+slug);
