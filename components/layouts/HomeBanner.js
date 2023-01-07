@@ -7,6 +7,19 @@ import { Button, Modal } from 'react-bootstrap';
 import { setCookie } from 'cookies-next';
 
 const SearchModal = (props) => {
+  const router = useRouter();
+  const [selectedValue, setSelectedValue] = useState("");
+  const [showModal, setShowModal] = useState(true);
+  const handleOnClickModal = (searchValue) => {
+    console.log(searchValue)
+    searchValue = JSON.parse(searchValue);
+    setCookie('search', searchValue);
+    const label = `${searchValue.refVal}, ${searchValue.alphaCode}`
+    setSelectedValue(label)
+    setShowModal(false);
+    router.push(searchValue.path)
+  }
+
   return (
     <Modal
       {...props}
@@ -24,10 +37,16 @@ const SearchModal = (props) => {
         {(props.content.length)? props.content.map((items, index) => (
           <>
           <label key={`label-${index}`}>{items.label}</label>
-          <ul className='list-group list-group-flush mb-2'>
+          {/* <ul className='list-group list-group-flush mb-2'>
             {items.options.map((item, i) => {
               let hrefLink = JSON.parse(item.value).path;
               return (<li key={`li-${index}-${i}`} className='list-group-item'><Link key={`mslink-${index}-${i}`} href={`${hrefLink}`}>{item.label}</Link></li>)
+            })}
+          </ul> */}
+          <ul className='list-group list-group-flush mb-2'>
+            {items.options.map((item, i) => {
+              let hrefLink = JSON.parse(item.value).path;
+              return (<li style={{cursor:'pointer'}} key={`li-${index}-${i}`} className='list-group-item' onClick={()=>handleOnClickModal(item.value)}>{item.label}</li>)
             })}
           </ul>
           </>

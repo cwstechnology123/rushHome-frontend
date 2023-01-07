@@ -1,6 +1,7 @@
 import PropertyCard from './PropertyCard'
 import { useState } from 'react'
 import { useRouter } from "next/router";
+import { setCookie } from 'cookies-next';
 
 export default function List({properties, stateCode}) {
   const [ listNum, setListNum] = useState(6); // Default number of properties dislplayed
@@ -9,6 +10,7 @@ export default function List({properties, stateCode}) {
   const handleClick = async (e, path) => {
     if (listNum == 12) {
       e.preventDefault()
+      setCookie('search', {refKey: "stateOrProvince", refVal: stateCode});
       router.push(path) 
     }
     setListNum(prevListNum => prevListNum + 6) // 6 is the number of properties we want to load per click
