@@ -35,9 +35,14 @@ export default function ClientBox({ type, address, price, pricearea, amenity, fu
         name: agent.listAgentFullName,
         message: `I would like more information on ${address}`,
     });
+    async function findFubAgent(){
+        let res = await getAgentFubDetails(agent.listAgentEmail);
+        console.log(res)
+    }
 
     useEffect(() => {
         setCurTime(moment().format('HH:00:00'));
+        findFubAgent();
         // (async () => {
         //     let res = await getAgentFubDetails();
         //     if(res.status){
@@ -82,7 +87,7 @@ export default function ClientBox({ type, address, price, pricearea, amenity, fu
                         <h3 className="text-center my-5">Request Send</h3>
                     </div>
                     <div className="modal-footer justify-content-center border-0">
-                        <button type="button" className="btn style2 contact_button" onClick={() => setSendModal(false)}>Close</button>
+                        <button type="button" className="btn style2 contact_button" onClick={setSendModal(false)}>Close</button>
                     </div>
                 </div>
             </div>

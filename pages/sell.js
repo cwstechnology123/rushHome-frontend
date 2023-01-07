@@ -32,7 +32,7 @@ export default function Sell() {
             </div>
             </div>
         </section>
-        <section className="advantage-wrap ptb-50 bg-seashell property_wraper">
+        {/* <section className="advantage-wrap ptb-50 bg-seashell property_wraper">
             <div className="container">
             <div className="col-xl-12 col-lg-12">
                 <div className="section-title style1 text-left mb-40">
@@ -77,7 +77,7 @@ export default function Sell() {
                 </div>
             </div>
             </div>
-        </section>
+        </section> */}
         <section className="hw-wrap pt-100 pb-75 whychoose_wraper">
             <div className="container">
             <div className="row">

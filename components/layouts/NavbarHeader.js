@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { Dropdown, Nav, Navbar, NavDropdown, Offcanvas } from "react-bootstrap";
 import Container from 'react-bootstrap/Container';
-import { deleteCookie } from 'cookies-next';
+import { setCookie, deleteCookie } from 'cookies-next';
 
 export default function NavbarHeader() {
   const { data: session } = useSession();
@@ -37,6 +37,11 @@ export default function NavbarHeader() {
       setSty({class : ""})
     }
   }
+  const handleBuyClick = async (e, path) => {
+    e.preventDefault()
+    setCookie('search', {refKey: "stateOrProvince", refVal: 'de'});
+    router.push(path) 
+  }
 
   return (
     <>
@@ -62,7 +67,7 @@ export default function NavbarHeader() {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav as={'ul'} className="mx-auto">
-                <Nav.Item as={'li'}><Nav.Link as={'a'} href="/homes-for-sale/delaware-de" className={(router.pathname == '/homes-for-sale/delaware-de' ? " active" : "")} passHref={true}>Buy</Nav.Link></Nav.Item>
+                <Nav.Item as={'li'}><Nav.Link as={'a'} href="/homes-for-sale/delaware-de" className={(router.pathname == '/homes-for-sale/delaware-de' ? " active" : "")} onClick={(ev)=>handleBuyClick(ev, '/homes-for-sale/delaware-de')} passHref={true}>Buy</Nav.Link></Nav.Item>
                 <Nav.Item as={'li'}><Nav.Link as={'a'} href="/sell" className={(router.pathname == '/sell' ? " active" : "")} passHref={true}>Sell</Nav.Link></Nav.Item>
                 {
                   (session)?

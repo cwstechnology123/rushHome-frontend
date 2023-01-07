@@ -7,9 +7,13 @@ export const fetchFubApi = async (payload) => {
         method: payload.method,
         url: payload.url,
         headers: {
-          accept: 'application/json',
-          'content-type': 'application/json',
-          authorization: 'Basic ZmthXzBXQlV2emM0MnJpejJiNWltWFBVbHlMSG4ybkdJZE9POFk6',
+            "Access-Control-Allow-Headers": "*", // this will allow all CORS requests
+            "Access-Control-Allow-Methods": 'POST,GET',
+            "Content-Type": "application/json",
+            "Accept": 'application/json',
+            "Authorization": 'Basic ZmthXzBXQlV2emM0MnJpejJiNWltWFBVbHlMSG4ybkdJZE9POFk6',
+            "X-System": 'RushHome',
+            "X-System-Key": 'fe518a715e062c50d1a460ec78a2a4d7'
         },
         data: JSON.stringify(payload.data)
     };

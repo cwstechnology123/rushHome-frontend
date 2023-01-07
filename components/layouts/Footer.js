@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from "next/router";
 import { useEffect, useState } from 'react';
+import { setCookie } from 'cookies-next';
 
 export default function Footer() {
     const curDate = new Date();
@@ -12,6 +13,11 @@ export default function Footer() {
         year: curDate.getFullYear(),
         lastUpdated: curDate.toLocaleString()
     }), []);
+    const handleBuyClick = async (e, city, path) => {
+        e.preventDefault()
+        setCookie('search', {refKey: "city", refVal: 'de'});
+        router.push(path) 
+    }
     const router = useRouter();
     if(router.pathname != '/auth' && router.pathname != '/auth/client-signin' && router.pathname != '/auth/agent-signin' && router.pathname != '/signup'){
         return (
@@ -42,7 +48,7 @@ export default function Footer() {
                                 <ul className="social-profile list-style style1">
                                 <li>
                                     <Link target="_blank" href="https://facebook.com/">
-                                    <i className="ri-facebook-fill" />
+                                        <i className="ri-facebook-fill" />
                                     </Link>
                                 </li>
                                 <li>
@@ -69,37 +75,37 @@ export default function Footer() {
                             <h3 className="footer-widget-title">Search by City</h3>
                                 <ul className="footer-menu list-style">
                                     <li>
-                                    <Link href="/homes-for-sale/dover-de" target="_blank">
+                                    <Link href="/homes-for-sale/dover-de" target="_blank" onClick={(ev)=>handleBuyClick(ev, 'Dover', '/homes-for-sale/dover-de')}>
                                         <i className="ri-arrow-right-s-line" />
                                         Dover
                                     </Link>
                                     </li>
                                     <li>
-                                    <Link href="/homes-for-sale/middletown-de" target="_blank">
+                                    <Link href="/homes-for-sale/middletown-de" target="_blank" onClick={(ev)=>handleBuyClick(ev, 'Middletown', '/homes-for-sale/middletown-de')}>
                                         <i className="ri-arrow-right-s-line" />
                                         Middletown
                                     </Link>
                                     </li>
                                     <li>
-                                    <Link href="/homes-for-sale/newark-de" target="_blank">
+                                    <Link href="/homes-for-sale/newark-de" target="_blank" onClick={(ev)=>handleBuyClick(ev, 'Newark', '/homes-for-sale/newark-de')}>
                                         <i className="ri-arrow-right-s-line" />
                                         Newark
                                     </Link>
                                     </li>
                                     <li>
-                                    <Link href="/homes-for-sale/ocean-city-md" target="_blank">
+                                    <Link href="/homes-for-sale/ocean-city-md" target="_blank" onClick={(ev)=>handleBuyClick(ev, 'Ocean City', '/homes-for-sale/ocean-city-md')}>
                                         <i className="ri-arrow-right-s-line" />
                                         Ocean City
                                     </Link>
                                     </li>
                                     <li>
-                                    <Link href="/homes-for-sale/philadelphia-pa" target="_blank">
+                                    <Link href="/homes-for-sale/philadelphia-pa" target="_blank" onClick={(ev)=>handleBuyClick(ev, 'Philadelphia', '/homes-for-sale/philadelphia-pa')}>
                                         <i className="ri-arrow-right-s-line" />
                                         Philadelphia
                                     </Link>
                                     </li>
                                     <li>
-                                    <Link href="/homes-for-sale/wilmington-de" target="_blank">
+                                    <Link href="/homes-for-sale/wilmington-de" target="_blank" onClick={(ev)=>handleBuyClick(ev, 'Wilmington', '/homes-for-sale/wilmington-de')}>
                                         <i className="ri-arrow-right-s-line" />
                                         Wilmington
                                     </Link>
@@ -107,19 +113,19 @@ export default function Footer() {
                                 </ul>
                                 <ul className="footer-menu list-style">
                                     <li>
-                                    <Link href="/homes-for-sale/annapolis-md" target="_blank">
+                                    <Link href="/homes-for-sale/annapolis-md" target="_blank" onClick={(ev)=>handleBuyClick(ev, 'Annapolis', '/homes-for-sale/annapolis-md')}>
                                         <i className="ri-arrow-right-s-line" />
                                         Annapolis
                                     </Link>
                                     </li>
                                     <li>
-                                    <Link href="/homes-for-sale/rehoboth-beach-de" target="_blank">
+                                    <Link href="/homes-for-sale/rehoboth-beach-de" target="_blank" onClick={(ev)=>handleBuyClick(ev, 'Rehoboth Beach', '/homes-for-sale/rehoboth-beach-de')}>
                                         <i className="ri-arrow-right-s-line" />
                                         Rehoboth
                                     </Link>
                                     </li>
                                     <li>
-                                    <Link href="/homes-for-sale/new-castle-de" target="_blank">
+                                    <Link href="/homes-for-sale/new-castle-de" target="_blank" onClick={(ev)=>handleBuyClick(ev, 'New Castle', '/homes-for-sale/new-castle-de')}>
                                         <i className="ri-arrow-right-s-line" />
                                         New Castle
                                     </Link>

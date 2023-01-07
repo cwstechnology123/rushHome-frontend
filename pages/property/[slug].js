@@ -67,7 +67,7 @@ export default function PropertyDetails({
     const [saved, setSaved] = useState(false);
     const [fubObj, setFubObj] = useState({});
     const [shareInfo, setShareInfo] = useState({});
-    console.log(session)
+    // console.log(session)
     //  SETTING FUB DATA OBJ
     useEffect(() => {
         setFubObj({

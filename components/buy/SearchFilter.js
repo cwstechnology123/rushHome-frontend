@@ -1,19 +1,29 @@
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Dropdown, Form, Offcanvas } from "react-bootstrap";
 import { BsFilterLeft } from "react-icons/bs";
 import { BiSearch } from "react-icons/bi";
 import { priceFilter } from "../../utils/propertyFilters";
 import AsyncSelect from 'react-select/async';
 import { apiBaseUrl, fetchApi } from '../../utils/fetchApi';
-import Select from 'react-select';
-import ReactSlider from "react-slider";
+import { setCookie } from 'cookies-next';
+import { toast } from "react-hot-toast";
 
 
-export default function SearchFilter({ mapView }) {
+export default function SearchFilter({ mapView, sendData, setPropertyList }) {
 
     const router = useRouter();
-    const [form, setForm] = useState({});
+    const [form, setForm] = useState({
+        city: "",
+        county: "",
+        stateOrProvince: "de",
+        mlsStatus: "",
+        bedroomsTotal: "",
+        bathroomsTotalInteger: "",
+        minListPrice: 0,
+        maxListPrice: 0,
+        page_limit: 1000
+    });
     const [showFilter, setShowFilter] = useState(false);
 
     const handleSidebar = () => {
@@ -52,13 +62,31 @@ export default function SearchFilter({ mapView }) {
 
     const handleOnSelectOptChange = async (selectedOption) => {
         // const path = selectedOption.value
-        if(selectedOption){
-            selectedOption.map(item => {
-                console.log(item.value)
-            })
-        }
+        // if(selectedOption){
+        //     selectedOption.map(item => {
+        //         console.log(item.value)
+        //     })
+        // }
+        console.log(selectedOption.value)
+        const searchValue = JSON.parse(selectedOption.value);
+        setCookie('search', searchValue);
+        setForm({...form, [searchValue.refKey]: searchValue.refVal, ['stateOrProvince']: searchValue.alphaCode});
+        // handleMainSearch();
+        // // router.push(searchValue.path)
+        // router.reload(searchValue.path)
     };
-
+    const handleMainSearch = async () => {
+        
+        // console.log({...form, ...sendData})
+        const toastId = toast.loading("Loading....");
+        const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: {...form, ...sendData}}
+        const response = await fetchApi(payload);
+        toast.dismiss(toastId)
+        // console.log(response)
+        if(response && response.data){
+            setPropertyList(response.data?.properties);
+        }
+    }
 
     // range slider code a
     const [minRange, setminRange] = useState(0);
@@ -71,12 +99,14 @@ export default function SearchFilter({ mapView }) {
 
     const MinInputhandle = (e) => {
         const Minvalue = e.target.value;
+        setForm({...form, ['minListPrice']: Minvalue});
         setminRange(Minvalue)
         setstyleLeft((Minvalue * 1))
     }
 
     const MaxInputhandle = (e) => {
         const Maxvalue = e.target.value;
+        setForm({...form, ['maxListPrice']: Maxvalue});
         setmaxRange(Maxvalue)
         setstyleRight(100 - ((Maxvalue / minvalues) * 100) / 20)
     }
@@ -95,7 +125,7 @@ export default function SearchFilter({ mapView }) {
                                     loadOptions={loadOptions} 
                                     components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
                                     defaultOptions 
-                                    isMulti
+                                    // isMulti
                                     placeholder="Enter an address neighborhood" classNamePrefix="react-select"
                                     onChange={handleOnSelectOptChange}
                                 />
@@ -105,7 +135,7 @@ export default function SearchFilter({ mapView }) {
                                     <div className="col-lg-8 col-md-7 statusBeds">
                                         <div className="row">
                                             <div className="col-3">
-                                                <select className="form-control" id="main_status" onChange={(ev)=>handleFormChange('status', ev?.value || "")}>
+                                                <select className="form-control" id="main_status" onChange={(ev)=>handleFormChange('mlsStatus', ev.target.value || "")}>
                                                     <option value={''}>Status</option>
                                                     <option value={'active'}>Active</option>
                                                     <option value={'coming soon'}>Coming Soon</option>
@@ -126,7 +156,7 @@ export default function SearchFilter({ mapView }) {
                                                 /> */}
                                             </div>
                                             <div className="col-3">
-                                                <select className="form-control" id="main_bed" onChange={(ev)=>handleFormChange('beds', ev?.value || "")}>
+                                                <select className="form-control" id="main_bed" onChange={(ev)=>handleFormChange('bedroomsTotal', ev.target.value || "")}>
                                                     <option value={''}>Bed</option>
                                                     <option value={'any'}>Any</option>
                                                     <option value={'1'}>1+</option>
@@ -153,7 +183,7 @@ export default function SearchFilter({ mapView }) {
                                                 /> */}
                                             </div>
                                             <div className="col-3">
-                                                <select className="form-control" id="main_bath" onChange={(ev)=>handleFormChange('baths', ev?.value || "")}>
+                                                <select className="form-control" id="main_bath" onChange={(ev)=>handleFormChange('bathroomsTotalInteger', ev.target.value || "")}>
                                                     <option value={''}>Baths</option>
                                                     <option value={'any'}>Any</option>
                                                     <option value={'1'}>1+</option>
@@ -212,7 +242,7 @@ export default function SearchFilter({ mapView }) {
                                         <button type="button" className="btn refresh_button" onClick={handleSidebar}>
                                             <BsFilterLeft/>
                                         </button>
-                                        <button type="submit" className="btn style2 search_top">Search</button>
+                                        <button type="submit" className="btn style2 search_top" onClick={(ev)=>{ev.preventDefault();handleMainSearch()}}>Search</button>
                                         <button type="reset" className="btn refresh_button">
                                             <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="currentColor" className="bi bi-arrow-clockwise" viewBox="0 0 16 16">
                                                 <path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />

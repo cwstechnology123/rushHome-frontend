@@ -10,10 +10,12 @@ import useWindowDimensions from "../../components/buy/useWindowDimensions";
 import BuyMap from "../../components/buy/BuyMap";
 import { useRouter } from "next/router";
 import Geocode from "react-geocode";
-import { getCookie, setCookies, deleteCookie } from 'cookies-next';
+import { getCookie, setCookie, deleteCookie } from 'cookies-next';
+import { Toaster } from "react-hot-toast";
 
-export default function HomesForSale({ properties, stateCode, city }) { 
-
+export default function HomesForSale({ properties, stateCode, city,refKey, refValue, sendData }) { 
+    const [propertyList, setPropertyList] = useState(properties);
+    const [filterData, setFilterData] = useState([]);
     Geocode.setApiKey(process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN);
     Geocode.setLanguage("en");
     Geocode.setRegion("us"); 
@@ -58,10 +60,11 @@ export default function HomesForSale({ properties, stateCode, city }) {
         }
         
     }, []);
-    const [filterData, setFilterData] = useState(properties);
+    useEffect(()=>setFilterData(propertyList), [propertyList]);
     return (
         <>
-            <SearchFilter mapView={mapView}/>
+            <Toaster/>
+            <SearchFilter mapView={mapView} sendData={sendData} setPropertyList={setPropertyList}/>
             
             <section className="listing_wraper mt-0">
                 <div className="container-fluid">
@@ -70,14 +73,14 @@ export default function HomesForSale({ properties, stateCode, city }) {
                             {/* FOR MAP */}
                             <div id="mapBox" style={{width:'100%', height: mapHeight, position: 'relative'}}>
                                 <BuyMap
-                                    initZoom={stateCode? ((city)? 10 : 8) : 0}
+                                    initZoom={stateCode? ((refKey==='City')? 10 : 8) : 0}
                                     center={center}
                                     setCenter={setCenter}
                                     setMapView={setMapView}
                                     bounds={bounds}
                                     setBounds={setBounds}
                                     filterData={filterData || []}
-                                    propertyList={properties || []}
+                                    propertyList={propertyList || []}
                                     setFilterData={setFilterData}
                                     highlight={highlight}
                                 />
@@ -96,55 +99,125 @@ export default function HomesForSale({ properties, stateCode, city }) {
     )
 }
 
-
 export async function getServerSideProps({ query, req, res }) {
     const searchStr = getCookie('search', { req, res});
+    let refKey= 'city';
+    let refVal = null;
+    let city="";
+    let stateCode="";
+    let slug = query.slug;
+    city = (slug.substring(0, slug.lastIndexOf('-'))).replace('-', ' ');
+    stateCode = slug.substring(slug.lastIndexOf('-')+1);
     if(searchStr){
         const searchObj = JSON.parse(searchStr);
-        const refKey = searchObj.refKey;
-        const refVal = searchObj.refVal;
-        console.log(refKey,refVal)
-    }
-    
-    let city="";
-    let stateCode = "";
-    let slug = query.slug;
-    // slug.lastIndexOf('-')
-    if(slug){
-        city = (slug.substring(0, slug.lastIndexOf('-'))).replace('-', ' ');
-        stateCode = slug.substring(slug.lastIndexOf('-')+1);
-        if(stateCodes[stateCode.toUpperCase()].toLowerCase() === city){
-            city = "";
+        refKey = searchObj.refKey;
+        refVal = searchObj.refVal;
+        if(refVal){
+            city = city+" "+refKey;
         }
+        // console.log(refKey,refVal)
     }
-    // console.log(stateCode, city)
+    else{
+        refVal = city;
+        if(refVal){
+            city = city+" "+refKey;
+        }
+        setCookie('search', {refKey, refVal});
+    }
     let sendData = {
         stateOrProvince : stateCode,
-        city: city,
-        page_limit: 10000
+        page_limit: 1000 
     }
-    // console.log(sendData)
+    if(refKey !== "stateOrProvince"){
+        sendData = {...sendData, [refKey]: refVal};
+    }
+    
+    console.log(sendData)
     
     const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: sendData}
     const response = await fetchApi(payload)
-    // console.log(sendData)
+    console.log(sendData, response)
     if(response && response.data){
         return {
             props: {
                 properties : response && response.data?.properties,
                 stateCode: stateCodes[stateCode.toUpperCase()],
-                city: city
+                city: city,
+                refKey: refKey,
+                refValue: refVal
             },
         };
     }
     return {
         props: {
             properties : null,
-            stateCode: city? stateCode : stateCodes[stateCode.toUpperCase()],
-            city: city
+            stateCode: stateCodes[stateCode.toUpperCase()],
+            city: city,
+            refKey: refKey,
+            refValue: refVal
         },
     };
 }
+
+// export async function getServerSideProps({ query, req, res }) {
+//     const searchStr = getCookie('search', { req, res});
+//     let refKey= 'City';
+//     let refVal = null;
+//     if(searchStr){
+//         const searchObj = JSON.parse(searchStr);
+//         refKey = searchObj.refKey;
+//         refVal = searchObj.refVal;
+//         deleteCookie('search', { req, res})
+//         // console.log(refKey,refVal)
+//     }
+    
+//     let city="";
+//     let stateCode = "";
+//     let slug = query.slug;
+//     // slug.lastIndexOf('-')
+//     city = (slug.substring(0, slug.lastIndexOf('-'))).replace('-', ' ');
+//     stateCode = slug.substring(slug.lastIndexOf('-')+1);
+    
+//     // console.log(stateCode, city)
+//     let sendData = {
+//         stateOrProvince : stateCode,
+//         city: city,
+//         page_limit: 1000
+//     }
+//     if(refKey){
+//         sendData = {...sendData, [refKey]: refVal,};
+//     }
+//     if(refVal){
+//         city = city+" "+refKey;
+//     }
+//     // console.log(sendData)
+    
+//     const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: sendData}
+//     const response = await fetchApi(payload)
+//     // console.log(sendData, response)
+//     if(response && response.data){
+//         return {
+//             props: {
+//                 properties : response && response.data?.properties,
+//                 stateCode: stateCodes[stateCode.toUpperCase()],
+//                 city: city,
+//                 sendData: sendData,
+//                 refKey: refKey,
+//                 refValue: refVal
+//             },
+//         };
+//     }
+//     return {
+//         props: {
+//             properties : null,
+//             stateCode: stateCodes[stateCode.toUpperCase()],
+//             city: city,
+//             sendData: sendData,
+//             refKey: refKey,
+//             refValue: refVal
+//         },
+//     };
+// }
 
 HomesForSale.getLayout = function(page) {
   return <BuyLayout>{page}</BuyLayout>;
