@@ -5,6 +5,7 @@ import useSupercluster from "use-supercluster";
 import SingleMarker from '../gmap/CustomSingleMarker';
 import ClusterMarker from '../gmap/ClusterMarkerr';
 import MultiMarker from '../gmap/MultiMarker';
+import { isBrowser } from "react-device-detect";
 
 
 const render = (status) => {
@@ -88,8 +89,8 @@ const BuyMap = ({
         }else{
             filterProps = propertyList
         }
-        
         setFilterData(filterProps);
+        
         //console.log("Inside: ",filterProperties)
         //console.log(bounds)
     }, [bounds, haspoly])

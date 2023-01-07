@@ -99,9 +99,12 @@ export default function Sell() {
                 <div className="about-content">
                     <div className="content-title style1 whatwe_Box">
                     <h2>What We do!</h2>
-                    <p> Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet.  Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur ad</p>
-                    <p> Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet. </p>
-                    <p> Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet.  Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur ad</p>
+                    <p> Research the comps in your area & complete a competitive market analysis to determine the best list price for the sale of your property.</p>
+                    <p> Make recommendations on potential repairs and cleaning of your property, in order to make your home more attractive to buyers.</p>
+                    <p> Suggest quality professionals, including attorneys, handymen and inspectors.</p>
+                    <p> Guide you in making informed decisions leading to a satisfactory sale.</p>
+                    <p> Present and respond to all offers in a timely manner.</p>
+                    <p> Negotiate the best price & terms available, always keeping your specific needs in mind.</p>
                     <Link href="#">Learn More</Link>
                     </div>
                 </div>

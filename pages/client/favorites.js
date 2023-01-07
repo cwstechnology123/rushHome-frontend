@@ -18,9 +18,9 @@ export default function Favorites() {
     const { data: session, loading } = useSession()
     const userId = session && session.user?.userId
     const accessToken = session && session.user?.accessToken;
-    console.log(session,userId)
+    // console.log(session,userId)
     
-
+//fa-sort-amount-desc, fa fa-sort-amount-asc
     useEffect( () => {
         if(session && !loading && userId != undefined){
             getFavProperties(Inputs, userId);
@@ -54,7 +54,7 @@ export default function Favorites() {
 
     const sortHandler = (key, value) => {
         const sortBy = value == 'DESC' ? 'ASC' : 'DESC';
-        console.log(key,sortBy)
+        // console.log(key,sortBy)
         if(value){
             setInputs({...Inputs, [key]: sortBy})
         }
@@ -119,10 +119,10 @@ export default function Favorites() {
                     <option value={'bathroomsTotalInteger'}>By Bath</option>
                     <option value={'listPrice'}>By Price</option>
                 </select>
-                <span><i className="fa fa-bars" aria-hidden="true" 
+                <span><i className={(Inputs.dir==='DESC')? 'fa-sort-amount-desc' : 'fa-sort-amount-asc'} aria-hidden="true" 
                 onClick={()=>sortHandler('dir', Inputs.dir)}/></span>
-                <span><i className="fa fa-bars" aria-hidden="true" /></span>
-                <span><i className="fa fa-bars" aria-hidden="true" /></span>
+                {/* <span><i className="fa fa-bars" aria-hidden="true" /></span>
+                <span><i className="fa fa-bars" aria-hidden="true" /></span> */}
                 <button type="button" className="btn style3 removeall" 
                 onClick={removeAllHandler}><i className="fa fa-trash" aria-hidden="true" /> Remove all</button>
                 </div>

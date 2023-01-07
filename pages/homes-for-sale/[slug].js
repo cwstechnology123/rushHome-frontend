@@ -61,6 +61,7 @@ export default function HomesForSale({ properties, stateCode, city,refKey, refVa
         
     }, []);
     useEffect(()=>setFilterData(propertyList), [propertyList]);
+    // console.log(filterData)
     return (
         <>
             <Toaster/>
@@ -69,6 +70,7 @@ export default function HomesForSale({ properties, stateCode, city,refKey, refVa
             <section className="listing_wraper mt-0">
                 <div className="container-fluid">
                     <div className="row">
+                        
                         <div className="col-xl-5 col-lg-5 d-md-none d-lg-block p-0 d-none d-sm-block d-sm-none d-md-block">
                             {/* FOR MAP */}
                             <div id="mapBox" style={{width:'100%', height: mapHeight, position: 'relative'}}>
@@ -86,9 +88,10 @@ export default function HomesForSale({ properties, stateCode, city,refKey, refVa
                                 />
                             </div>
                         </div>
+                        
                         <div className="col-xl-7 col-lg-7 col-12" style={{height: mapHeight, overflowY: 'auto'}}>
                             {/* FOR PROPERTIES */}
-                            <BuyPropertyList properties={filterData || []} setHighlight={setHighlight} />
+                            <BuyPropertyList properties={filterData} setHighlight={setHighlight} />
                             <Footer />
                         </div>
                     </div>
