@@ -12,16 +12,16 @@ export default function Client() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false)
     // const [redirectUrl, setRedirectUrl] = useState('/client/favorites');
-    const redirectUrl = useRef()
-    console.log(localStorage.getItem('overridePath'))
-    useEffect(()=>{
-        if(localStorage.getItem('overridePath') !== null){
-            redirectUrl.current = localStorage.getItem('overridePath');
-            localStorage.removeItem('overridePath');
-        }else{
-            redirectUrl.current = '/client/favorites';
-        }
-    }, []);
+    const redirectUrl = useRef('/client/favorites')
+
+    // useEffect(()=>{
+    //     if(localStorage.getItem('overridePath') !== null){
+    //         redirectUrl.current = localStorage.getItem('overridePath');
+    //         localStorage.removeItem('overridePath');
+    //     }else{
+    //         redirectUrl.current = '/client/favorites';
+    //     }
+    // }, []);
     //form validations schema
     const loginSchema = Yup.object().shape({
         email: Yup.string().email('Enter valid email id.').required('Email id is required.'),
@@ -32,7 +32,7 @@ export default function Client() {
             ),
     })
     //validation schema end
-    console.log(redirectUrl.current)
+    // console.log(redirectUrl.current)
     const formOptionsLogin = { resolver: yupResolver(loginSchema) }
     const { register, formState: { errors }, handleSubmit } = useForm(formOptionsLogin);
 
