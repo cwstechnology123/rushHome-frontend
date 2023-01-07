@@ -1,11 +1,50 @@
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 import { apiBaseUrl, fetchApi } from "../../utils/fetchApi";
 
 export default function HomeCityList() {
-    // const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
-    // const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/count`, method : 'POST'}, fetcher)
-    // console.log("COunt data: ", data);
+//   {
+//     "data": {
+//         "cities": [
+//         {
+//             "stateCode": "DE",
+//             "city": "Dover",
+//             "total": 292
+//         },
+//         {
+//             "stateCode": "DE",
+//             "city": "Wilmington",
+//             "total": 527
+//         },
+//         {
+//             "stateCode": "DE",
+//             "city": "Rehoboth Beach",
+//             "total": 239
+//         },
+//         {
+//             "stateCode": "DE",
+//             "city": "Middletown",
+//             "total": 214
+//         },
+//         {
+//             "stateCode": "DE",
+//             "city": "Newark",
+//             "total": 201
+//         },
+//         {
+//             "stateCode": "PA",
+//             "city": "Philadelphia",
+//             "total": 9453
+//         },
+//         {
+//             "stateCode": "MD",
+//             "city": "Ocean City",
+//             "total": 309
+//         }
+//     ]
+// }
+// } 
     return (
         <section className="city-wrap pt-100 pb-75 bg-seashell">
         <img src="assets/img/shape-2.png" alt="Image" className="city-shape-one" />
@@ -24,7 +63,7 @@ export default function HomeCityList() {
                   <img src="assets/img/city/Dover.jpg" alt="Image" />
                   <div className="city-info">
                     <h3><Link href="/city/dover-de">Dover</Link></h3>
-                    <p>+5231 properties</p>
+                    <p>+292 properties</p>
                   </div>
                 </div>
               </div>
@@ -33,7 +72,7 @@ export default function HomeCityList() {
                   <img src="assets/img/city/Middletown.jpg" alt="Image" />
                   <div className="city-info">
                     <h3><Link href="/city/middletown-de">Middletown</Link></h3>
-                    <p>+5231 properties</p>
+                    <p>+214 properties</p>
                   </div>
                 </div>
               </div>
@@ -44,7 +83,7 @@ export default function HomeCityList() {
                   <img src="assets/img/city/Wilmington.jpg" alt="Image" />
                   <div className="city-info">
                     <h3><Link href="/city/wilmington-de">Wilmington</Link></h3>
-                    <p>+5231 properties</p>
+                    <p>+527 properties</p>
                   </div>
                 </div>
               </div>
@@ -54,7 +93,7 @@ export default function HomeCityList() {
                     <img src="assets/img/city/Newark.jpg" alt="Image" />
                     <div className="city-info">
                       <h3><Link href="/city/newark-de">Newark</Link></h3>
-                      <p>+5231 properties</p>
+                      <p>+201 properties</p>
                     </div>
                   </div>
                 </div>
@@ -63,7 +102,7 @@ export default function HomeCityList() {
                     <img src="assets/img/city/Philly.jpg" alt="Image" />
                     <div className="city-info">
                       <h3><Link href="/city/philadelphia-pa">Philadelphia</Link></h3>
-                      <p>+5231 properties</p>
+                      <p>+9453 properties</p>
                     </div>
                   </div>
                 </div>
@@ -75,7 +114,7 @@ export default function HomeCityList() {
                   <img src="assets/img/city/Rehoboth.jpg" alt="Image" />
                   <div className="city-info">
                     <h3><Link href="/city/rehoboth-beach-de">Rehoboth</Link></h3>
-                    <p>+5231 properties</p>
+                    <p>+239 properties</p>
                   </div>
                 </div>
               </div>
@@ -84,7 +123,7 @@ export default function HomeCityList() {
                   <img src="assets/img/city/Ocean City.jpg" alt="Image" />
                   <div className="city-info">
                     <h3><Link href="/city/ocean-city-md">Ocean City</Link></h3>
-                    <p>+5231 properties</p>
+                    <p>+309 properties</p>
                   </div>
                 </div>
               </div>
@@ -95,8 +134,8 @@ export default function HomeCityList() {
     )
 }
 
-// export async function getInitialProps(){
-//     const payload = {url : `${apiBaseUrl}/properties/count`, method : 'POST'};
+// export async function getServerSideProps(){
+//     const payload = {url : `${apiBaseUrl}/properties/count`, method : 'GET'};
 //     const res = await fetchApi(payload);
 //     console.log(res)
 //     return {

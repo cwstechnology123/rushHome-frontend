@@ -18,6 +18,7 @@ import PropertyAmenities from "../../components/property/PropertyAmenities";
 import PropertyAgentCard from "../../components/property/PropertyAgentCard";
 import ClientOtherDetails from "../../components/property/ClientOtherDetails";
 import AgentOtherDetails from "../../components/property/AgentOtherDetails";
+import { sendFubLeads } from "../../utils/fubApiCall";
 
 export default function PropertyDetails({ 
     propertyDetails: {
@@ -66,6 +67,7 @@ export default function PropertyDetails({
     const [saved, setSaved] = useState(false);
     const [fubObj, setFubObj] = useState({});
     const [shareInfo, setShareInfo] = useState({});
+    console.log(session)
     //  SETTING FUB DATA OBJ
     useEffect(() => {
         setFubObj({
@@ -116,25 +118,20 @@ export default function PropertyDetails({
                 const payload = {url : `${apiBaseUrl}/properties/fav-update`, accessToken: accessToken, method : 'POST', data : {userId: userId, propertyId: id.toString(), isSaved: isSaved.toString()}}
                 const res = await fetchApi(payload)
                 toast.dismiss(toastId);
-                console.log(isSaved, saved)
+                // console.log(isSaved, saved)
                 if (res && res.type == 'success') {
-                    // let leadObj = {
-                    //     person: {
-                    //         id: //FUB ID
-                    //         contacted: false,
-                    //         emails: [{isPrimary: true, type: 'work', value: data.request_email}],
-                    //         phones: [{isPrimary: false, value: data.request_phone, type: 'mobile'}],
-                    //         firstName: people[0].firstName,
-                    //         lastName: people[0].lastName,
-                    //         stage: 'Lead',
-                    //         sourceUrl: fubObj.propertyURL
-                    //     },
-                    //     property: fubObj.property,
-                    //     type: 'Saved Property',
-                    //     system: 'NextJS',
-                    //     source: 'RushHome',
-                    // };
-                    // const resFub = await sendFubLeads(leadObj)
+                    let leadObj = {
+                        person: {
+                            emails: [{isPrimary: true, type: 'work', value: session.user.email}],
+                            stage: 'Lead',
+                            sourceUrl: fubObj.propertyURL
+                        },
+                        property: fubObj.property,
+                        type: isSaved? 'Saved Property' : 'Unsubscribed',
+                        system: 'NextJS',
+                        source: 'RushHome',
+                    };
+                    await sendFubLeads(leadObj)
                     toast.success(isSaved? 'Added to Favorites' : 'Removed from Favorites');
                     setSaved(!saved);
                 }
@@ -179,6 +176,7 @@ export default function PropertyDetails({
                 <PropertyAgentCard 
                     agent={agent} 
                     address={`${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`}
+                    slug={slug}
                 />
             </>
             )

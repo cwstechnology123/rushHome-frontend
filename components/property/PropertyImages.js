@@ -58,7 +58,7 @@ const PropertyImages = ({
             {(userSession) && (<div className="carousel_icons">
                 <ul>
                     <li>
-                        <a href="javascript:void(0)" onClick={handleSave} style={{color: `${saved? 'red' : ''}`}}>
+                        <a href="javascript:void(0);" onClick={handleSave} style={{color: `${saved? 'red' : ''}`}}>
                             <i className={`fa fa-heart${saved? '' : '-o'}`} aria-hidden="true" ></i>
                         </a>
                     </li>
@@ -68,14 +68,15 @@ const PropertyImages = ({
                         onClick={() => console.log("shared successfully!")}
                         sites='["facebook", "twitter", "mail", "linkedin", "copy"]'
                     >
-                        <a href="javascript:void(0)"><i className="fa fa-share" aria-hidden="true" /> </a>
+                        <a href="javascript:void(0);"><i className="fa fa-share" aria-hidden="true" /> </a>
                     </RWebShare>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" onClick={handlePrint}>
-                        <i className="fa fa-print" aria-hidden="true"></i>
+                        <a href="javascript:void(0);" onclick="{handlePrint}">
+                            <i className="fa fa-print" aria-hidden="true" />
                         </a>
                     </li>
+
                 </ul>
             </div>)}
             {(isLoading && isValidating)? <PropertyBannerLoader/ > : <ImageGallery items={images} showPlayButton={false} lazyLoad={true} showFullscreenButton={false} useBrowserFullscreen={false} renderLeftNav={leftButton} renderRightNav={rightButton} />}

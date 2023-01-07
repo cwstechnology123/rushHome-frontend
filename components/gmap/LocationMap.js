@@ -24,7 +24,8 @@ export default function LocationMap({
           map.setOptions({
             ...options,
             mapTypeControlOptions: {
-                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+                style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                position: google.maps.ControlPosition.TOP_RIGHT,
                 mapTypeIds: ["roadmap", "terrain", "satellite"],
             }
           });

@@ -132,7 +132,7 @@ export async function getServerSideProps({ query, req, res }) {
         return {
             props: {
                 properties : response && response.data?.properties,
-                stateCode: stateCode,
+                stateCode: stateCodes[stateCode.toUpperCase()],
                 city: city
             },
         };

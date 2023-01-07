@@ -1,19 +1,21 @@
-import useSWR from "swr";
-import { fetchFubApi, fubApiBaseUrl } from "../../utils/fubFetchApi";
 import defaultAgentImage from "../../public/assets/img/default-profile-pic.png";
 import blurImage from "../../public/assets/img/placeholder.png";
 import Image from "next/image";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/router";
 
-export default function PropertyAgentCard({ agent, address }) {
-    // console.log(agent.listAgentEmail.search(/rushhome/i))
-    // if(agent.listAgentEmail.search(/rushhome/i) == -1){
-    //     return null;
-    // }
-    // console.log(agent.listAgentEmail.search(/rushhome/i))
-    // const fetcher = async (payload) => await fetchFubApi(payload).then(res => res.data);
-    // const { data, error, isLoading, isValidating } = useSWR((agent.listAgentEmail.search(/rushhome/i)>0)? {url : `${fubApiBaseUrl}/users?role=Agent&email=${agent.listAgentEmail}`, method : 'GET'} : null, fetcher);
-    // console.log(data)
+export default function PropertyAgentCard({ agent, address, slug }) {
+
     if(agent.listAgentEmail.endsWith("@rushhome.com")){
+        const router = useRouter();
+        const handleAgentSubmit = (ev) => {
+            ev.preventDefault();
+            localStorage.setItem('overridePath', '/property/'+slug);
+            toast.error('You need to sign in...');
+            router.push('/auth/client-signin')
+        }
+
+
         const src = defaultAgentImage.src;
         return (
             <>
@@ -37,11 +39,11 @@ export default function PropertyAgentCard({ agent, address }) {
                         <h2>Ask a question:</h2>
                         <div className="col-12">
                             <div className="form-group">
-                            <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{height: 150}} value={`I would like more information on ${address}`} />
+                            <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style={{height: 150}} defaultValue={`I would like more information on ${address}`} />
                             </div>
                         </div>
                         <div className="col-12 text-center">
-                            <button type="submit" className="btn style2 contact_button">Ask a Question</button>
+                            <button type="submit" className="btn style2 contact_button" onClick={handleAgentSubmit}>Ask a Question</button>
                         </div>
                     </div>
                 </div>

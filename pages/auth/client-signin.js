@@ -3,7 +3,7 @@ import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from "next/router"
 import { handleSuccess, handleError, handleLoading } from "../../utils/notify";
 import { setCookie } from 'cookies-next';
@@ -11,15 +11,15 @@ import { setCookie } from 'cookies-next';
 export default function Client() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false)
-    const [redirectUrl, setRedirectUrl] = useState('/client/favorites');
+    // const [redirectUrl, setRedirectUrl] = useState('/client/favorites');
+    const redirectUrl = useRef()
+    console.log(localStorage.getItem('overridePath'))
     useEffect(()=>{
-        let newPath = '';
         if(localStorage.getItem('overridePath') !== null){
-            newPath = localStorage.getItem('overridePath');
+            redirectUrl.current = localStorage.getItem('overridePath');
             localStorage.removeItem('overridePath');
-        }
-        if(newPath){
-            setRedirectUrl(newPath);
+        }else{
+            redirectUrl.current = '/client/favorites';
         }
     }, []);
     //form validations schema
@@ -32,7 +32,7 @@ export default function Client() {
             ),
     })
     //validation schema end
-    console.log(redirectUrl)
+    console.log(redirectUrl.current)
     const formOptionsLogin = { resolver: yupResolver(loginSchema) }
     const { register, formState: { errors }, handleSubmit } = useForm(formOptionsLogin);
 
@@ -45,7 +45,7 @@ export default function Client() {
             {
                 email : formValue.email,
                 password : formValue.password,
-                callbackUrl: `${process.env.NEXT_PUBLIC_HOST_NAME}${redirectUrl}`,
+                callbackUrl: `${process.env.NEXT_PUBLIC_HOST_NAME}${redirectUrl.current}`,
                 redirect: false,
             }
         )
@@ -62,7 +62,7 @@ export default function Client() {
         e.preventDefault()
         if (path === "/signin") {
             setCookie('rh_user', {role : 'client'});
-          const response = await signIn("google", { callbackUrl: `${process.env.NEXT_PUBLIC_HOST_NAME}${redirectUrl}`})
+          const response = await signIn("google", { callbackUrl: `${process.env.NEXT_PUBLIC_HOST_NAME}${redirectUrl.current}`})
         }
     };
 
