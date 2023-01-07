@@ -44,6 +44,8 @@ export default function HomeBanner() {
   const router = useRouter();
   const [showList, setShowList] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [selectedValue, setSelectedValue] = useState("");
+
   const [searchList, setSearchList] = useState({});
   // const [inputValue, setInputValue] = useState("");
   const inputValue = useRef();
@@ -86,6 +88,9 @@ export default function HomeBanner() {
     console.log(searchValue)
     searchValue = JSON.parse(searchValue);
     setCookie('search', searchValue);
+    const label = `${searchValue.refVal}, ${searchValue.alphaCode}`
+    setSelectedValue(label)
+    setShowList(false);
     router.push(searchValue.path)
   }
       // console.dir(searchContent)
@@ -105,7 +110,9 @@ export default function HomeBanner() {
                         onChange={handleOnChange} />
                         onChange={(ev)=>handleOnChange(ev.target.value)} 
                         */}
-                      <input type="text" className="form-control" onKeyUp={loadOptions} placeholder="Address, City, Zip, School District" />
+                      <input type="text" className="form-control" onKeyUp={loadOptions} placeholder="Address, City, Zip, School District" 
+                      value={selectedValue}
+                      onChange={(event) => { setSelectedValue(event.target.value) }}/>
                       <div className="input-group-append">
                           <button className="btn style_button" type="button" onClick={handleOnSearch}>Search</button>
                       </div>
