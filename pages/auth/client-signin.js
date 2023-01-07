@@ -51,7 +51,7 @@ export default function Client() {
         )
         // console.log('response',response)
         setIsLoading(false)
-        if (response?.error) handleError(response.error)
+        if (response?.error) handleError("Invalid Credentials.")
         if (response.url) {
             handleSuccess("Login Successfully!")
             router.push(response.url)
@@ -92,7 +92,7 @@ export default function Client() {
                                 <span className="text-danger">{errors.password?.message}</span>
                             </div>
                         </div>
-                        <div className="forgot_box"><Link href="#">Forgot Password?</Link></div>
+                        {/* <div className="forgot_box"><Link href="#">Forgot Password?</Link></div> */}
                         <div className="col-md-12 text-center">
                             <button type="submit" disabled={isLoading} className="btn style1 button_agent">Login</button>
                         </div>

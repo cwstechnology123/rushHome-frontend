@@ -3,7 +3,6 @@ import GoogleProvider from "next-auth/providers/google"
 import CredentialProvider from "next-auth/providers/credentials"
 import { apiBaseUrl, fetchApi } from '../../../utils/fetchApi'
 import { getCookie } from 'cookies-next';
-import { sendFubLeads } from "../../../utils/fubApiCall"
 
 const authOptions = (req, res) => {
   const rh_user = getCookie('rh_user', { req, res})? JSON.parse(getCookie('rh_user', { req, res})) : '';
@@ -35,7 +34,7 @@ const authOptions = (req, res) => {
               return user
             }
             else{
-              return response.message 
+              return false
             }
             
           } catch (e) {
@@ -72,48 +71,29 @@ const authOptions = (req, res) => {
           if (account.provider === "google") {
             try {
               console.log(rh_user)
-              const user_type = rh_user && rh_user.role == "agent" ? "2" : "0"; 
-              let fub_id = '0';
-              // if(rh_user === "client"){
-              //   const {firstName, lastName} = splitName(formValue.full_name);
-              //   let leadObj = {
-              //     person: {
-              //       contacted: false,
-              //       emails: [{isPrimary: true, type: 'work', value: user.email}],
-              //       firstName: firstName,
-              //       lastName: lastName,
-              //       stage: 'Lead',
-              //       sourceUrl: `${process.env.NEXT_PUBLIC_HOST_NAME}/signup`
-              //     },
-              //     type: 'Registration',
-              //     system: 'NextJS',
-              //     source: 'RushHome',
-              // };
-              //   const resFub = await sendFubLeads(leadObj);
-              //   if(resFub.status){
-              //       fub_id = resFub.message.people[0].id;
-              //       console.log(fub_id)   
-              //   }
-              // }
-                const payload = {url : `${apiBaseUrl}/google-login`, method : 'POST', data : {email : user.email, full_name: user.name, google_id : user.id, image: user.image, user_type: user_type, fub_id: fub_id}}
-                    const response = await fetchApi(payload)
-                    if (response && response.data) {
-                      const profile = response.data?.profile;
-                      const role = profile && profile.user_type == 2 ? "agent" : "client"
-                      return {
-                        ...token,
-                        accessToken: response.data.token,
-                        refreshToken: response.data.refreshToken,
-                        picture: user.image,
-                        role: role,
-                        userId: profile.id
-                      };
-                    }
-                    else{
-                      return response.message 
-                    } 
-            
-               
+              const user_type = rh_user && rh_user.role == "agent" ? "2" : "0";
+              let sendData = {};
+              sendData = {email : user.email, full_name: user.name, google_id : user.id, image: user.image, user_type: user_type}
+              if(rh_user.role == "client" && rh_user.fub_id){
+                sendData = {email : user.email, full_name: user.name, google_id : user.id, image: user.image, user_type: user_type, fub_id: rh_user.fub_id}
+              }
+              const payload = {url : `${apiBaseUrl}/google-login`, method : 'POST', data : sendData}
+              const response = await fetchApi(payload)
+              if (response && response.data) {
+                const profile = response.data?.profile;
+                const role = profile && profile.user_type == 2 ? "agent" : "client"
+                return {
+                  ...token,
+                  accessToken: response.data.token,
+                  refreshToken: response.data.refreshToken,
+                  picture: user.image,
+                  role: role,
+                  userId: profile.id
+                };
+              }
+              else{
+                return false 
+              } 
             } catch (e) {
               const errorMessage = e.response.data.message
               // Redirecting to the login page with error message in the URL
