@@ -13,7 +13,8 @@ import Geocode from "react-geocode";
 import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 import { Toaster } from "react-hot-toast";
 
-export default function HomesForSale({ properties, stateCode, city,refKey, refValue, sendData }) { 
+export default function HomesForSale({ properties, stateCode, city,refKey, refValue, sendData, deviceType }) { 
+    console.log(deviceType)
     const [propertyList, setPropertyList] = useState(properties);
     const [filterData, setFilterData] = useState([]);
     Geocode.setApiKey(process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN);
@@ -73,20 +74,23 @@ export default function HomesForSale({ properties, stateCode, city,refKey, refVa
                         
                         <div className="col-xl-5 col-lg-5 d-md-none d-lg-block p-0 d-none d-sm-block d-sm-none d-md-block">
                             {/* FOR MAP */}
-                            <div id="mapBox" style={{width:'100%', height: mapHeight, position: 'relative'}}>
-                                <BuyMap
-                                    initZoom={stateCode? ((refKey==='City')? 10 : 8) : 0}
-                                    center={center}
-                                    setCenter={setCenter}
-                                    setMapView={setMapView}
-                                    bounds={bounds}
-                                    setBounds={setBounds}
-                                    filterData={filterData || []}
-                                    propertyList={propertyList || []}
-                                    setFilterData={setFilterData}
-                                    highlight={highlight}
-                                />
-                            </div>
+                            {deviceType==='desktop' && (
+                                <div id="mapBox" style={{width:'100%', height: mapHeight, position: 'relative'}}>
+                                    <BuyMap
+                                        initZoom={stateCode? ((refKey==='City')? 10 : 8) : 0}
+                                        center={center}
+                                        setCenter={setCenter}
+                                        setMapView={setMapView}
+                                        bounds={bounds}
+                                        setBounds={setBounds}
+                                        filterData={filterData || []}
+                                        propertyList={propertyList || []}
+                                        setFilterData={setFilterData}
+                                        highlight={highlight}
+                                    />
+                                </div>
+                            )}
+                            
                         </div>
                         
                         <div className="col-xl-7 col-lg-7 col-12" style={{height: mapHeight, overflowY: 'auto'}}>
@@ -103,6 +107,10 @@ export default function HomesForSale({ properties, stateCode, city,refKey, refVa
 }
 
 export async function getServerSideProps({ query, req, res }) {
+    const UA = req.headers['user-agent'];
+    const isMobile = Boolean(UA.match(
+        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    ))
     const searchStr = getCookie('search', { req, res});
     let refKey= 'city';
     let refVal = null;
@@ -147,7 +155,8 @@ export async function getServerSideProps({ query, req, res }) {
                 stateCode: stateCodes[stateCode.toUpperCase()],
                 city: city,
                 refKey: refKey,
-                refValue: refVal
+                refValue: refVal,
+                deviceType: isMobile ? 'mobile' : 'desktop'
             },
         };
     }
@@ -157,7 +166,8 @@ export async function getServerSideProps({ query, req, res }) {
             stateCode: stateCodes[stateCode.toUpperCase()],
             city: city,
             refKey: refKey,
-            refValue: refVal
+            refValue: refVal,
+            deviceType: isMobile ? 'mobile' : 'desktop'
         },
     };
 }

@@ -12,6 +12,7 @@ export default function AgentCard({ agent }) {
     // console.log("Phone: ", phoneBlk);
     const src = agent.picture.original ?? defaultAgentImage.src;
     return (
+        <Link href={`/agent/${agent.id}`}>
         <div key={'card-'+agent.id} className="agent-card style1">
             <div key={'image-box-'+agent.id} className="agent-img mx-auto">
                 <Image  key={'image-'+agent.id}
@@ -24,9 +25,9 @@ export default function AgentCard({ agent }) {
             </div>
             <div key={'card-info-'+agent.id}  className="agent-info-wrap">
                 <div key={'agent-'+agent.id} className="agent-info">
-                    <h5><Link href={`/agent/${agent.id}`} passHref={true}>{agent.name}</Link></h5>
+                    <h5>{agent.name}</h5>
                     <span>Real Estate Agent</span>
-                    <ul className="social-profile list-style style1">
+                    {/* <ul className="social-profile list-style style1">
                     <li key={"twitter-"+agent.id}>
                         <a target="_blank" rel="noreferrer" href="https://twitter.com/">
                         <i className="flaticon-twitter" />
@@ -47,7 +48,7 @@ export default function AgentCard({ agent }) {
                         <i className="flaticon-linkedin-1" />
                         </a>
                     </li>
-                    </ul>
+                    </ul> */}
                 </div>
                 <div className="mail_Box">
                     <p>{agent.email}</p>
@@ -55,5 +56,6 @@ export default function AgentCard({ agent }) {
                 </div>
             </div>
         </div>
+        </Link>
     );
 };

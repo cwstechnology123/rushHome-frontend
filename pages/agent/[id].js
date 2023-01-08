@@ -763,10 +763,10 @@ export default function AgentDetail({ agent: { name, firstName, lastName, email,
 export async function getServerSideProps({ params: { id }}) {
     const payload = {url : `${fubApiBaseUrl}/users/${id}`, method : 'GET', data: []}
     const res = await fetchFubApi(payload);
-    console.log("Query:", res)
+    // console.log("Query:", res)
     return {
         props: {
-            agent : res,
+            agent : res.message,
         },
     };
 }

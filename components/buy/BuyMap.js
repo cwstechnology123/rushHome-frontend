@@ -5,8 +5,6 @@ import useSupercluster from "use-supercluster";
 import SingleMarker from '../gmap/CustomSingleMarker';
 import ClusterMarker from '../gmap/ClusterMarkerr';
 import MultiMarker from '../gmap/MultiMarker';
-import { isBrowser } from "react-device-detect";
-
 
 const render = (status) => {
     if (status === Status.FAILURE) {
@@ -26,7 +24,6 @@ const BuyMap = ({
 }) => {
     //initialize
        
-    
     const [zoom, setZoom] = useState(initZoom? initZoom : 5);
     const [clicks, setClicks] = useState([]);
     const poly = useRef(null);
@@ -71,7 +68,7 @@ const BuyMap = ({
     useEffect(() => {
         // bounds: { ne, nw, se, sw }\
         let filterProps = {};
-
+        // console.log(isBrowser)
         if(bounds){
             filterProps = propertyList.filter(property => {
                 let lat = parseFloat(property.geography.lat);
@@ -90,8 +87,7 @@ const BuyMap = ({
             filterProps = propertyList
         }
         setFilterData(filterProps);
-        
-        //console.log("Inside: ",filterProperties)
+        // console.log("Inside: ",filterProperties)
         //console.log(bounds)
     }, [bounds, haspoly])
     //MARKER CLUSTERING
