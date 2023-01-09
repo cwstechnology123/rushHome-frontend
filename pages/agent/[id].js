@@ -66,7 +66,7 @@ export default function AgentDetail({ agent: { name, firstName, lastName, email,
                                 <img src="../assets/img/callus.jpg" /> + {phoneBlk.phone}
                             </p>)}
                             <p>
-                                <img src="../assets/img/agentemail.jpg" /> {phoneBlk.phone}
+                                <img src="../assets/img/agentemail.jpg" /> {phoneBlk.email}
                             </p>
                             </div>
                             <p dangerouslySetInnerHTML={{__html: phoneBlk.details}}></p>
