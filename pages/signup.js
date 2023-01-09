@@ -9,6 +9,7 @@ import { apiBaseUrl, fetchApi } from '../utils/fetchApi'
 import { handleSuccess, handleError, handleLoading } from "../utils/notify";
 import splitName from "../utils/splitName";
 import { sendFubLeads } from "../utils/fubApiCall";
+import { setCookie } from 'cookies-next';
 
 export default function SignUp() {
     const router = useRouter();
@@ -71,6 +72,14 @@ export default function SignUp() {
         };
     }
 
+    const handleClickGLogin = async (e, path) => {
+        e.preventDefault()
+        if (path === "/signin") {
+          setCookie('rh_user', {role : 'client'});
+          const response = await signIn("google", { callbackUrl: "/client/favorites"})
+        }
+    };
+
   return (
     <>
     {/*  */}
@@ -115,7 +124,7 @@ export default function SignUp() {
                             <button type="submit" disabled={isLoading} className="btn style1 button_agent w-100">Sign Up</button>
                         </div>
                         <div className="col-md-12 text-center">
-                            <button type="button" className="btn style1 button_agent w-100" onClick={() => signIn("google", { callbackUrl: '/client/dashboard' })}><span className="googleicon"><img src="assets/img/googleicon.png" /></span>Continue with Google</button>
+                            <button type="button" className="btn style1 button_agent w-100" onClick={(e) => handleClickGLogin(e, "/signin")}><span className="googleicon"><img src="assets/img/googleicon.png" /></span>Continue with Google</button>
                         </div>
                         <p className="policy_content">Already have an account? <Link href="/auth"> Login</Link></p>
                         </form>
