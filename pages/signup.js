@@ -9,6 +9,7 @@ import { apiBaseUrl, fetchApi } from '../utils/fetchApi'
 import { handleSuccess, handleError, handleLoading } from "../utils/notify";
 import splitName from "../utils/splitName";
 import { sendFubLeads } from "../utils/fubApiCall";
+import { setCookie } from 'cookies-next';
 
 export default function SignUp() {
     const router = useRouter();
