@@ -73,16 +73,16 @@ export default function AgentDetail({ agent: { name, firstName, lastName, email,
                             <div className="ratting_box">
                             <ul>
                                 <li>
-                                <h2>182</h2>
-                                <p>Transactions</p>
+                                    <h2>182</h2>
+                                    <p>Transactions</p>
                                 </li>
                                 <li>
-                                <h2>85</h2>
-                                <p>Client Served</p>
+                                    <h2>85</h2>
+                                    <p>Client Served</p>
                                 </li>
                                 <li>
-                                <h2>54</h2>
-                                <p>Active Listing</p>
+                                    <h2>54</h2>
+                                    <p>Active Listing</p>
                                 </li>
                                 {/* <li>
                                 <h2>4.9</h2>
