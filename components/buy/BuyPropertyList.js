@@ -1,33 +1,25 @@
 import { useEffect, useState } from "react";
 import PropertyCard from "../property/PropertyCard";
 import { Pagination } from "react-headless-pagination";
-// import PropertyCard from "./PropertyCard";
-
 
 export default function BuyPropertyList({ properties, setHighlight }){
 
     const showPerPage = 40;
     const [currentPage, setCurrentPage] = useState(0);
     const [pageCount, setPageCount] = useState(1);
-    // const pageCount = properties? Math.round(properties.length/showPerPage) : 1;
 
     const [showproperty, setShowproperty] = useState([]);
 
     const handleShowProperty = (page) => {
-        // console.log(page)
         let offset = showPerPage * page;
-        // let limit = (showPerPage * (page+1));
         let dataList = JSON.parse(JSON.stringify(properties));
-        // console.log(offset, limit)
         setCurrentPage(page);
         document.getElementById('property_list')?.scrollIntoView({behavior:"smooth", block: "start", inline:"nearest"});
         setShowproperty(dataList.splice(offset, showPerPage));
-        
     }
 
     useEffect(() => {
         let total = properties.length;
-        
         if(total > showPerPage){
             if(total % showPerPage === 0){
                 setPageCount(() =>(total/showPerPage));
@@ -102,31 +94,6 @@ export default function BuyPropertyList({ properties, setHighlight }){
             </Pagination>
             )}
 
-            {/* <ReactPaginate
-                previousLabel={'Prev'}
-                nextLabel={'Next'}
-                breakLabel={'...'}
-                breakClassName={'break-me'}
-                activeClassName={'active'}
-                containerClassName={'pagination list-style mt-10'}
-                subContainerClassName={''}
-
-                initialPage={currentPage - 1}
-                pageCount={pageCount}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={5}
-                onPageChange={handleShowProperty}
-            /> */}
-            {/* <ul className="page-nav list-style mt-10">
-                <li><a href="#"><i className="fa fa-angle-left" style={{fontSize: 1.2+'rem'}}></i>&nbsp;&nbsp;&nbsp;&nbsp;Prev</a></li>
-                <li><a className="active" href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">6</a></li>
-                <li><a href="#">Next&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa fa-angle-right" style={{fontSize: 1.2+'rem'}}></i></a></li>
-            </ul> */}
         </section>
     )
 }
