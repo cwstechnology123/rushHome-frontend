@@ -75,7 +75,7 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
         const toastId = toast.loading("Loading....");
         sendData = {
             [searchValue.refKey] : searchValue.refVal,
-            page_limit: 1000
+            page_limit: 1500
         }
         const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: sendData}
         const response = await fetchApi(payload);

@@ -135,17 +135,15 @@ export async function getServerSideProps({ query, req, res }) {
     }
     let sendData = {
         stateOrProvince : stateCode,
-        page_limit: 1000 
+        page_limit: 1500 
     }
     if(refKey !== "stateOrProvince"){
         sendData = {...sendData, [refKey]: refVal};
     }
-    
-    console.log(sendData)
-    
+
     const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: sendData}
     const response = await fetchApi(payload)
-    // console.log(sendData, response)
+    console.log(response)
     if(response && response.data){
         return {
             props: {
@@ -154,7 +152,7 @@ export async function getServerSideProps({ query, req, res }) {
                 city: city,
                 refKey: refKey,
                 refValue: refVal,
-                deviceType: isMobile ? 'mobile' : 'desktop'
+                deviceType: isMobile ? 'mobile' : 'desktop',
             },
         };
     }

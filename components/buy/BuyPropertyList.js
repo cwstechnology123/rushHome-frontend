@@ -17,7 +17,6 @@ export default function BuyPropertyList({ properties, setHighlight }){
         document.getElementById('property_list')?.scrollIntoView({behavior:"smooth", block: "start", inline:"nearest"});
         setShowproperty(dataList.splice(offset, showPerPage));
     }
-
     useEffect(() => {
         let total = properties.length;
         if(total > showPerPage){

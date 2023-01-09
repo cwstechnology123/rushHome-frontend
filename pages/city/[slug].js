@@ -51,7 +51,7 @@ export default function CityDetails() {
                         <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                             <div className="hw-card">
                                 <div className="hw-img">
-                                <img src="../assets/img/age.jpg" />
+                                <img src="../assets/img/age.jpg" style={{width:100, height:80}}/>
                                 </div>
                                 <div className="hw-info">
                                 <h3>{cityDetail.demographics.median_age}</h3>
@@ -62,7 +62,7 @@ export default function CityDetails() {
                         <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                             <div className="hw-card">
                                 <div className="hw-img">
-                                <img src="../assets/img/Household.jpg" />
+                                <img src="../assets/img/Household.jpg" style={{width:100, height:80}} />
                                 </div>
                                 <div className="hw-info">
                                 <h3>{cityDetail.demographics.household_income}</h3>
@@ -73,7 +73,7 @@ export default function CityDetails() {
                         <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                             <div className="hw-card">
                                 <div className="hw-img">
-                                <img src="../assets/img/Educated.jpg" />
+                                <img src="../assets/img/Educated.jpg" style={{width:100, height:80}} />
                                 </div>
                                 <div className="hw-info">
                                 <h3>{cityDetail.demographics.college_educated}</h3>
@@ -84,7 +84,7 @@ export default function CityDetails() {
                         <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                             <div className="hw-card">
                                 <div className="hw-img">
-                                <img src="../assets/img/homeprice.jpg" />
+                                <img src="../assets/img/homeprice.jpg" style={{width:100, height:80}} />
                                 </div>
                                 <div className="hw-info">
                                 <h3>{cityDetail.demographics.avg_home_price}</h3>
