@@ -115,7 +115,7 @@ export default function NavbarHeader() {
                           <Dropdown.Toggle id="dropdown-button-profile" className="profile_button style3">{profileTitle} <div id="moon" className={Sty.class}></div></Dropdown.Toggle>
                           <Dropdown.Menu variant="white" className="profile_sub dropdown-class">
                             <Dropdown.Item href="/client/my-profile">My Profile</Dropdown.Item>
-                            <Dropdown.Item href="/client/my-account">My Account</Dropdown.Item>
+                            {/* <Dropdown.Item href="/client/my-account">My Account</Dropdown.Item> */}
                             <Dropdown.Item href="#" onClick={(e) => handleClick(e, "/signout")}>Logout</Dropdown.Item>
                           </Dropdown.Menu>
                         </Dropdown>
