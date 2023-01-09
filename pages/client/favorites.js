@@ -99,6 +99,7 @@ export default function Favorites() {
 
   return (
     <>
+    {(propertyList && propertyList.properties && propertyList.properties.length)?
         <section className="client_favorites">
             <div className="container">
             <div className="client_favbox">
@@ -129,6 +130,8 @@ export default function Favorites() {
             </div>
             </div>
         </section>
+    : <></>
+    }
         <section className="list_clientbox">
             <div className="container">
             <div className="row justify-content-center">
