@@ -99,7 +99,6 @@ export default function Favorites() {
 
   return (
     <>
-    {(propertyList && propertyList.properties && propertyList.properties.length)?
         <section className="client_favorites">
             <div className="container">
             <div className="client_favbox">
@@ -120,18 +119,18 @@ export default function Favorites() {
                     <option value={'bathroomsTotalInteger'}>By Bath</option>
                     <option value={'listPrice'}>By Price</option>
                 </select>
-                <span style={{cursor:'pointer'}}><i className={(Inputs.dir==='DESC')? 'fa fa-sort-amount-desc' : 'fa fa-sort-amount-asc'} aria-hidden="true" 
+                <span><i className={(Inputs.dir==='DESC')? 'fa-sort-amount-desc' : 'fa-sort-amount-asc'} aria-hidden="true" 
                 onClick={()=>sortHandler('dir', Inputs.dir)}/></span>
                 {/* <span><i className="fa fa-bars" aria-hidden="true" /></span>
                 <span><i className="fa fa-bars" aria-hidden="true" /></span> */}
+                {(propertyList && propertyList.properties && propertyList.properties.length) ?
                 <button type="button" className="btn style3 removeall" 
                 onClick={removeAllHandler}><i className="fa fa-trash" aria-hidden="true" /> Remove all</button>
+                :<></>}
                 </div>
             </div>
             </div>
         </section>
-    : <></>
-    }
         <section className="list_clientbox">
             <div className="container">
             <div className="row justify-content-center">
