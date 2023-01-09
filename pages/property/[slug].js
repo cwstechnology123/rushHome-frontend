@@ -67,7 +67,7 @@ export default function PropertyDetails({
     const [saved, setSaved] = useState(false);
     const [fubObj, setFubObj] = useState({});
     const [shareInfo, setShareInfo] = useState({});
-    // console.log(session)
+    console.log(agent)
     //  SETTING FUB DATA OBJ
     useEffect(() => {
         setFubObj({
@@ -120,6 +120,7 @@ export default function PropertyDetails({
                 toast.dismiss(toastId);
                 // console.log(isSaved, saved)
                 if (res && res.type == 'success') {
+                    toastId = toast.loading('Saving...');
                     let leadObj = {
                         person: {
                             emails: [{isPrimary: true, type: 'work', value: session.user.email}],
@@ -132,6 +133,7 @@ export default function PropertyDetails({
                         source: 'RushHome',
                     };
                     await sendFubLeads(leadObj)
+                    toast.dismiss(toastId);
                     toast.success(isSaved? 'Added to Favorites' : 'Removed from Favorites');
                     setSaved(!saved);
                 }
@@ -283,7 +285,7 @@ export default function PropertyDetails({
                             </div>
                             <div className="descriptions_box heading_line mt-4">
                                 <div className="section-title style1 mb-40">
-                                    <h2>Descriptions</h2>
+                                    <h2>Description</h2>
                                     <hr />
                                     <div className="text-justify" dangerouslySetInnerHTML={{__html: description}} />
                                     <h6 className="mt-3">Listed by {listOfficeName || '-'}</h6>
@@ -478,6 +480,7 @@ export default function PropertyDetails({
 export async function getServerSideProps({ query }){
     const payload = {url : `${apiBaseUrl}/properties/details/${query.slug}`, method : 'GET'}
     const res = await fetchApi(payload)
+    // console.log(res)
     if(res?.data){
         return {
             props: {

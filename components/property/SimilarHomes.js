@@ -43,7 +43,7 @@ export default function SimilarHomes({
                     {(isLoading)? <Grid item={3} /> : (
                         data? (<>
                         <div className="row">
-                            {!!similarHomes && similarHomes.slice(0, 4).map((property, i) => (
+                            {!!similarHomes && similarHomes.slice(0, 3).map((property, i) => (
                                 <div key={`first${i}`} className="col-xl-4 col-lg-6 col-md-6">
                                     <PropertyCard property={property}/>
                                 </div>

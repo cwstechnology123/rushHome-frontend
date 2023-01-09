@@ -119,7 +119,7 @@ export default function Favorites() {
                     <option value={'bathroomsTotalInteger'}>By Bath</option>
                     <option value={'listPrice'}>By Price</option>
                 </select>
-                <span><i className={(Inputs.dir==='DESC')? 'fa-sort-amount-desc' : 'fa-sort-amount-asc'} aria-hidden="true" 
+                <span style={{cursor:'pointer'}}><i className={(Inputs.dir==='DESC')? 'fa fa-sort-amount-desc' : 'fa fa-sort-amount-asc'} aria-hidden="true" 
                 onClick={()=>sortHandler('dir', Inputs.dir)}/></span>
                 {/* <span><i className="fa fa-bars" aria-hidden="true" /></span>
                 <span><i className="fa fa-bars" aria-hidden="true" /></span> */}

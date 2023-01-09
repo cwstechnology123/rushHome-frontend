@@ -2,76 +2,91 @@
     {
         "agent": "Marcus Rush",
         "email": "marcus@rushhome.com",
-        "phone": "302-257-3883"
+        "phone": "302-257-3883",
+        "details": ""
     },
     {
         "agent": "Bert Ferguson",
         "email": "bertf@rushhome.com",
-        "phone": "(302) 204-1347"
+        "phone": "(302) 204-1347",
+        "details": "My name is Bert Ferguson and I am a Realtor with Rush Home in Smyrna, Delaware. Choosing a Realtor is one of the most important decisions you will make as you enter the market, and I want to help make that decision a smart one. I've been a Delaware Resident for over 15 years, so I am knowledgable on local properties and the surrounding area. Having been a Marketing and Management entrepreneur for 6 years, I have the experience that will allow me to engage in the proper marketing techniques to help you fulfill your real estate needs. <br/>In my spare time I enjoy working on my fitness goals, reading, blogging , and cooking. My goal is to ensure I lend you a helping hand on each step in the purchasing or selling process. I pride myself in being a person who loves helping others so I would be honored to help you achieve your real estate goals."
     },
     {
         "agent": "Leroy Gaines",
         "email": "leroygaines@rushhome.com",
-        "phone": "(302) 204-1485"
+        "phone": "(302) 204-1485",
+        "details": "I'm an experienced REALTOR/ASSOCIATE BROKER, licensed in Delaware, Maryland and Pennsylvania. I specialize in residential real estate for Buyers and Sellers. I provide services for first time home buyers, as well as experienced buyers looking to move up or down size. My clients note that my ability to negotiate in their best interest has proven that no matter how complex the deal may seem we navigate their transaction seamless thus providing quality services and a memorable experience. Prior to my career change, I owned/operated ATC Hardwood Floors, Inc. for eleven years. Our services included, Sales, Installation and Refinishing Custom Hardwood floors. I am presently a Full time Professional Sales Associate who is committed to providing you, your family and friends with exceptional service. I pride myself in being surrounded by the necessary resources, being fully trained and equipped to take a unique and proactive approach to meeting all of your real estate needs. I am committed to building life long relationships through the wonderful experience of real estate. It would be an honor to serve you."
     },
     {
         "agent": "Chennita Crawford",
         "email": "chennita@rushhome.com",
-        "phone": "(302) 321-1801"
+        "phone": "(302) 321-1801",
+        "details": ""
     },
     {
         "agent": "Marquise Broom",
         "email": "marquise@rushhome.com",
-        "phone": "(302) 233-7056"
+        "phone": "(302) 233-7056",
+        "details": ""
     },
     {
         "agent": "Chris Harper",
         "email": "chrisharper@rushhome.com",
-        "phone": "(302) 360-5017"
+        "phone": "(302) 360-5017",
+        "details": "Christopher Harper is a native of Salisbury Maryland and served in the Maryland Army National Guard. Mr. Harper graduated from Wilmington University with a Bachelors of Science Degree in 2012 and obtained his Masters Degree in Administration of Justice in 2013. Mr. Harper is a retired Federal Law Enforcement (Lieutenant). Mr. Harper loves lifting weights, watching movies and golfing. Mr. Harper is a licensed real-estate agent in Maryland and Delaware."
     },
     {
         "agent": "Yazmin Parrish",
         "email": "yazmin.parrish@rushhome.com",
-        "phone": ""
+        "phone": "",
+        "details": ""
     },
     {
         "agent": "Kita Miller",
         "email": "kita.miller@rushhome.com",
-        "phone": "(302) 244-5598"
+        "phone": "(302) 244-5598",
+        "details": ""
     },
     {
         "agent": "Raquel Gomez",
         "email": "raquelgomez@rushhome.com",
-        "phone": "(302) 406-1781"
+        "phone": "(302) 406-1781",
+        "details": ""
     },
     {
         "agent": "Shakiah Davis",
         "email": "mrskiadavis@rushhome.com",
-        "phone": ""
+        "phone": "",
+        "details": ""
     },
     {
         "agent": "SHANENE SEWELL",
         "email": "shanene@rushhome.com",
-        "phone": ""
+        "phone": "",
+        "details": ""
     },
     {
         "agent": "Wandre Brown",
         "email": "wandrebrown@rushhome.com",
-        "phone": "(301) 900-3157"
+        "phone": "(301) 900-3157",
+        "details": ""
     },
     {
         "agent": "Danielle Franchi",
         "email": "danielle.franchi@rushhome.com",
-        "phone": "(410) 280-7874"
+        "phone": "(410) 280-7874",
+        "details": ""
     },
     {
         "agent": "Naadia Brown",
         "email": "naadiabrown@rushhome.com",
-        "phone": "(267) 656-6903"
+        "phone": "(267) 656-6903",
+        "details": ""
     },
     {
         "agent": "Seveta Green",
         "email": "sgreen@rushhome.com",
-        "phone": "(302) 508-4687"
+        "phone": "(302) 508-4687",
+        "details": ""
     }
 ]

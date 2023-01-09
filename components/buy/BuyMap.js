@@ -24,7 +24,7 @@ const BuyMap = ({
 }) => {
     //initialize
        
-    const [zoom, setZoom] = useState(initZoom? initZoom : 5);
+    const [zoom, setZoom] = useState(5);
     const [clicks, setClicks] = useState([]);
     const poly = useRef(null);
     const [haspoly, setHaspoly] = useState(false);
@@ -122,7 +122,7 @@ const BuyMap = ({
         point_count: pointCount
         } = cluster.properties;
         if (isCluster) {
-            if(zoom>=17){
+            if(zoom>=18){
                 //console.log(clusterChilds[0].properties.hotel)
                 return (
                     <MultiMarker

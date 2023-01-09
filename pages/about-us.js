@@ -55,33 +55,33 @@ export default function AboutUs() {
             <div className="section-title style2 text-center mb-40">
               <h2>Our Services</h2>
               <hr className="center" />
-              <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p>
+              {/* <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p> */}
             </div>
           </div>
           <div className="row justify-content-center">
-            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+            <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6">
               <div className="adv-card">
                 <div className="adv-img">
-                  <img src="assets/img/ourservice1.jpg" alt="Image" />
+                  <img src="assets/img/Buy a New Home.jpg" alt="Image" style={{width: 100, height: 90}}/>
                 </div>
                 <div className="adv-info">
-                  <h3>Property Management</h3>
-                  <p>Lorem ipsum dolor sit amet, cons ectetur adip isci ngelit, sed do eiusmod tem. Lorem ipsum dolor sit amet, cons ectetur adip isci ngelit, sed do eiusmod tem.</p>
+                  <h3>Home Buying</h3>
+                  <p>We marry human power with technology and no how to help you find the right home for you faster.</p>
                 </div>
               </div>
             </div>
-            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+            <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6">
               <div className="adv-card">
                 <div className="adv-img">
-                  <img src="assets/img/ourservice2.jpg" alt="Image" />
+                  <img src="assets/img/Sell a Home.jpg" alt="Image" style={{width: 100, height: 90}}/>
                 </div>
                 <div className="adv-info">
-                  <h3>Mortgage Service</h3>
-                  <p>Lorem ipsum dolor sit amet, cons ectetur adip isci ngelit, sed do eiusmod tem. Lorem ipsum dolor sit amet, cons ectetur adip isci ngelit, sed do eiusmod tem.</p>
+                  <h3>Selling A Home</h3>
+                  <p>Our local experts know the area, and are ready to help you sell your home quicker and for more. </p>
                 </div>
               </div>
             </div>
-            <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+            {/* <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6">
               <div className="adv-card">
                 <div className="adv-img">
                   <img src="assets/img/ourservice3.jpg" alt="Image" />
@@ -91,7 +91,7 @@ export default function AboutUs() {
                   <p>Lorem ipsum dolor sit amet, cons ectetur adip isci ngelit, sed do eiusmod tem. Lorem ipsum dolor sit amet, cons ectetur adip isci ngelit, sed do eiusmod tem.</p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
@@ -148,7 +148,7 @@ export default function AboutUs() {
               <div className="section-title style2 text-center mb-40" id="office_location">
                 <h2>We are always eager to hear from you!</h2>
                 <hr className="center" />
-                <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p>
+                {/* <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p> */}
               </div>
             </div>
           </div>
@@ -203,9 +203,9 @@ export default function AboutUs() {
           <div className="row">
             <div className="col-xl-10 col-lg-10 offset-xl-1 offset-lg-1">
               <div className="section-title style2 text-center mb-40">
-                <h2>RushHome is an estate agency that helps people live in more thoughtful and beautiful ways.</h2>
+                <h2>We focus on your success, because when you do more, we do more!</h2>
                 <hr className="center" />
-                <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p>
+                {/* <p className="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p> */}
               </div>
             </div>
           </div>

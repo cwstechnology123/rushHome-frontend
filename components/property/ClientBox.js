@@ -36,13 +36,19 @@ export default function ClientBox({ type, address, price, pricearea, amenity, fu
         message: `I would like more information on ${address}`,
     });
     async function findFubAgent(){
-        let res = await getAgentFubDetails(agent.listAgentEmail);
-        console.log(res)
+        let res =  await getAgentFubDetails(agent.listAgentEmail);
+        if(res.status){
+            let user = res.message.users;
+            if(user[0].role === 'Agent'){
+                setAgentForm({...agentForm, id: user[0].id})
+            }
+        }
     }
 
     useEffect(() => {
         setCurTime(moment().format('HH:00:00'));
-        // findFubAgent();
+        findFubAgent();
+        
         // (async () => {
         //     let res = await getAgentFubDetails();
         //     if(res.status){
@@ -52,7 +58,7 @@ export default function ClientBox({ type, address, price, pricearea, amenity, fu
         //     }
         // })();
         
-        // return () => true;
+        return () => true;
     }, []);
     const schema = yup.object().shape({
         schedule_time: yup.string().required("Please enter schedule time").label('Schedule Time'),
@@ -76,7 +82,7 @@ export default function ClientBox({ type, address, price, pricearea, amenity, fu
     const selectedDay = (val) =>{
         setSelectDate(val)
     };
-    
+    // console.log(agentForm)
     //request send modal
 
     const RequestSendModal = () => (
@@ -211,39 +217,43 @@ export default function ClientBox({ type, address, price, pricearea, amenity, fu
     //message agent modal
     const handleAgentMsg = async () => {
         setMessageModal(false);
-        const {firstName, lastName} = splitName(session.user.name);
-        let leadObj = {
-            person: {
-                // assignedUserId: 1, //NEED TO CHECK FOR AGENT ONLY NOT BROKER
-                // assignedTo: agent.listAgentFullName,
-                emails: [{isPrimary: true, type: 'work', value: session.user.email}],
-                firstName: firstName,
-                lastName: lastName,
-                stage: 'Lead',
-                sourceUrl: fubObj.propertyURL
-            },
-            property: fubObj.property,
-            type: type? type : 'Property Inquiry',
-            system: 'NextJS',
-            source: 'RushHome',
-            message: agentForm.message,
-        };
-        try{
-            const toastId = toast.loading('Loading...');
-            const res = await sendFubLeads(leadObj)
-            if(res.status){
-                setSendModal(true)
-                // alert("Leads send successfully")
-            }else{
-                toast.error('Request failed to send');
-            }
-            toast.dismiss(toastId);
-        } catch (error) {
-            // console.log(error)
-            toast.dismiss();
-            toast.error('Request failed. Please try again.');
-        };
-        reset();
+        if(agentForm.id != 0){
+            const {firstName, lastName} = splitName(session.user.name);
+            let leadObj = {
+                person: {
+                    // assignedUserId: 1, //NEED TO CHECK FOR AGENT ONLY NOT BROKER
+                    // assignedTo: agent.listAgentFullName,
+                    emails: [{isPrimary: true, type: 'work', value: session.user.email}],
+                    firstName: firstName,
+                    lastName: lastName,
+                    stage: 'Lead',
+                    sourceUrl: fubObj.propertyURL
+                },
+                property: fubObj.property,
+                type: type? type : 'Property Inquiry',
+                system: 'NextJS',
+                source: 'RushHome',
+                message: agentForm.message,
+            };
+            try{
+                const toastId = toast.loading('Loading...');
+                const res = await sendFubLeads(leadObj)
+                if(res.status){
+                    setSendModal(true)
+                    // alert("Leads send successfully")
+                }else{
+                    toast.error('Request failed to send');
+                }
+                toast.dismiss(toastId);
+            } catch (error) {
+                // console.log(error)
+                toast.dismiss();
+                toast.error('Request failed. Please try again.');
+            };
+            reset();
+        }else{
+            toast.error('Unable to send request.');
+        }
     }
     const AgentModal = () => (
         <div className={`modal fade ${messageModal? 'show' : ''}`} id="scheduleModal" style={{display: (messageModal? 'block' : 'none')}}>

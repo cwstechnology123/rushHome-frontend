@@ -14,7 +14,7 @@ import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 import { Toaster } from "react-hot-toast";
 
 export default function HomesForSale({ properties, stateCode, city,refKey, refValue, sendData, deviceType }) { 
-    console.log(deviceType)
+    // console.log(deviceType)
     const [propertyList, setPropertyList] = useState(properties);
     const [filterData, setFilterData] = useState([]);
     Geocode.setApiKey(process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN);
@@ -42,25 +42,25 @@ export default function HomesForSale({ properties, stateCode, city,refKey, refVa
     })
     // const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
     // const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/all/1/1000`, method : 'GET'}, fetcher);
-    useEffect(() => {
-        if(stateCode){
-            Geocode.fromAddress(`${stateCode.toUpperCase()}, ${city}`).then(
-                (response) => {
-                // console.log("Rsponse",response.results[0])
-                  const { lat, lng } = response.results[0].geometry.location;
-                //   console.log(lat, lng);
-                  setCenter({
-                    lat: lat,
-                    lng: lng,
-                  });
-                },
-                (error) => {
-                  console.error(error);
-                }
-            );
-        }
+    // useEffect(() => {
+    //     if(stateCode){
+    //         Geocode.fromAddress(`${stateCode.toUpperCase()}, ${city}`).then(
+    //             (response) => {
+    //             // console.log("Rsponse",response.results[0])
+    //               const { lat, lng } = response.results[0].geometry.location;
+    //             //   console.log(lat, lng);
+    //               setCenter({
+    //                 lat: lat,
+    //                 lng: lng,
+    //               });
+    //             },
+    //             (error) => {
+    //               console.error(error);
+    //             }
+    //         );
+    //     }
         
-    }, []);
+    // }, []);
     useEffect(()=>setFilterData(propertyList), [propertyList]);
     // console.log(filterData)
     return (

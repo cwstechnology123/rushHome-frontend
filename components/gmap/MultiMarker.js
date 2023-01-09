@@ -3,6 +3,7 @@ import { useState } from "react";
 import PopupView from "./popups/PopupView";
 import OverlayView from "./marker/OverlayView";
 import Link from 'next/link';
+import noImage from "../../public/no_picture_available.png";
 import Marker from './Marker';
 
 export default function MultiMarker({
@@ -27,9 +28,10 @@ export default function MultiMarker({
                     <div className='card-body p-0' style={{maxHeight:'30vh', overflowY: 'auto'}}>
                         {hotels.map(({properties}) => {
                             let hotel = properties.hotel;
+                            // console.log(hotel)
                             return (
                             <div key={`marker_${hotel.id}`} className='d-flex mb-2 border'>
-                                <Image src={hotel.listPictureURL} alt={`property for ${hotel.slug}`}  width={120} height={120} loading="lazy"/>
+                                <Image src={hotel.listPictureURL? hotel.listPictureURL : noImage.src} alt={`property for ${hotel.slug}`}  width={120} height={120} loading="lazy"/>
                                 <div className="grow p-2">
                                     <span className="font-weight-bold">
                                         {hotel.id && (

@@ -106,10 +106,10 @@ export default function NavbarHeader() {
                 {(session) ?
                   <>
                     <div className="header-btn">
-                      <div className="bell_box">
+                      {/* <div className="bell_box">
                         <i className="fa fa-bell-o" aria-hidden="true"></i>
                         <span></span>
-                      </div>
+                      </div> */}
                       <div className="profile_wraper headerbtn-toggle" onClick={toggleArrow}>
                         <Dropdown>
                           <Dropdown.Toggle id="dropdown-button-profile" className="profile_button style3">{profileTitle} <div id="moon" className={Sty.class}></div></Dropdown.Toggle>

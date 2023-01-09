@@ -58,10 +58,10 @@ export default function AgentDetail({ agent: { name, firstName, lastName, email,
                                 <img src="../assets/img/callus.jpg" /> + {phoneBlk.phone}
                             </p>)}
                             <p>
-                                <img src="../assets/img/agentemail.jpg" /> {email}
+                                <img src="../assets/img/agentemail.jpg" /> {phoneBlk.phone}
                             </p>
                             </div>
-                            <p> Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur adip iscing eliteous sedun amet. Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur ad Lorem ipsum dolor sit amet consec tetur aditonsi soom isotope elit esumo tempo incidunt labore dolore magna aliqu core tetur ad</p>
+                            <p dangerouslySetInnerHTML={{__html: phoneBlk.details}}></p>
                             <div className="ratting_box">
                             <ul>
                                 <li>
@@ -105,7 +105,7 @@ export default function AgentDetail({ agent: { name, firstName, lastName, email,
                         </div>
                         <h2>{firstName} Listings</h2>
                         <hr />
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p>
+                        {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p> */}
                         </div>
                     </div>
                     </div>
@@ -540,7 +540,7 @@ export default function AgentDetail({ agent: { name, firstName, lastName, email,
                             <div className="section-title style1 text-left mb-40">
                                 <h2>Past Transections</h2>
                                 <hr />
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p>
+                                {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. </p> */}
                             </div>
                         </div>
                     </div>

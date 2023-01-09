@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import OverlayView from "./marker/OverlayView";
 import PopupView from "./popups/PopupView";
+import noImage from "../../public/no_picture_available.png";
 
 export default function CustomSingleMarker({ hotel, map, highlight }) {
     // console.log(hotel)
@@ -14,7 +15,7 @@ export default function CustomSingleMarker({ hotel, map, highlight }) {
     const contentPopup = (hotel) =>{
         return (
             <div className="popup-bubble d-flex shadow bg-light text-white">
-                <Image src={hotel.listPictureURL} alt={`property for ${hotel.slug}`} width={120} height={120} loading="lazy"/>
+                <Image src={hotel.listPictureURL? hotel.listPictureURL : noImage.src} alt={`property for ${hotel.slug}`} width={120} height={120} loading="lazy"/>
                 <div className="grow p-2">
                     <span className="font-weight-bold">
                         {hotel.id && (

@@ -25,7 +25,7 @@ export default function PropertyAgentCard({ agent, address, slug }) {
                     <div className="media d-flex w-100">
                         <img src={src} className="align-self-center mr-3 img-circle" alt="Agent Image" style={{width:100, marginRight:10}} />
                         <div className="media-body text-left">
-                            <h5>{agent.listAgentFullName}</h5>
+                            <h5>{`${agent.listAgentFirstName} ${agent.listAgentLastName}`}</h5>
                             <h6>Rush<span style={{color: '#FFC107'}}>Home</span></h6>
                             {agent.listAgentEmail}
                             {(agent.listAgentOfficePhone!="") && (

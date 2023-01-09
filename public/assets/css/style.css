@@ -7653,12 +7653,12 @@ margin-left: 0px;}
     width: 100%;
 }
 .right_client select {
-    width: 100%;
+    width: auto !important;
     height: 100%;
     margin: 0;
     border: 0;
     outline: 1px solid #e1e1e1;
-    box-shadow: unset!important;
+    box-shadow: unset !important;
 }
 .right_client select:focus {
     outline: 1px solid #e1e1e1;
