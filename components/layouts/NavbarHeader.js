@@ -48,7 +48,7 @@ export default function NavbarHeader() {
     <header className="header-wrap">
       <Navbar expand="lg" collapseOnSelect>
         <Container>
-          <Navbar.Brand href="/" passHref={true}>
+          <Navbar.Brand href="/">
             <span className="logo_wraper"><img src="../assets/img/Black Rush home.png" alt="Black Rush home" /></span>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} style={{cursor: 'pointer'}}>
@@ -67,14 +67,14 @@ export default function NavbarHeader() {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav as={'ul'} className="mx-auto">
-                <Nav.Item as={'li'}><Nav.Link as={'a'} href="/homes-for-sale/delaware-de" className={(router.pathname == '/homes-for-sale/delaware-de' ? " active" : "")} onClick={(ev)=>handleBuyClick(ev, '/homes-for-sale/delaware-de')} passHref={true}>Buy</Nav.Link></Nav.Item>
-                <Nav.Item as={'li'}><Nav.Link as={'a'} href="/sell" className={(router.pathname == '/sell' ? " active" : "")} passHref={true}>Sell</Nav.Link></Nav.Item>
+                <Nav.Item as={'li'}><Nav.Link as={'a'} href="/homes-for-sale/delaware-de" className={(router.pathname == '/homes-for-sale/delaware-de' ? " active" : "")} onClick={(ev)=>handleBuyClick(ev, '/homes-for-sale/delaware-de')}>Buy</Nav.Link></Nav.Item>
+                <Nav.Item as={'li'}><Nav.Link as={'a'} href="/sell" className={(router.pathname == '/sell' ? " active" : "")}>Sell</Nav.Link></Nav.Item>
                 {
                   (session)?
                   (
                     <>
-                    {/* <Nav.Item as={'li'}><Nav.Link href="/client/dashboard" className={"nav-link" + (router.pathname == '/client/dashboard' ? " active" : "")} passHref={true}>Dashboard</Nav.Link></Nav.Item> */}
-                    <Nav.Item as={'li'}><Nav.Link as={'a'} href="/client/favorites" className={(router.pathname == '/client/favorites' ? " active" : "")} passHref={true}>Favorites</Nav.Link></Nav.Item>
+                    {/* <Nav.Item as={'li'}><Nav.Link href="/client/dashboard" className={"nav-link" + (router.pathname == '/client/dashboard' ? " active" : "")}>Dashboard</Nav.Link></Nav.Item> */}
+                    <Nav.Item as={'li'}><Nav.Link as={'a'} href="/client/favorites" className={(router.pathname == '/client/favorites' ? " active" : "")}>Favorites</Nav.Link></Nav.Item>
                     </>
                   )
                   :
@@ -86,12 +86,12 @@ export default function NavbarHeader() {
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu as={'ul'}>
-                        <Dropdown.Item as={'li'} className="nav-item"><Nav.Link href="/find-an-agent" className={(router.pathname == '/find-an-agent' ? " active" : "")} passHref={true}>Find an Agent</Nav.Link></Dropdown.Item>
-                        <Dropdown.Item as={'li'} className="nav-item"><Nav.Link href="/about-us?link=become-an-agent" passHref={true}>Become an Agent</Nav.Link></Dropdown.Item>
+                        <Dropdown.Item as={'li'} className="nav-item"><Nav.Link href="/find-an-agent" className={(router.pathname == '/find-an-agent' ? " active" : "")}>Find an Agent</Nav.Link></Dropdown.Item>
+                        <Dropdown.Item as={'li'} className="nav-item"><Nav.Link href="/about-us?link=become-an-agent">Become an Agent</Nav.Link></Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
-                    <Nav.Item as={'li'}><Nav.Link as={'a'} href="/about-us" className={"nav-link" + (router.pathname == '/about-us' ? " active" : "")} passHref={true}>About Us</Nav.Link></Nav.Item>
-                    <Nav.Item as={'li'}><Nav.Link as={'a'} href="/about-us?link=contact-us" className={"nav-link"} passHref={true}>Contact</Nav.Link></Nav.Item>
+                    <Nav.Item as={'li'}><Nav.Link as={'a'} href="/about-us" className={"nav-link" + (router.pathname == '/about-us' ? " active" : "")}>About Us</Nav.Link></Nav.Item>
+                    <Nav.Item as={'li'}><Nav.Link as={'a'} href="/about-us?link=contact-us" className={"nav-link"}>Contact</Nav.Link></Nav.Item>
                     <Nav.Item as={'li'} className="d-lg-none">
                       <button type="button" className={"btn" + (router.pathname == '/auth' || router.pathname == '/auth/client-signin' || router.pathname == '/auth/agent-signin' ? " style1" : " style3")} onClick={(e) => handleClick(e, "/auth")}>Sign In</button>
                     </Nav.Item>

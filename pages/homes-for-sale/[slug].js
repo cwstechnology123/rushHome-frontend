@@ -143,7 +143,7 @@ export async function getServerSideProps({ query, req, res }) {
 
     const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: sendData}
     const response = await fetchApi(payload)
-    console.log(response)
+    // console.log(response)
     if(response && response.data){
         return {
             props: {
