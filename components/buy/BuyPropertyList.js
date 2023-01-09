@@ -59,8 +59,10 @@ export default function BuyPropertyList({ properties, setHighlight }){
                 <div className="col-xl-3 col-lg-4 col-md-4">
                     <div className="filter-item-cat">
                         <select>
-                        <option value={2}>Sort By High To Low</option>
-                        <option value={3}>Sort By Low To High</option>
+                            <option value={1}>Newest to Oldest</option>
+                            <option value={2}>Oldest to Newest</option>
+                            <option value={3}>Price High to Low</option>
+                            <option value={4}>Price Low to High</option>
                         </select>
                     </div>
                 </div>

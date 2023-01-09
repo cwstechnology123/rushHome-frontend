@@ -410,16 +410,17 @@
 	width: 49%;
 	display: inline-block;
 }
-
-
-
-
 	.state_tabs ul {
 	width: 100%;
+    justify-content: space-around;
 	/* display: flex; */
+}
+.state_tabs ul li:last-child {
+    margin-right: 15px;
 }
 .state_tabs ul li {
 	width: 44%;
+    margin-bottom: 15px;
 }
 .state_tabs ul li button {
 	width: 100%;
@@ -1146,6 +1147,19 @@
     }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+    /* css responsive css by alam date : 09/01/2023 */
+    .img_box img {
+        border-radius: 20px !important;
+        width: 100%;
+        padding-top: 30px;
+    }
+    .about-content {
+        padding-top: 15px;
+    }
+    .about-img-wrap.img_box.seller_box {
+        margin-top: 50px;
+    }
+    /* css responsive css by alam date : 09/01/2023 */
 	.byfooter p.copyright-text {
 	font-size: 13px;
 }
@@ -1391,6 +1405,7 @@
     }
     .about-wrap.style1 .about-img-wrap {
         margin-bottom: 30px;
+        margin-top: 150px;
     }
     .about-wrap.style1 .about-img-wrap .about-img-one {
         width: calc(100% - 200px);
@@ -1533,6 +1548,14 @@
 }
 @media only screen and (max-width: 991px) {
     /* ============ header add css code date: 05/01/2023 =========== */
+    .top_slide_nav.new-top-slider-cls .right_slide_nav {
+        display: flex;
+    }
+    .top_slide_nav.new-top-slider-cls .left_nav_slide {
+        width: 50%;
+        display: flex;
+        align-items: center;
+    }
     .others-options {
         width: 100%;
         height: 45px;
@@ -1610,7 +1633,12 @@
     }
     .btn.style1 {
         background-color: #fdce64;
+        width: auto;
+        margin: 0 auto;
+    }
+    .state_tabs .nav-pills li .btn.style1 {
         width: 100%;
+        margin: 0 auto;
     }
     .dropdown-item.active, .dropdown-item:active {
         color: #fff;
@@ -1637,7 +1665,7 @@
         border-bottom: 4px solid #f6ce75;
         border-width: 6px;
         padding-bottom: 10px;
-        border-radius: 15px;
+        border-radius: 0;
     }
     /* ============ header add css code date: 05/01/2023 =========== */
 
@@ -1730,6 +1758,18 @@
 @media only screen and (max-width: 767px) {
 
     /*  ============ homes for sale page add css responsive max-width: 767px code by alam data:03/01/2023 ============ */
+    .top_slide_nav.new-top-slider-cls .btn.style2 {
+        width: auto;
+        margin-bottom: 0;
+    }
+    .top_slide_nav.new-top-slider-cls .btn.style3:first-child {
+        margin-left: 0;
+    }
+    .top_slide_nav.new-top-slider-cls .left_nav_slide {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
     .client_favbox {
         border: 0!important;
         border-radius: 10px;
@@ -1758,7 +1798,7 @@
     }
     .btn.style3.removeall {
         font-size: 12px;
-        padding: 5px;
+        padding: 4px;
         margin: 0;
         height: 100%;
     }

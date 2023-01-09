@@ -24,7 +24,7 @@ const BuyMap = ({
 }) => {
     //initialize
        
-    const [zoom, setZoom] = useState(5);
+    const [zoom, setZoom] = useState(initZoom? initZoom : 5);
     const [clicks, setClicks] = useState([]);
     const poly = useRef(null);
     const [haspoly, setHaspoly] = useState(false);

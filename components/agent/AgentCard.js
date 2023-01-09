@@ -8,7 +8,7 @@ export default function AgentCard({ agent }) {
     // const [src, setSrc] = useState(agent.picture?.original);
     // console.log(agent.picture)
     // console.log(src)
-    const phoneBlk = agentList.find(person => (person.email === agent.email));
+    const phoneBlk = agentList.find(person => (person.email === (agent.email).toLowerCase()));
     // console.log("Phone: ", phoneBlk);
     const src = agent.picture.original ?? defaultAgentImage.src;
     return (
@@ -51,7 +51,7 @@ export default function AgentCard({ agent }) {
                         </ul> */}
                     </div>
                     <div className="mail_Box">
-                        <p>{agent.email}</p>
+                        <p>{(agent.email).toLowerCase()}</p>
                         <span>{phoneBlk?.phone}</span>
                     </div>
                 </div>

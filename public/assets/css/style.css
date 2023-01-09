@@ -3893,6 +3893,11 @@ select {
 .property-card.style6 .property-img {
     position: relative;
 }
+.property-card.style3 .property-img {
+    height: 250px;
+    width: 100%;
+
+}
 .property-card.style3 .property-img .property-status,
 .property-card.style6 .property-img .property-status {
     position: absolute;
@@ -6226,9 +6231,13 @@ hr.left {margin: 20px 0;}
     z-index: -1 !important;
 }
 
-.city_height {height: 600px;}
-.city_height img {
+.city_height {
     height: 600px;
+    width: 100%;
+}
+.city_height img {
+    height: 100%;
+    width: 100%;
     object-fit: cover;
 }
 .content-title p {
@@ -6510,8 +6519,9 @@ color: #000000;}
 .city_map iframe {width: 100%; height: 500px;}
 .property-img img {
     border-radius: 20px;
-    height: 250px;
+    height: 100%;
     width: 100%;
+    object-fit: fill;
 }
 .demographi_box .hw-info p {
     text-align: center !important;
@@ -7653,12 +7663,12 @@ margin-left: 0px;}
     width: 100%;
 }
 .right_client select {
-    width: auto !important;
+    width: auto!important;
     height: 100%;
     margin: 0;
     border: 0;
     outline: 1px solid #e1e1e1;
-    box-shadow: unset !important;
+    box-shadow: unset!important;
 }
 .right_client select:focus {
     outline: 1px solid #e1e1e1;
@@ -7787,61 +7797,7 @@ ul.lsit-checked li span {
     color: #000;
     font-weight: 500;
 }
-[type="radio"]:checked,
-[type="radio"]:not(:checked) {
-    position: absolute;
-    left: -9999px;
-}
-[type="radio"]:checked + label,
-[type="radio"]:not(:checked) + label
-{
-    position: relative;
-    padding-left: 28px;
-    cursor: pointer;
-    line-height: 20px;
-    display: inline-block;
-    color: #000;
-    font-size: 16px;
-    font-weight: 500;
-}
-[type="radio"]:checked + label:before,
-[type="radio"]:not(:checked) + label:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 18px;
-    height: 18px;
-    border: 1px solid #ddd;
-    border-radius: 100%;
-    background: #fff;
-}
-[type="radio"]:checked + label:after,
-[type="radio"]:not(:checked) + label:after {
-    content: '';
-    width: 12px;
-    height: 12px;
-    background: #000000;
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    border-radius: 100%;
-    -webkit-transition: all 0.2s ease;
-    transition: all 0.2s ease;
-}
-[type="radio"]:not(:checked) + label:after {
-    opacity: 0;
-    -webkit-transform: scale(0);
-    transform: scale(0);
-}
-[type="radio"]:checked + label:after {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
-}
-form.check-list p {
-    text-align: left;
-}
+
 .form-group.py-3.sdfsdfd-dfd {
     display: flex;
     justify-content: space-around;
@@ -7855,8 +7811,117 @@ form.check-list p {
     background-color: #F2F2F2;
     color: #000;
 }
+button.btn.style3.active {
+    background: #333;
+    color: #fff;
+}
+/* ========= check box css code =============  */
+
+.form-control1 input[type="checkbox"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    appearance: none;
+    /* For iOS < 15 to remove gradient background */
+    background-color: #fff;
+    /* Not removed via appearance */
+    margin: 0;
+  }
+  .form-control1 input[type="checkbox"] {
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+    margin-right: 10px;
+  }
+  .form-control1 {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 500;
+    color: #000;
+  }
+  .form-control1 + .form-control1 {
+    margin-top: 1em;
+  }
+  .form-control1 input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+  }
+  .form-control1 input[type="checkbox"] {
+    /* ...existing styles */
+    display: grid;
+    place-content: center;
+  }
+  
+  .form-control1 input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+  }
+  
+  .form-control1 input[type="checkbox"]:checked::before {
+    transform: scale(1);
+  }
+  .form-control1 input[type="checkbox"]::before {
+    background-color: CanvasText;
+  }
+  .form-control1 input[type="checkbox"]::before {
+    transform-origin: bottom left;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  }
+
+/* ========= check box css code =============  */
+
+/* ========= input check box buttom ============ */
+/* ========= input check box buttom ============ */
+.about-img-wrap.img_box {
+    width: 100%;
+    height: 100%;
+}
+
+.about-img-wrap.img_box img {
+    width: 100%;
+    height: auto;
+}
+.all-home-type-btn label {
+    cursor: pointer;
+}
+.all-home-type-btn label input[type="checkbox"] {
+    display: none;
+}
+.all-home-type-btn label {
+    width: 100%;
+    max-width: calc(33% - 10px);
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+.all-home-type-btn label:nth-child(3){
+    margin-right: 0;
+}
+.all-home-type-btn label span {
+    padding: 7px 0px;
+    display: inherit;
+    font-size: 14px;
+}
+.all-home-type-btn label input[type="checkbox"]:checked  ~ span{
+    background-color: #333;
+    color: #fff;
+}
 /*  ============ advance filter page add css code by alam data:03/01/2023 ============ */
-
-
 
 

@@ -285,7 +285,29 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
                         <form>
                             
                             <label className="mb-3 h5" style={{color: "#000"}}>Home Type</label>
-                            <div className="form-group">
+                            <div className="all-home-type-btn">
+                                <label htmlfor type="checkbox" htmlFor="homes">
+                                    <input type="checkbox" id="homes" name="types[]" />
+                                    <span className="btn style3">Houses</span>
+                                </label>
+                                <label htmlfor type="checkbox" htmlFor="townhome">
+                                    <input type="checkbox" id="townhome" name="types[]" />
+                                    <span className="btn style3">Townhome</span>
+                                </label>
+                                <label htmlfor type="checkbox" htmlFor="condo">
+                                    <input type="checkbox" id="condo" name="types[]" />
+                                    <span className="btn style3">Condo</span>
+                                </label>
+                                <label htmlfor type="checkbox" htmlFor="land">
+                                    <input type="checkbox" id="land" name="types[]" />
+                                    <span className="btn style3">Land</span>
+                                </label>
+                                <label htmlfor type="checkbox" htmlFor="multi-family">
+                                    <input type="checkbox" id="multi-family" name="types[]" />
+                                    <span className="btn style3">Multi-Family</span>
+                                </label>
+                            </div>
+                            {/* <div className="form-group">
                                 <div className="form-check-inline m-2">
                                     <label className="form-check-label">
                                     <input type="checkbox" className="form-check-input" name="types[]" id="homes" defaultValue={'houses'} onChange={()=>handleOnChecked('types[], types')}/> Houses
@@ -311,7 +333,7 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
                                     <input type="checkbox" className="form-check-input" name="types[]" id="multi-family" defaultValue={'multi-family'} onChange={()=>handleOnChecked('types[], types')} /> Multi-Family
                                     </label>
                                 </div>
-                            </div>
+                            </div> */}
                             <hr/>
                             <div className="form-group mb-3">
                                 <label className="mb-3 h5" style={{color: "#000"}}>Square Footage</label>
@@ -400,28 +422,25 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
                             <hr/>
                             <div className="form-group mb-3">
                                 <h3 className="mb-3">Features</h3>
-                                <form action="#" className="check-list">
-                                    <p>
-                                        <input type="radio" id="test1" name="radio-group" defaultChecked />
-                                        <label htmlFor="test1">Basement</label>
-                                    </p>
-                                    <p>
-                                        <input type="radio" id="test2" name="radio-group" />
-                                        <label htmlFor="test2">Single Story</label>
-                                    </p>
-                                    <p>
-                                        <input type="radio" id="test3" name="radio-group" />
-                                        <label htmlFor="test3">Senior Community</label>
-                                    </p>
-                                    <p>
-                                        <input type="radio" id="test4" name="radio-group" />
-                                        <label htmlFor="test4">New Construction Only</label>
-                                    </p>
-                                    <p>
-                                        <input type="radio" id="test5" name="radio-group" />
-                                        <label htmlFor="test5">Bedroom on Main</label>
-                                    </p>
-                                </form>
+                                <div className="check-list">
+                                    <div className="checkbox-div">
+                                        <label className="form-control1">
+                                            <input type="checkbox" name="checkbox" defaultChecked /> Basement
+                                        </label>
+                                        <label className="form-control1">
+                                            <input type="checkbox" name="checkbox" /> Single Story
+                                        </label>
+                                        <label className="form-control1">
+                                            <input type="checkbox" name="checkbox" /> Senior Community
+                                        </label>
+                                        <label className="form-control1">
+                                            <input type="checkbox" name="checkbox" /> New Construction Only
+                                        </label>
+                                        <label className="form-control1">
+                                            <input type="checkbox" name="checkbox" /> Bedroom on Main
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                             <hr/>
                         </form>

@@ -1,11 +1,12 @@
 import Image from "next/image";
 import useSWR from "swr";
 import { useRouter } from "next/router"
-import List from "../../components/property/List";
+import { setCookie } from 'cookies-next';
 import Grid from "../../components/skeletonLoader/Grid";
 import cityList from "../../utils/cityList.json"
 import stateNames from "../../utils/states_hash.json"
 import { apiBaseUrl, fetchApi } from "../../utils/fetchApi";
+import PropertyCard from "../../components/property/PropertyCard";
 
 export default function CityDetails() {
     const router = useRouter();
@@ -18,6 +19,12 @@ export default function CityDetails() {
         city: cityDetail?.name,
         page_limit: 12
     }}, fetcher);
+
+    const handleClick = async (e) => {
+        e.preventDefault()
+        setCookie('search', {refKey: "city", refVal: cityDetail.name});
+        router.push('/homes-for-sale/'+cityDetail.slug) 
+      }
 
     if(cityDetail){
         return (
@@ -98,9 +105,16 @@ export default function CityDetails() {
                             </div>
                         </div>
                         {(isLoading) ?<Grid item={3} /> : (data) ?
-                            <>
-                            <List properties={data.properties? data.properties : null} stateCode={cityDetail?.slug} />
-                            </>
+                            <div className="row justify-content-center">
+                                {data.properties && data.properties.slice(0, 6).map((property, i) => (
+                                    <div key={`first${i}`} className="col-xl-4 col-lg-6 col-md-6">
+                                        <PropertyCard property={property}/>
+                                    </div>
+                                ))}
+                                <div className="col-md-12 text-center">
+                                    <button type="button" onClick={(e) => handleClick(e)} className="btn style1 button_custom">See All Properties <i className="flaticon-right-arrow" /></button>
+                                </div>
+                            </div>
                             :
                             <>
                             <div className="col-md-12 text-center">

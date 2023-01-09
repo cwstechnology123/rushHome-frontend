@@ -42,25 +42,25 @@ export default function HomesForSale({ properties, stateCode, city,refKey, refVa
     })
     // const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
     // const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/all/1/1000`, method : 'GET'}, fetcher);
-    // useEffect(() => {
-    //     if(stateCode){
-    //         Geocode.fromAddress(`${stateCode.toUpperCase()}, ${city}`).then(
-    //             (response) => {
-    //             // console.log("Rsponse",response.results[0])
-    //               const { lat, lng } = response.results[0].geometry.location;
-    //             //   console.log(lat, lng);
-    //               setCenter({
-    //                 lat: lat,
-    //                 lng: lng,
-    //               });
-    //             },
-    //             (error) => {
-    //               console.error(error);
-    //             }
-    //         );
-    //     }
+    useEffect(() => {
+        if(stateCode){
+            Geocode.fromAddress(`${stateCode.toUpperCase()}, ${city}`).then(
+                (response) => {
+                // console.log("Rsponse",response.results[0])
+                  const { lat, lng } = response.results[0].geometry.location;
+                //   console.log(lat, lng);
+                  setCenter({
+                    lat: lat,
+                    lng: lng,
+                  });
+                },
+                (error) => {
+                  console.error(error);
+                }
+            );
+        }
         
-    // }, []);
+    }, []);
     useEffect(()=>setFilterData(propertyList), [propertyList]);
     // console.log(filterData)
     return (
@@ -77,7 +77,7 @@ export default function HomesForSale({ properties, stateCode, city,refKey, refVa
                             {deviceType==='desktop' && (
                                 <div id="mapBox" style={{width:'100%', height: mapHeight, position: 'relative'}}>
                                     <BuyMap
-                                        initZoom={stateCode? ((refKey==='City')? 10 : 8) : 0}
+                                        initZoom={stateCode? ((refKey==='city')? 10 : 8) : 0}
                                         center={center}
                                         setCenter={setCenter}
                                         setMapView={setMapView}
