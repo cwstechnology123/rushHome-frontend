@@ -14,8 +14,6 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
 
     const router = useRouter();
     const [form, setForm] = useState({
-        city: "",
-        county: "",
         stateOrProvince: "de",
         mlsStatus: "",
         bedroomsTotal: "",
@@ -60,21 +58,36 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
         }
     };
 
+    const resetAll = () => {
+        setForm({
+            ...form,
+            mlsStatus: "",
+            bedroomsTotal: "",
+            bathroomsTotalInteger: "",
+            minListPrice: 0,
+            maxListPrice: 0,
+            page_limit: 1000
+        })
+    }
     const handleOnSelectOptChange = async (selectedOption) => {
-        // const path = selectedOption.value
-        // if(selectedOption){
-        //     selectedOption.map(item => {
-        //         console.log(item.value)
-        //     })
-        // }
         console.log(selectedOption.value)
         const searchValue = JSON.parse(selectedOption.value);
         setCookie('search', searchValue);
-        setForm({...form, [searchValue.refKey]: searchValue.refVal, ['stateOrProvince']: searchValue.alphaCode});
-        // handleMainSearch();
-        // // router.push(searchValue.path)
-        // router.reload(searchValue.path)
+        resetAll();
+        const toastId = toast.loading("Loading....");
+        sendData = {
+            [searchValue.refKey] : searchValue.refVal,
+            page_limit: 1000
+        }
+        const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: sendData}
+        const response = await fetchApi(payload);
+        toast.dismiss(toastId)
+        if(response && response.data){
+            searchValue.refKey !== 'address' ? setPropertyList(response.data?.properties) : '';
+            router.push(searchValue.path)
+        }
     };
+    
     const handleMainSearch = async () => {
         
         // console.log({...form, ...sendData})
@@ -135,7 +148,9 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
                                     <div className="col-lg-8 col-md-7 statusBeds">
                                         <div className="row">
                                             <div className="col-3">
-                                                <select className="form-control" id="main_status" onChange={(ev)=>handleFormChange('mlsStatus', ev.target.value || "")}>
+                                                <select className="form-control" id="main_status"
+                                                value={form.mlsStatus}
+                                                onChange={(ev)=>handleFormChange('mlsStatus', ev.target.value || "")}>
                                                     <option value={''}>Status</option>
                                                     <option value={'active'}>Active</option>
                                                     <option value={'coming soon'}>Coming Soon</option>
@@ -156,7 +171,9 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
                                                 /> */}
                                             </div>
                                             <div className="col-3">
-                                                <select className="form-control" id="main_bed" onChange={(ev)=>handleFormChange('bedroomsTotal', ev.target.value || "")}>
+                                                <select className="form-control" id="main_bed" 
+                                                value={form.bedroomsTotal}
+                                                onChange={(ev)=>handleFormChange('bedroomsTotal', ev.target.value || "")}>
                                                     <option value={''}>Bed</option>
                                                     <option value={'any'}>Any</option>
                                                     <option value={'1'}>1+</option>
@@ -183,7 +200,9 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
                                                 /> */}
                                             </div>
                                             <div className="col-3">
-                                                <select className="form-control" id="main_bath" onChange={(ev)=>handleFormChange('bathroomsTotalInteger', ev.target.value || "")}>
+                                                <select className="form-control" id="main_bath" 
+                                                value={form.bathroomsTotalInteger}
+                                                onChange={(ev)=>handleFormChange('bathroomsTotalInteger', ev.target.value || "")}>
                                                     <option value={''}>Baths</option>
                                                     <option value={'any'}>Any</option>
                                                     <option value={'1'}>1+</option>
