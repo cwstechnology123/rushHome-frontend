@@ -126,7 +126,8 @@ export default function Favorites() {
                 {(propertyList && propertyList.properties && propertyList.properties.length) ?
                 <button type="button" className="btn style3 removeall" 
                 onClick={removeAllHandler}><i className="fa fa-trash" aria-hidden="true" /> Remove all</button>
-                :<></>}
+                :<></>
+                }
                 </div>
             </div>
             </div>
