@@ -12,7 +12,7 @@ import PropertyCard from "../../components/property/PropertyCard";
 
 export default function AgentDetail({ agent: { name, firstName, lastName, email, phone, picture } }) {
     const [src, setSrc] = useState(picture.original);
-    const phoneBlk = agentList.find(person => (person.email === email));
+    const phoneBlk = agentList.find(person => (person.email === email.toLowerCase()));
 
     const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
     const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/agent`, method : 'POST', data: {listAgentEmail: email, mlsStatus: "ACTIVE"}}, fetcher);
@@ -63,11 +63,11 @@ export default function AgentDetail({ agent: { name, firstName, lastName, email,
                             </h2>
                             <div className="callemail_box">
                                 {phoneBlk?.phone && (<p>
-                                <img src="../assets/img/callus.jpg" /> + {phoneBlk.phone}
-                            </p>)}
-                            <p>
-                                <img src="../assets/img/agentemail.jpg" /> {phoneBlk.email}
-                            </p>
+                                    <img src="../assets/img/callus.jpg" /> + {phoneBlk.phone}
+                                </p>)}
+                                {phoneBlk?.email && (<p>
+                                    <img src="../assets/img/agentemail.jpg" /> {phoneBlk.email}
+                                </p>)}
                             </div>
                             <p dangerouslySetInnerHTML={{__html: phoneBlk.details}}></p>
                             <div className="ratting_box">
@@ -84,10 +84,10 @@ export default function AgentDetail({ agent: { name, firstName, lastName, email,
                                 <h2>54</h2>
                                 <p>Active Listing</p>
                                 </li>
-                                <li>
+                                {/* <li>
                                 <h2>4.9</h2>
                                 <p>Ratings</p>
-                                </li>
+                                </li> */}
                             </ul>
                             </div>
                         </div>
