@@ -110,13 +110,12 @@ export default function SignUp() {
                                 <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} {...register("confirm_password")} id="confirm_password" placeholder="Confirm Password" />
                                 <span className="text-danger">{errors.confirm_password?.message}</span>
                             </div>
-                            
+                        </div>
+                        <div className="col-md-12 text-center mb-3">
+                            <button type="submit" disabled={isLoading} className="btn style1 button_agent w-100">Sign Up</button>
                         </div>
                         <div className="col-md-12 text-center">
-                            <button type="submit" disabled={isLoading} className="btn style1 button_agent">Sign Up</button>
-                        </div>
-                        <div className="col-md-12 text-center">
-                            <button type="button" className="btn style1 button_agent" onClick={() => signIn("google", { callbackUrl: '/client/dashboard' })}><span className="googleicon"><img src="assets/img/googleicon.png" /></span>Continue with Google</button>
+                            <button type="button" className="btn style1 button_agent w-100" onClick={() => signIn("google", { callbackUrl: '/client/dashboard' })}><span className="googleicon"><img src="assets/img/googleicon.png" /></span>Continue with Google</button>
                         </div>
                         <p className="policy_content">Already have an account? <Link href="/auth"> Login</Link></p>
                         </form>

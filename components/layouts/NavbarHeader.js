@@ -8,13 +8,9 @@ import { setCookie, deleteCookie } from 'cookies-next';
 
 export default function NavbarHeader() {
   const { data: session } = useSession();
-  const [showMe, setShowMe] = useState(false);
   const router = useRouter();
-  function toggle(){
-    setShowMe(!showMe);
-  }
-  const handleClick = async (e, path) => {
-    e.preventDefault()
+  const handleClick = async (path) => {
+    // e.preventDefault()
     if (path === "/signup") {
       router.push(path)
     }
@@ -22,7 +18,7 @@ export default function NavbarHeader() {
       router.push(path)
     }
     else if (path === "/signout") {
-      toggle()
+      // toggle()
       deleteCookie('rh_user');
       const data = await signOut({redirect: false, callbackUrl: "/"})
       router.push(data.url)
@@ -92,12 +88,18 @@ export default function NavbarHeader() {
                     </Dropdown>
                     <Nav.Item as={'li'}><Nav.Link as={'a'} href="/about-us" className={"nav-link" + (router.pathname == '/about-us' ? " active" : "")}>About Us</Nav.Link></Nav.Item>
                     <Nav.Item as={'li'}><Nav.Link as={'a'} href="/about-us?link=contact-us" className={"nav-link"}>Contact</Nav.Link></Nav.Item>
-                    <Nav.Item as={'li'} className="d-lg-none">
+                    {/* <Nav.Item as={'li'} className="d-lg-none">
                       <button type="button" className={"btn" + (router.pathname == '/auth' || router.pathname == '/auth/client-signin' || router.pathname == '/auth/agent-signin' ? " style1" : " style3")} onClick={(e) => handleClick(e, "/auth")}>Sign In</button>
                     </Nav.Item>
                     <Nav.Item as={'li'} className="d-lg-none">
                       <button type="button" className={"btn" + (router.pathname != '/signup' && (router.pathname == '/auth' || router.pathname == '/auth/client-signin' || router.pathname == '/auth/agent-signin') ? " style3" : " style1")} onClick={(e) => handleClick(e, "/signup")}>Sign Up</button>  
-                    </Nav.Item>
+                    </Nav.Item> */}
+                    <Nav.Item as={'li'} className="d-lg-none">
+                        <Nav.Link as={'a'} className="nav-link btn style1 w-100" onClick={(e) => handleClick("/auth")}>Sign In</Nav.Link>
+                      </Nav.Item>
+                      <Nav.Item as={'li'} className="d-lg-none">
+                        <Nav.Link as={'a'} className="nav-link btn style3" onClick={(e) => handleClick("/signup")}>Sign Up</Nav.Link>
+                      </Nav.Item>
                     </>
                   )
                 }
@@ -127,6 +129,7 @@ export default function NavbarHeader() {
                     <div className="header-btn md-none">
                       <button type="button" className={"btn" + (router.pathname == '/auth' || router.pathname == '/auth/client-signin' || router.pathname == '/auth/agent-signin' ? " style1" : " style3")} onClick={(e) => handleClick(e, "/auth")}>Sign In</button>
                       <button type="button" className={"btn" + (router.pathname != '/signup' && (router.pathname == '/auth' || router.pathname == '/auth/client-signin' || router.pathname == '/auth/agent-signin') ? " style3" : " style1")}  onClick={(e) => handleClick(e, "/signup")}>Sign Up</button>
+                      
                     </div>
                   </>
                 }

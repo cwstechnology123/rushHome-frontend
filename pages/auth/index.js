@@ -30,11 +30,11 @@ export default function SignInOpt() {
                         <div className="Login_img">
                         <Image width={100} height={100} layout="responsive" src="/assets/img/login_signupbg.png" alt="Login"/>
                         </div>
-                        <div className="col-md-12 text-center">
-                            <button type="button" className="btn style1 button_agent" onClick={(e) => handleClick(e, "/auth/agent-signin")}>Rush Home Agent</button>
+                        <div className="col-md-12 text-center mb-3">
+                            <button type="button" className="btn style1 button_agent w-100" onClick={(e) => handleClick(e, "/auth/agent-signin")}>Rush Home Agent</button>
                         </div>
                         <div className="col-md-12 text-center">
-                            <button type="button" className="btn style1 button_agent" onClick={(e) => handleClick(e, "/auth/client-signin")}>Buyer or Seller</button>
+                            <button type="button" className="btn style1 button_agent w-100" onClick={(e) => handleClick(e, "/auth/client-signin")}>Buyer or Seller</button>
                         </div>
                         <p className="policy_content">I accept Rush Home Terms of Service &amp; Privacy Policy</p>
                     </div>
