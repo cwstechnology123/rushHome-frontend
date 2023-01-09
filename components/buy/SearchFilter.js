@@ -2,8 +2,6 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { Button, Dropdown, Form, Offcanvas } from "react-bootstrap";
 import { BsFilterLeft } from "react-icons/bs";
-import { BiSearch } from "react-icons/bi";
-import { priceFilter } from "../../utils/propertyFilters";
 import AsyncSelect from 'react-select/async';
 import { apiBaseUrl, fetchApi } from '../../utils/fetchApi';
 import { setCookie } from 'cookies-next';
@@ -89,13 +87,10 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
     };
     
     const handleMainSearch = async () => {
-        
-        // console.log({...form, ...sendData})
         const toastId = toast.loading("Loading....");
         const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: {...form, ...sendData}}
         const response = await fetchApi(payload);
         toast.dismiss(toastId)
-        // console.log(response)
         if(response && response.data){
             setPropertyList(response.data?.properties);
         }
@@ -156,19 +151,6 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
                                                     <option value={'coming soon'}>Coming Soon</option>
                                                     <option value={'pending'}>Pending</option>
                                                 </select>
-                                                {/* <Select
-                                                    components={{ IndicatorSeparator:() => null }}
-                                                    isClearable={true}
-                                                    isSearchable={false}
-                                                    id="main_status"
-                                                    placeholder="Status"
-                                                    onChange={(ev)=>handleFormChange('status', ev?.value || "")}
-                                                    options={[
-                                                        {value: "active", label: "Active"},
-                                                        {value: "coming soon", label: "Coming Soon"},
-                                                        {value: "pending", label: "Pending"}
-                                                    ]}
-                                                /> */}
                                             </div>
                                             <div className="col-3">
                                                 <select className="form-control" id="main_bed" 
@@ -182,22 +164,6 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
                                                     <option value={'44'}>4+</option>
                                                     <option value={'5'}>5+</option>
                                                 </select>
-                                                {/* <Select
-                                                    components={{ IndicatorSeparator:() => null }}
-                                                    isClearable={true}
-                                                    isSearchable={false}
-                                                    id="main_bed"
-                                                    placeholder="Beds"
-                                                    onChange={(ev)=>handleFormChange('beds', ev?.value || "")}
-                                                    options={[
-                                                        {value: "", label: "Any"},
-                                                        {value: "1", label: "1+"},
-                                                        {value: "2", label: "2+"},
-                                                        {value: "3", label: "3+"},
-                                                        {value: "4", label: "4+"},
-                                                        {value: "5", label: "5+"}
-                                                    ]}
-                                                /> */}
                                             </div>
                                             <div className="col-3">
                                                 <select className="form-control" id="main_bath" 
@@ -211,22 +177,6 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
                                                     <option value={'44'}>4+</option>
                                                     <option value={'5'}>5+</option>
                                                 </select>
-                                                {/* <Select
-                                                    components={{ IndicatorSeparator:() => null }}
-                                                    isClearable={true}
-                                                    isSearchable={false}
-                                                    id="main_bath"
-                                                    placeholder="Baths"
-                                                    onChange={(ev)=>handleFormChange('baths', ev?.value || "")}
-                                                    options={[
-                                                        {value: "", label: "Any"},
-                                                        {value: "1", label: "1+"},
-                                                        {value: "2", label: "2+"},
-                                                        {value: "3", label: "3+"},
-                                                        {value: "4", label: "4+"},
-                                                        {value: "5", label: "5+"}
-                                                    ]}
-                                                /> */}
                                             </div>
                                             <div className="col-3">
                                                 <Dropdown>
@@ -258,9 +208,9 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
                                         </div>
                                     </div>
                                     <div className="col-lg-4 col-md-5 col-12">
-                                        <button type="button" className="btn refresh_button" onClick={handleSidebar}>
+                                        {/* <button type="button" className="btn refresh_button" onClick={handleSidebar}>
                                             <BsFilterLeft/>
-                                        </button>
+                                        </button> */}
                                         <button type="submit" className="btn style2 search_top" onClick={(ev)=>{ev.preventDefault();handleMainSearch()}}>Search</button>
                                         <button type="reset" className="btn refresh_button">
                                             <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="currentColor" className="bi bi-arrow-clockwise" viewBox="0 0 16 16">
@@ -307,33 +257,7 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
                                     <span className="btn style3">Multi-Family</span>
                                 </label>
                             </div>
-                            {/* <div className="form-group">
-                                <div className="form-check-inline m-2">
-                                    <label className="form-check-label">
-                                    <input type="checkbox" className="form-check-input" name="types[]" id="homes" defaultValue={'houses'} onChange={()=>handleOnChecked('types[], types')}/> Houses
-                                    </label>
-                                </div>
-                                <div className="form-check-inline m-2">
-                                    <label className="form-check-label">
-                                    <input type="checkbox" className="form-check-input" name="types[]" id="homes" onChange={()=>handleOnChecked('types[], types')} defaultValue={'townhome'} /> Townhome
-                                    </label>
-                                </div>
-                                <div className="form-check-inline m-2">
-                                    <label className="form-check-label">
-                                    <input type="checkbox" className="form-check-input" name="types[]" id="condo" defaultValue={'condo'} onChange={()=>handleOnChecked('types[], types')} /> Condo
-                                    </label>
-                                </div>
-                                <div className="form-check-inline m-2">
-                                    <label className="form-check-label">
-                                    <input type="checkbox" className="form-check-input" name="types[]" id="land" defaultValue={'land'} onChange={()=>handleOnChecked('types[], types')} /> Land
-                                    </label>
-                                </div>
-                                <div className="form-check-inline m-2">
-                                    <label className="form-check-label">
-                                    <input type="checkbox" className="form-check-input" name="types[]" id="multi-family" defaultValue={'multi-family'} onChange={()=>handleOnChecked('types[], types')} /> Multi-Family
-                                    </label>
-                                </div>
-                            </div> */}
+                            {/* onChange={()=>handleOnChecked('types[], types')} */}
                             <hr/>
                             <div className="form-group mb-3">
                                 <label className="mb-3 h5" style={{color: "#000"}}>Square Footage</label>
@@ -344,15 +268,6 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
                                 </div>
                             </div>
                             <hr/>
-                            {/* <div className="row mb-3">
-                                
-                                <label className="mb-3 h5" style={{color: "#000"}}>Lot Size</label>
-                                <div className="d-flex align-items-center">
-                                    <input type={'number'} className="form-control" id="sb_min_lot" placeholder="Min Lot"/>
-                                    <span className="mx-1">-</span>
-                                    <input type={'number'} className="form-control" id="sb_max_lot" placeholder="Max Lot"/>
-                                </div>
-                            </div> */}
                             <div className="row mb-3 justify-content-center align-items-center">
                                 <div className="col-4">
                                     <div className="form-group sdas">
@@ -412,12 +327,6 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
                                         </div>
                                     </div>
                                 </div>
-                                {/* <label className="mb-3 h5" style={{color: "#000"}}>Year Build</label>
-                                <div className="d-flex align-items-center">
-                                    <input type={'number'} className="form-control" id="sb_min_year" placeholder="Min Year"/>
-                                    <span className="mx-1">-</span>
-                                    <input type={'number'} className="form-control" id="sb_max_year" placeholder="Max Year"/>
-                                </div> */}
                             </div>
                             <hr/>
                             <div className="form-group mb-3">

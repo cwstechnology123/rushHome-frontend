@@ -6,8 +6,9 @@ export default function BuyFooter(){
     const router = useRouter();
     const handleBuyClick = async (e, city, path) => {
         e.preventDefault()
-        setCookie('search', {refKey: "city", refVal: 'de'});
+        setCookie('search', {refKey: "city", refVal: city});
         router.push(path) 
+        // router.replace(path).then(() => router.reload());
     }
     if(router.pathname != '/auth' && router.pathname != '/auth/client-signin' && router.pathname != '/auth/agent-signin' && router.pathname != '/signup'){
         return (
