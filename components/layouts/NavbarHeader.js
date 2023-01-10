@@ -9,8 +9,8 @@ import { setCookie, deleteCookie } from 'cookies-next';
 export default function NavbarHeader() {
   const { data: session } = useSession();
   const router = useRouter();
-  const handleClick = async (path) => {
-    // e.preventDefault()
+  const handleClick = async (e, path) => {
+    e.preventDefault()
     if (path === "/signup") {
       router.push(path)
     }
@@ -95,10 +95,10 @@ export default function NavbarHeader() {
                       <button type="button" className={"btn" + (router.pathname != '/signup' && (router.pathname == '/auth' || router.pathname == '/auth/client-signin' || router.pathname == '/auth/agent-signin') ? " style3" : " style1")} onClick={(e) => handleClick(e, "/signup")}>Sign Up</button>  
                     </Nav.Item> */}
                     <Nav.Item as={'li'} className="d-lg-none">
-                        <Nav.Link as={'a'} className="nav-link btn style1 w-100" onClick={(e) => handleClick("/auth")}>Sign In</Nav.Link>
+                        <Nav.Link as={'a'} className="nav-link btn style1 w-100" onClick={(e) => handleClick(e,"/auth")}>Sign In</Nav.Link>
                       </Nav.Item>
                       <Nav.Item as={'li'} className="d-lg-none">
-                        <Nav.Link as={'a'} className="nav-link btn style3" onClick={(e) => handleClick("/signup")}>Sign Up</Nav.Link>
+                        <Nav.Link as={'a'} className="nav-link btn style3" onClick={(e) => handleClick(e,"/signup")}>Sign Up</Nav.Link>
                       </Nav.Item>
                     </>
                   )
