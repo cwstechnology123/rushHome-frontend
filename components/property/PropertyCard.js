@@ -12,7 +12,7 @@ const PropertyCard = ({
       listingAgreementType,
       listPrice,
       bedroomsTotal,
-      bathroomsTotal,
+      bathroomsTotalInteger,
       areaTotal,
       slug,
       county,
@@ -47,7 +47,7 @@ const PropertyCard = ({
                     <h3 className="text-dark text-uppercase" style={{whiteSpace: 'pre-wrap'}}>{fullStreetAddress ? `${fullStreetAddress}\n${city}, ${stateNames[stateOrProvince]} ${postalCode}`: ucfirst(county)}</h3>
                     <ul className="property-metainfo list-style">
                         <li key={`bed${id}`}><i className="flaticon-double-bed" />{bedroomsTotal? bedroomsTotal : '-'} Br</li>
-                        <li key={`bath${id}`}><i className="flaticon-bath-tub" />{bathroomsTotal? bathroomsTotal : '-'} Ba</li>
+                        <li key={`bath${id}`}><i className="flaticon-bath-tub" />{bathroomsTotalInteger? bathroomsTotalInteger : '-'} Ba</li>
                         <li key={`square${id}`}><i className="flaticon-square" />{areaTotal? Number(areaTotal).toLocaleString('en-US') : '-'} Sq.Ft</li>
                         <li key={`home${id}`}><i className="flaticon-home" />{totalGarageAndParkingSpaces? totalGarageAndParkingSpaces : '-'} Gr</li>
                     </ul>
