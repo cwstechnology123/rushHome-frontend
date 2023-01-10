@@ -44,12 +44,6 @@ export default function PropertyAmenities({ amenities }) {
                             {item}
                             </li>
                         ))}
-                        {/* {amenities.parkingTypes && (
-                            <li>
-                            <i className="fa fa-check"  />
-                            {amenities.parkingTypes}
-                            </li>
-                        )} */}
                         {(amenities?.basementYN && amenities.basementYN=='Y') && (
                             <li key={`bsemnt-yn`}>
                             <i className="fa fa-check"  />

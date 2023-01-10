@@ -36,7 +36,7 @@ export default function PropertyHeader({ saved, mlsListDate, price, area, addres
             </div>
             <div className="right_slide_nav">
             <button type="button" className="btn style3 button_top" onClick={handleSave}>
-                <i className={`fa fa-heart${saved? '' : '-o'}`} aria-hidden="true" style={{color: saved? 'crimson !important' : ''}} /> Saved </button>
+                <i className={`fa fa-heart${saved? '' : '-o'}`} aria-hidden="true" style={{color: saved? 'crimson !important' : 'white !important'}} /> Saved </button>
             <RWebShare
                 data={info}
                 onClick={() => console.log("shared successfully!")}
@@ -44,8 +44,6 @@ export default function PropertyHeader({ saved, mlsListDate, price, area, addres
             >
                 <button type="button" className="btn style3 button_top" ><i className="fa fa-share" aria-hidden="true" /> Share </button>
             </RWebShare>
-                {/* <button type="button" className="btn style3 button_top" onClick={handleShare}>
-                <i className="fa fa-share" aria-hidden="true" /> Share </button> */}
             <button type="button" className="btn style3 button_top" onClick={handlePrint}>
                 <i className="fa fa-print" aria-hidden="true" /> Print </button>
             </div>
