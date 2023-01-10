@@ -175,11 +175,11 @@ export default function PropertyDetails({
             return (
             <>
                 <NonAccount address={`${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`} fubObj={fubObj}/>
-                <PropertyAgentCard 
+                {(agent.listAgentEmail.endsWith("@rushhome.com")) && <PropertyAgentCard 
                     agent={agent} 
                     address={`${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`}
                     slug={slug}
-                />
+                />}
             </>
             )
         }
