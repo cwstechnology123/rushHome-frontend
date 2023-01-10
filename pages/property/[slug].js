@@ -61,13 +61,29 @@ export default function PropertyDetails({
         taxAnnualAmount
     }
  }){
+    
     const router = useRouter();
     const componentRef = useRef();
     const { data: session, loading } = useSession();
     const [saved, setSaved] = useState(false);
     const [fubObj, setFubObj] = useState({});
     const [shareInfo, setShareInfo] = useState({});
-    console.log(agent)
+    if(!id){
+        return (
+            <>
+            <section className="property-slider-wrap pb-75 property_wraper">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12 my-5 text-center">
+                            <h3 className="font-weight-bold text-center text-danger">Property not found...</h3>
+                            <button type="button" className="btn btn-info" onClick={()=>{router.push('/')}}>Go Back</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </>
+        )
+    }
     //  SETTING FUB DATA OBJ
     useEffect(() => {
         setFubObj({
@@ -467,6 +483,8 @@ export default function PropertyDetails({
 
         {/* SIMILAR HOMES */}
         <SimilarHomes 
+            geography={geography}
+            city={city}
             propertyId={id}
             stataCode={stateOrProvince}
             price={listPrice}
