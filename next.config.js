@@ -11,6 +11,14 @@ const nextConfig = {
       },
     ],
   },
+  redirects: async () => [
+    {
+      source: '/:path*',
+      has: [{ type: 'host', value: 'rushhome.com' }],
+      destination: 'https://www.rushhome.com/:path*',
+      permanent: true
+    }
+  ]
 }
 
 module.exports = nextConfig
