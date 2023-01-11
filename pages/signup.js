@@ -61,8 +61,23 @@ export default function SignUp() {
                 //     let fub_id = res.message.id;
                 //     console.log(fub_id)
                 // }
-                handleSuccess(res.message)
-                router.push('/auth/client-signin')
+                const responseL = await signIn('credentials',
+                    {
+                        email : formValue.email,
+                        password : formValue.password,
+                        callbackUrl: '/client/favorites',
+                        redirect: false,
+                    }
+                )
+                // console.log('response',response)
+                setIsLoading(false)
+                if (responseL?.error) handleError("Invalid Credentials.")
+                if (responseL.url) {
+                    handleSuccess("Congratulation! Your Account Created Successfully.")
+                    router.push(responseL.url)
+                }
+                // handleSuccess(res.message)
+                // router.push('/auth/client-signin')
             }
         } catch (error) {
             setIsLoading(false)
