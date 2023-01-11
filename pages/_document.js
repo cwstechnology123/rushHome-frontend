@@ -37,6 +37,8 @@ class MyDocument extends Document {
           <link rel="stylesheet" href="../assets/css/font-awesome.min.css" />
           <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
           <script src="../assets/js/fubWidgetTracker.js" async></script>
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-S6CHY31B2Z"></script>
+          <script src="../assets/js/googleTagManager.js" async></script>
           <script src="../assets/js/jquery.min.js" async></script>
         </Head>
         <body>
