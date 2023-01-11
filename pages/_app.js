@@ -4,19 +4,28 @@ import { SessionProvider } from "next-auth/react"
 import NextNProgress from 'nextjs-progressbar'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { SSRProvider } from 'react-bootstrap'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import * as gtag from "../lib/gtag"
 
 function MyApp({  Component,  pageProps: { session, ...pageProps } }) {
-  // console.log(Component)
-  // let CustomLayout = Component.layout? BuyLayout : Layout;
+  const router = useRouter();
   const getLayout = Component.getLayout || ((page) => <Layout>{page}</Layout>)
+  useEffect(()=>{ 
+    const handleRouteChange = (url) => {
+      gtag.pageview(url)
+    }
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    }
+
+  }, [router.events])
   return (
     <SSRProvider>
       <SessionProvider session={session}>
         <NextNProgress color="#29D" startPosition={0.3} stopDelayMs={50} height={3} showOnShallow={true}  options={{ showSpinner: false }} />
         {getLayout(<Component {...pageProps} />)}
-        {/* <CustomLayout>
-          <Component {...pageProps} />
-        </CustomLayout> */}
       </SessionProvider>
     </SSRProvider>
   )

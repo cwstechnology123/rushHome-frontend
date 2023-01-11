@@ -60,7 +60,7 @@ export default function HomesForSale({ properties, stateCode, city,refKey, refVa
         
     }, []);
     useEffect(()=>setFilterData(propertyList), [propertyList]);
-    // console.log(filterData)
+    console.log(bounds)
     return (
         <>
             <Toaster/>

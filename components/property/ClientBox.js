@@ -7,7 +7,6 @@ import { useEffect, useRef, useState } from "react";
 import * as yup from "yup";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import defaultAgentImage from "../../public/assets/img/default-profile-pic.png";
 import DatePicker from "../../components/property/DatePicker";
 import { scheduleTime } from "../../utils/propertyFilters";
 import 'react-phone-number-input/style.css'
@@ -17,7 +16,7 @@ import moment from "moment/moment";
 import { useSession } from "next-auth/react";
 import splitName from "../../utils/splitName";
 import { toast } from "react-hot-toast";
-import { getAgentFubDetails, sendFubLeads } from "../../utils/fubApiCall";
+import { sendFubLeads } from "../../utils/fubApiCall";
 import Image from "next/image";
 
 export default function ClientBox({ type, address, price, pricearea, amenity, fubObj, agent }) {
@@ -28,32 +27,15 @@ export default function ClientBox({ type, address, price, pricearea, amenity, fu
     const [scheduleModal, setScheduleModal] = useState(false);
     const [sendModal, setSendModal] = useState(false);
     const [messageModal, setMessageModal] = useState(false);
-    const [asrc, setAsrc] = useState(defaultAgentImage.src);
     const [agentForm, setAgentForm] = useState({
-        id: 0,
-        email: agent.listAgentEmail,
-        name: agent.listAgentFullName,
+        id: agent.id,
+        email: agent.email,
+        name: agent.firstName+" "+agent.lastName,
         message: `I would like more information on ${address}`,
     });
-    async function findFubAgent(){
-        let res =  await getAgentFubDetails(agent.listAgentEmail);
-        if(res.status){
-            let user = res.message.users;
-            //console.log(user)
-            if(user && user[0] && user[0].role === 'Agent'){
-                let agentImage = res.message.users[0].picture?.original;
-                if(agentImage){
-                    setAsrc(agentImage);
-                }
-                setAgentForm({...agentForm, id: user[0].id})
-            }
-        }
-    }
 
     useEffect(() => {
         setCurTime(moment().format('HH:00:00'));
-        findFubAgent();
-        return () => true;
     }, []);
     const schema = yup.object().shape({
         schedule_time: yup.string().required("Please enter schedule time").label('Schedule Time'),
@@ -77,9 +59,6 @@ export default function ClientBox({ type, address, price, pricearea, amenity, fu
     const selectedDay = (val) =>{
         setSelectDate(val)
     };
-    // console.log(agentForm)
-    //request send modal
-
     const RequestSendModal = () => (
         <div className={`modal fade ${sendModal? 'show' : ''}`} id="messageModal" style={{display: (sendModal? 'block' : 'none')}}>
             <div className="modal-dialog modal-dialog-centered">
@@ -94,7 +73,7 @@ export default function ClientBox({ type, address, price, pricearea, amenity, fu
             </div>
         </div>
     )
-    //schedule tour modal
+
     const handleTourClose = () => {
         reset();
         setScheduleModal(false);
@@ -216,8 +195,8 @@ export default function ClientBox({ type, address, price, pricearea, amenity, fu
             const {firstName, lastName} = splitName(session.user.name);
             let leadObj = {
                 person: {
-                    // assignedUserId: 1, //NEED TO CHECK FOR AGENT ONLY NOT BROKER
-                    // assignedTo: agent.listAgentFullName,
+                    assignedUserId: agentForm.id,
+                    assignedTo: agentForm.name,
                     emails: [{isPrimary: true, type: 'work', value: session.user.email}],
                     firstName: firstName,
                     lastName: lastName,
@@ -262,15 +241,15 @@ export default function ClientBox({ type, address, price, pricearea, amenity, fu
                         <form className="listing_agentbox">
                             <div className="row">
                                 <div className="col-4">
-                                    <Image src={asrc} className="align-self-center mr-3 img-circle" alt="Agent Image" width={100} height={100} />
+                                    <Image src={agent.src} className="align-self-center mr-3 img-circle w-100" alt="Agent Image" width={100} height={100} />
                                 </div>
                                 <div className="col-8">
-                                    <h5>{agent.listAgentFullName}</h5>
+                                    <h5>{agent.firstName+" "+agent.lastName}</h5>
                                     <h6>Rush<span style={{color: '#FFC107'}}>Home</span></h6>
-                                    {agent.listAgentEmail}
-                                    {(agent.listAgentOfficePhone!="") && (
+                                    {agent.email}
+                                    {(agent.phone!="") && (
                                         <>
-                                        <br/>P: ({agent.listAgentOfficePhoneExt}) {agent.listAgentOfficePhone}
+                                        <br/>P: ({agent.ext}) {agent.phone}
                                         </>
                                     )}
                                 </div>
@@ -337,7 +316,7 @@ export default function ClientBox({ type, address, price, pricearea, amenity, fu
                     </ul>
                 </div>
                 <button type="button" className="btn style1 mb-3 w-100" style={{borderRadius: 15}} onClick={() => setScheduleModal(true)}>Schedule a Tour</button>
-                {agent.listAgentEmail.endsWith("@rushhome.com") && (
+                {agent.email.endsWith("@rushhome.com") && (
                     <button type="button" className="btn style2 contact_button w-100" style={{borderRadius: 15}} onClick={()=>setMessageModal(true)}>Message Agent</button>
                 )}
                 

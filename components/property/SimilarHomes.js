@@ -25,8 +25,6 @@ export default function SimilarHomes({
         longitude: geography.lng,
         page_limit: 3
     }}, fetcher);
-
-    console.log(data)
     return (
         <section className="property-slider-wrap pb-75 property_wraper">
             <div className="container">
@@ -42,7 +40,7 @@ export default function SimilarHomes({
                     {(isLoading)? <Grid item={3} /> : (
                         (data)? (<>
                         <div className="row">
-                            {data.properties.length && data.properties.map((property, i) => (
+                            {!!(data.properties.length) && data.properties.map((property, i) => (
                                 <div key={`first${i}`} className="col-xl-4 col-lg-6 col-md-6">
                                     <PropertyCard property={property}/>
                                 </div>

@@ -18,7 +18,8 @@ import PropertyAmenities from "../../components/property/PropertyAmenities";
 import PropertyAgentCard from "../../components/property/PropertyAgentCard";
 import ClientOtherDetails from "../../components/property/ClientOtherDetails";
 import AgentOtherDetails from "../../components/property/AgentOtherDetails";
-import { sendFubLeads } from "../../utils/fubApiCall";
+import { getAgentFubDetails, sendFubLeads } from "../../utils/fubApiCall";
+import defaultAgentImage from "../../public/assets/img/default-profile-pic.png";
 
 export default function PropertyDetails({ 
     propertyDetails: {
@@ -68,7 +69,34 @@ export default function PropertyDetails({
     const [saved, setSaved] = useState(false);
     const [fubObj, setFubObj] = useState({});
     const [shareInfo, setShareInfo] = useState({});
-    
+    const [agentDetails, setAgentDetails] = useState({
+        id: 0,
+        src: defaultAgentImage.src,
+        firstName: agent.listAgentFirstName,
+        lastName: agent.listAgentLastName,
+        email: agent.listAgentEmail,
+        ext: agent.listAgentOfficePhoneExt,
+        phone: agent.listAgentOfficePhone
+    });
+    async function findFubAgent(email){
+        let res =  await getAgentFubDetails(email);
+        if(res.status){
+            let user = res.message.users;
+            console.log(user)
+            if(user){
+                let agentImage = user[0].picture?.original;
+                setAgentDetails({
+                    id: user[0].role === 'Agent'? user[0].id : 0,
+                    src: agentImage? agentImage : defaultAgentImage.src,
+                    firstName: user[0].firstName,
+                    lastName: user[0].lastName,
+                    email: user[0].email,
+                    ext: agent.listAgentOfficePhoneExt,
+                    phone: agent.listAgentOfficePhone
+                })
+            }
+        }
+    }
     //  SETTING FUB DATA OBJ
     useEffect(() => {
         setFubObj({
@@ -94,6 +122,7 @@ export default function PropertyDetails({
             url: `${process.env.NEXT_PUBLIC_HOST_NAME}/property/${slug}`,
             title: `${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`,
         });
+        findFubAgent(agent.listAgentEmail)
     }, []);
     //HANDLING PAGE PRINT
     const handlePrint = useReactToPrint({
@@ -166,7 +195,7 @@ export default function PropertyDetails({
                             garages: parseInt(garageSpaces),
                             area: areaTotal
                         }}
-                        agent={agent}
+                        agent={agentDetails}
                         fubObj={fubObj}
                     />
             }else if(session.user.role === 'agent'){
@@ -177,7 +206,7 @@ export default function PropertyDetails({
             <>
                 <NonAccount address={`${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`} fubObj={fubObj}/>
                 {(agent.listAgentEmail.endsWith("@rushhome.com")) && <PropertyAgentCard 
-                    agent={agent} 
+                    agent={agentDetails} 
                     address={`${fullStreetAddress}, ${city}, ${stateOrProvince} ${postalCode}`}
                     slug={slug}
                 />}
@@ -216,9 +245,7 @@ export default function PropertyDetails({
         )
     }
     useEffect(() => {
-        // console.log('check saved property')
         if(session && !loading){
-            // console.log('===============')
             const userId = session && session.user?.userId;
             const accessToken = session && session.user?.accessToken;
             isSavedProperty(userId, accessToken) 
@@ -255,7 +282,6 @@ export default function PropertyDetails({
             </>
         )
     }
-    // console.log(fubObj)
     return (
         <>
             <Toaster />
@@ -390,10 +416,6 @@ export default function PropertyDetails({
                                                         <th width={'50%'}>Property Type:</th>
                                                         <td width={'50%'} className="text-left">{propertyType}</td>
                                                 </tr>
-                                                {/* <tr>
-                                                    <th width={'50%'}>Rooms:</th>
-                                                    <td width={'50%'} className="text-left">{roomsTotal? roomsTotal : '-'}</td>
-                                                </tr> */}
                                                 <tr>
                                                     <th width={'50%'}>Size:</th>
                                                     <td width={'50%'} className="text-left">{areaTotal? Number(areaTotal).toLocaleString('en-US') : '-'} SqFt</td>
@@ -402,10 +424,6 @@ export default function PropertyDetails({
                                                     <th width={'50%'}>Garage:</th>
                                                     <td width={'50%'} className="text-left">{garageSpaces? parseInt(garageSpaces) : '-'}</td>
                                                 </tr>
-                                                {/* <tr>
-                                                    <th width={'50%'}>Garage Size:</th>
-                                                    <td width={'50%'} className="text-left">{garageSpaces? garageSpaces : '-'} SqFt</td>
-                                                </tr> */}
                                                 <tr>
                                                     <th width={'50%'}>Year Build:</th>
                                                     <td width={'50%'} className="text-left">{yearBuilt}</td>
@@ -437,14 +455,6 @@ export default function PropertyDetails({
                                                     <th width={'50%'}>Fireplace:</th>
                                                     <td width={'50%'} className="text-left">{fireplacesTotal? fireplacesTotal : '-'}</td>
                                                 </tr>
-                                                {/* <tr>
-                                                    <th width={'50%'}>Bath Size:</th>
-                                                    <td width={'50%'} className="text-left">50 SqFt</td>
-                                                </tr>
-                                                <tr>
-                                                    <th width={'50%'}>Label:</th>
-                                                    <td width={'50%'} className="text-left">Bestseller</td>
-                                                </tr> */}
                                             </tbody>
                                             
                                         </table>
@@ -480,8 +490,6 @@ export default function PropertyDetails({
                 </div>
             </div>
         </section>
-
-        {/* SIMILAR HOMES */}
         <SimilarHomes 
             geography={geography}
             city={city}
