@@ -15,7 +15,7 @@ export default function Footer() {
     }), []);
     const handleBuyClick = async (e, city, path) => {
         e.preventDefault()
-        setCookie('search', {refKey: "city", refVal: 'de'});
+        setCookie('search', {refKey: "city", refVal: city});
         router.push(path) 
     }
     const router = useRouter();

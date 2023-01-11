@@ -21,8 +21,6 @@ const PropertyCard = ({
       country,
       stateOrProvince,
       listPictureURL,
-      listPicture2URL,
-      listPicture3URL,
       garageSpaces,
       fullStreetAddress,
       totalGarageAndParkingSpaces,
@@ -30,13 +28,12 @@ const PropertyCard = ({
       mlsStatus
     },
   }) => {
-    // const [srcimg, setSrcimg] = useState(listPictureURL.replace(/^http:\/\//i, 'https://'));
     const src = listPictureURL? listPictureURL.replace(/^http:\/\//i, 'https://') : noImage.src;
     return (
         <Link href={`/property/${slug}`} scroll={true}>
             <div className="property-card style3">
                 <div className="property-img">
-                    <img key={`image_${id}`} src={src} alt="Image" />
+                    <Image key={`image_${id}`} src={src} alt="Image" width={250} height={200} loading={'lazy'}/>
                     {tag && (<span className="property-status">{tag}</span>)}
                     {mlsStatus && mlsStatus == 'COMING SOON' ? <span className="property-status">{mlsStatus}</span> : ''}
                 </div>
@@ -49,7 +46,7 @@ const PropertyCard = ({
                         <li key={`bed${id}`}><i className="flaticon-double-bed" />{bedroomsTotal? bedroomsTotal : '-'} Br</li>
                         <li key={`bath${id}`}><i className="flaticon-bath-tub" />{bathroomsTotalInteger? bathroomsTotalInteger : '-'} Ba</li>
                         <li key={`square${id}`}><i className="flaticon-square" />{areaTotal? Number(areaTotal).toLocaleString('en-US') : '-'} Sq.Ft</li>
-                        <li key={`home${id}`}><i className="flaticon-home" />{totalGarageAndParkingSpaces? totalGarageAndParkingSpaces : '-'} Gr</li>
+                        <li key={`home${id}`}><i className="flaticon-home" />{garageSpaces? Number(garageSpaces).toLocaleString('en-US') : '-'} Gr</li>
                     </ul>
                 </div>
             </div>

@@ -4,4 +4,4 @@
 e.parentNode.insertBefore(t,e);})
 (window,"https://widgetbe.com/agent",document,"widgetTracker");
 window.widgetTracker("create", "WT-BQSFVIEG");
-window.widgetTracker("send", "pageview");
+window.widgetTracker("send", "pageview", {'campaignSource': 'RushHome'});

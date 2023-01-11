@@ -5,28 +5,28 @@ import Grid from "../skeletonLoader/Grid";
 import PropertyCard from "./PropertyCard";
 
 export default function SimilarHomes({
+    geography,
+    city,
     propertyId,
     stataCode,
     price,
     beds,
     baths
 }) {
-    const [similarHomes, setSimilarHomes] = useState([]);
+
     const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
     const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/similar`, method : 'POST', data: {
+        id: propertyId,
         bedroomsTotal: beds,
         bathroomsTotalInteger: baths,
         listPrice: price,
-        stateOrProvince: stataCode
+        city: city,
+        latitude: geography.lat,
+        longitude: geography.lng,
+        page_limit: 3
     }}, fetcher);
-    useEffect(() => {
-        if(!!data){
-            setSimilarHomes(() => (
-                data?.properties.filter(homes => homes.id != propertyId)
-            ));
-        }
-    }, [data]);
 
+    console.log(data)
     return (
         <section className="property-slider-wrap pb-75 property_wraper">
             <div className="container">
@@ -36,14 +36,13 @@ export default function SimilarHomes({
                             <div className="section-title style1 text-left mb-40">
                                 <h2>Similar Homes You May Like</h2>
                                 <hr />
-                                {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed </p> */}
                             </div>
                         </div>
                     </div>
                     {(isLoading)? <Grid item={3} /> : (
-                        data? (<>
+                        (data)? (<>
                         <div className="row">
-                            {!!similarHomes && similarHomes.slice(0, 3).map((property, i) => (
+                            {data.properties.length && data.properties.map((property, i) => (
                                 <div key={`first${i}`} className="col-xl-4 col-lg-6 col-md-6">
                                     <PropertyCard property={property}/>
                                 </div>
