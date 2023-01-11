@@ -39,7 +39,8 @@ export default function ClientBox({ type, address, price, pricearea, amenity, fu
         let res =  await getAgentFubDetails(agent.listAgentEmail);
         if(res.status){
             let user = res.message.users;
-            if(user[0].role === 'Agent'){
+            //console.log(user)
+            if(user && user[0] && user[0].role === 'Agent'){
                 let agentImage = res.message.users[0].picture?.original;
                 if(agentImage){
                     setAsrc(agentImage);
