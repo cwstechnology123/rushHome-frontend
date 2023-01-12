@@ -15,8 +15,6 @@ export default function FindAnAgent({agentList}) {
         { value: 'name-desc', label: 'Descending' }
     ];
     const sortAgent = (filterValues) => {
-        // console.log(filterValues)
-        
         const path = router.pathname;
         const { query } = router;
         query['sort'] = filterValues;
@@ -52,25 +50,14 @@ export default function FindAnAgent({agentList}) {
                             <p>We found <span>{total_agents}</span> agents available for you</p>
                         </div>
                     </div>
-                    {/* <div className="col-xl-2 col-lg-4 col-md-4">
-                        <p className="sort_by">
-                            
-                        </p>
-                    </div> */}
                     <div className="col-xl-3 col-lg-4 col-md-4">
                         <div className="filter-item-cat">
                             <Dropdown
                                 options={options} placeholder={<span className="sorted_list"><i className="fa fa-list-ul"/> Sort By Alphabet</span>}
                                 onChange={ev => sortAgent(ev.value)}
-                                // arrowClosed={<span className="arrow-closed" />}
-                                // arrowOpen={<span className="arrow-open" />}
                             />
                         </div>
                     </div>
-                    {/* <div className="lising_icons">
-                        <span className="list_icon"><i className="fa fa-th-list" aria-hidden="true" /></span>
-                        <span className="list_th_icon"><i className="fa fa-th" aria-hidden="true" /></span>
-                    </div> */}
                 </div>
                 <div className="row justify-content-center">
                     {agents.map((agent, i) => (
@@ -86,14 +73,11 @@ export default function FindAnAgent({agentList}) {
 }
 
 export async function getServerSideProps({ query }) {
-    //users?limit=10&offset=0&role=Agent&includeDeleted=false',
     let limit = query?.limit || 25;
     let offset = query?.offset || 0;
     let sort = query.sort? (query.sort=='name-asc'? 'name' : '-name') : 'name';
-    const payload = {url : `${fubApiBaseUrl}/users/?limit=${limit}&offset=${offset}&sort=${sort}&role=Agent&includeDeleted=false`, method : 'GET', data: []}
+    const payload = {url : `${fubApiBaseUrl}/users/?limit=${limit}&offset=${offset}&sort=${sort}&role=Agent&includeDeleted=false`, method : 'GET'}
     const res = await fetchFubApi(payload);
-    // Pass data to the page via props
-    // console.log("res:", res)
     if(res.status){
         return {
             props: {

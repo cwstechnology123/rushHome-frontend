@@ -11,16 +11,7 @@ import * as gtag from "../lib/gtag"
 function MyApp({  Component,  pageProps: { session, ...pageProps } }) {
   const router = useRouter();
   const getLayout = Component.getLayout || ((page) => <Layout>{page}</Layout>)
-  useEffect(()=>{ 
-    const handleRouteChange = (url) => {
-      gtag.pageview(url)
-    }
-    router.events.on("routeChangeComplete", handleRouteChange);
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    }
 
-  }, [router.events])
   return (
     <SSRProvider>
       <SessionProvider session={session}>

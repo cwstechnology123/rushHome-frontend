@@ -1,28 +1,17 @@
 import Link from "next/link"
-import useSWR from "swr";
 import { fetchFubApi, fubApiBaseUrl } from "../../utils/fubFetchApi";
 import defaultAgentImage from "../../public/assets/img/default-profile-pic.png";
 import blurImage from "../../public/assets/img/placeholder.png";
 import agentList from "../../utils/fub_numbers.json";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { apiBaseUrl, fetchApi } from "../../utils/fetchApi";
-import Grid from "../../components/skeletonLoader/Grid";
-import PropertyCard from "../../components/property/PropertyCard";
+import AgentActiveListing from "../../components/agent/AgentActiveListing";
 
 export default function AgentDetail({ agent: { name, firstName, lastName, email, phone, picture } }) {
     const [src, setSrc] = useState(picture.original);
     const [activeCount, setActiveCount] = useState(0);
     const phoneBlk = agentList.find(person => (person.email === email.toLowerCase()));
 
-    const fetcher = async (payload) => await fetchApi(payload).then(res => res.data);
-    const { data, error, isLoading, isValidating } = useSWR({url : `${apiBaseUrl}/properties/agent`, method : 'POST', data: {listAgentEmail: email, mlsStatus: "ACTIVE"}}, fetcher);
-    useEffect(()=>{
-        if(data){
-            setActiveCount(data.properties.length)
-        }
-    }, [data]);
-    // console.log(data)
     return (
         <>
             <section className="style3 singalagent_box pt-50">
@@ -101,43 +90,13 @@ export default function AgentDetail({ agent: { name, firstName, lastName, email,
                     </div>
                 </div>
                 </section>
-                {
-                    (isLoading)?
-                        <section className="property-slider-wrap pt-100 pb-75 property_wraper">
-                            <div className="container">
-                            <Grid item={3} />
-                            </div>
-                        </section>
-                    :
-                    ((data && data.properties.length) && (
-                        <section className="property-slider-wrap pt-100 pb-75 property_wraper">
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-xl-12 col-lg-12">
-                                        <div className="section-title style1 text-left mb-40">
-                                        <h2>{firstName} Listings</h2>
-                                        <hr />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="row justify-content-center">
-                                {data.properties && data.properties.slice(0, 6).map((property, i) => (
-                                    <div key={`first${i}`} className="col-xl-4 col-lg-6 col-md-6">
-                                        <PropertyCard property={property}/>
-                                    </div>
-                                ))}
-                                </div>
-                            </div>
-                        </section>
-                    ))
-                }                        
+                <AgentActiveListing firstName={firstName} email={email} setActiveCount={setActiveCount} />                       
         </>
     )
 }
 //{ params: { id }}
 export async function getServerSideProps({ params: { id }}) {
-    const payload = {url : `${fubApiBaseUrl}/users/${id}`, method : 'GET', data: []}
-    const res = await fetchFubApi(payload);
+    const res = await fetchFubApi({url : `${fubApiBaseUrl}/users/${id}`, method : 'GET'});
     // console.log("Query:", res)
     return {
         props: {
