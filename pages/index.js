@@ -151,6 +151,7 @@ export async function getStaticProps() {
       props: {
         properties : res.data.properties,
       },
+      revalidate: 100
     };
   }
   return {
