@@ -24,7 +24,7 @@ export default function AgentActiveListing({ firstName, email, setActiveCount })
                     </div>
                 </section>
             :
-            ((data && data.properties.length) && (
+            ((data && !!data.properties.length) && (
                 <section className="property-slider-wrap pt-100 pb-75 property_wraper">
                     <div className="container">
                         <div className="row">
