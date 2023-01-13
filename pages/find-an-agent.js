@@ -1,24 +1,36 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import AgentCard from "../components/agent/AgentCard";
+import AgentCardLoader from "../components/skeletonLoader/AgentCardLoader";
 import { fetchFubApi, fubApiBaseUrl } from "../utils/fubFetchApi";
 
-export default function FindAnAgent({agentList}) {
-    const router = useRouter();
-    const total_agents = agentList._metadata.total;
-    const agents = agentList.users;
+export default function FindAnAgent() {
+    const [loader, setLoader] = useState(false);
+    const [agentList, setAgentList] = useState({});
+    const handleAgentCalls = async (sortVal) => {
+        setLoader(true);
+        let limit = 25;
+        let offset = 0;
+        let sort = sortVal? (sortVal=='name-asc'? 'name' : '-name') : 'name';
+        try {
+            let res = await fetchFubApi({url : `${fubApiBaseUrl}/users/?limit=${limit}&offset=${offset}&sort=${sort}&role=Agent&includeDeleted=false`, method : 'GET'});
+            if(res.status){
+                setAgentList(res.message)
+                setLoader(false);
+            }
+        } catch (error) {
+            setLoader(false);
+        }
+    }
+    useEffect(()=> {handleAgentCalls('name-asc')}, []);
+
     const options = [
         { value: 'name-asc', label: 'Ascending' },
         { value: 'name-desc', label: 'Descending' }
     ];
     const sortAgent = (filterValues) => {
-        const path = router.pathname;
-        const { query } = router;
-        query['sort'] = filterValues;
-        router.push({ pathname: path, query: query });
+        handleAgentCalls(filterValues);
     };
     return (
       <>
@@ -47,7 +59,7 @@ export default function FindAnAgent({agentList}) {
                 <div className="row justify-content-between align-items-center mb-25">
                     <div className="col-xl-6 col-lg-8 col-md-8">
                         <div className="profuct-result">
-                            <p>We found <span>{total_agents}</span> agents available for you</p>
+                            <p>We found <span>{agentList._metadata?.total || 0}</span> agents available for you</p>
                         </div>
                     </div>
                     <div className="col-xl-3 col-lg-4 col-md-4">
@@ -60,34 +72,18 @@ export default function FindAnAgent({agentList}) {
                     </div>
                 </div>
                 <div className="row justify-content-center">
-                    {agents.map((agent, i) => (
-                        <div key={"list-card-"+i} className="col-xl-3 col-lg-6 col-md-6">
-                            <AgentCard agent={agent}/>
-                        </div>
-                    ))}
+                    {loader? <AgentCardLoader/> : (
+                        <>
+                        {!!(agentList.users) && agentList.users.map((agent, i) => (
+                            <div key={"list-card-"+i} className="col-xl-3 col-lg-6 col-md-6">
+                                <AgentCard agent={agent}/>
+                            </div>
+                        ))}
+                        </>
+                    )}
                 </div>
             </div>
         </section>
       </>
     )
-}
-
-export async function getServerSideProps({ query }) {
-    let limit = query?.limit || 25;
-    let offset = query?.offset || 0;
-    let sort = query.sort? (query.sort=='name-asc'? 'name' : '-name') : 'name';
-    const payload = {url : `${fubApiBaseUrl}/users/?limit=${limit}&offset=${offset}&sort=${sort}&role=Agent&includeDeleted=false`, method : 'GET'}
-    const res = await fetchFubApi(payload);
-    if(res.status){
-        return {
-            props: {
-                agentList : res.message,
-            },
-        };
-    }
-    return {
-        props: {
-            agentList : null,
-        },
-    };
 }

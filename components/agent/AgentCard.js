@@ -8,6 +8,7 @@ import { useState } from "react";
 export default function AgentCard({ agent }) {
     const [src, setSrc] = useState(agent.picture.original);
     const phoneBlk = agentList.find(person => (person.email === (agent.email).toLowerCase()));
+    // console.log(agent.email, agent.picture.original)
     return (
         <Link href={`/agent/${agent.id}`}>
             <div key={'card-'+agent.id} className="agent-card style1">
@@ -28,7 +29,7 @@ export default function AgentCard({ agent }) {
                     </div>
                     <div className="mail_Box">
                         <p>{(agent.email).toLowerCase()}</p>
-                        <span>{phoneBlk?.phone}</span>
+                        <span>{phoneBlk?.contact}</span>
                     </div>
                 </div>
             </div>
