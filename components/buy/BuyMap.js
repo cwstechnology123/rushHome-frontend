@@ -18,7 +18,7 @@ const BuyMap = ({
     zoom, setZoom,
     bounds, setBounds,
     center, setCenter,
-    properties,
+    propertyList,
     filterList,
     setFilterList,
     highlight,
@@ -52,8 +52,8 @@ const BuyMap = ({
         setCenter(map.getCenter().toJSON());
     }
     useEffect(() => {
-        setFilterList(filterHomesByBounds(bounds, properties, poly.current));
-    }, [bounds, haspoly])
+        setFilterList(filterHomesByBounds(bounds, propertyList, poly.current));
+    }, [bounds, propertyList, haspoly])
 
     const setMapDraw = (draw, map) => {
         setDraw(draw);
