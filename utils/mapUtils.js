@@ -1,3 +1,26 @@
+import { useEffect } from "react";
+
+export function filterHomesByBounds(bounds, propertyList, poly){
+    let filterProps = {};
+    if(bounds){
+        filterProps = propertyList.filter(property => {
+            let lat = parseFloat(property.geography.lat);
+            let lng = parseFloat(property.geography.lng);
+            if(
+                ((lat > bounds.se.lat && lat > bounds.sw.lat) &&
+                (lat < bounds.ne.lat && lat < bounds.nw.lat) &&
+                (lng > bounds.nw.lng && lng > bounds.sw.lng) &&
+                (lng < bounds.ne.lng && lng < bounds.se.lng) ) && 
+                containsInPolygon(property.geography, poly)
+            ){
+                return property;
+            }
+        })   
+    }else{
+        filterProps = propertyList
+    }
+    return filterProps;
+}
 
 export function containsInPolygon(point, poly) {
 
@@ -51,4 +74,8 @@ export function containsInPolygon(point, poly) {
         return (blue >= red);
 
     }
-};
+}
+
+export async function getBuyHomes(){
+
+}

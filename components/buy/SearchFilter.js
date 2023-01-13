@@ -3,12 +3,14 @@ import { useEffect, useRef, useState } from "react";
 import { Button, Dropdown, Form, Offcanvas } from "react-bootstrap";
 import { BsFilterLeft } from "react-icons/bs";
 import AsyncSelect from 'react-select/async';
+import stateCodes from "../../utils/states_hash.json";
 import { apiBaseUrl, fetchApi } from '../../utils/fetchApi';
 import { setCookie } from 'cookies-next';
 import { toast } from "react-hot-toast";
+import ReactRange from "./ReactRange";
 
 
-export default function SearchFilter({ mapView, sendData, setPropertyList }) {
+export default function SearchFilter({ sendData, setPropertyList, setGeoaddress, setUikey }) {
 
     const router = useRouter();
     const [form, setForm] = useState({
@@ -18,10 +20,9 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
         bathroomsTotalInteger: "",
         minListPrice: 0,
         maxListPrice: 0,
-        page_limit: 1000
+        page_limit: 1500
     });
     const [showFilter, setShowFilter] = useState(false);
-
     const handleSidebar = () => {
         setShowFilter(!showFilter)
     }
@@ -35,6 +36,10 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
             output.push(checkbox.value);
         });
         setForm({...form, [formNames]: output});
+    }
+    const handlePriceRange = (priceVal) => {
+        // console.log(priceVal[0])
+        setForm({...form, "minListPrice": priceVal[0], "maxListPrice": priceVal[1]});
     }
     const loadOptions = async (inputValue, callback) => {
         if(inputValue.length > 1) {
@@ -64,11 +69,11 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
             bathroomsTotalInteger: "",
             minListPrice: 0,
             maxListPrice: 0,
-            page_limit: 1000
+            page_limit: 1500
         })
     }
     const handleOnSelectOptChange = async (selectedOption) => {
-        console.log(selectedOption.value)
+        // console.log(selectedOption.value)
         const searchValue = JSON.parse(selectedOption.value);
         setCookie('search', searchValue);
         resetAll();
@@ -82,11 +87,17 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
         toast.dismiss(toastId)
         if(response && response.data){
             searchValue.refKey !== 'address' ? setPropertyList(response.data?.properties) : '';
+            if(searchValue.refKey !== "stateOrProvince"){
+                setGeoaddress(searchValue.alphaCode.toUpperCase()+", USA, "+searchValue.refVal+" "+searchValue.refKey);
+            }else{
+                setGeoaddress(stateCodes[searchValue.alphaCode.toUpperCase()]+", USA");
+            }
+            setUikey(searchValue.refKey);
             router.push(searchValue.path)
         }
     };
-    
-    const handleMainSearch = async () => {
+    const handleMainSearch = async (ev) => {
+        ev.preventDefault();
         const toastId = toast.loading("Loading....");
         const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: {...form, ...sendData}}
         const response = await fetchApi(payload);
@@ -96,33 +107,8 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
         }
     }
 
-    // range slider code a
-    const [minRange, setminRange] = useState(0);
-    const [maxRange, setmaxRange] = useState(200);
-    const [styleLeft, setstyleLeft] = useState(0);
-    const [styleRight, setstyleRight] = useState(0);
-
-    const minvalues = 10;
-    // const maxRangeValue = 100;
-
-    const MinInputhandle = (e) => {
-        const Minvalue = e.target.value;
-        setForm({...form, ['minListPrice']: Minvalue});
-        setminRange(Minvalue)
-        setstyleLeft((Minvalue * 1))
-    }
-
-    const MaxInputhandle = (e) => {
-        const Maxvalue = e.target.value;
-        setForm({...form, ['maxListPrice']: Maxvalue});
-        setmaxRange(Maxvalue)
-        setstyleRight(100 - ((Maxvalue / minvalues) * 100) / 20)
-    }
-    // range slider code a
-
     return (
         <>
-        {/* bye_topnav */}
             <section className="filter_topnav">
                 <div className="container-fluid"> 
                     <form>
@@ -140,7 +126,7 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
                             </div>
                             <div className="col-lg-8 col-md-12 col-sm-12 col-12">
                                 <div className="row justify-content-center align-items-center">
-                                    <div className="col-lg-8 col-md-7 statusBeds">
+                                    <div className="col-lg-8 col-md-7 d-lg-block d-md-block statusBeds d-sm-block">
                                         <div className="row">
                                             <div className="col-3">
                                                 <select className="form-control" id="main_status"
@@ -157,11 +143,11 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
                                                 value={form.bedroomsTotal}
                                                 onChange={(ev)=>handleFormChange('bedroomsTotal', ev.target.value || "")}>
                                                     <option value={''}>Bed</option>
-                                                    <option value={'any'}>Any</option>
+                                                    <option value={''}>Any</option>
                                                     <option value={'1'}>1+</option>
                                                     <option value={'2'}>2+</option>
                                                     <option value={'3'}>3+</option>
-                                                    <option value={'44'}>4+</option>
+                                                    <option value={'4'}>4+</option>
                                                     <option value={'5'}>5+</option>
                                                 </select>
                                             </div>
@@ -170,11 +156,11 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
                                                 value={form.bathroomsTotalInteger}
                                                 onChange={(ev)=>handleFormChange('bathroomsTotalInteger', ev.target.value || "")}>
                                                     <option value={''}>Baths</option>
-                                                    <option value={'any'}>Any</option>
+                                                    <option value={''}>Any</option>
                                                     <option value={'1'}>1+</option>
                                                     <option value={'2'}>2+</option>
                                                     <option value={'3'}>3+</option>
-                                                    <option value={'44'}>4+</option>
+                                                    <option value={'4'}>4+</option>
                                                     <option value={'5'}>5+</option>
                                                 </select>
                                             </div>
@@ -185,39 +171,30 @@ export default function SearchFilter({ mapView, sendData, setPropertyList }) {
                                                     </Dropdown.Toggle>
 
                                                     <Dropdown.Menu>
-                                                        <div className="price-input">
-                                                            <div className="slider-range">
-                                                                <div className="processbar"></div>
-                                                            </div>
-                                                            <div className="range-input">
-                                                                <input type="range" onChange={MinInputhandle} classname="range-min" min={0} max={100} defaultValue={minRange} />
-                                                                <input type="range" onChange={MaxInputhandle} classname="range-max" min={100} max={200} defaultValue={maxRange} />
-                                                            </div>
-                                                            <div className="input-field">
-                                                                <div className="field">
-                                                                    <input type="number" name="min" placeholder={'Min: ' + ' $ ' + minRange}/>
-                                                                </div>
-                                                                <div className="field">
-                                                                    <input type="number" name="max" placeholder={'Max: ' + ' $ ' + maxRange}/>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <ReactRange 
+                                                            minValue={100000}
+                                                            maxValue={25000000}
+                                                            min={100000}
+                                                            max={25000000}
+                                                            steps={50000}
+                                                            onChange={handlePriceRange}
+                                                        ></ReactRange>
                                                     </Dropdown.Menu>
                                                 </Dropdown>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-lg-4 col-md-5 col-12">
+                                    <div className="col-lg-4 col-md-5 col-12 filet-and-shortlist">
                                         {/* <button type="button" className="btn refresh_button" onClick={handleSidebar}>
                                             <BsFilterLeft/>
                                         </button> */}
-                                        <button type="submit" className="btn style2 search_top" onClick={(ev)=>{ev.preventDefault();handleMainSearch()}}>Search</button>
-                                        <button type="reset" className="btn refresh_button">
+                                        <button type="submit" className="btn style2 search_top" onClick={(ev)=>{handleMainSearch(ev)}}>Search</button>
+                                        {/* <button type="reset" className="btn refresh_button">
                                             <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="currentColor" className="bi bi-arrow-clockwise" viewBox="0 0 16 16">
                                                 <path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
                                                 <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
                                             </svg>
-                                        </button>
+                                        </button> */}
                                     </div>
                                 </div>
                             </div>

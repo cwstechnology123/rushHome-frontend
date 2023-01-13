@@ -297,6 +297,41 @@
 }
 @media only screen and (max-width: 767px) {
 
+    /* ============ filter and search responsive css code ========== */
+    .search-bar {
+        position: relative;
+    }
+    .search-icon {
+        font-size: 20px;
+        font-weight: 500;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 0;
+        margin: 0;
+        background: unset;
+        border: 0;
+        line-height: initial;
+    }
+    .mobile-only {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 5px;
+    }
+    .filter-item-cat select {
+        padding: 0 10px!important;
+        height: 30px;
+    }
+    .btn.refresh_button {
+        width: 11%!important;
+        padding: 0px 0px;
+        height: 30px;
+        border-radius: 5px;
+        font-size: 25px;
+    }
+     /* ============ filter and search responsive css code ========== */
+
     /*  ============ homes for sale page add css responsive max-width: 767px code by alam data:03/01/2023 ============ */
     .btn.refresh_button {
         width: 15%;
@@ -612,7 +647,8 @@
     .contact-item .contact-info h3,
     .property-card .property-info h3,
     .blog-card .blog-info h3 {
-        font-size: 20px;
+        font-size: 14px;
+        white-space: unset!important;
     }
     .hero-wrap .hero-content h1 {
         margin: 0 0 10px;
@@ -768,7 +804,7 @@
         margin: 10px 0;
     }
     .profuct-result {
-	margin-top: 20px;
+	margin-top: 0px;
 }
     .property-slider-three.owl-carousel .owl-dots,
     .testimonial-slider-one.owl-carousel .owl-dots,
@@ -1146,7 +1182,69 @@
         max-width: 300px;
     }
 }
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .content-address {
+        line-height: 34px;
+    }
+    .felecia-contetn h3 {
+        text-align: left;
+    }
+    .criteria_box ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .criteria_box ul li {
+        display: inline-block;
+        font-size: 13px;
+        margin-right: 5px;
+        margin-top: 10px;
+        width: 130px;
+    }
+    .criteria_box ul li i {
+        margin-right: 10px;
+    }
+    .rushhome_agent .your-agent {
+        text-align: left;
+    }
+}
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+    /* ============== client dashboard css code ============ */
+    .rushhome_agent .your-agent {
+        margin-top: 25px;
+    }
+    .felecia-contetn h3 {
+        text-align: left;
+    }
+    .dashboard_nav_box h2 {
+        font-size: 14px;
+        color: #333;
+    }
+    .images-box {
+        width: 80px;
+        height: auto;
+    }
+    
+    .images-box img {
+        width: 100%;
+    }
+    .content-address {
+        width: 250px;
+        display: block;
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+        line-height: 34px;
+    }
+    button.btn.style2.sdfds-df {
+        width: 100%;
+    }
+    /* ============== dashboard css code ============ */
+
     /* css responsive css by alam date : 09/01/2023 */
     .img_box img {
         border-radius: 20px !important;
@@ -1546,6 +1644,14 @@
         max-width: 720px;
     }
 }
+@media only screen and (min-width: 768px) {
+    .mobile-only {
+        display: none;
+    }
+    .desktop-hide {
+        display: none;
+    }
+}
 @media only screen and (max-width: 991px) {
     /* ============ header add css code date: 05/01/2023 =========== */
     .top_slide_nav.new-top-slider-cls .right_slide_nav {
@@ -1633,7 +1739,7 @@
     }
     .btn.style1 {
         background-color: #fdce64;
-        width: auto;
+        width: 100%;
         margin: 0 auto;
     }
     .state_tabs .nav-pills li .btn.style1 {
@@ -1666,6 +1772,25 @@
         border-width: 6px;
         padding-bottom: 10px;
         border-radius: 0;
+    }
+    .criteria_box ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: unset;
+        justify-content: start;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .criteria_box ul li {
+        display: inline-block;
+        font-size: 13px;
+        margin-right: 5px;
+        margin-top: 10px;
+        width: 130px;
+    }
+    .criteria_box ul li i {
+        margin-right: 10px;
     }
     /* ============ header add css code date: 05/01/2023 =========== */
 
@@ -1758,6 +1883,26 @@
 @media only screen and (max-width: 767px) {
 
     /*  ============ homes for sale page add css responsive max-width: 767px code by alam data:03/01/2023 ============ */
+    .map-button {
+        position: fixed;
+        right: 5%;
+        z-index: 3;
+        bottom: 30px;
+    }
+    
+    button.btn.style1.map-btn {
+        padding: 5px 15px;
+    }
+    .mobile-device-hide {
+        display: none!important;
+    }
+    section#property_list {
+        padding: 0!important;
+    }
+    .property-card.style3 .property-img {
+        height: 200px;
+        width: 100%;
+    }
     .top_slide_nav.new-top-slider-cls .btn.style2 {
         width: auto;
         margin-bottom: 0;
@@ -1776,6 +1921,9 @@
         display: flex;
         margin-top: 30px;
         flex-direction: column;
+    }
+    button.btn.style1.criteria_edit {
+        width: auto;
     }
     .left_client {
         width: 100%;
@@ -1815,6 +1963,56 @@
     .agent_wraper {
         padding: 130px 25px!important;
     }
+    .dashboard_nav_box h2 {
+        font-size: 14px;
+        color: #333;
+    }
+    .images-box {
+        width: 80px;
+        height: auto;
+    }
+    
+    .images-box img {
+        width: 100%;
+    }
+    .content-address {
+        width: 250px;
+        display: block;
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+        line-height: 34px;
+    }
+    button.btn.style2.sdfds-df {
+        width: 100%;
+    }
+    .paginaion_wraper {
+        width: 100%;
+        display: inline-block;
+        margin: 24px 0 10px 0;
+    }
+    .rushhome_agent h3:first-child {
+        font-size: 15px;
+        text-align: center;
+        margin-top: 25px;
+        margin-bottom: 0;
+        line-height: 25px;
+    }
+    .rushhome_agent div.col-md-6 h3 {
+        text-align: left;
+    }
+    .rightrushome {
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .felecia-contetn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    
     /*  ============ homes for sale page add css responsive max-width: 767px code by alam data:03/01/2023 ============ */
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px) {

@@ -1,10 +1,11 @@
-import { memo, useEffect, useRef, useState } from "react"
+import { memo, useEffect, useRef, useState } from "react";
 import { Wrapper, Status } from '@googlemaps/react-wrapper';
 import Map from "../gmap/Map";
+import { filterHomesByBounds } from "../../utils/mapUtils";
 import useSupercluster from "use-supercluster";
-import SingleMarker from '../gmap/CustomSingleMarker';
-import ClusterMarker from '../gmap/ClusterMarkerr';
-import MultiMarker from '../gmap/MultiMarker';
+import MultiMarker from "../gmap/MultiMarker";
+import ClusterMarker from "../gmap/ClusterMarkerr";
+import SingleMarker from "../gmap/CustomSingleMarker";
 
 const render = (status) => {
     if (status === Status.FAILURE) {
@@ -13,33 +14,20 @@ const render = (status) => {
     return <p>Loading...</p>;
 };
 
-const BuyMap = ({
-    initZoom,
-    setMapView,
-    center, setCenter,
+const BuyMap = ({ 
+    zoom, setZoom,
     bounds, setBounds,
-    filterData, setFilterData,
-    propertyList,
-    highlight
+    center, setCenter,
+    properties,
+    filterList,
+    setFilterList,
+    highlight,
+    deviceType
 }) => {
-    //initialize
-       
-    const [zoom, setZoom] = useState(initZoom? initZoom : 5);
-    const [clicks, setClicks] = useState([]);
     const poly = useRef(null);
     const [haspoly, setHaspoly] = useState(false);
     const [draw, setDraw] = useState(false);
-    const onMapClick = (e) => {
-        setClicks([...clicks, e.latLng]);
-    };
-    const onMapZoom = (e) => {
-        setMapView(bounds? [
-            bounds.nw.lng,
-            bounds.se.lat,
-            bounds.se.lng,
-            bounds.nw.lat
-        ] : []);
-    };
+
     const onMapIdle = (map) => {
         let bounds = map.getBounds();
         setBounds({
@@ -63,105 +51,11 @@ const BuyMap = ({
         setZoom(map.getZoom());
         setCenter(map.getCenter().toJSON());
     }
-
-    //FILTER PROPERTY DATA BY BOUNDS
     useEffect(() => {
-        // bounds: { ne, nw, se, sw }\
-        let filterProps = {};
-        // console.log(isBrowser)
-        if(bounds){
-            filterProps = propertyList.filter(property => {
-                let lat = parseFloat(property.geography.lat);
-                let lng = parseFloat(property.geography.lng);
-                if(
-                    ((lat > bounds.se.lat && lat > bounds.sw.lat) &&
-                    (lat < bounds.ne.lat && lat < bounds.nw.lat) &&
-                    (lng > bounds.nw.lng && lng > bounds.sw.lng) &&
-                    (lng < bounds.ne.lng && lng < bounds.se.lng) ) && 
-                    containsInPolygon(property.geography)
-                ){
-                    return property;
-                }
-            })   
-        }else{
-            filterProps = propertyList
-        }
-        setFilterData(filterProps);
-        // console.log("Inside: ",filterProperties)
-        //console.log(bounds)
+        setFilterList(filterHomesByBounds(bounds, properties, poly.current));
     }, [bounds, haspoly])
-    //MARKER CLUSTERING
-    const points = filterData.map(home => ({
-        type: "Feature",
-        properties: { cluster: false, homeId: home.id, hotel: home },
-        geometry: {
-          type: "Point",
-          coordinates: [
-            parseFloat(home.geography.lng),
-            parseFloat(home.geography.lat)
-          ]
-        }
-    }));
-    //console.log(points)
-    const { clusters, supercluster } = useSupercluster({
-        points,
-        bounds: bounds? [
-            bounds.nw.lng,
-            bounds.se.lat,
-            bounds.se.lng,
-            bounds.nw.lat
-        ] : [],
-        zoom,
-        options: { radius: 75, maxZoom: 20 }
-    });
-    //console.log(clusters)
-    const clusterSets = clusters.map(cluster => {
-        const [longitude, latitude] = cluster.geometry.coordinates;
-        const {
-        cluster: isCluster,
-        point_count: pointCount
-        } = cluster.properties;
-        if (isCluster) {
-            if(zoom>=18){
-                //console.log(clusterChilds[0].properties.hotel)
-                return (
-                    <MultiMarker
-                        key={`multicluster-${cluster.id}`}
-                        position={{
-                            lat: latitude,
-                            lng: longitude
-                        }}
-                        highlight={highlight}
-                        clusterId={cluster.id}
-                        pointCount={pointCount}
-                        hotels={supercluster.getChildren(cluster.id)}
-                    >
-                    </MultiMarker>
-                )
-            }else{
-                // console.log({...supercluster.getLeaves(cluster.id)})
-                return (
-                    <ClusterMarker
-                        key={`cluster-${cluster.id}`}
-                        clusterId={cluster.id}
-                        highlight={highlight}
-                        position={{
-                            lat: latitude,
-                            lng: longitude
-                        }}
-                        pointCount={pointCount}
-                        pointsLength={points.length}
-                    />
-                );
-            }
-        }
-        return (
-            <SingleMarker key={`hotel-marker-${cluster.properties.homeId}`} hotel={cluster.properties.hotel} highlight={highlight}/>
-        );
-    });
-    //MAP DRAW
+
     const setMapDraw = (draw, map) => {
-        //console.log(draw)
         setDraw(draw);
         if(draw){
             drawFreeHand(map)
@@ -184,7 +78,6 @@ const BuyMap = ({
         }
         
         disableMapOption(map);
-        //the polygon
         
         google.maps.event.addListenerOnce(map, 'mousedown', function(e) {
             poly.current = new google.maps.Polyline({map:map,clickable:false, draggable: false});
@@ -213,76 +106,46 @@ const BuyMap = ({
     const disableMapOption = (map) => {
         map.setOptions({
             draggable: false, 
-            zoomControl: false, 
+            zoomControl: (deviceType==='mobile')? false : false, 
             scrollwheel: false, 
             disableDoubleClickZoom: false,
             draggableCursor: 'crosshair'
         });
     }
     const enableMapOption = (map) =>{
-        google.maps.event.clearInstanceListeners(map);
+        // google.maps.event.clearInstanceListeners(map);
         map.setOptions({
             draggable: true, 
-            zoomControl: true, 
+            zoomControl: (deviceType==='mobile')? false : true, 
             scrollwheel: true, 
             disableDoubleClickZoom: true,
             draggableCursor:''
         });
     }
-    function containsInPolygon(point) {
-
-        if(poly.current != null){
-            var crossings = 0,
-            path = poly.current.getPath();
-
-            // for each edge
-            for (var i=0; i < path.getLength(); i++) {
-                var a = path.getAt(i),
-                    j = i + 1;
-                if (j >= path.getLength()) {
-                    j = 0;
-                }
-                var b = path.getAt(j);
-                if (rayCrossesSegment(point, a, b)) {
-                    crossings++;
-                }
-            }
-
-            // odd number of crossings?
-            return (crossings % 2 == 1);
-        }else{
-            return true;
+    
+    const points = filterList.map(home => ({
+        type: "Feature",
+        properties: { cluster: false, homeId: home.id, hotel: home },
+        geometry: {
+          type: "Point",
+          coordinates: [
+            parseFloat(home.geography.lng),
+            parseFloat(home.geography.lat)
+          ]
         }
+    }));
+    const { clusters, supercluster } = useSupercluster({
+        points,
+        bounds: bounds? [
+            bounds.nw.lng,
+            bounds.se.lat,
+            bounds.se.lng,
+            bounds.nw.lat
+        ] : [],
+        zoom,
+        options: { radius: 75, maxZoom: 20 }
+    });
 
-        function rayCrossesSegment(point, a, b) {
-            var px = parseFloat(point.lng),
-                py = parseFloat(point.lat),
-                ax = a.lng(),
-                ay = a.lat(),
-                bx = b.lng(),
-                by = b.lat();
-            if (ay > by) {
-                ax = b.lng();
-                ay = b.lat();
-                bx = a.lng();
-                by = a.lat();
-            }
-            // alter longitude to cater for 180 degree crossings
-            if (px < 0) { px += 360 };
-            if (ax < 0) { ax += 360 };
-            if (bx < 0) { bx += 360 };
-
-            if (py == ay || py == by) py += 0.00000001;
-            if ((py > by || py < ay) || (px > Math.max(ax, bx))) return false;
-            if (px < Math.min(ax, bx)) return true;
-
-            var red = (ax != bx) ? ((by - ay) / (bx - ax)) : Infinity;
-            var blue = (ax != px) ? ((py - ay) / (px - ax)) : Infinity;
-            return (blue >= red);
-
-        }
-    };
-    // console.log("Zoom",zoom, center, initZoom)
     return (
         <>
         <Wrapper
@@ -292,20 +155,59 @@ const BuyMap = ({
             <Map
                 center={center}
                 zoom={zoom}
-                minZoom={3}
+                minZoom={5}
                 maxZoom={20}
                 onMapIdle={onMapIdle}
-                onMapClick={onMapClick}
-                onMapZoom={onMapZoom}
                 draw={draw}
                 setMapDraw={setMapDraw}
                 fullscreenControl={false}
                 streetViewControl={true}
                 mapTypeControl={true}
-                zoomControl={true}
+                zoomControl={(deviceType==='mobile')? false : true}
                 clickableIcons={false}
             >
-                {clusterSets}
+                {clusters.map(cluster => {
+                    const [longitude, latitude] = cluster.geometry.coordinates;
+                    const {
+                        cluster: isCluster,
+                        point_count: pointCount
+                    } = cluster.properties;
+                    if (isCluster) {
+                        if(zoom>=18){
+                            return (
+                                <MultiMarker
+                                    key={`multicluster-${cluster.id}`}
+                                    position={{
+                                        lat: latitude,
+                                        lng: longitude
+                                    }}
+                                    highlight={highlight}
+                                    clusterId={cluster.id}
+                                    pointCount={pointCount}
+                                    hotels={supercluster.getChildren(cluster.id)}
+                                >
+                                </MultiMarker>
+                            )
+                        }else{
+                            return (
+                                <ClusterMarker
+                                    key={`cluster-${cluster.id}`}
+                                    clusterId={cluster.id}
+                                    highlight={highlight}
+                                    position={{
+                                        lat: latitude,
+                                        lng: longitude
+                                    }}
+                                    pointCount={pointCount}
+                                    pointsLength={points.length}
+                                />
+                            );
+                        }
+                    }
+                    return (
+                        <SingleMarker key={`hotel-marker-${cluster.properties.homeId}`} hotel={cluster.properties.hotel} highlight={highlight}/>
+                    );
+                })}
             </Map>
         </Wrapper>
         {haspoly && (<button type="button" className="btn_block btn-danger btn-sm" style={{position: 'absolute', top: '2%', left: '2%', zIndex: 9}} onClick={clearMapDraw}>Clear</button>)}
@@ -313,4 +215,4 @@ const BuyMap = ({
     )
 }
 
-export default BuyMap;
+export default memo(BuyMap);
