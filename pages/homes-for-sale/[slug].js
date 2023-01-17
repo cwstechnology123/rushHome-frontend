@@ -21,6 +21,7 @@ const HomesForSale = ({
     Geocode.setApiKey(process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN);
     Geocode.setLanguage("en");
     Geocode.setRegion("us"); 
+    const [isIdle, setIsIdle] = useState(false);
     const [geoaddress, setGeoaddress] = useState(address);
     const [uikey, setUikey] = useState(refKey)
     const [zoom, setZoom] = useState(5);
@@ -62,7 +63,13 @@ const HomesForSale = ({
     return (
         <>
         <Toaster/>
-        <SearchFilter mapView={mapView} setMapView={setMapView} sendData={sendData} propertyList={propertyList} setPropertyList={setPropertyList} setGeoaddress={setGeoaddress} setUikey={setUikey}/>
+        <SearchFilter 
+            mapView={mapView} setMapView={setMapView} 
+            sendData={sendData} 
+            isIdle={isIdle} setIsIdle={setIsIdle}
+            propertyList={propertyList} setPropertyList={setPropertyList} 
+            setGeoaddress={setGeoaddress} setUikey={setUikey}
+        />
         <section className="listing_wraper mt-0">
             <div className="container-fluid">
                 <div className="row">
@@ -76,6 +83,7 @@ const HomesForSale = ({
                                     setBounds={setBounds}
                                     mapView={mapView}
                                     setMapView={setMapView}
+                                    setIsIdle={setIsIdle}
                                     center={center}
                                     setCenter={setCenter}
                                     highlight={highlight}

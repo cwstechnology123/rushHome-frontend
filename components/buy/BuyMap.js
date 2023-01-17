@@ -19,6 +19,7 @@ const BuyMap = ({
     bounds, setBounds, 
     mapView, setMapView,
     center, setCenter,
+    setIsIdle,
     propertyList,
     filterList,
     setFilterList,
@@ -28,24 +29,14 @@ const BuyMap = ({
     const poly = useRef(null);
     const [haspoly, setHaspoly] = useState(false);
     const [draw, setDraw] = useState(false);
-    const MapZoomChanged = (map) => {
-        let boundary = map.getBounds();
-        if(boundary){
-            let obj = {
-                nelat: boundary.getNorthEast().lat(),
-                swlat: boundary.getSouthWest().lat(),
-                nelng: boundary.getNorthEast().lng(),
-                swlng: boundary.getSouthWest().lng(),
-            }
-            if(JSON.stringify(mapView) === JSON.stringify(obj)){
-                return;
-            }else{
-                setMapView(obj)
-            }
-        }
-    }
     const onMapIdle = (map) => {
         let boundary = map.getBounds();
+        let obj = {
+            nelat: boundary.getNorthEast().lat(),
+            swlat: boundary.getSouthWest().lat(),
+            nelng: boundary.getNorthEast().lng(),
+            swlng: boundary.getSouthWest().lng(),
+        }
         setBounds({
             ne: {
                 lat: boundary.getNorthEast().lat(), //y2
@@ -64,8 +55,14 @@ const BuyMap = ({
                 lng: boundary.getSouthWest().lng() //x1
             },
         });
+        if(JSON.stringify(mapView) === JSON.stringify(obj)){
+            return;
+        }else{
+            setMapView(obj)
+        }
         setZoom(map.getZoom());
         setCenter(map.getCenter().toJSON());
+        setIsIdle(true)
     }
     // useEffect(() => {
     //     // setFilterList(filterHomesByPolygon(propertyList, poly.current));
@@ -173,8 +170,8 @@ const BuyMap = ({
                 zoom={zoom}
                 minZoom={5}
                 maxZoom={20}
+                gestureHandling={'cooperative'}
                 onMapIdle={onMapIdle}
-                MapZoomChanged={MapZoomChanged}
                 draw={draw}
                 setMapDraw={setMapDraw}
                 fullscreenControl={false}

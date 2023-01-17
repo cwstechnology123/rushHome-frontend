@@ -9,8 +9,10 @@ import { setCookie } from 'cookies-next';
 import { toast } from "react-hot-toast";
 import ReactRange from "./ReactRange";
 
-
-export default function SearchFilter({ mapView, sendData, setPropertyList, setGeoaddress, setUikey }) {
+export default function SearchFilter({ 
+    mapView, sendData, setPropertyList, setGeoaddress, setUikey,
+    isIdle, setIsIdle
+}) {
     const router = useRouter();
     const [form, setForm] = useState({
         mlsStatus: "",
@@ -80,7 +82,6 @@ export default function SearchFilter({ mapView, sendData, setPropertyList, setGe
     };
     const handleMainSearch = async () => {
         setIsLoading(true);
-        console.log(form)
         const toastId = toast.loading("Loading....");
         try {
             const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: {...form, ...mapView}}
@@ -99,22 +100,20 @@ export default function SearchFilter({ mapView, sendData, setPropertyList, setGe
         }
     }
     useEffect(()=>{
-        if(mapView){
+        if(mapView && isIdle){
+            console.log("call2: ",isIdle, mapView)
+            setIsIdle(false)
             handleMainSearch();
         }
         return ()=>null
-    }, [mapView])
-    // useEffect(()=>{
-    //     toast.dismiss()
-    //     setIsLoading(false);
-    // }, [propertyList])
+    }, [mapView, isIdle, setIsIdle])
 
     return (
         <>
             <section className="filter_topnav">
                 <div className="container-fluid"> 
                     <form>
-                        <div className="row justify-content-center align-items-center mb-1">
+                        <div className="row justify-content-center align-items-center">
                             <div className="col-lg-4 col-md-12 col-sm-12 col-12">
                                 <AsyncSelect 
                                     cacheOptions 
