@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import ContactUs from '../components/ContactUs'
 import Link from 'next/link'
+import { NextSeo } from 'next-seo'
 
 export default function Sell() {
     const handleScrollTo = (sectionId) => {
@@ -9,6 +10,26 @@ export default function Sell() {
 
     return (
     <>
+        <NextSeo
+            title="Sell Home | RushHome"
+            description="Sell Home With Rush Home Expert."
+            canonical={`${process.env.NEXT_PUBLIC_HOST_NAME}/sell`}
+            openGraph={{
+                type: 'website',
+                title: "Sell Home | RushHome",
+                description: "Sell Home With Rush Home Expert.",
+                url: `${process.env.NEXT_PUBLIC_HOST_NAME}/sell`,
+                images: [
+                    {
+                        url: `${process.env.NEXT_PUBLIC_HOST_NAME}/assets/img/about_banner.jpg`,
+                        width: 800,
+                        height: 600,
+                        alt: 'Photo of property',
+                    }
+                ],
+                site_name: 'RushHome'
+            }}
+        />
         <section className="about-wrap style1 ptb-100 sell_wraper">
             <img src="assets/img/about/shape-3.png" alt="Image" className="about-shape-three" />
             <div className="container">
@@ -32,52 +53,6 @@ export default function Sell() {
             </div>
             </div>
         </section>
-        {/* <section className="advantage-wrap ptb-50 bg-seashell property_wraper">
-            <div className="container">
-            <div className="col-xl-12 col-lg-12">
-                <div className="section-title style1 text-left mb-40">
-                <h2>Popular Properties</h2>
-                <hr />
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi dunt ut labore et dolore magna aliqua adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi du </p>
-                </div>
-            </div>
-            <div className="row justify-content-center">
-                <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                <div className="adv-card">
-                    <div className="adv-img">
-                    <img src="assets/img/simple-2.jpg" alt="Image" />
-                    </div>
-                    <div className="adv-info">
-                    <h3>Get an Offer Just a Minutes</h3>
-                    <p>Lorem ipsum dolor sit amet, cons ectetur adip isci ngelit, sed do eiusmod tem.</p>
-                    </div>
-                </div>
-                </div>
-                <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                <div className="adv-card">
-                    <div className="adv-img">
-                    <img src="assets/img/simple-2.jpg" alt="Image" />
-                    </div>
-                    <div className="adv-info">
-                    <h3>Do a Videos Walkthrough</h3>
-                    <p>Lorem ipsum dolor sit amet, cons ectetur adip isci ngelit, sed do eiusmod tem.</p>
-                    </div>
-                </div>
-                </div>
-                <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                <div className="adv-card">
-                    <div className="adv-img">
-                    <img src="assets/img/simple-2.jpg" alt="Image" />
-                    </div>
-                    <div className="adv-info">
-                    <h3>Close and Move, Stress-Free</h3>
-                    <p>Lorem ipsum dolor sit amet, cons ectetur adip isci ngelit, sed do eiusmod tem.</p>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-        </section> */}
         <section className="hw-wrap pt-100 pb-75 whychoose_wraper">
             <div className="container">
             <div className="row">

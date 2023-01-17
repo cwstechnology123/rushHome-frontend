@@ -19,7 +19,9 @@ import PropertyAgentCard from "../../components/property/PropertyAgentCard";
 import ClientOtherDetails from "../../components/property/ClientOtherDetails";
 import AgentOtherDetails from "../../components/property/AgentOtherDetails";
 import { getAgentFubDetails, sendFubLeads } from "../../utils/fubApiCall";
+import noImage from "../../public/no_picture_available.png";
 import defaultAgentImage from "../../public/assets/img/default-profile-pic.png";
+import { NextSeo } from "next-seo";
 
 export default function PropertyDetails({ 
     propertyDetails: {
@@ -284,6 +286,26 @@ export default function PropertyDetails({
     }
     return (
         <>
+            <NextSeo
+                title={`${fullStreetAddress} | RushHome`}
+                description={description}
+                canonical={`${process.env.NEXT_PUBLIC_HOST_NAME}/property/${slug}`}
+                openGraph={{
+                    type: 'website',
+                    title: `${fullStreetAddress} | RushHome`,
+                    description: description,
+                    url: `${process.env.NEXT_PUBLIC_HOST_NAME}/property/${slug}`,
+                    images: [
+                        {
+                            url: listPictureURL? listPictureURL.replace(/^http:\/\//i, 'https://') : `${process.env.NEXT_PUBLIC_HOST_NAME}/assets/img/about_banner.jpg`,
+                            width: 800,
+                            height: 600,
+                            alt: 'Photo of property',
+                        }
+                    ],
+                    site_name: 'RushHome'
+                }}
+            />
             <Toaster />
             <section className="style3 ptb-50 product_box">
                 <div className="container">

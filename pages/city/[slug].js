@@ -7,6 +7,7 @@ import cityList from "../../utils/cityList.json"
 import stateNames from "../../utils/states_hash.json"
 import { apiBaseUrl, fetchApi } from "../../utils/fetchApi";
 import PropertyCard from "../../components/property/PropertyCard";
+import { NextSeo } from "next-seo";
 
 export default function CityDetails() {
     const router = useRouter();
@@ -29,6 +30,26 @@ export default function CityDetails() {
     if(cityDetail){
         return (
             <>
+            <NextSeo
+                title={`${cityDetail.name}, ${stateNames[cityDetail.state_code.toUpperCase()]} | RushHome`}
+                description={cityDetail.description}
+                canonical={`${process.env.NEXT_PUBLIC_HOST_NAME}/city/${query.slug}`}
+                openGraph={{
+                    type: 'website',
+                    title: `${cityDetail.name}, ${stateNames[cityDetail.state_code.toUpperCase()]} | RushHome`,
+                    description: cityDetail.description,
+                    url: `${process.env.NEXT_PUBLIC_HOST_NAME}/city/${query.slug}`,
+                    images: [
+                        {
+                            url: `${process.env.NEXT_PUBLIC_HOST_NAME}/${cityDetail.main_image}`,
+                            width: 800,
+                            height: 600,
+                            alt: 'Photo of property',
+                        }
+                    ],
+                    site_name: 'RushHome'
+                }}
+            />
             <section className="pt-50 pb-75 text-center citybanner_box">
                 <div className="container">
                 <h1 className="aos-init aos-animate">{cityDetail.name}, {stateNames[cityDetail.state_code.toUpperCase()]}</h1>  

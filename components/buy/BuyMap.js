@@ -1,7 +1,7 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { Wrapper, Status } from '@googlemaps/react-wrapper';
 import Map from "../gmap/Map";
-import { filterHomesByBounds } from "../../utils/mapUtils";
+import { filterHomesByPolygon } from "../../utils/mapUtils";
 import useSupercluster from "use-supercluster";
 import MultiMarker from "../gmap/MultiMarker";
 import ClusterMarker from "../gmap/ClusterMarkerr";
@@ -16,7 +16,8 @@ const render = (status) => {
 
 const BuyMap = ({ 
     zoom, setZoom,
-    bounds, setBounds,
+    bounds, setBounds, 
+    mapView, setMapView,
     center, setCenter,
     propertyList,
     filterList,
@@ -27,33 +28,48 @@ const BuyMap = ({
     const poly = useRef(null);
     const [haspoly, setHaspoly] = useState(false);
     const [draw, setDraw] = useState(false);
-
+    const MapZoomChanged = (map) => {
+        let boundary = map.getBounds();
+        if(boundary){
+            let obj = {
+                nelat: boundary.getNorthEast().lat(),
+                swlat: boundary.getSouthWest().lat(),
+                nelng: boundary.getNorthEast().lng(),
+                swlng: boundary.getSouthWest().lng(),
+            }
+            if(JSON.stringify(mapView) === JSON.stringify(obj)){
+                return;
+            }else{
+                setMapView(obj)
+            }
+        }
+    }
     const onMapIdle = (map) => {
-        let bounds = map.getBounds();
+        let boundary = map.getBounds();
         setBounds({
             ne: {
-                lat: bounds.getNorthEast().lat(), //y2
-                lng: bounds.getNorthEast().lng() //x2
+                lat: boundary.getNorthEast().lat(), //y2
+                lng: boundary.getNorthEast().lng() //x2
             },
             nw: {
-                lat: bounds.getNorthEast().lat(), //y2
-                lng: bounds.getSouthWest().lng() //x1
+                lat: boundary.getNorthEast().lat(), //y2
+                lng: boundary.getSouthWest().lng() //x1
             },
             se: {
-                lat: bounds.getSouthWest().lat(), //y1
-                lng: bounds.getNorthEast().lng() //x2
+                lat: boundary.getSouthWest().lat(), //y1
+                lng: boundary.getNorthEast().lng() //x2
             },
             sw: {
-                lat: bounds.getSouthWest().lat(), //y1
-                lng: bounds.getSouthWest().lng() //x1
+                lat: boundary.getSouthWest().lat(), //y1
+                lng: boundary.getSouthWest().lng() //x1
             },
         });
         setZoom(map.getZoom());
         setCenter(map.getCenter().toJSON());
     }
-    useEffect(() => {
-        setFilterList(filterHomesByBounds(bounds, propertyList, poly.current));
-    }, [bounds, propertyList, haspoly])
+    // useEffect(() => {
+    //     // setFilterList(filterHomesByPolygon(propertyList, poly.current));
+    // }, [propertyList, haspoly])
 
     const setMapDraw = (draw, map) => {
         setDraw(draw);
@@ -158,6 +174,7 @@ const BuyMap = ({
                 minZoom={5}
                 maxZoom={20}
                 onMapIdle={onMapIdle}
+                MapZoomChanged={MapZoomChanged}
                 draw={draw}
                 setMapDraw={setMapDraw}
                 fullscreenControl={false}

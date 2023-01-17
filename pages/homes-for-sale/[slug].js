@@ -25,6 +25,7 @@ const HomesForSale = ({
     const [uikey, setUikey] = useState(refKey)
     const [zoom, setZoom] = useState(5);
     const [bounds, setBounds] = useState(null);
+    const [mapView, setMapView] = useState(null)
     const [center, setCenter] = useState({
         lat: 39.000000,
         lng: -75.500000,
@@ -58,15 +59,13 @@ const HomesForSale = ({
             }
         );
     }, [geoaddress, uikey]);
-    // console.log(address, refKey, center, zoom)
     return (
         <>
         <Toaster/>
-        <SearchFilter sendData={sendData} setPropertyList={setPropertyList} setGeoaddress={setGeoaddress} setUikey={setUikey}/>
+        <SearchFilter mapView={mapView} setMapView={setMapView} sendData={sendData} propertyList={propertyList} setPropertyList={setPropertyList} setGeoaddress={setGeoaddress} setUikey={setUikey}/>
         <section className="listing_wraper mt-0">
             <div className="container-fluid">
                 <div className="row">
-                {/* */}
                     <div className="col-xl-5 col-lg-5 d-md-none d-lg-block p-0 d-none d-sm-block d-sm-none d-md-block">
                         {(deviceType==='desktop') && (
                             <div id="mapBox" style={{width:'100%', height: mapHeight, position: 'relative'}}>
@@ -75,6 +74,8 @@ const HomesForSale = ({
                                     setZoom={setZoom}
                                     bounds={bounds}
                                     setBounds={setBounds}
+                                    mapView={mapView}
+                                    setMapView={setMapView}
                                     center={center}
                                     setCenter={setCenter}
                                     highlight={highlight}
@@ -88,7 +89,7 @@ const HomesForSale = ({
                         
                     </div>
                     <div className="col-xl-7 col-lg-7 col-12" style={{height: mapHeight, overflowY: 'auto'}}>
-                        <BuyPropertyList properties={filterList || []} setHighlight={setHighlight} />
+                        <BuyPropertyList properties={propertyList || []} setHighlight={setHighlight} />
                         <Footer />
                     </div>
                 </div>
@@ -124,7 +125,7 @@ export async function getServerSideProps({ query, req, res }){
     }
     let sendData = {
         stateOrProvince : stateCode,
-        page_limit: 1500 
+        // page_limit: 1500 
     }
     if(refKey !== "stateOrProvince"){
         sendData = {...sendData, [refKey]: refVal};
@@ -134,10 +135,10 @@ export async function getServerSideProps({ query, req, res }){
     }else{
         address = stateCodes[stateCode.toUpperCase()]+", USA";
     }
-    const response = await fetchApi({url: `${apiBaseUrl}/properties/search`, method: 'POST', data: sendData});
+    // const response = await fetchApi({url: `${apiBaseUrl}/properties/search`, method: 'POST', data: sendData});
     return {
         props: {
-            properties : response && response.data?.properties,
+            properties : null, //response && response.data?.properties,
             address: address,
             refKey: refKey,
             sendData: sendData,

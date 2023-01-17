@@ -20,19 +20,21 @@ export default function BuyPropertyList({ properties, setHighlight }){
         setShowproperty(dataList.splice(offset, showPerPage));
     }
     useEffect(() => {
-        let total = properties.length;
-        if(total > showPerPage){
-            if(total % showPerPage === 0){
-                setPageCount(() =>(total/showPerPage));
-                setCurrentPage(0);
-            }else{
-                setPageCount(() =>(Math.floor(total/showPerPage) + 1));
-                setCurrentPage(0);
+        if(properties){
+            let total = properties.length;
+            let pcount = 1;
+            if(total > showPerPage){
+                if(total % showPerPage === 0){
+                    pcount = Math.round(total/showPerPage);
+                }else{
+                    pcount = Math.round(Math.floor(total/showPerPage) + 1);
+                }
             }
-        }else{
+            setPageCount(pcount);
             setCurrentPage(0);
+            handleShowProperty(0);
         }
-        handleShowProperty(0);
+        
     }, [properties]);
 
     return (
@@ -59,8 +61,8 @@ export default function BuyPropertyList({ properties, setHighlight }){
                 </div>
             </div>
             <div className="row justify-content-center">
-                {showproperty.map(property => (
-                    <div className="col-md-6 col-12" key={`property-block-${property.id}`} onMouseEnter={()=>setHighlight({id: property.id, position: property.geography, price: property.listPrice})} onMouseLeave={()=>setHighlight(null)}>
+                {showproperty.map((property, i) => (
+                    <div className="col-md-6 col-12" key={`property-block-${i}-${property.id}`} onMouseEnter={()=>setHighlight({id: property.id, position: property.geography, price: property.listPrice})} onMouseLeave={()=>setHighlight(null)}>
                         <PropertyCard property={property}/>
                     </div>
                 ))}
@@ -82,9 +84,9 @@ export default function BuyPropertyList({ properties, setHighlight }){
 
                         <div className="flex items-center justify-center flex-grow">
                             <Pagination.PageButton
-                            activeClassName="active"
-                            inactiveClassName=""
-                            className=""
+                                activeClassName="active"
+                                inactiveClassName=""
+                                className=""
                             />
                         </div>
 

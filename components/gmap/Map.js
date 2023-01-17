@@ -4,6 +4,7 @@ import mapStyle from './mapStyle';
 
 export default function Map({
     onMapIdle,
+    MapZoomChanged,
     draw,
     setMapDraw,
     children,
@@ -36,14 +37,17 @@ export default function Map({
 
     useEffect(() => {
         if (map) {
-          ["idle"].forEach((eventName) =>
+          ["idle", "bounds_changed"].forEach((eventName) =>
             google.maps.event.clearListeners(map, eventName)
           );
           if (onMapIdle) {
             map.addListener("idle", () => onMapIdle(map));
           }
+          if (MapZoomChanged) {
+            map.addListener("bounds_changed", () => MapZoomChanged(map));
+          }
         }
-    }, [map, onMapIdle]);
+    }, [map, onMapIdle, MapZoomChanged]);
 
     return (
         <>

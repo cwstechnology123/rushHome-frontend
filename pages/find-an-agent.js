@@ -1,3 +1,4 @@
+import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
@@ -34,6 +35,26 @@ export default function FindAnAgent() {
     };
     return (
       <>
+        <NextSeo
+            title="Find an Agent | RushHome"
+            description="We see change as opportunity, not a threat & start with the belief that there is a better way."
+            canonical={`${process.env.NEXT_PUBLIC_HOST_NAME}/find-an-agent`}
+            openGraph={{
+                type: 'website',
+                title: "Find an Agent | RushHome",
+                description: "We see change as opportunity, not a threat & start with the belief that there is a better way.",
+                url: `${process.env.NEXT_PUBLIC_HOST_NAME}/find-an-agent`,
+                images: [
+                    {
+                        url: `${process.env.NEXT_PUBLIC_HOST_NAME}/assets/img/about_banner.jpg`,
+                        width: 800,
+                        height: 600,
+                        alt: 'Photo of property',
+                    }
+                ],
+                site_name: 'RushHome'
+            }}
+        />
         <section className="hero-wrap style3 findagent_banner">
             <div className="hero-slider-two owl-carousel">
                 <div className="hero-slide-item hero-slide-4 bg-f"></div>

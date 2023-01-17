@@ -10,18 +10,16 @@ import { toast } from "react-hot-toast";
 import ReactRange from "./ReactRange";
 
 
-export default function SearchFilter({ sendData, setPropertyList, setGeoaddress, setUikey }) {
-
+export default function SearchFilter({ mapView, sendData, setPropertyList, setGeoaddress, setUikey }) {
     const router = useRouter();
     const [form, setForm] = useState({
-        stateOrProvince: "de",
         mlsStatus: "",
         bedroomsTotal: "",
         bathroomsTotalInteger: "",
         minListPrice: 0,
         maxListPrice: 0,
-        page_limit: 1500
     });
+    const [isLoading, setIsLoading] = useState(false);
     const [showFilter, setShowFilter] = useState(false);
     const handleSidebar = () => {
         setShowFilter(!showFilter)
@@ -29,16 +27,8 @@ export default function SearchFilter({ sendData, setPropertyList, setGeoaddress,
     const handleFormChange = (name, vals) => {
         setForm({...form, [name]: vals});
     }
-    const handleOnChecked = (names, formNames) => {
-        let checkboxes= document.querySelectorAll('input[name="'+names+'"]:checked');
-        let output= [];
-        checkboxes.forEach((checkbox) => {
-            output.push(checkbox.value);
-        });
-        setForm({...form, [formNames]: output});
-    }
+    
     const handlePriceRange = (priceVal) => {
-        // console.log(priceVal[0])
         setForm({...form, "minListPrice": priceVal[0], "maxListPrice": priceVal[1]});
     }
     const loadOptions = async (inputValue, callback) => {
@@ -69,43 +59,55 @@ export default function SearchFilter({ sendData, setPropertyList, setGeoaddress,
             bathroomsTotalInteger: "",
             minListPrice: 0,
             maxListPrice: 0,
-            page_limit: 1500
         })
     }
     const handleOnSelectOptChange = async (selectedOption) => {
-        // console.log(selectedOption.value)
         const searchValue = JSON.parse(selectedOption.value);
         setCookie('search', searchValue);
         resetAll();
-        const toastId = toast.loading("Loading....");
-        sendData = {
-            [searchValue.refKey] : searchValue.refVal,
-            page_limit: 1500
-        }
-        const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: sendData}
-        const response = await fetchApi(payload);
-        toast.dismiss(toastId)
-        if(response && response.data){
-            searchValue.refKey !== 'address' ? setPropertyList(response.data?.properties) : '';
+        
+        if(searchValue.refKey !== 'address'){
             if(searchValue.refKey !== "stateOrProvince"){
-                setGeoaddress(searchValue.alphaCode.toUpperCase()+", USA, "+searchValue.refVal+" "+searchValue.refKey);
+                setGeoaddress(searchValue.alphaCode.toUpperCase()+", USA, "+searchValue.refVal);
             }else{
                 setGeoaddress(stateCodes[searchValue.alphaCode.toUpperCase()]+", USA");
             }
+            // setForm(form => ({...form, ...objData}));
             setUikey(searchValue.refKey);
+        }else{
             router.push(searchValue.path)
         }
     };
-    const handleMainSearch = async (ev) => {
-        ev.preventDefault();
+    const handleMainSearch = async () => {
+        setIsLoading(true);
+        console.log(form)
         const toastId = toast.loading("Loading....");
-        const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: {...form, ...sendData}}
-        const response = await fetchApi(payload);
-        toast.dismiss(toastId)
-        if(response && response.data){
-            setPropertyList(response.data?.properties);
+        try {
+            const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: {...form, ...mapView}}
+            const response = await fetchApi(payload);
+            if(response && response.data){
+                setPropertyList(response.data.properties);
+                toast.dismiss()
+                setIsLoading(false);
+            }else{
+                toast.dismiss(toastId);
+                setIsLoading(false);
+            }
+        } catch (error) {
+            toast.dismiss()
+            setIsLoading(false);
         }
     }
+    useEffect(()=>{
+        if(mapView){
+            handleMainSearch();
+        }
+        return ()=>null
+    }, [mapView])
+    // useEffect(()=>{
+    //     toast.dismiss()
+    //     setIsLoading(false);
+    // }, [propertyList])
 
     return (
         <>
@@ -188,7 +190,7 @@ export default function SearchFilter({ sendData, setPropertyList, setGeoaddress,
                                         {/* <button type="button" className="btn refresh_button" onClick={handleSidebar}>
                                             <BsFilterLeft/>
                                         </button> */}
-                                        <button type="submit" className="btn style2 search_top" onClick={(ev)=>{handleMainSearch(ev)}}>Search</button>
+                                        <button type="submit" className="btn style2 search_top" onClick={(ev)=>{ev.preventDefault();handleMainSearch()}}>Search</button>
                                         {/* <button type="reset" className="btn refresh_button">
                                             <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="currentColor" className="bi bi-arrow-clockwise" viewBox="0 0 16 16">
                                                 <path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />

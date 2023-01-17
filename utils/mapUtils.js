@@ -22,6 +22,16 @@ export function filterHomesByBounds(bounds, propertyList, poly){
     return filterProps;
 }
 
+export function filterHomesByPolygon(propertyList, poly){
+    let filterProps = {};
+    filterProps = propertyList.filter(property => {
+        if(containsInPolygon(property.geography, poly)){
+            return property;
+        }
+    }) 
+    return filterProps;
+}
+
 export function containsInPolygon(point, poly) {
 
     if(poly != null){
