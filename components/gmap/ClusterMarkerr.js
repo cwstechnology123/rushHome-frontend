@@ -27,17 +27,8 @@ export default function ClusterMarker({
                         width: `${Math.round(30 + (pointCount / pointsLength) * 20)}px`,
                         height: `${Math.round(30 + (pointCount / pointsLength) * 20)}px`
                     }}
-                    // onClick={() => onClusterClick(clusterId, map, position)}
-                    // onClick={() => {
-                    //     const expansionZoom = Math.min(
-                    //         supercluster.getClusterExpansionZoom(cluster.id),
-                    //         20
-                    //     );
-                    //     map.setZoom(expansionZoom);
-                    //     map.panTo({ lat: latitude, lng: longitude });
-                    // }}
                 >
-                    {pointCount}
+                    {millify(pointCount)}
                 </div>
             </OverlayView>
             {highlight && (
