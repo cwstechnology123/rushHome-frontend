@@ -23,21 +23,24 @@ export function filterHomesByBounds(bounds, propertyList, poly){
 }
 
 export function filterHomesByPolygon(propertyList, poly){
-    let filterProps = {};
-    filterProps = propertyList.filter(property => {
-        if(containsInPolygon(property.geography, poly)){
-            return property;
+    let filterProps = [];
+    // filterProps = propertyList.filter(property => {
+    //     if(containsInPolygon(property.geography, poly)){
+    //         return property;
+    //     }
+    // }) 
+    for(let i=0; i<propertyList.length; i++){
+        if(containsInPolygon(propertyList[i].geography, poly)){
+            filterProps.push(propertyList[i])
         }
-    }) 
+    }
     return filterProps;
 }
 
 export function containsInPolygon(point, poly) {
-
     if(poly != null){
         var crossings = 0,
         path = poly.getPath();
-
         // for each edge
         for (var i=0; i < path.getLength(); i++) {
             var a = path.getAt(i),
@@ -50,7 +53,6 @@ export function containsInPolygon(point, poly) {
                 crossings++;
             }
         }
-
         // odd number of crossings?
         return (crossings % 2 == 1);
     }else{
@@ -84,8 +86,4 @@ export function containsInPolygon(point, poly) {
         return (blue >= red);
 
     }
-}
-
-export async function getBuyHomes(){
-
 }

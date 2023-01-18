@@ -10,7 +10,8 @@ import { toast } from "react-hot-toast";
 import ReactRange from "./ReactRange";
 
 export default function SearchFilter({ 
-    mapView, sendData, setPropertyList, setGeoaddress, setUikey,
+    propertyList,
+    mapView, setPropertyList, setGeoaddress, setUikey,
     isIdle, setIsIdle
 }) {
     const router = useRouter();
@@ -29,7 +30,6 @@ export default function SearchFilter({
     const handleFormChange = (name, vals) => {
         setForm({...form, [name]: vals});
     }
-    
     const handlePriceRange = (priceVal) => {
         setForm({...form, "minListPrice": priceVal[0], "maxListPrice": priceVal[1]});
     }
@@ -74,7 +74,6 @@ export default function SearchFilter({
             }else{
                 setGeoaddress(stateCodes[searchValue.alphaCode.toUpperCase()]+", USA");
             }
-            // setForm(form => ({...form, ...objData}));
             setUikey(searchValue.refKey);
         }else{
             router.push(searchValue.path)
@@ -84,8 +83,7 @@ export default function SearchFilter({
         setIsLoading(true);
         const toastId = toast.loading("Loading....");
         try {
-            const payload = {url: `${apiBaseUrl}/properties/search`, method: 'POST', data: {...form, ...mapView}}
-            const response = await fetchApi(payload);
+            const response = await fetchApi({url: `${apiBaseUrl}/properties/search`, method: 'POST', data: {...form, ...mapView}});
             if(response && response.data){
                 setPropertyList(response.data.properties);
                 toast.dismiss()
@@ -101,7 +99,6 @@ export default function SearchFilter({
     }
     useEffect(()=>{
         if(mapView && isIdle){
-            console.log("call2: ",isIdle, mapView)
             setIsIdle(false)
             handleMainSearch();
         }

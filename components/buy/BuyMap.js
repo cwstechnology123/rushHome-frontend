@@ -64,9 +64,11 @@ const BuyMap = ({
         setCenter(map.getCenter().toJSON());
         setIsIdle(true)
     }
-    // useEffect(() => {
-    //     // setFilterList(filterHomesByPolygon(propertyList, poly.current));
-    // }, [propertyList, haspoly])
+    useEffect(() => {
+        if(haspoly){
+            setFilterList(filterHomesByPolygon(propertyList, poly.current));
+        }
+    }, [propertyList, haspoly])
 
     const setMapDraw = (draw, map) => {
         setDraw(draw);
@@ -80,6 +82,7 @@ const BuyMap = ({
     const clearMapDraw = () => {
         if(poly.current != null){
             setHaspoly(false);
+            setFilterList(propertyList)
             poly.current.setMap(null);
             poly.current = null;
         }
@@ -89,19 +92,14 @@ const BuyMap = ({
         if(poly.current){
             clearMapDraw();
         }
-        
         disableMapOption(map);
-        
         google.maps.event.addListenerOnce(map, 'mousedown', function(e) {
-            poly.current = new google.maps.Polyline({map:map,clickable:false, draggable: false});
-
+            poly.current = new google.maps.Polyline({map:map, clickable:false, draggable: false});
             var move=google.maps.event.addListener(map,'mousemove',function(e){
-                //console.log(polyDraw)
                 poly.current?.getPath().push(e.latLng);
             });
 
             if(poly.current != null){
-                //mouseup-listener
                 google.maps.event.addListenerOnce(map,'mouseup',function(e){
                     google.maps.event.removeListener(move);
                     var path=poly.current?.getPath();
@@ -126,7 +124,6 @@ const BuyMap = ({
         });
     }
     const enableMapOption = (map) =>{
-        // google.maps.event.clearInstanceListeners(map);
         map.setOptions({
             draggable: true, 
             zoomControl: (deviceType==='mobile')? false : true, 
@@ -156,7 +153,10 @@ const BuyMap = ({
             bounds.nw.lat
         ] : [],
         zoom,
-        options: { radius: 75, maxZoom: 20 }
+        options: {
+            radius: 75,
+            maxZoom: 20
+        }
     });
 
     return (
@@ -170,13 +170,15 @@ const BuyMap = ({
                 zoom={zoom}
                 minZoom={5}
                 maxZoom={20}
-                gestureHandling={'cooperative'}
+                gestureHandling={(deviceType==='mobile')? 'cooperative' : 'greedy'}
                 onMapIdle={onMapIdle}
                 draw={draw}
+                haspoly={haspoly}
+                clearMapDraw={clearMapDraw}
                 setMapDraw={setMapDraw}
+                mapTypeControl={false}
                 fullscreenControl={false}
-                streetViewControl={true}
-                mapTypeControl={true}
+                streetViewControl={false}
                 zoomControl={(deviceType==='mobile')? false : true}
                 clickableIcons={false}
             >
@@ -224,7 +226,6 @@ const BuyMap = ({
                 })}
             </Map>
         </Wrapper>
-        {haspoly && (<button type="button" className="btn_block btn-danger btn-sm" style={{position: 'absolute', top: '2%', left: '2%', zIndex: 9}} onClick={clearMapDraw}>Clear</button>)}
         </>
     )
 }

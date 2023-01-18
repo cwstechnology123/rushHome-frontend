@@ -41,8 +41,9 @@ const HomesForSale = ({
             setMapHeight('auto');
         }else{
             let mh = (windowDimensions?.height)? windowDimensions.height : (window?.innerHeight || 500);
-            setMapHeight(Math.round(mh * 0.7915));
+            setMapHeight(Math.round(mh * 0.776255708));
         }
+        console.log(windowDimensions?.height)
     }, [windowDimensions])
     useEffect(()=>setFilterList(propertyList), [propertyList]);
     useEffect(()=>{
@@ -67,13 +68,14 @@ const HomesForSale = ({
             mapView={mapView} setMapView={setMapView} 
             sendData={sendData} 
             isIdle={isIdle} setIsIdle={setIsIdle}
-            propertyList={propertyList} setPropertyList={setPropertyList} 
+            propertyList={propertyList}
+            setPropertyList={setPropertyList} 
             setGeoaddress={setGeoaddress} setUikey={setUikey}
         />
         <section className="listing_wraper mt-0">
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-xl-5 col-lg-5 d-md-none d-lg-block p-0 d-none d-sm-block d-sm-none d-md-block">
+                    <div className="col-xl-5 col-lg-5 col-12 d-md-none d-lg-block p-0 d-none d-sm-block d-sm-none d-md-block">
                         {(deviceType==='desktop') && (
                             <div id="mapBox" style={{width:'100%', height: mapHeight, position: 'relative'}}>
                                 <BuyMap 
@@ -97,7 +99,7 @@ const HomesForSale = ({
                         
                     </div>
                     <div className="col-xl-7 col-lg-7 col-12" style={{height: mapHeight, overflowY: 'auto'}}>
-                        <BuyPropertyList properties={propertyList || []} setHighlight={setHighlight} />
+                        <BuyPropertyList properties={filterList || []} setHighlight={setHighlight} />
                         <Footer />
                     </div>
                 </div>
