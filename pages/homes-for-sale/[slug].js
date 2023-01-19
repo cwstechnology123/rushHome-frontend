@@ -10,6 +10,7 @@ import { apiBaseUrl, fetchApi } from '../../utils/fetchApi';
 import { Toaster } from 'react-hot-toast';
 import BuyMap from '../../components/buy/BuyMap';
 import Geocode from "react-geocode";
+import { filterHomesByPolygon } from '../../utils/mapUtils';
 
 const HomesForSale = ({
     properties,
@@ -22,6 +23,7 @@ const HomesForSale = ({
     Geocode.setLanguage("en");
     Geocode.setRegion("us"); 
     const [isIdle, setIsIdle] = useState(false);
+    const [polyBound, setPolyBound] = useState(null);
     const [geoaddress, setGeoaddress] = useState(address);
     const [uikey, setUikey] = useState(refKey)
     const [zoom, setZoom] = useState(5);
@@ -45,7 +47,6 @@ const HomesForSale = ({
         }
         console.log(windowDimensions?.height)
     }, [windowDimensions])
-    useEffect(()=>setFilterList(propertyList), [propertyList]);
     useEffect(()=>{
         Geocode.fromAddress(geoaddress).then(
             (response) => {
@@ -65,6 +66,7 @@ const HomesForSale = ({
         <>
         <Toaster/>
         <SearchFilter 
+            polyBound={polyBound} setFilterList={setFilterList}
             mapView={mapView} setMapView={setMapView} 
             sendData={sendData} 
             isIdle={isIdle} setIsIdle={setIsIdle}
@@ -89,9 +91,8 @@ const HomesForSale = ({
                                     center={center}
                                     setCenter={setCenter}
                                     highlight={highlight}
-                                    propertyList={propertyList || []} 
+                                    setPolyBound={setPolyBound}
                                     filterList={filterList || []}
-                                    setFilterList={setFilterList}
                                     deviceType={deviceType}
                                 />
                             </div>

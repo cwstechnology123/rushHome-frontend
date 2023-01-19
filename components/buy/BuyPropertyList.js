@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import PropertyCard from "../property/PropertyCard";
-import { Pagination } from "react-headless-pagination";
+import Pagination from 'react-responsive-pagination';
 import { Form, InputGroup } from "react-bootstrap";
 import { GrSort } from "react-icons/gr";
 
@@ -70,28 +70,19 @@ export default function BuyPropertyList({ properties, setHighlight }){
                     <div className="col-12"><h4 className="text-danger text-center">No result found</h4></div>
                 )}
                 {properties.length !== 0 && (
-                    <div className="col-12"><Pagination
-                        currentPage={currentPage}
-                        setCurrentPage={handleShowProperty}
-                        totalPages={pageCount}
-                        edgePageCount={2}
-                        middlePagesSiblingCount={1}
-                        className="pagination list-style mt-10"
-                        truncableText="..."
-                        truncableClassName=""
-                        >
-                        <Pagination.PrevButton className=""><i className="fa fa-angle-left" style={{fontSize: 1.2+'rem'}} />  Prev</Pagination.PrevButton>
-
-                        <div className="flex items-center justify-center flex-grow">
-                            <Pagination.PageButton
-                                activeClassName="active"
-                                inactiveClassName=""
-                                className=""
-                            />
-                        </div>
-
-                        <Pagination.NextButton className="">Next  <i className="fa fa-angle-right" style={{fontSize: 1.2+'rem'}} /> </Pagination.NextButton>
-                    </Pagination></div>
+                    <div className="col-12">
+                        <Pagination
+                            previousLabel="< Prev"
+                            ariaPreviousLabel="Prev"
+                            nextLabel="Next >"
+                            ariaNextLabel="Next"
+                            className="pagination_wrap mt-10"
+                            activeItemClassName="active"
+                            current={currentPage}
+                            total={pageCount}
+                            onPageChange={handleShowProperty}
+                        />
+                    </div>
                 )}
             </div>
         </section>

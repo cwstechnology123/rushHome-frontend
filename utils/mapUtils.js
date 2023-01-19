@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { ConsoleView } from "react-device-detect";
 
 export function filterHomesByBounds(bounds, propertyList, poly){
     let filterProps = {};
@@ -24,17 +25,24 @@ export function filterHomesByBounds(bounds, propertyList, poly){
 
 export function filterHomesByPolygon(propertyList, poly){
     let filterProps = [];
-    // filterProps = propertyList.filter(property => {
-    //     if(containsInPolygon(property.geography, poly)){
-    //         return property;
-    //     }
-    // }) 
+
     for(let i=0; i<propertyList.length; i++){
         if(containsInPolygon(propertyList[i].geography, poly)){
             filterProps.push(propertyList[i])
         }
     }
     return filterProps;
+}
+
+export function hasInPolygon(point, poly){
+    if(!!poly){
+        let homeLocation = new google.maps.LatLng(point.lng, point.lat);
+        // console.log("Poly",point)
+        // console.log(google.maps.geometry.poly.containsLocation(homeLocation, poly))
+        return google.maps.geometry.poly.containsLocation(homeLocation, poly)
+    }else{
+        return true;
+    }
 }
 
 export function containsInPolygon(point, poly) {

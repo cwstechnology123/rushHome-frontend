@@ -9,7 +9,6 @@ import stateNames from "../../utils/states_hash.json"
 const PropertyCard = ({
     property: {
       id,
-      listingAgreementType,
       listPrice,
       bedroomsTotal,
       bathroomsTotalInteger,
@@ -18,12 +17,10 @@ const PropertyCard = ({
       county,
       postalCode,
       city,
-      country,
       stateOrProvince,
       listPictureURL,
       garageSpaces,
       fullStreetAddress,
-      totalGarageAndParkingSpaces,
       tag,
       mlsStatus
     },

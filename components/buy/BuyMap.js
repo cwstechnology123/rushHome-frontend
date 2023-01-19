@@ -1,7 +1,6 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { Wrapper, Status } from '@googlemaps/react-wrapper';
 import Map from "../gmap/Map";
-import { filterHomesByPolygon } from "../../utils/mapUtils";
 import useSupercluster from "use-supercluster";
 import MultiMarker from "../gmap/MultiMarker";
 import ClusterMarker from "../gmap/ClusterMarkerr";
@@ -15,14 +14,13 @@ const render = (status) => {
 };
 
 const BuyMap = ({ 
+    setPolyBound,
     zoom, setZoom,
     bounds, setBounds, 
     mapView, setMapView,
     center, setCenter,
     setIsIdle,
-    propertyList,
     filterList,
-    setFilterList,
     highlight,
     deviceType
 }) => {
@@ -64,12 +62,6 @@ const BuyMap = ({
         setCenter(map.getCenter().toJSON());
         setIsIdle(true)
     }
-    useEffect(() => {
-        if(haspoly){
-            setFilterList(filterHomesByPolygon(propertyList, poly.current));
-        }
-    }, [propertyList, haspoly])
-
     const setMapDraw = (draw, map) => {
         setDraw(draw);
         if(draw){
@@ -82,7 +74,7 @@ const BuyMap = ({
     const clearMapDraw = () => {
         if(poly.current != null){
             setHaspoly(false);
-            setFilterList(propertyList)
+            setPolyBound(polyBound=>(polyBound = null));
             poly.current.setMap(null);
             poly.current = null;
         }
@@ -108,6 +100,7 @@ const BuyMap = ({
                     google.maps.event.clearListeners(map, 'mousedown');
                     
                     enableMapOption(map);
+                    setPolyBound(polyBound => (polyBound = poly.current));
                     setHaspoly(true);
                     setDraw(false);
                 });
@@ -132,8 +125,7 @@ const BuyMap = ({
             draggableCursor:''
         });
     }
-    
-    const points = filterList.map(home => ({
+    const points = filterList?.map(home => ({
         type: "Feature",
         properties: { cluster: false, homeId: home.id, hotel: home },
         geometry: {

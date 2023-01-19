@@ -8,8 +8,10 @@ import { apiBaseUrl, fetchApi } from '../../utils/fetchApi';
 import { setCookie } from 'cookies-next';
 import { toast } from "react-hot-toast";
 import ReactRange from "./ReactRange";
+import { containsInPolygon, hasInPolygon } from "../../utils/mapUtils";
 
 export default function SearchFilter({ 
+    polyBound, setFilterList,
     propertyList,
     mapView, setPropertyList, setGeoaddress, setUikey,
     isIdle, setIsIdle
@@ -22,7 +24,6 @@ export default function SearchFilter({
         minListPrice: 0,
         maxListPrice: 0,
     });
-    const [isLoading, setIsLoading] = useState(false);
     const [showFilter, setShowFilter] = useState(false);
     const handleSidebar = () => {
         setShowFilter(!showFilter)
@@ -56,11 +57,11 @@ export default function SearchFilter({
     const resetAll = () => {
         setForm({
             ...form,
-            mlsStatus: "",
+            mlsStatus: "ACTIVE",
             bedroomsTotal: "",
             bathroomsTotalInteger: "",
-            minListPrice: 0,
-            maxListPrice: 0,
+            minListPrice: 100000,
+            maxListPrice: 25000000,
         })
     }
     const handleOnSelectOptChange = async (selectedOption) => {
@@ -79,28 +80,39 @@ export default function SearchFilter({
             router.push(searchValue.path)
         }
     };
-    const handleMainSearch = async () => {
-        setIsLoading(true);
+    const handleMainSearch = () => {
+        if(propertyList){           
+            let properties = JSON.parse( JSON.stringify( propertyList.filter(home=>(containsInPolygon(home.geography, polyBound))) ));
+            if(properties){
+                setFilterList((filterList) => (filterList = properties) )
+            }else{
+                setFilterList((filterList) => (filterList = propertyList) )
+            }
+        }
+    }
+    const handleBoundSearch = async () => {
         const toastId = toast.loading("Loading....");
         try {
-            const response = await fetchApi({url: `${apiBaseUrl}/properties/search`, method: 'POST', data: {...form, ...mapView}});
+            const response = await fetchApi({url: `${apiBaseUrl}/properties/search`, method: 'POST', data: {...mapView}});
             if(response && response.data){
                 setPropertyList(response.data.properties);
                 toast.dismiss()
-                setIsLoading(false);
             }else{
                 toast.dismiss(toastId);
-                setIsLoading(false);
             }
         } catch (error) {
             toast.dismiss()
-            setIsLoading(false);
         }
+        
     }
+    useEffect(()=>{
+        handleMainSearch()
+    }, [propertyList, polyBound]);
+    
     useEffect(()=>{
         if(mapView && isIdle){
             setIsIdle(false)
-            handleMainSearch();
+            handleBoundSearch();
         }
         return ()=>null
     }, [mapView, isIdle, setIsIdle])

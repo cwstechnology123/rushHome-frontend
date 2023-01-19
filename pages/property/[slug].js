@@ -84,8 +84,7 @@ export default function PropertyDetails({
         let res =  await getAgentFubDetails(email);
         if(res.status){
             let user = res.message.users;
-            console.log(user)
-            if(user){
+            if(user.length){
                 let agentImage = user[0].picture?.original;
                 setAgentDetails({
                     id: user[0].role === 'Agent'? user[0].id : 0,

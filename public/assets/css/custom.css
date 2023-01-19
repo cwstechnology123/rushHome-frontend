@@ -296,68 +296,43 @@
 }
 
 /* ---------------------------------------------------------------- */
-.pagination {
+
+.pagination_wrap {
     text-align: center;
     justify-content: center;
-}
-/* .pagination li {
-    margin: 0 5px;
-    display: inline-block;
-} */
-.pagination button {
-    border-radius: 15px;
-    font-size: 16px;
-    line-height: 44px;
-    font-weight: 400;
-    color: #666 !important;
-    background-color: transparent;
-    border-color: transparent;
-}
-.pagination button:hover {
-    color: #fff !important;
-    opacity: 1;
-    background-color: #fdce64;
-    border-color: transparent;
-}
-.pagination span {
-    /* width: 45px;
-    height: 45px; */
-    padding: 10px 15px;
-    border-radius: 15px;
-    margin: 0px 5px;
-    font-size: 16px;
-    line-height: 44px;
-    font-weight: 400;
-    opacity: 0.7;
-    color: #666;
-    background: #f9f9f9;
-    text-align: center;
-    -webkit-transition: all 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
-}
-/* .pagination li a i {
-    font-size: 14px;
-    line-height: 42px;
-    position: relative;
-    top: 1px;
-    color: #002172;
-    margin: 0 auto;
-    -webkit-transition: all 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
-} */
-.pagination span.active,
-.pagination span:hover {
-    color: #fff !important;
-    opacity: 1;
-    background-color: #fdce64;
-    border-color: transparent;
-    cursor: pointer;
-}
-/* .pagination li.active i,
-.pagination li:hover i {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+  }
+  .pagination_wrap .page-item:first-child .page-link,.pagination_wrap .page-item:last-child .page-link {
     color: #fff;
-} */
-
+    background-color: #fdce64 !important;
+    border-color: #fdce64 !important;
+    border-radius: 10px;
+  }
+  .pagination_wrap .page-item:first-child .page-link {
+    margin-right: 5px;
+  }
+  
+  .pagination_wrap .page-item:last-child .page-link {
+    margin-left: 5px;
+  }
+  
+  .pagination_wrap .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #fdce64 !important;
+    border-color: #fdce64 !important;
+    border-radius: 10px;
+  }
+  .pagination_wrap .page-link {
+    position: relative;
+    display: block;
+    color: #666;
+    text-decoration: none;
+    background-color: transparent !important;
+    border-color: transparent !important;
+  }
 /* --------------------------MAP------------------- */
 .btn_block{
     border: 1px;

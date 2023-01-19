@@ -36,9 +36,10 @@ class MyDocument extends Document {
           <link rel="stylesheet" href="../assets/css/responsive.css" />
           <link rel="stylesheet" href="../assets/css/font-awesome.min.css" />
           <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
-          {/* <script src="../assets/js/fubWidgetTracker.js" async></script> */}
+          <script defer src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN}`}></script>
           <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140459859-1"></script>
           <script src="../assets/js/googleTagManager.js" async></script>
+          <script src="../assets/js/fubWidgetTracker.js" async></script>
           <script src="../assets/js/jquery.min.js" async></script>
         </Head>
         <body>
