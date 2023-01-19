@@ -7,10 +7,10 @@ import BuyPropertyList from "../../components/buy/BuyPropertyList";
 import useWindowDimensions from "../../components/buy/useWindowDimensions";
 import stateCodes from "../../utils/states_hash.json";
 import { apiBaseUrl, fetchApi } from '../../utils/fetchApi';
-import { Toaster } from 'react-hot-toast';
+import { toast, Toaster } from 'react-hot-toast';
 import BuyMap from '../../components/buy/BuyMap';
 import Geocode from "react-geocode";
-import { filterHomesByPolygon } from '../../utils/mapUtils';
+import { containsInPolygon, filterHomesByPolygon } from '../../utils/mapUtils';
 
 const HomesForSale = ({
     properties,
@@ -33,11 +33,53 @@ const HomesForSale = ({
         lat: 39.000000,
         lng: -75.500000,
     })
+    const [form, setForm] = useState({
+        mlsStatus: "",
+        bedroomsTotal: "",
+        bathroomsTotalInteger: "",
+        minListPrice: 100000,
+        maxListPrice: 25000000,
+    })
     const [propertyList, setPropertyList] = useState(properties);
     const [filterList, setFilterList] = useState();
     const [highlight, setHighlight] = useState(null);
     const windowDimensions = useWindowDimensions();
     const [mapHeight, setMapHeight] = useState(windowDimensions?.height || 500);
+    const handleMainSearch = () => {
+        if(propertyList){        
+            console.log("called")   
+            let properties = JSON.parse( JSON.stringify( propertyList.filter(home=>(containsInPolygon(home.geography, polyBound))) ));
+            if(properties){
+                setFilterList(properties);
+            }else{
+                setFilterList(propertyList);
+            }
+        }
+    }
+    const handleBoundSearch = async () => {
+        const toastId = toast.loading("Loading....");
+        console.log("called Search", form)
+        try {
+            const response = await fetchApi({url: `${apiBaseUrl}/properties/search`, method: 'POST', data: {...form, ...mapView}});
+            if(response && response.data){
+                setPropertyList(response.data.properties);
+                console.log("Response:", response.data.properties)
+                toast.dismiss()
+            }else{
+                toast.dismiss(toastId);
+            }
+        } catch (error) {
+            toast.dismiss()
+        }
+    }
+
+    useEffect(()=>{
+        if(mapView && isIdle){
+            setIsIdle(false)
+            handleBoundSearch();
+        }
+        return ()=>null
+    }, [mapView, isIdle, setIsIdle])
     useEffect(() => {
         if(windowDimensions && (windowDimensions.width <= 768)){
             setMapHeight('auto');
@@ -62,16 +104,15 @@ const HomesForSale = ({
             }
         );
     }, [geoaddress, uikey]);
+    useEffect(()=>{
+        handleMainSearch()
+    }, [propertyList, polyBound]);
     return (
         <>
         <Toaster/>
         <SearchFilter 
-            polyBound={polyBound} setFilterList={setFilterList}
-            mapView={mapView} setMapView={setMapView} 
-            sendData={sendData} 
-            isIdle={isIdle} setIsIdle={setIsIdle}
-            propertyList={propertyList}
-            setPropertyList={setPropertyList} 
+            form={form} setForm={setForm}
+            handleBoundSearch={handleBoundSearch}
             setGeoaddress={setGeoaddress} setUikey={setUikey}
         />
         <section className="listing_wraper mt-0">

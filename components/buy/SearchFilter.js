@@ -11,19 +11,10 @@ import ReactRange from "./ReactRange";
 import { containsInPolygon, hasInPolygon } from "../../utils/mapUtils";
 
 export default function SearchFilter({ 
-    polyBound, setFilterList,
-    propertyList,
-    mapView, setPropertyList, setGeoaddress, setUikey,
-    isIdle, setIsIdle
+    form, setForm,
+    handleBoundSearch, setGeoaddress, setUikey
 }) {
     const router = useRouter();
-    const [form, setForm] = useState({
-        mlsStatus: "",
-        bedroomsTotal: "",
-        bathroomsTotalInteger: "",
-        minListPrice: 0,
-        maxListPrice: 0,
-    });
     const [showFilter, setShowFilter] = useState(false);
     const handleSidebar = () => {
         setShowFilter(!showFilter)
@@ -57,7 +48,7 @@ export default function SearchFilter({
     const resetAll = () => {
         setForm({
             ...form,
-            mlsStatus: "ACTIVE",
+            mlsStatus: "",
             bedroomsTotal: "",
             bathroomsTotalInteger: "",
             minListPrice: 100000,
@@ -80,42 +71,6 @@ export default function SearchFilter({
             router.push(searchValue.path)
         }
     };
-    const handleMainSearch = () => {
-        if(propertyList){           
-            let properties = JSON.parse( JSON.stringify( propertyList.filter(home=>(containsInPolygon(home.geography, polyBound))) ));
-            if(properties){
-                setFilterList((filterList) => (filterList = properties) )
-            }else{
-                setFilterList((filterList) => (filterList = propertyList) )
-            }
-        }
-    }
-    const handleBoundSearch = async () => {
-        const toastId = toast.loading("Loading....");
-        try {
-            const response = await fetchApi({url: `${apiBaseUrl}/properties/search`, method: 'POST', data: {...mapView}});
-            if(response && response.data){
-                setPropertyList(response.data.properties);
-                toast.dismiss()
-            }else{
-                toast.dismiss(toastId);
-            }
-        } catch (error) {
-            toast.dismiss()
-        }
-        
-    }
-    useEffect(()=>{
-        handleMainSearch()
-    }, [propertyList, polyBound]);
-    
-    useEffect(()=>{
-        if(mapView && isIdle){
-            setIsIdle(false)
-            handleBoundSearch();
-        }
-        return ()=>null
-    }, [mapView, isIdle, setIsIdle])
 
     return (
         <>
@@ -143,9 +98,9 @@ export default function SearchFilter({
                                                 value={form.mlsStatus}
                                                 onChange={(ev)=>handleFormChange('mlsStatus', ev.target.value || "")}>
                                                     <option value={''}>Status</option>
-                                                    <option value={'active'}>Active</option>
-                                                    <option value={'coming soon'}>Coming Soon</option>
-                                                    <option value={'pending'}>Pending</option>
+                                                    <option value={'ACTIVE'}>Active</option>
+                                                    <option value={'COMING SOON'}>Coming Soon</option>
+                                                    <option value={'PENDING'}>Pending</option>
                                                 </select>
                                             </div>
                                             <div className="col-3">
@@ -198,7 +153,7 @@ export default function SearchFilter({
                                         {/* <button type="button" className="btn refresh_button" onClick={handleSidebar}>
                                             <BsFilterLeft/>
                                         </button> */}
-                                        <button type="submit" className="btn style2 search_top" onClick={(ev)=>{ev.preventDefault();handleMainSearch()}}>Search</button>
+                                        <button type="submit" className="btn style2 search_top" onClick={(ev)=>{ev.preventDefault();handleBoundSearch()}}>Search</button>
                                         {/* <button type="reset" className="btn refresh_button">
                                             <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="currentColor" className="bi bi-arrow-clockwise" viewBox="0 0 16 16">
                                                 <path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />

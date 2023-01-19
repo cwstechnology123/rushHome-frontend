@@ -615,6 +615,7 @@ react-select__input {
     border: inherit;
     font-size: 14px;
     color: #000;
+    text-align: left;
 }
 .filter_topnav .dropdown-control.dropdown-toggle::after{
     display: none !important;
@@ -739,4 +740,3 @@ react-select__input {
     background: #E0DEF7;
     text-align: left !important;
 }
-.align-items-center { text-align: center !important;}
