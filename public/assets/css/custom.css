@@ -734,3 +734,9 @@ react-select__input {
     -moz-appearance: none;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
 }
+
+.changePasswordBtn {
+    background: #E0DEF7;
+    text-align: left !important;
+}
+.align-items-center { text-align: center !important;}
