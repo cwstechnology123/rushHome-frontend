@@ -32,7 +32,7 @@ const authOptions = (req, res) => {
               const profile = response.data?.profile;
               const name = profile?.full_name;
               const role = "client"
-              const user = { id: profile.id, userId: profile.id, name: name, email: profile.email, image: profile.image, role: role, access_token : response.data.token, refreshToken : response.data.refreshToken, fubId: profile.fub_id }
+              const user = { id: profile.id, userId: profile.id, name: name, email: profile.email, image: profile.image, role: role, access_token : response.data.token, refreshToken : response.data.refreshToken, fub_id: profile.fub_id }
               return user
             }
             else{
@@ -168,7 +168,7 @@ const authOptions = (req, res) => {
         return token;
       },
       async session({ session, token }) {
-        console.log("Token",token)
+        //console.log("Token",token)
         session.user.accessToken = token.accessToken;
         session.user.refreshToken = token.refreshToken;
         session.user.role = token.role;
@@ -178,6 +178,9 @@ const authOptions = (req, res) => {
         return session;
       },
     },
+    pages: {
+      signIn: '/auth/client-signin',
+    }
   }
 }
 
