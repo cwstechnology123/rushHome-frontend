@@ -38,8 +38,8 @@ export default function BuyPropertyList({ properties, setHighlight }){
     }, [properties]);
 
     return (
-        <section className="listing-wrap px-3" id="property_list">
-            <div className="row align-items-center py-3" style={{position: 'sticky', top: 0, zIndex: 999, backgroundColor: '#f9f9f9'}}>
+        <section className="listing-wrap px-2" id="property_list">
+            <div className="row align-items-center py-2" style={{position: 'sticky', top: 0, zIndex: 999, backgroundColor: '#f9f9f9'}}>
                 <div className="col-xl-8 col-lg-8 col-md-8">
                     <div className="profuct-result">
                         <p>We found <span>{properties?.length || 0}</span> properties available for you</p>

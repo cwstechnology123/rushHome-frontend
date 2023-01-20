@@ -23,7 +23,10 @@ const HomesForSale = ({
     Geocode.setApiKey(process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN);
     Geocode.setLanguage("en");
     Geocode.setRegion("us"); 
-    const [mapList, setMapList] = useState(true);
+    const [mapList, setMapList] = useState({
+        map: true,
+        list: true,
+    });
     const [isIdle, setIsIdle] = useState(false);
     const [polyBound, setPolyBound] = useState(null);
     const [geoaddress, setGeoaddress] = useState(address);
@@ -48,8 +51,7 @@ const HomesForSale = ({
     const windowDimensions = useWindowDimensions();
     const [mapHeight, setMapHeight] = useState(windowDimensions?.height || 500);
     const handleMainSearch = () => {
-        if(propertyList){        
-            console.log("called")   
+        if(propertyList){         
             let properties = JSON.parse( JSON.stringify( propertyList.filter(home=>(containsInPolygon(home.geography, polyBound))) ));
             if(properties){
                 setFilterList(properties);
@@ -65,7 +67,6 @@ const HomesForSale = ({
             const response = await fetchApi({url: `${apiBaseUrl}/properties/search`, method: 'POST', data: {...form, ...mapView}});
             if(response && response.data){
                 setPropertyList(response.data.properties);
-                console.log("Response:", response.data.properties)
                 toast.dismiss();
             }else{
                 toast.dismiss(toastId);
@@ -87,10 +88,8 @@ const HomesForSale = ({
             //0.835616438
             setMapHeight(Math.round(mh * 0.7516129032));
         }else{
-            
             setMapHeight(Math.round(mh * 0.776255708));
         }
-        console.log(windowDimensions?.height)
     }, [windowDimensions])
     useEffect(()=>{
         Geocode.fromAddress(geoaddress).then(
@@ -110,7 +109,16 @@ const HomesForSale = ({
     useEffect(()=>{
         handleMainSearch()
     }, [propertyList, polyBound]);
-    console.log(deviceType)
+    useEffect(()=>{
+        const timeoutId = setTimeout(() => {
+            setMapList({
+                map: false,
+                list: true,
+            });
+        }, 2000);
+
+        return () => clearTimeout(timeoutId);
+    }, []);
     return (
         <>
         <Toaster/>
@@ -122,7 +130,7 @@ const HomesForSale = ({
         <section className="listing_wraper mt-0">
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-xl-5 col-lg-5 col-12" style={{display: ( (deviceType==='desktop')? 'block' : (mapList? 'block' : 'none') )}}>
+                    <div className="col-xl-5 col-lg-5 col-12" style={{display: ( (deviceType==='desktop')? 'block' : (mapList.map? 'block' : 'none') )}}>
                         <div id="mapBox" style={{width:'100%', height: mapHeight, position: 'relative'}}>
                             <BuyMap 
                                 zoom={zoom}
@@ -141,13 +149,13 @@ const HomesForSale = ({
                             />
                         </div>
                     </div>
-                    <div className="col-xl-7 col-lg-7 col-12" style={{height: mapHeight, overflowY: 'auto', display: ( (deviceType==='desktop')? 'block' : (mapList? 'none' : 'block') )}}>
+                    <div className="col-xl-7 col-lg-7 col-12" style={{height: mapHeight, overflowY: 'auto', display: ( (deviceType==='desktop')? 'block' : (mapList.list? 'block' : 'none') )}}>
                         <BuyPropertyList properties={filterList || []} setHighlight={setHighlight} />
                         <Footer />
                     </div>
                 </div>
                 {(deviceType==='mobile') && (
-                    <button type="button" onClick={()=>setMapList(!mapList)} style={{position: 'absolute', zIndex: '99', bottom: '5%', left: '50%', transform: 'translate(-50%, -50%)',borderColor: '#fff', borderRadius: 10, padding: 10}}>{mapList? <GrUnorderedList/> : <GrMap/>}</button>
+                    <button type="button" onClick={()=>setMapList(mapList=>({map: !mapList.map, list: !mapList.list}))} style={{position: 'absolute', zIndex: '99', bottom: '5%', left: '50%', transform: 'translate(-50%, -50%)',borderColor: '#fff', borderRadius: 10, padding: 10}}>{mapList? <GrUnorderedList/> : <GrMap/>}</button>
                 )}
             </div>
         </section>
