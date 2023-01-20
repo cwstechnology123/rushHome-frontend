@@ -84,7 +84,8 @@ const HomesForSale = ({
     useEffect(() => {
         let mh = (windowDimensions?.height)? windowDimensions.height : (window?.innerHeight || 500);
         if(deviceType==='mobile'){
-            setMapHeight(Math.round(mh * 0.835616438));
+            //0.835616438
+            setMapHeight(Math.round(mh * 0.7516129032));
         }else{
             
             setMapHeight(Math.round(mh * 0.776255708));

@@ -308,6 +308,13 @@
     border-color: #fdce64 !important;
     border-radius: 10px !important;
 }
+.listing-wrap .pagination .page-link:focus {
+    z-index: 3;
+    color: #666 !important;
+    background-color: #fff !important;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(253 206 100 / 25%) !important;
+}
 /* --------------------------MAP------------------- */
 .btn_block{
     border: 1px;

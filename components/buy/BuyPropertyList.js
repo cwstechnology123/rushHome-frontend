@@ -70,7 +70,7 @@ export default function BuyPropertyList({ properties, setHighlight }){
                     <div className="col-12"><h4 className="text-danger text-center">No result found</h4></div>
                 )}
                 {properties.length !== 0 && (
-                    <div className="col-12">
+                    <div className="col-md-12">
                         <Pagination
                             previousLabel="< Prev"
                             ariaPreviousLabel="Prev"
