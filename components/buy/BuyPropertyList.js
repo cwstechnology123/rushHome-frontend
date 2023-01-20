@@ -76,8 +76,6 @@ export default function BuyPropertyList({ properties, setHighlight }){
                             ariaPreviousLabel="Prev"
                             nextLabel="Next >"
                             ariaNextLabel="Next"
-                            className="pagination_wrap mt-10"
-                            activeItemClassName="active"
                             current={currentPage}
                             total={pageCount}
                             onPageChange={handleShowProperty}

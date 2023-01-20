@@ -109,6 +109,7 @@ const HomesForSale = ({
     useEffect(()=>{
         handleMainSearch()
     }, [propertyList, polyBound]);
+    console.log(deviceType)
     return (
         <>
         <Toaster/>

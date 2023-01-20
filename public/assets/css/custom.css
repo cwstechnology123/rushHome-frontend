@@ -296,43 +296,18 @@
 }
 
 /* ---------------------------------------------------------------- */
-
-.pagination_wrap {
-    text-align: center;
-    justify-content: center;
-    display: flex;
-    padding-left: 0;
-    list-style: none;
-  }
-  .pagination_wrap .page-item:first-child .page-link,.pagination_wrap .page-item:last-child .page-link {
-    color: #fff;
-    background-color: #fdce64 !important;
-    border-color: #fdce64 !important;
-    border-radius: 10px;
-  }
-  .pagination_wrap .page-item:first-child .page-link {
-    margin-right: 5px;
-  }
-  
-  .pagination_wrap .page-item:last-child .page-link {
-    margin-left: 5px;
-  }
-  
-  .pagination_wrap .page-item.active .page-link {
-    z-index: 3;
-    color: #fff;
-    background-color: #fdce64 !important;
-    border-color: #fdce64 !important;
-    border-radius: 10px;
-  }
-  .pagination_wrap .page-link {
-    position: relative;
-    display: block;
-    color: #666;
-    text-decoration: none;
+.listing-wrap .pagination .page-link {
+    color: #666 !important;
     background-color: transparent !important;
-    border-color: transparent !important;
-  }
+    border: 1px solid transparent !important;
+}
+.listing-wrap .pagination .page-item.active .page-link {
+    z-index: 3;
+    color: #fff !important;
+    background-color: #fdce64 !important;
+    border-color: #fdce64 !important;
+    border-radius: 10px !important;
+}
 /* --------------------------MAP------------------- */
 .btn_block{
     border: 1px;
