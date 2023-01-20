@@ -4,7 +4,7 @@ import CredentialProvider from "next-auth/providers/credentials"
 import { apiBaseUrl, fetchApi } from '../../../utils/fetchApi'
 import { getCookie } from 'cookies-next';
 import splitName from "../../../utils/splitName";
-import { sendFubLeads } from "../../../utils/fubApiCall";
+import { getAgentFubDetails, sendFubLeads } from "../../../utils/fubApiCall";
 
 const authOptions = (req, res) => {
   const rh_user = getCookie('rh_user', { req, res})? JSON.parse(getCookie('rh_user', { req, res})) : '';
@@ -32,7 +32,7 @@ const authOptions = (req, res) => {
               const profile = response.data?.profile;
               const name = profile?.full_name;
               const role = "client"
-              const user = { id: profile.id, userId: profile.id, name: name, email: profile.email, image: profile.image, role: role, access_token : response.data.token, refreshToken : response.data.refreshToken }
+              const user = { id: profile.id, userId: profile.id, name: name, email: profile.email, image: profile.image, role: role, access_token : response.data.token, refreshToken : response.data.refreshToken, fubId: profile.fub_id }
               return user
             }
             else{
@@ -59,8 +59,8 @@ const authOptions = (req, res) => {
         return baseUrl
       },
       async signIn({ account, user}) {
-        console.log(account,user)
-        console.log(rh_user)
+        // console.log(account,user)
+        // console.log(rh_user)
         if (account.provider === "google" && rh_user.role === "agent") {
           return user.email.endsWith("@cwsinfotech.com") || user.email.endsWith("@rushhome.com")
         }
@@ -79,7 +79,8 @@ const authOptions = (req, res) => {
                 ...token,
                 picture: profile.image,
                 name: profile.full_name,
-                userId: profile.id
+                userId: profile.id,
+                fubId: profile.fub_id
               };
             }
             else{
@@ -91,9 +92,10 @@ const authOptions = (req, res) => {
           } 
         }
         if (account && user) {
+          console.log("User: ",rh_user);
           if (account.provider === "google") {
             try {
-              console.log(rh_user)
+              
               const user_type = rh_user && rh_user.role == "agent" ? "2" : "0";
               let sendData = {};
               sendData = {email : user.email, full_name: user.name, google_id : user.id, image: user.image, user_type: user_type}
@@ -118,6 +120,15 @@ const authOptions = (req, res) => {
                   sendData = {email : user.email, full_name: user.name, google_id : user.id, image: user.image, user_type: user_type, fub_id: respond.message.id}
                 }
               }
+              if(rh_user.role == "agent"){
+                let respond = await getAgentFubDetails(user.email);
+                if(respond && respond.status){
+                  let userAgent = respond.message.users;
+                  if(userAgent.length){
+                    sendData = {email : user.email, full_name: user.name, google_id : user.id, image: user.image, user_type: user_type, fub_id: userAgent[0].id}
+                  }
+                }
+              }
               const payload = {url : `${apiBaseUrl}/google-login`, method : 'POST', data : sendData}
               const response = await fetchApi(payload)
               if (response && response.data) {
@@ -129,7 +140,8 @@ const authOptions = (req, res) => {
                   refreshToken: response.data.refreshToken,
                   picture: user.image,
                   role: role,
-                  userId: profile.id
+                  userId: profile.id,
+                  fubId: (profile.fub_id || "") 
                 };
               }
               else{
@@ -148,18 +160,21 @@ const authOptions = (req, res) => {
               refreshToken: user.refreshToken,
               picture: user.image,
               role: user.role,
-              userId: user.userId
+              userId: user.userId,
+              fubId: user.fub_id,
             };
           }
         }
         return token;
       },
       async session({ session, token }) {
+        console.log("Token",token)
         session.user.accessToken = token.accessToken;
         session.user.refreshToken = token.refreshToken;
         session.user.role = token.role;
         session.user.picture = token.image;
         session.user.userId = token.userId;
+        session.user.fubId = token.fubId;
         return session;
       },
     },

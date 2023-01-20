@@ -36,48 +36,47 @@ export default function SignUp() {
         setIsLoading(true)
         handleLoading('Please wait...');
         try{
-            const payload = {url : `${apiBaseUrl}/signup`, method : 'POST', data : formValue}
-            const res = await fetchApi(payload)
-            setIsLoading(false)
-            if (res && res.type == 'error') handleError(res.message)
-            if (res && res.type == 'success') {
-                const {firstName, lastName} = splitName(formValue.full_name);
-                let leadObj = {
-                    person: {
-                      contacted: false,
-                      emails: [{isPrimary: true, type: 'work', value: formValue.email}],
-                      firstName: firstName,
-                      lastName: lastName,
-                      stage: 'Lead',
-                      sourceUrl: `${process.env.NEXT_PUBLIC_HOST_NAME}/signup`,
-                      source: 'RushHome',
-                    },
-                    type: 'Registration',
-                    system: 'NextJS',
+            const {firstName, lastName} = splitName(formValue.full_name);
+            let leadObj = {
+                person: {
+                    contacted: false,
+                    emails: [{isPrimary: true, type: 'work', value: formValue.email}],
+                    firstName: firstName,
+                    lastName: lastName,
+                    stage: 'Lead',
+                    sourceUrl: `${process.env.NEXT_PUBLIC_HOST_NAME}/signup`,
                     source: 'RushHome',
-                };
-                let respond = await sendFubLeads(leadObj);
-                // if(res.status){
-                //     let fub_id = res.message.id;
-                //     console.log(fub_id)
-                // }
-                const responseL = await signIn('credentials',
-                    {
-                        email : formValue.email,
-                        password : formValue.password,
-                        callbackUrl: '/client/favorites',
-                        redirect: false,
-                    }
-                )
-                // console.log('response',response)
+                },
+                type: 'Registration',
+                system: 'NextJS',
+                source: 'RushHome',
+            };
+            let respond = await sendFubLeads(leadObj);
+            if(respond.status){
+                formValue.fub_id = (respond.message.id).toString();
+                const res = await fetchApi({url : `${apiBaseUrl}/signup`, method : 'POST', data : formValue})
                 setIsLoading(false)
-                if (responseL?.error) handleError("Invalid Credentials.")
-                if (responseL.url) {
-                    handleSuccess("Congratulation! Your Account Created Successfully.")
-                    router.push(responseL.url)
+                if (res && res.type == 'error') handleError(res.message)
+                if (res && res.type == 'success') {
+                    const responseL = await signIn('credentials',
+                        {
+                            email : formValue.email,
+                            password : formValue.password,
+                            callbackUrl: '/client/favorites',
+                            redirect: false,
+                        }
+                    )
+                    setIsLoading(false)
+                    if (responseL?.error) handleError("Invalid Credentials.")
+                    if (responseL.url) {
+                        handleSuccess("Congratulation! Your Account Created Successfully.")
+                        router.push(responseL.url)
+                    }
+                    // handleSuccess(res.message)
+                    // router.push('/auth/client-signin')
                 }
-                // handleSuccess(res.message)
-                // router.push('/auth/client-signin')
+            }else{
+                return false;
             }
         } catch (error) {
             setIsLoading(false)
@@ -97,57 +96,56 @@ export default function SignUp() {
 
   return (
     <>
-    {/*  */}
-        <section className="pt-50 pb-75 ">
-            <div className="container">
-                <div className="row justify-content-center">
-                    <div className="col-xl-4 col-lg-4 col-md-6 col-12 client_sign">
-                        <div className="heading_login">
-                            <h2>Sign Up</h2>
-                        </div>
-                        <form onSubmit={handleSubmit(onSubmit)} className="g-3" autoComplete="off">
-                        <div className="col-md-12">
-                            <div className="form-group mb-2">
-                                <label htmlFor="full_name" className="form-label">Name</label>
-                                <input type="text" className="form-control" {...register("full_name")} id="full_name" placeholder="Full Name" />
-                                <span className="text-danger">{errors.full_name?.message}</span>
-                            </div>
-                        </div>
-                        <div className="col-md-12">
-                            <div className="form-group mb-2">
-                                <label htmlFor="email" className="form-label">Email</label>
-                                <input type="email" className="form-control"  {...register("email")} id="email" placeholder="Email"/>
-                                <span className="text-danger">{errors.email?.message}</span>
-                            </div>
-                        </div>
-                        <div className="col-md-12">
-                            <div className="form-group mb-2">
-                                <label htmlFor="password" className="form-label">Password</label>
-                                <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} {...register("password")} id="password" placeholder="Create Password" />
-                                <span className="text-danger">{errors.password?.message}</span>
-                            </div>
-                            
-                        </div>
-                        <div className="col-md-12">
-                            <div className="form-group mb-2">
-                                <label htmlFor="confirm_password" className="form-label">Confirm Password</label>
-                                <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} {...register("confirm_password")} id="confirm_password" placeholder="Confirm Password" />
-                                <span className="text-danger">{errors.confirm_password?.message}</span>
-                            </div>
-                        </div>
-                        <div className="col-md-12 text-center mb-3">
-                            <button type="submit" disabled={isLoading} className="btn style1 button_agent w-100">Sign Up</button>
-                        </div>
-                        <div className="col-md-12 text-center">
-                            <button type="button" className="btn style1 button_agent w-100" onClick={(e) => handleClickGLogin(e, "/signin")}><span className="googleicon"><img src="assets/img/googleicon.png" /></span>Continue with Google</button>
-                        </div>
-                        <p className="policy_content">Already have an account? <Link href="/auth"> Login</Link></p>
-                        </form>
+    <section className="pt-50 pb-75 ">
+        <div className="container">
+            <div className="row justify-content-center">
+                <div className="col-xl-4 col-lg-4 col-md-6 col-12 client_sign">
+                    <div className="heading_login">
+                        <h2>Sign Up</h2>
                     </div>
+                    <form onSubmit={handleSubmit(onSubmit)} className="g-3" autoComplete="off">
+                    <div className="col-md-12">
+                        <div className="form-group mb-2">
+                            <label htmlFor="full_name" className="form-label">Name</label>
+                            <input type="text" className="form-control" {...register("full_name")} id="full_name" placeholder="Full Name" />
+                            <span className="text-danger">{errors.full_name?.message}</span>
+                        </div>
+                    </div>
+                    <div className="col-md-12">
+                        <div className="form-group mb-2">
+                            <label htmlFor="email" className="form-label">Email</label>
+                            <input type="email" className="form-control"  {...register("email")} id="email" placeholder="Email"/>
+                            <span className="text-danger">{errors.email?.message}</span>
+                        </div>
+                    </div>
+                    <div className="col-md-12">
+                        <div className="form-group mb-2">
+                            <label htmlFor="password" className="form-label">Password</label>
+                            <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} {...register("password")} id="password" placeholder="Create Password" />
+                            <span className="text-danger">{errors.password?.message}</span>
+                        </div>
+                        
+                    </div>
+                    <div className="col-md-12">
+                        <div className="form-group mb-2">
+                            <label htmlFor="confirm_password" className="form-label">Confirm Password</label>
+                            <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} {...register("confirm_password")} id="confirm_password" placeholder="Confirm Password" />
+                            <span className="text-danger">{errors.confirm_password?.message}</span>
+                        </div>
+                    </div>
+                    <div className="col-md-12 text-center mb-3">
+                        <button type="submit" disabled={isLoading} className="btn style1 button_agent w-100">Sign Up</button>
+                    </div>
+                    <div className="col-md-12 text-center">
+                        <button type="button" className="btn style1 button_agent w-100" onClick={(e) => handleClickGLogin(e, "/signin")}><span className="googleicon"><img src="assets/img/googleicon.png" /></span>Continue with Google</button>
+                    </div>
+                    <p className="policy_content">Already have an account? <Link href="/auth"> Login</Link></p>
+                    </form>
                 </div>
             </div>
-            
-        </section>
+        </div>
+        
+    </section>
     </>
   )
 }
