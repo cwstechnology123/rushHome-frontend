@@ -1,14 +1,12 @@
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
-import { Button, Dropdown, Form, Offcanvas } from "react-bootstrap";
+import { useState } from "react";
+import { Dropdown, Offcanvas } from "react-bootstrap";
 import { BsFilterLeft } from "react-icons/bs";
 import AsyncSelect from 'react-select/async';
 import stateCodes from "../../utils/states_hash.json";
 import { apiBaseUrl, fetchApi } from '../../utils/fetchApi';
 import { setCookie } from 'cookies-next';
-import { toast } from "react-hot-toast";
 import ReactRange from "./ReactRange";
-import { containsInPolygon, hasInPolygon } from "../../utils/mapUtils";
 
 export default function SearchFilter({ 
     form, setForm,
@@ -44,7 +42,6 @@ export default function SearchFilter({
           }
         }
     };
-
     const resetAll = () => {
         setForm({
             ...form,
@@ -59,7 +56,6 @@ export default function SearchFilter({
         const searchValue = JSON.parse(selectedOption.value);
         setCookie('search', searchValue);
         resetAll();
-        
         if(searchValue.refKey !== 'address'){
             if(searchValue.refKey !== "stateOrProvince"){
                 setGeoaddress(searchValue.alphaCode.toUpperCase()+", USA, "+searchValue.refVal);

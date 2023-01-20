@@ -11,6 +11,7 @@ import { toast, Toaster } from 'react-hot-toast';
 import BuyMap from '../../components/buy/BuyMap';
 import Geocode from "react-geocode";
 import { containsInPolygon, filterHomesByPolygon } from '../../utils/mapUtils';
+import { GrMap, GrUnorderedList } from 'react-icons/gr';
 
 const HomesForSale = ({
     properties,
@@ -22,6 +23,7 @@ const HomesForSale = ({
     Geocode.setApiKey(process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN);
     Geocode.setLanguage("en");
     Geocode.setRegion("us"); 
+    const [mapList, setMapList] = useState(true);
     const [isIdle, setIsIdle] = useState(false);
     const [polyBound, setPolyBound] = useState(null);
     const [geoaddress, setGeoaddress] = useState(address);
@@ -57,22 +59,21 @@ const HomesForSale = ({
         }
     }
     const handleBoundSearch = async () => {
+        toast.dismiss();
         const toastId = toast.loading("Loading....");
-        console.log("called Search", form)
         try {
             const response = await fetchApi({url: `${apiBaseUrl}/properties/search`, method: 'POST', data: {...form, ...mapView}});
             if(response && response.data){
                 setPropertyList(response.data.properties);
                 console.log("Response:", response.data.properties)
-                toast.dismiss()
+                toast.dismiss();
             }else{
                 toast.dismiss(toastId);
             }
         } catch (error) {
-            toast.dismiss()
+            toast.dismiss();
         }
     }
-
     useEffect(()=>{
         if(mapView && isIdle){
             setIsIdle(false)
@@ -81,10 +82,11 @@ const HomesForSale = ({
         return ()=>null
     }, [mapView, isIdle, setIsIdle])
     useEffect(() => {
-        if(windowDimensions && (windowDimensions.width <= 768)){
-            setMapHeight('auto');
+        let mh = (windowDimensions?.height)? windowDimensions.height : (window?.innerHeight || 500);
+        if(deviceType==='mobile'){
+            setMapHeight(Math.round(mh * 0.835616438));
         }else{
-            let mh = (windowDimensions?.height)? windowDimensions.height : (window?.innerHeight || 500);
+            
             setMapHeight(Math.round(mh * 0.776255708));
         }
         console.log(windowDimensions?.height)
@@ -118,33 +120,33 @@ const HomesForSale = ({
         <section className="listing_wraper mt-0">
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-xl-5 col-lg-5 col-12 d-md-none d-lg-block p-0 d-none d-sm-block d-sm-none d-md-block">
-                        {(deviceType==='desktop') && (
-                            <div id="mapBox" style={{width:'100%', height: mapHeight, position: 'relative'}}>
-                                <BuyMap 
-                                    zoom={zoom}
-                                    setZoom={setZoom}
-                                    bounds={bounds}
-                                    setBounds={setBounds}
-                                    mapView={mapView}
-                                    setMapView={setMapView}
-                                    setIsIdle={setIsIdle}
-                                    center={center}
-                                    setCenter={setCenter}
-                                    highlight={highlight}
-                                    setPolyBound={setPolyBound}
-                                    filterList={filterList || []}
-                                    deviceType={deviceType}
-                                />
-                            </div>
-                        )}
-                        
+                    <div className="col-xl-5 col-lg-5 col-12" style={{display: ( (deviceType==='desktop')? 'block' : (mapList? 'block' : 'none') )}}>
+                        <div id="mapBox" style={{width:'100%', height: mapHeight, position: 'relative'}}>
+                            <BuyMap 
+                                zoom={zoom}
+                                setZoom={setZoom}
+                                bounds={bounds}
+                                setBounds={setBounds}
+                                mapView={mapView}
+                                setMapView={setMapView}
+                                setIsIdle={setIsIdle}
+                                center={center}
+                                setCenter={setCenter}
+                                highlight={highlight}
+                                setPolyBound={setPolyBound}
+                                filterList={filterList || []}
+                                deviceType={deviceType}
+                            />
+                        </div>
                     </div>
-                    <div className="col-xl-7 col-lg-7 col-12" style={{height: mapHeight, overflowY: 'auto'}}>
+                    <div className="col-xl-7 col-lg-7 col-12" style={{height: mapHeight, overflowY: 'auto', display: ( (deviceType==='desktop')? 'block' : (mapList? 'none' : 'block') )}}>
                         <BuyPropertyList properties={filterList || []} setHighlight={setHighlight} />
                         <Footer />
                     </div>
                 </div>
+                {(deviceType==='mobile') && (
+                    <button type="button" onClick={()=>setMapList(!mapList)} style={{position: 'absolute', zIndex: '99', bottom: '5%', left: '50%', transform: 'translate(-50%, -50%)',borderColor: '#fff', borderRadius: 10, padding: 10}}>{mapList? <GrUnorderedList/> : <GrMap/>}</button>
+                )}
             </div>
         </section>
         </>

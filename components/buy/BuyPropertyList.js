@@ -49,7 +49,7 @@ export default function BuyPropertyList({ properties, setHighlight }){
                     <div className="filter-item-sort">
                         <InputGroup>
                             <InputGroup.Text id="basic-addon1"><GrSort/>
-                            &nbsp;Sorted By</InputGroup.Text>
+                            &nbsp;Sort By</InputGroup.Text>
                             <Form.Select aria-label="Default select example">
                                 <option value={1}>Newest to Oldest</option>
                                 <option value={2}>Oldest to Newest</option>
